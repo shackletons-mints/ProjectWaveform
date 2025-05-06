@@ -4,6 +4,7 @@ public class UserMicrophone : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // TODO make cool art here
         var audio = GetComponent<AudioSource>();
         Debug.Log("NAME:" + Microphone.devices[0]);
         audio.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
