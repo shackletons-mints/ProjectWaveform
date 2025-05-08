@@ -9,6 +9,8 @@ public class SparseVector
     {
         for (int i = 0; i < spectrum.Length; i++)
         {
+            // we can modify this value if we want
+            // to extend the lower bound
             const float epsilon = 0.00001f;
             if (Mathf.Abs(spectrum[i]) > epsilon)
             {
