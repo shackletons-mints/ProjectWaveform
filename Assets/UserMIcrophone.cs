@@ -1,21 +1,63 @@
 using UnityEngine;
+
 public class UserMicrophone : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public AudioSource audioSource;
+
+    [Tooltip("Number of spectrum samples. Must be a power of 2 (e.g., 64, 128, 256, 512, 1024, 2048).")]
+    public int spectrumSize = 512;
+
+    [Tooltip("FFT window type used for spectrum analysis.")]
+    public FFTWindow fftWindow = FFTWindow.Blackman;
+
+    [HideInInspector]
+    public float[] spectrum;
+
+    public float[] spectrumValues = new float[512];
+
     void Start()
     {
-        // TODO make cool art here
-        var audio = GetComponent<AudioSource>();
-        Debug.Log("NAME:" + Microphone.devices[0]);
-        audio.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
-        audio.loop = true;
-        while (!(Microphone.GetPosition(null) > 0)){}
-        audio.Play();
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
+        Debug.Log("NAME: " + Microphone.devices[0]);
+        audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
+        audioSource.loop = true;
+
+        // Wait until the microphone starts recording
+        while (!(Microphone.GetPosition(null) > 0)) { }
+
+        audioSource.Play();
+
+        spectrum = new float[spectrumSize];
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            // Get the spectrum data
+            audioSource.GetSpectrumData(spectrum, 0, fftWindow);
+
+            string output = "Non-zero Spectrum Values: ";
+            bool hasValues = false;
+
+            // Log only the non-zero spectrum values
+            for (int i = 0; i < spectrum.Length; i++)
+            {
+                if (spectrum[i] > 0f)
+                {
+                    output += $"[{i}]={spectrum[i]:F5} ";
+                    hasValues = true;
+                }
+            }
+
+            if (hasValues)
+            {
+                Debug.Log(output);
+            }
+        }
     }
 }
