@@ -5,14 +5,13 @@ public class UserMicrophone : MonoBehaviour
     public AudioSource audioSource;
 
     [Tooltip("Number of spectrum samples. Must be a power of 2 (e.g., 64, 128, 256, 512, 1024, 2048).")]
-    public int spectrumSize = 512;
+    public int spectrumSize = 4096;
+    public int sampleRate = 44100;
 
     [Tooltip("FFT window type used for spectrum analysis.")]
     public FFTWindow fftWindow = FFTWindow.Blackman;
 
-    [HideInInspector]
-    public float[] spectrum;
-
+    public float[] spectrumData;
     void Start()
     {
         if (audioSource == null)
@@ -21,7 +20,7 @@ public class UserMicrophone : MonoBehaviour
         }
 
         Debug.Log("NAME: " + Microphone.devices[0]);
-        audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
+        audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, sampleRate);
         audioSource.loop = true;
 
         // Wait until the microphone starts recording
@@ -29,19 +28,22 @@ public class UserMicrophone : MonoBehaviour
 
         audioSource.Play();
 
-        spectrum = new float[spectrumSize];
+        spectrumData = new float[spectrumSize];
     }
 
     void Update()
     {
         if (audioSource != null && audioSource.isPlaying)
         {
-            audioSource.GetSpectrumData(spectrum, 0, fftWindow);
-            SparseVector sparse = new SparseVector(spectrum);
+            audioSource.GetSpectrumData(spectrumData, 0, fftWindow);
+            SoundSpectrum soundSpectrum = new SoundSpectrum(spectrumData, spectrumSize, sampleRate);
 
-            if (sparse.vector.Count > 0)
+            if (soundSpectrum.data.Length > 0)
             {
-                Debug.Log("Non-zero Spectrum Values: " + sparse.ToString());
+                Debug.Log("Non-zero Spectrum Values: " + soundSpectrum.ToString());
+                Debug.Log("Largest Value: " + soundSpectrum.GetLargestValue());
+                Debug.Log("Smallest Value: " + soundSpectrum.GetSmallestValue());
+                Debug.Log("Estimated Pitch: " + soundSpectrum.GetEstimatedPitch());
             }
         }
     }
