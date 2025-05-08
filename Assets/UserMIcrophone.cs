@@ -13,8 +13,6 @@ public class UserMicrophone : MonoBehaviour
     [HideInInspector]
     public float[] spectrum;
 
-    public float[] spectrumValues = new float[512];
-
     void Start()
     {
         if (audioSource == null)
@@ -47,7 +45,7 @@ public class UserMicrophone : MonoBehaviour
             // Log only the non-zero spectrum values
             for (int i = 0; i < spectrum.Length; i++)
             {
-                if (spectrum[i] > 0f)
+                if (spectrum[i].ToString("F5") != "0.00000")
                 {
                     output += $"[{i}]={spectrum[i]:F5} ";
                     hasValues = true;
