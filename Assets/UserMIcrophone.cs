@@ -43,7 +43,9 @@ public class UserMicrophone : MonoBehaviour
                 Debug.Log("Non-zero Spectrum Values: " + soundSpectrum.ToString());
                 Debug.Log("Largest Value: " + soundSpectrum.GetLargestValue());
                 Debug.Log("Smallest Value: " + soundSpectrum.GetSmallestValue());
-                Debug.Log("Estimated Pitch: " + soundSpectrum.GetEstimatedPitch());
+                // we pass in the maxHarmonics here, I didn't play with it
+                // and just used 4 as this is what chatGodPT recommended
+                Debug.Log("Estimated Pitch: " + soundSpectrum.GetEstimatedPitch(4));
             }
         }
     }

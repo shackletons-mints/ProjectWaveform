@@ -6,14 +6,14 @@ public class SoundSpectrum
 
     public float[] data;
     public int sampleRate;
-    private int _size;
+    private int _spectrumSize;
     // use this to filter out low values
     const float epsilon = 0.00001f;
     public SoundSpectrum(float[] spectrumData, int spectrumSize, int sampleRate)
     {
         data = spectrumData;
         this.sampleRate = sampleRate;
-        _size = spectrumSize;
+        _spectrumSize = spectrumSize;
     }
 
     public string GetSmallestValue() 
@@ -43,13 +43,16 @@ public class SoundSpectrum
         return $"{max}";
     }
 
-    public string GetEstimatedPitch()
-    {
-        int maxHarmonics = 4;
-        return $"{EstimatePitchHPS(maxHarmonics)}";
-    }
+    // this helper computes the estimated pitch
+    // this is called a Harmonic Product Spectrum 
 
-    float EstimatePitchHPS(int maxHarmonics)
+    // the algorithm is:
+    // 1. Get the magnitude spectrum data, this is data in this context
+    // 2. Downsample the spectrum multiple times
+    // 3. Multiply the original and downsampled spectra
+    // 4. Find the index of the maximum product — that’s the pitch bin
+    // 5.  Convert that bin index to frequency
+    public string GetEstimatedPitch(int maxHarmonics)
     {
         int len = data.Length;
         float[] hps = new float[len];
@@ -81,7 +84,7 @@ public class SoundSpectrum
         }
 
         float freqResolution = (sampleRate / 2f) / len;
-        return maxIndex * freqResolution;
+        return $"{maxIndex * freqResolution}";
     }
 
     public override string ToString()
