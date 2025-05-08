@@ -36,25 +36,12 @@ public class UserMicrophone : MonoBehaviour
     {
         if (audioSource != null && audioSource.isPlaying)
         {
-            // Get the spectrum data
             audioSource.GetSpectrumData(spectrum, 0, fftWindow);
+            SparseVector sparse = new SparseVector(spectrum);
 
-            string output = "Non-zero Spectrum Values: ";
-            bool hasValues = false;
-
-            // Log only the non-zero spectrum values
-            for (int i = 0; i < spectrum.Length; i++)
+            if (sparse.vector.Count > 0)
             {
-                if (spectrum[i].ToString("F5") != "0.00000")
-                {
-                    output += $"[{i}]={spectrum[i]:F5} ";
-                    hasValues = true;
-                }
-            }
-
-            if (hasValues)
-            {
-                Debug.Log(output);
+                Debug.Log("Non-zero Spectrum Values: " + sparse.ToString());
             }
         }
     }
