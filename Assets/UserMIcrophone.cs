@@ -5,16 +5,13 @@ public class UserMicrophone : MonoBehaviour
     public AudioSource audioSource;
 
     [Tooltip("Number of spectrum samples. Must be a power of 2 (e.g., 64, 128, 256, 512, 1024, 2048).")]
-    public int spectrumSize = 512;
+    public int spectrumSize = 4096;
+    public int sampleRate = 44100;
 
     [Tooltip("FFT window type used for spectrum analysis.")]
     public FFTWindow fftWindow = FFTWindow.Blackman;
 
-    [HideInInspector]
-    public float[] spectrum;
-
-    public float[] spectrumValues = new float[512];
-
+    public float[] spectrumData;
     void Start()
     {
         if (audioSource == null)
@@ -23,7 +20,7 @@ public class UserMicrophone : MonoBehaviour
         }
 
         Debug.Log("NAME: " + Microphone.devices[0]);
-        audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
+        audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, sampleRate);
         audioSource.loop = true;
 
         // Wait until the microphone starts recording
@@ -31,32 +28,24 @@ public class UserMicrophone : MonoBehaviour
 
         audioSource.Play();
 
-        spectrum = new float[spectrumSize];
+        spectrumData = new float[spectrumSize];
     }
 
     void Update()
     {
         if (audioSource != null && audioSource.isPlaying)
         {
-            // Get the spectrum data
-            audioSource.GetSpectrumData(spectrum, 0, fftWindow);
+            audioSource.GetSpectrumData(spectrumData, 0, fftWindow);
+            SoundSpectrum soundSpectrum = new SoundSpectrum(spectrumData, spectrumSize, sampleRate);
 
-            string output = "Non-zero Spectrum Values: ";
-            bool hasValues = false;
-
-            // Log only the non-zero spectrum values
-            for (int i = 0; i < spectrum.Length; i++)
+            if (soundSpectrum.data.Length > 0)
             {
-                if (spectrum[i] > 0f)
-                {
-                    output += $"[{i}]={spectrum[i]:F5} ";
-                    hasValues = true;
-                }
-            }
-
-            if (hasValues)
-            {
-                Debug.Log(output);
+                Debug.Log("Non-zero Spectrum Values: " + soundSpectrum.ToString());
+                Debug.Log("Largest Value: " + soundSpectrum.GetLargestValue());
+                Debug.Log("Smallest Value: " + soundSpectrum.GetSmallestValue());
+                // we pass in the maxHarmonics here, I didn't play with it
+                // and just used 4 as this is what chatGodPT recommended
+                Debug.Log("Estimated Pitch: " + soundSpectrum.GetEstimatedPitch(4));
             }
         }
     }
