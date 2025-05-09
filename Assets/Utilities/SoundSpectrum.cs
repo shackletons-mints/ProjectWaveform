@@ -1,17 +1,19 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SoundSpectrum
 {
 
-    public float[] data;
+    public float[] frequencySpectrum;
     public int sampleRate;
     private int _spectrumSize;
     // use this to filter out low values
     const float epsilon = 0.00001f;
     public SoundSpectrum(float[] spectrumData, int spectrumSize, int sampleRate)
     {
-        data = spectrumData;
+        frequencySpectrum = spectrumData;
         this.sampleRate = sampleRate;
         _spectrumSize = spectrumSize;
     }
@@ -19,7 +21,7 @@ public class SoundSpectrum
     public string GetSmallestValue() 
     {
         float min = 1;
-        foreach (var val in data)
+        foreach (var val in frequencySpectrum)
         {
             if (val < min && val > epsilon)
             {
@@ -33,7 +35,7 @@ public class SoundSpectrum
     public string GetLargestValue() 
     {
         float max = -1;
-        foreach (var val in data)
+        foreach (var val in frequencySpectrum)
         {
             if (val > max)
             {
@@ -43,38 +45,36 @@ public class SoundSpectrum
         return $"{max}";
     }
 
-    // this helper computes the estimated pitch
-    // this is called a Harmonic Product Spectrum 
-
-    // the algorithm is:
-    // 1. Get the magnitude spectrum data, this is data in this context
-    // 2. Downsample the spectrum multiple times
-    // 3. Multiply the original and downsampled spectra
-    // 4. Find the index of the maximum product — that’s the pitch bin
-    // 5.  Convert that bin index to frequency
     public string GetEstimatedPitch(int maxHarmonics)
     {
-        int len = data.Length;
-        float[] hps = new float[len];
+        int smallestLength = Mathf.CeilToInt(_spectrumSize / (float)maxHarmonics);
+        float[] hps = new float[smallestLength];
 
-        // Copy original Data
-        for (int i = 0; i < len; i++)
-            hps[i] = data[i];
+        Array.Copy(frequencySpectrum, hps, smallestLength);
 
-        // Multiply with downsampled versions
+        // downsample - gives us the fundamental freq
         for (int h = 2; h <= maxHarmonics; h++)
         {
-            for (int i = 0; i < len / h; i++)
+            for (int i = 0; i < smallestLength; i++)
             {
-                hps[i] *= data[i * h];
+                int idx = i * h;
+                if (idx < _spectrumSize)
+                {
+                    hps[i] *= frequencySpectrum[idx];
+                }
+                else
+                {
+                    hps[i] *= 0f; // pad with zero
+                }
             }
         }
 
-        // Find index of max value
+        // find max value which, in theory, is the dominant freq
+        // which should point us in the direction of the pitch
         int maxIndex = 1;
-        float maxValue = hps[1]; // skip bin 0 (DC component)
+        float maxValue = hps[1];
 
-        for (int i = 2; i < len / maxHarmonics; i++) // Limit search range
+        for (int i = 2; i < smallestLength; i++)
         {
             if (hps[i] > maxValue)
             {
@@ -83,16 +83,16 @@ public class SoundSpectrum
             }
         }
 
-        float freqResolution = (sampleRate / 2f) / len;
-        return $"{maxIndex * freqResolution}";
+        float freqResolution = (sampleRate / 2f) / _spectrumSize;
+        float estimatedPitch = maxIndex * freqResolution;
+        return $"{estimatedPitch}";
     }
-
     public override string ToString()
     {
         string output = "";
-        for (int i = 0; i < data.Length; i++)
+        for (int i = 0; i < frequencySpectrum.Length; i++)
         {
-            float value = data[i];
+            float value = frequencySpectrum[i];
             if (value > epsilon)
             {
                 output += $"[{i}]={value:F5} ";

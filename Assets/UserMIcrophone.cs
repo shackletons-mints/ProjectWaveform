@@ -9,7 +9,7 @@ public class UserMicrophone : MonoBehaviour
     public int sampleRate = 44100;
 
     [Tooltip("FFT window type used for spectrum analysis.")]
-    public FFTWindow fftWindow = FFTWindow.Blackman;
+    public FFTWindow fftWindow = FFTWindow.Rectangular;
 
     public float[] spectrumData;
     void Start()
@@ -38,14 +38,12 @@ public class UserMicrophone : MonoBehaviour
             audioSource.GetSpectrumData(spectrumData, 0, fftWindow);
             SoundSpectrum soundSpectrum = new SoundSpectrum(spectrumData, spectrumSize, sampleRate);
 
-            if (soundSpectrum.data.Length > 0)
+            if (soundSpectrum.frequencySpectrum.Length > 0)
             {
                 Debug.Log("Non-zero Spectrum Values: " + soundSpectrum.ToString());
                 Debug.Log("Largest Value: " + soundSpectrum.GetLargestValue());
                 Debug.Log("Smallest Value: " + soundSpectrum.GetSmallestValue());
-                // we pass in the maxHarmonics here, I didn't play with it
-                // and just used 4 as this is what chatGodPT recommended
-                Debug.Log("Estimated Pitch: " + soundSpectrum.GetEstimatedPitch(4));
+                Debug.Log("Estimated Pitch: " + soundSpectrum.GetEstimatedPitch(3));
             }
         }
     }
