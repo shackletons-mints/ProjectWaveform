@@ -58,26 +58,22 @@ public class SoundSpectrum
                 maxIndex = i;
             }
         }
+        float y0 = frequencySpectrum[maxIndex - 1];
+        float y1 = frequencySpectrum[maxIndex];
+        float y2 = frequencySpectrum[maxIndex + 1];
 
-        float dominantFrequency;
+        float x0 = maxIndex - 1;
+        float x1 = maxIndex;
+        float x2 = maxIndex + 1;
 
-        if (maxIndex > 0 && maxIndex < _spectrumSize - 1)
-        {
-            float left = frequencySpectrum[maxIndex - 1];
-            float center = frequencySpectrum[maxIndex];
-            float right = frequencySpectrum[maxIndex + 1];
+        float denom = (x0 - x1) * (x0 - x2) * (x1 - x2);
 
-            // Quadratic interpolation formula
-            float interp = 0.5f * (left - right) / (left - 2 * center + right);
-            float trueIndex = maxIndex + interp;
+        float a = (y0 * (x1 - x2) + y1 * (x2 - x0) + y2 * (x0 - x1)) / denom;
+        float b = (y0 * (x2 * x2 - x1 * x1) + y1 * (x0 * x0 - x2 * x2) + y2 * (x1 * x1 - x0 * x0)) / denom;
 
-            dominantFrequency = (trueIndex * sampleRate) / (2f * _spectrumSize);
-        }
-        else
-        {
-            // Fallback to original estimate
-            dominantFrequency = (maxIndex * sampleRate) / (2f * _spectrumSize);
-        }
+        float trueIndex = -b / (2f * a);
+
+        float dominantFrequency = (trueIndex * sampleRate) / (2f * _spectrumSize);
         return dominantFrequency;
     }
 
