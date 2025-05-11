@@ -18,7 +18,7 @@ public class SoundSpectrum
         _spectrumSize = spectrumSize;
     }
 
-    public string GetSmallestValue() 
+    public float GetSmallestValue() 
     {
         float min = 1;
         foreach (var val in frequencySpectrum)
@@ -29,10 +29,10 @@ public class SoundSpectrum
             }
         }
 
-        return $"{min}";
+        return min;
     }
 
-    public string GetLargestValue() 
+    public float GetLargestValue() 
     {
         float max = -1;
         foreach (var val in frequencySpectrum)
@@ -42,10 +42,10 @@ public class SoundSpectrum
                 max = val;
             }
         }
-        return $"{max}";
+        return max;
     }
 
-    public string GetEstimatedPitch(int maxHarmonics)
+    public float GetEstimatedPitch(int maxHarmonics)
     {
         int smallestLength = Mathf.CeilToInt(_spectrumSize / (float)maxHarmonics);
         float[] hps = new float[smallestLength];
@@ -85,7 +85,7 @@ public class SoundSpectrum
 
         float freqResolution = (sampleRate / 2f) / _spectrumSize;
         float estimatedPitch = maxIndex * freqResolution;
-        return $"{estimatedPitch}";
+        return estimatedPitch;
     }
     public override string ToString()
     {
