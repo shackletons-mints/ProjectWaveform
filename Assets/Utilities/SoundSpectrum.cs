@@ -47,45 +47,38 @@ public class SoundSpectrum
 
     public float GetEstimatedPitch(int maxHarmonics)
     {
-        int smallestLength = Mathf.CeilToInt(_spectrumSize / (float)maxHarmonics);
-        float[] hps = new float[smallestLength];
+        int maxIndex = 0;
+        float maxMagnitude = 0f;
 
-        Array.Copy(frequencySpectrum, hps, smallestLength);
-
-        // downsample - gives us the fundamental freq
-        for (int h = 2; h <= maxHarmonics; h++)
+        for (int i = 0; i < _spectrumSize; i++)
         {
-            for (int i = 0; i < smallestLength; i++)
+            if (frequencySpectrum[i] > maxMagnitude)
             {
-                int idx = i * h;
-                if (idx < _spectrumSize)
-                {
-                    hps[i] *= frequencySpectrum[idx];
-                }
-                else
-                {
-                    hps[i] *= 0f; // pad with zero
-                }
-            }
-        }
-
-        // find max value which, in theory, is the dominant freq
-        // which should point us in the direction of the pitch
-        int maxIndex = 1;
-        float maxValue = hps[1];
-
-        for (int i = 2; i < smallestLength; i++)
-        {
-            if (hps[i] > maxValue)
-            {
-                maxValue = hps[i];
+                maxMagnitude = frequencySpectrum[i];
                 maxIndex = i;
             }
         }
 
-        float freqResolution = (sampleRate / 2f) / _spectrumSize;
-        float estimatedPitch = maxIndex * freqResolution;
-        return estimatedPitch;
+        float dominantFrequency;
+
+        if (maxIndex > 0 && maxIndex < _spectrumSize - 1)
+        {
+            float left = frequencySpectrum[maxIndex - 1];
+            float center = frequencySpectrum[maxIndex];
+            float right = frequencySpectrum[maxIndex + 1];
+
+            // Quadratic interpolation formula
+            float interp = 0.5f * (left - right) / (left - 2 * center + right);
+            float trueIndex = maxIndex + interp;
+
+            dominantFrequency = (trueIndex * sampleRate) / (2f * _spectrumSize);
+        }
+        else
+        {
+            // Fallback to original estimate
+            dominantFrequency = (maxIndex * sampleRate) / (2f * _spectrumSize);
+        }
+        return dominantFrequency;
     }
 
     public void LogSpectrumAnalysis()
