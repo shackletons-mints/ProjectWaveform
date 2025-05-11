@@ -87,6 +87,16 @@ public class SoundSpectrum
         float estimatedPitch = maxIndex * freqResolution;
         return estimatedPitch;
     }
+
+    public void LogSpectrumAnalysis()
+    {
+        float smallest = this.GetSmallestValue();
+        float largest = this.GetLargestValue();
+        float pitch = this.GetEstimatedPitch(4);
+        Debug.Log("Largest Value: " + $"{largest}");
+        Debug.Log("Smallest Value: " + $"{smallest}");
+        Debug.Log("Estimated Pitch: " + $"{pitch}");
+    }
     public override string ToString()
     {
         string output = "";

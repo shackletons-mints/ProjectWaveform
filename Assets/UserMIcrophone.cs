@@ -9,7 +9,7 @@ public class UserMicrophone : MonoBehaviour
     public int sampleRate = 44100;
 
     [Tooltip("FFT window type used for spectrum analysis.")]
-    public FFTWindow fftWindow = FFTWindow.Rectangular;
+    public FFTWindow fftWindow = FFTWindow.BlackmanHarris;
 
     public float[] spectrumData;
     void Start()
@@ -40,10 +40,7 @@ public class UserMicrophone : MonoBehaviour
 
             if (soundSpectrum.frequencySpectrum.Length > 0)
             {
-                Debug.Log("Non-zero Spectrum Values: " + soundSpectrum.ToString());
-                Debug.Log("Largest Value: " + soundSpectrum.GetLargestValue());
-                Debug.Log("Smallest Value: " + soundSpectrum.GetSmallestValue());
-                Debug.Log("Estimated Pitch: " + soundSpectrum.GetEstimatedPitch(3));
+                soundSpectrum.LogSpectrumAnalysis();
             }
         }
     }
