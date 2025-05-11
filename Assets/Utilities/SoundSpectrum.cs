@@ -58,6 +58,7 @@ public class SoundSpectrum
                 maxIndex = i;
             }
         }
+
         float y0 = frequencySpectrum[maxIndex - 1];
         float y1 = frequencySpectrum[maxIndex];
         float y2 = frequencySpectrum[maxIndex + 1];
