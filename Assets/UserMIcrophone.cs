@@ -40,6 +40,7 @@ public class UserMicrophone : MonoBehaviour
         {
             audioSource.GetSpectrumData(spectrumData, 0, fftWindow);
             float pitch = pitchEstimator.Estimate(audioSource);
+            SoundSpectrum soundSpectrum = new SoundSpectrum(spectrumData, spectrumSize, sampleRate);
             
             if (!float.IsNaN(pitch))
             {
@@ -50,9 +51,8 @@ public class UserMicrophone : MonoBehaviour
                 Debug.Log("No clear pitch detected");
                 soundSpectrum.LogSpectrumAnalysis();
                 // Parse values from string-returning methods
-                float largest = float.Parse(soundSpectrum.GetLargestValue());
-                float smallest = float.Parse(soundSpectrum.GetSmallestValue());
-                float pitch = float.Parse(soundSpectrum.GetEstimatedPitch(4));
+                float largest = soundSpectrum.GetLargestValue();
+                float smallest = soundSpectrum.GetSmallestValue();
 
                 // Particle System references
                 var main = particleSystem.main;
