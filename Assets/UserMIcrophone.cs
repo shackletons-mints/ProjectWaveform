@@ -12,7 +12,7 @@ public class UserMicrophone : MonoBehaviour
     [Tooltip("FFT window type used for spectrum analysis.")]
     public FFTWindow fftWindow = FFTWindow.BlackmanHarris;
     public float[] spectrumData;
-    private AudioPitchEstimator pitchEstimator;
+    private AudioPitchEstimator _pitchEstimator;
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class UserMicrophone : MonoBehaviour
             audioSource = GetComponent<AudioSource>();
         }
 
-        pitchEstimator = GetComponent<AudioPitchEstimator>();
+        _pitchEstimator = GetComponent<AudioPitchEstimator>();
 
         Debug.Log("NAME: " + Microphone.devices[0]);
         audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, sampleRate);
@@ -39,7 +39,7 @@ public class UserMicrophone : MonoBehaviour
         if (audioSource != null && audioSource.isPlaying)
         {
             audioSource.GetSpectrumData(spectrumData, 0, fftWindow);
-            float pitch = pitchEstimator.Estimate(audioSource);
+            float pitch = _pitchEstimator.Estimate(audioSource);
             SoundSpectrum soundSpectrum = new SoundSpectrum(spectrumData, spectrumSize, sampleRate);
             
             if (!float.IsNaN(pitch))
