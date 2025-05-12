@@ -11,8 +11,8 @@ public class UserMicrophone : MonoBehaviour
 
     [Tooltip("FFT window type used for spectrum analysis.")]
     public FFTWindow fftWindow = FFTWindow.BlackmanHarris;
-
     public float[] spectrumData;
+    private AudioPitchEstimator pitchEstimator;
 
     void Start()
     {
@@ -21,11 +21,12 @@ public class UserMicrophone : MonoBehaviour
             audioSource = GetComponent<AudioSource>();
         }
 
+        pitchEstimator = GetComponent<AudioPitchEstimator>();
+
         Debug.Log("NAME: " + Microphone.devices[0]);
         audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, sampleRate);
         audioSource.loop = true;
 
-        // Wait until the microphone starts recording
         while (!(Microphone.GetPosition(null) > 0)) { }
 
         audioSource.Play();
@@ -38,15 +39,20 @@ public class UserMicrophone : MonoBehaviour
         if (audioSource != null && audioSource.isPlaying)
         {
             audioSource.GetSpectrumData(spectrumData, 0, fftWindow);
+            float pitch = pitchEstimator.Estimate(audioSource);
             SoundSpectrum soundSpectrum = new SoundSpectrum(spectrumData, spectrumSize, sampleRate);
-
-            if (soundSpectrum.frequencySpectrum.Length > 0)
+            
+            if (!float.IsNaN(pitch))
             {
+                Debug.Log("Estimated Pitch: " + pitch + " Hz");
+            }
+            else
+            {
+                Debug.Log("No clear pitch detected");
                 soundSpectrum.LogSpectrumAnalysis();
                 // Parse values from string-returning methods
-                float largest = float.Parse(soundSpectrum.GetLargestValue());
-                float smallest = float.Parse(soundSpectrum.GetSmallestValue());
-                float pitch = float.Parse(soundSpectrum.GetEstimatedPitch(4));
+                float largest = soundSpectrum.GetLargestValue();
+                float smallest = soundSpectrum.GetSmallestValue();
 
                 // Particle System references
                 var main = particleSystem.main;
