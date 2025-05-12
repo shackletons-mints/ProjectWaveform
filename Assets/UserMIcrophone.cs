@@ -6,7 +6,7 @@ public class UserMicrophone : MonoBehaviour
     public AudioSource audioSource;
 
     [Tooltip("Number of spectrum samples. Must be a power of 2 (e.g., 64, 128, 256, 512, 1024, 2048).")]
-    public int spectrumSize = 4096;
+    public int spectrumSize = 1024;
     public int sampleRate = 44100;
 
     [Tooltip("FFT window type used for spectrum analysis.")]
