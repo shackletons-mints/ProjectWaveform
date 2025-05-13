@@ -3,25 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SoundSpectrum
+public class SpectrumAnalysis
 {
 
-    public float[] frequencySpectrum;
-    public int sampleRate;
-    private int _spectrumSize;
+    public float[] spectrumData;
     // use this to filter out low values
     const float epsilon = 0.00001f;
-    public SoundSpectrum(float[] spectrumData, int spectrumSize, int sampleRate)
+    public SpectrumAnalysis(float[] spectrumData)
     {
-        frequencySpectrum = spectrumData;
-        this.sampleRate = sampleRate;
-        _spectrumSize = spectrumSize;
+        this.spectrumData = spectrumData;
     }
 
     public float GetSmallestValue() 
     {
         float min = 1;
-        foreach (var val in frequencySpectrum)
+        foreach (var val in spectrumData)
         {
             if (val < min && val > epsilon)
             {
@@ -35,7 +31,7 @@ public class SoundSpectrum
     public float GetLargestValue() 
     {
         float max = -1;
-        foreach (var val in frequencySpectrum)
+        foreach (var val in spectrumData)
         {
             if (val > max)
             {
@@ -45,7 +41,7 @@ public class SoundSpectrum
         return max;
     }
 
-    public void LogSpectrumAnalysis()
+    public void Log()
     {
         float smallest = this.GetSmallestValue();
         float largest = this.GetLargestValue();
@@ -56,9 +52,9 @@ public class SoundSpectrum
     public override string ToString()
     {
         string output = "";
-        for (int i = 0; i < frequencySpectrum.Length; i++)
+        for (int i = 0; i < spectrumData.Length; i++)
         {
-            float value = frequencySpectrum[i];
+            float value = spectrumData[i];
             if (value > epsilon)
             {
                 output += $"[{i}]={value:F5} ";
