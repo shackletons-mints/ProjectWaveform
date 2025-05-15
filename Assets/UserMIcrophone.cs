@@ -65,13 +65,13 @@ public class UserMicrophone : MonoBehaviour
             if (!float.IsNaN(estimatedPitch))
             {
                 Debug.Log("Rounded Pitch: " + roundedPitch);
-                if (roundedPitch >= 430 && roundedPitch <= 450) {
+                if (roundedPitch >= 283 && roundedPitch <= 303) {
                     if (particleSystem1 is not null)
                     {
                         particleSystem1.Emit(1);
                     }
                 }
-                else if (roundedPitch >= 340 && roundedPitch <= 360) {
+                else if (roundedPitch >= 185 && roundedPitch <= 205) {
                     if (particleSystem2 is not null)
                     {
                         particleSystem2.Emit(1);
