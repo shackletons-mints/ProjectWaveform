@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class UserMicrophone : MonoBehaviour
 {
-    public ParticleSystem particleSystem1;
-    public ParticleSystem particleSystem2;
+    public ParticleSystem particleSystemG;
+    public ParticleSystem particleSystemD;
+    public ParticleSystem particleSystemFsharp;
     public AudioSource audioSource;
 
     [Tooltip("Number of spectrum samples. Must be a power of 2 (e.g., 64, 128, 256, 512, 1024, 2048).")]
@@ -21,14 +22,19 @@ public class UserMicrophone : MonoBehaviour
         ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>(true);
         foreach (var ps in particleSystems)
         {
-            if (ps.gameObject.name == "ParticleSystem-1")
+            if (ps.gameObject.name == "ParticleSystemG")
             {
-                particleSystem1 = ps;
+                particleSystemG = ps;
             }
-            else if (ps.gameObject.name == "ParticleSystem-2")
+            else if (ps.gameObject.name == "ParticleSystemD")
             {
-                particleSystem2 = ps;
+                particleSystemD = ps;
             }
+            else if (ps.gameObject.name == "ParticleSystemFsharp")
+            {
+                particleSystemFsharp = ps;
+            }
+
             ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             var emission = ps.emission;
             emission.enabled = false;
@@ -65,16 +71,22 @@ public class UserMicrophone : MonoBehaviour
             if (!float.IsNaN(estimatedPitch))
             {
                 Debug.Log("Rounded Pitch: " + roundedPitch);
-                if (roundedPitch >= 470 && roundedPitch <= 510) {
-                    if (particleSystem1 is not null)
+                if (roundedPitch >= 465 && roundedPitch <= 515) {
+                    if (particleSystemG is not null)
                     {
-                        particleSystem1.Emit(1);
+                        particleSystemG.Emit(1);
                     }
                 }
-                else if (roundedPitch >= 175 && roundedPitch <= 215) {
-                    if (particleSystem2 is not null)
+                else if (roundedPitch >= 535 && roundedPitch <= 585) {
+                    if (particleSystemD is not null)
                     {
-                        particleSystem2.Emit(1);
+                        particleSystemFsharp.Emit(1);
+                    }
+                }
+                else if (roundedPitch >= 175 && roundedPitch <= 225) {
+                    if (particleSystemD is not null)
+                    {
+                        particleSystemD.Emit(1);
                     }
                 }
             
