@@ -68,25 +68,13 @@ public class UserMicrophone : MonoBehaviour
                 if (roundedPitch >= 430 && roundedPitch <= 450) {
                     if (particleSystem1 is not null)
                     {
-                        var emission = particleSystem1.emission;
-                        emission.enabled = true;
-                        particleSystem1.Play();
-
-                        emission = particleSystem2.emission;
-                        emission.enabled = false;
-                        particleSystem2.Stop();
+                        particleSystem1.Emit(1);
                     }
                 }
                 else if (roundedPitch >= 340 && roundedPitch <= 360) {
                     if (particleSystem2 is not null)
                     {
-                        var emission = particleSystem2.emission;
-                        emission.enabled = true;
-                        particleSystem2.Play();
-
-                        emission = particleSystem1.emission;
-                        emission.enabled = false;
-                        particleSystem1.Stop();
+                        particleSystem2.Emit(1);
                     }
                 }
             

@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 1146709733}
   - component: {fileID: 1146709732}
   - component: {fileID: 1146709731}
+  - component: {fileID: 1146709736}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -558,6 +559,23 @@ Transform:
   - {fileID: 1916715697}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1146709736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146709730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb4f23b3682df483e9592da4376bff42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequencyMin: 40
+  frequencyMax: 600
+  harmonicsToUse: 5
+  smoothingWidth: 500
+  thresholdSRH: 7
 --- !u!1 &1196183804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,7 +1425,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 10000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -6240,7 +6258,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 10000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
