@@ -1,11 +1,15 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UserMicrophone : MonoBehaviour
 {
+    public GameObject sphere;
     public ParticleSystem particleSystemG;
     public ParticleSystem particleSystemD;
     public ParticleSystem particleSystemFsharp;
+    public SphereSurfacePoints sphereSurfacePoints;
+
     public AudioSource audioSource;
 
     [Tooltip("Number of spectrum samples. Must be a power of 2 (e.g., 64, 128, 256, 512, 1024, 2048).")]
@@ -20,6 +24,12 @@ public class UserMicrophone : MonoBehaviour
     void Start()
     {
         ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>(true);
+        sphere = GameObject.Find("Sphere");
+        if (sphere != null)
+        {
+            sphereSurfacePoints = new SphereSurfacePoints(sphere);
+            sphereSurfacePoints.LogAllSurfacePoints();
+        }
         foreach (var ps in particleSystems)
         {
             if (ps.gameObject.name == "ParticleSystemG")
@@ -70,7 +80,7 @@ public class UserMicrophone : MonoBehaviour
             
             if (!float.IsNaN(estimatedPitch))
             {
-                Debug.Log("Rounded Pitch: " + roundedPitch);
+                // Debug.Log("Rounded Pitch: " + roundedPitch);
                 if (roundedPitch >= 465 && roundedPitch <= 515) {
                     if (particleSystemG is not null)
                     {
@@ -93,7 +103,7 @@ public class UserMicrophone : MonoBehaviour
             }
             else
             {
-                Debug.Log("No clear pitch detected");
+                // Debug.Log("No clear pitch detected");
                 // spectrumAnalysis.Log();
                 // Parse values from string-returning methods
                 float largest = spectrumAnalysis.GetLargestValue();
