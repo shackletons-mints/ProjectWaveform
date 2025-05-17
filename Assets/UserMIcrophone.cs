@@ -27,7 +27,7 @@ public class UserMicrophone : MonoBehaviour
         sphere = GameObject.Find("Sphere");
         if (sphere != null)
         {
-            sphereSurfacePoints = new SphereSurfacePoints(sphere);
+            SphereSurfacePoints sphereSurfacePoints = new SphereSurfacePoints(sphere);
             sphereSurfacePoints.LogAllSurfacePoints();
         }
         foreach (var ps in particleSystems)

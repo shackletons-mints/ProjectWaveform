@@ -1,9 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SphereSurfacePoints
 {
     public GameObject sphere;
+    public float radius;
+    public Vector3 center;
+
     [Tooltip("Total points on the sphere")]
     [Range(100, 2000)]
     public int pointCount = 500;
@@ -20,13 +24,21 @@ public class SphereSurfacePoints
             return;
         }
 
-        // Generate points on the surface of the sphere
-        GenerateSurfacePoints(sphere.transform.position, sphere.transform.lossyScale.x * 0.5f);
-    }
+        center = sphere.transform.position;
+        radius = sphere.GetComponent<SphereCollider>().radius;
 
-    // Function to generate surface points on the sphere
-    public GenerateSurfacePoints(Vector3 center, float radius)
+        Debug.Log("Calculated radius: " + radius);
+
+        GenerateSurfacePoints();
+    }
+    public void GenerateSurfacePoints()
     {
+        if (sphere == null)
+        {
+            Debug.LogError("Sphere not assigned.");
+            return;
+        }
+
         float offset = 2f / pointCount;
         float increment = Mathf.PI * (3f - Mathf.Sqrt(5f));
 
@@ -44,10 +56,10 @@ public class SphereSurfacePoints
 
             surfacePoints.Add(new SurfacePoint(position, normal));
         }
-
-        Debug.Log($"Generated {surfacePoints.Count} surface points.");
     }
-    public void LogAllSurfacePoints(List<SurfacePoint> surfacePoints)
+
+    public void LogAllSurfacePoints()
+
     {
         if (surfacePoints == null || surfacePoints.Count == 0)
         {
