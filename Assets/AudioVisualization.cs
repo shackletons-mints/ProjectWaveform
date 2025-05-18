@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class UserMicrophone : MonoBehaviour
+public class AudioVisualization : MonoBehaviour
 {
     public ParticleSystem particleSystemG;
     public ParticleSystem particleSystemD;
@@ -16,6 +16,11 @@ public class UserMicrophone : MonoBehaviour
     public FFTWindow fftWindow = FFTWindow.BlackmanHarris;
     public float[] spectrumData;
     public AudioPitchEstimator audioPitchEstimator;
+
+    [Tooltip("Toggle between using microphone or audio clip.")]
+    public bool useMicrophone = true;
+
+    public AudioClip audioClip;
 
     void Start()
     {
@@ -38,7 +43,6 @@ public class UserMicrophone : MonoBehaviour
             ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             var emission = ps.emission;
             emission.enabled = false;
-
         }
 
         if (audioSource == null)
@@ -48,16 +52,41 @@ public class UserMicrophone : MonoBehaviour
 
         audioPitchEstimator = GetComponent<AudioPitchEstimator>();
 
-        Debug.Log("NAME: " + Microphone.devices[0]);
-        audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, sampleRate);
-        audioSource.loop = true;
+        if (useMicrophone)
+        {
+            if (Microphone.devices.Length > 0)
+            {
+                Debug.Log("Using microphone: " + Microphone.devices[0]);
+                audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, sampleRate);
+                audioSource.loop = true;
 
-        while (!(Microphone.GetPosition(null) > 0)) { }
+                while (!(Microphone.GetPosition(null) > 0)) { }
 
-        audioSource.Play();
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("No microphone devices found.");
+            }
+        }
+        else
+        {
+            if (audioClip != null)
+            {
+                Debug.Log("Using audio clip.");
+                audioSource.clip = audioClip;
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("No audio clip assigned.");
+            }
+        }
 
         spectrumData = new float[spectrumSize];
     }
+
 
     void Update()
     {
