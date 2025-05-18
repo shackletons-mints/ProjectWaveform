@@ -23,11 +23,8 @@ public class SphereSurfacePoints
             Debug.LogError("Sphere not assigned.");
             return;
         }
-
         center = sphere.transform.position;
         radius = sphere.GetComponent<SphereCollider>().radius;
-
-        Debug.Log("Calculated radius: " + radius);
 
         GenerateSurfacePoints();
     }
@@ -44,12 +41,12 @@ public class SphereSurfacePoints
 
         for (int i = 0; i < pointCount; i++)
         {
-            float y = ((i * offset) - 1) + (offset / 2);
-            float r = Mathf.Sqrt(1 - y * y);
-            float phi = i * increment;
+            float theta = i * Mathf.PI * 2 / pointCount;  // Angle around the z-axis (0 to 2π)
+            float phi = Mathf.Acos(2 * Random.value - 1); // Angle around the y-axis (0 to π)
 
-            float x = Mathf.Cos(phi) * r;
-            float z = Mathf.Sin(phi) * r;
+            float x = radius * Mathf.Sin(phi) * Mathf.Cos(theta);  // Cartesian x
+            float y = radius * Mathf.Sin(phi) * Mathf.Sin(theta);  // Cartesian y
+            float z = radius * Mathf.Cos(phi);                    // Cartesian z
 
             Vector3 normal = new Vector3(x, y, z).normalized;
             Vector3 position = center + normal * radius;
