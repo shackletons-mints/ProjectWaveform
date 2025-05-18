@@ -41,14 +41,21 @@ public class SphereSurfacePoints
 
         for (int i = 0; i < pointCount; i++)
         {
-            float theta = i * Mathf.PI * 2 / pointCount;  // Angle around the z-axis (0 to 2π)
-            float phi = Mathf.Acos(2 * Random.value - 1); // Angle around the y-axis (0 to π)
+            // n = 50
+            // goldenRatio = (1 + 5**0.5)/2
+            // i = arange(0, n)
+            // theta = 2 *pi * i / goldenRatio
+            // phi = arccos(1 - 2*(i+0.5)/n)
+            // x, y, z = cos(theta) * sin(phi), sin(theta) * sin(phi), cos(phi);
+            float goldenRation = (1 + Mathf.Sqrt(5)) / 2;
+            float theta = 2 * Mathf.PI * i / goldenRation;
+            float phi = Mathf.Acos(1 - 2*(i+0.5f)/pointCount);
 
-            float x = radius * Mathf.Sin(phi) * Mathf.Cos(theta);  // Cartesian x
-            float y = radius * Mathf.Sin(phi) * Mathf.Sin(theta);  // Cartesian y
-            float z = radius * Mathf.Cos(phi);                    // Cartesian z
+            float x = radius * Mathf.Cos(theta) * Mathf.Sin(phi);
+            float y = radius * Mathf.Sin(theta) * Mathf.Sin(phi);
+            float z = radius * Mathf.Cos(phi);
 
-            Vector3 normal = new Vector3(x, y, z).normalized;
+            Vector3 normal = new Vector3(x, y, z);
             Vector3 position = center + normal * radius;
 
             surfacePoints.Add(new SurfacePoint(position, normal));
