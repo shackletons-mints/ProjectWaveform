@@ -1,5 +1,9 @@
 using System;
 using UnityEngine;
+using Utilities;
+using UnityEngine.InputSystem;
+
+
 
 public class AudioVisualization : MonoBehaviour
 {
@@ -21,6 +25,7 @@ public class AudioVisualization : MonoBehaviour
     public bool useMicrophone = true;
 
     public AudioClip audioClip;
+    public ToggleAudioHelper toggleAudioHelper;
 
     void Start()
     {
@@ -48,6 +53,11 @@ public class AudioVisualization : MonoBehaviour
         if (audioSource == null)
         {
             audioSource = GetComponent<AudioSource>();
+        }
+
+        if (toggleAudioHelper == null)
+        {
+            toggleAudioHelper = GetComponent<ToggleAudioHelper>();
         }
 
         audioPitchEstimator = GetComponent<AudioPitchEstimator>();
@@ -126,6 +136,17 @@ public class AudioVisualization : MonoBehaviour
             else
             {
                 Debug.Log("No clear pitch detected");
+            }
+        }
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            if (toggleAudioHelper != null)
+            {
+                toggleAudioHelper.ToggleAudio();
+            }
+            else
+            {
+                Debug.LogWarning("toggleAudioHelper is not assigned or missing on this GameObject.");
             }
         }
     }
