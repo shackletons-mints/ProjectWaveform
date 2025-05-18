@@ -24,12 +24,13 @@ public class SphereSurfacePoints
             return;
         }
         center = sphere.transform.position;
-        radius = sphere.GetComponent<SphereCollider>().radius;
+        radius = sphere.GetComponent<SphereCollider>().radius * sphere.transform.lossyScale.x; // world-space radius
 
         GenerateSurfacePoints();
     }
     public void GenerateSurfacePoints()
     {
+        Debug.Log("Generating surface points...");
         if (sphere == null)
         {
             Debug.LogError("Sphere not assigned.");
@@ -48,8 +49,11 @@ public class SphereSurfacePoints
             float x = Mathf.Cos(theta) * radiusAtY;
             float z = Mathf.Sin(theta) * radiusAtY;
 
-            Vector3 normal = new Vector3(x, y, z);
-            Vector3 position = normal * radius;
+            Vector3 normal = new Vector3(x, y, z).normalized;
+            Vector3 position = center + normal * radius;
+
+            // adds red lines to signify the positions and their orientation (gay) on the sphere
+            // Debug.DrawRay(center + normal * radius, normal * 0.5f, Color.red, 10f);
 
             surfacePoints.Add(new SurfacePoint(position, normal));
         }

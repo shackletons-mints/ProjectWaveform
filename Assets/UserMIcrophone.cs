@@ -18,6 +18,8 @@ public class UserMicrophone : MonoBehaviour
     public FFTWindow fftWindow = FFTWindow.BlackmanHarris;
     public float[] spectrumData;
     public AudioPitchEstimator audioPitchEstimator;
+    float emitTimer = 0f;
+    float emitInterval = 0.05f; // Emit every 0.1 seconds
 
     void Start()
     {
@@ -54,16 +56,16 @@ public class UserMicrophone : MonoBehaviour
 
     void Update()
     {
+        emitTimer += Time.deltaTime;
         if (audioSource != null && audioSource.isPlaying)
         {
             audioSource.GetSpectrumData(spectrumData, 0, fftWindow);
             float estimatedPitch = audioPitchEstimator.Estimate(audioSource);
             int roundedPitch = (int)Math.Round(estimatedPitch, 0);
             SpectrumAnalysis spectrumAnalysis = new SpectrumAnalysis(spectrumData);
-            
-            if (!float.IsNaN(estimatedPitch))
+            if (!float.IsNaN(estimatedPitch) && emitTimer >= emitInterval)
             {
-
+                emitTimer = 0f;
                 if (particleSystem != null)
                 {
                     var psTransform = particleSystem.transform;
@@ -75,7 +77,7 @@ public class UserMicrophone : MonoBehaviour
                         int index = 0;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
                         psMain.startColor = new Color(1f, 0f, 0f, 1f); // Red (G3)
                         particleSystem.Emit(1);
                     }
@@ -83,7 +85,7 @@ public class UserMicrophone : MonoBehaviour
                         int index = 14;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
                         psMain.startColor = new Color(1f, 0.5f, 0f, 1f); // Orange (A3)
                         particleSystem.Emit(1);
                     }
@@ -91,7 +93,7 @@ public class UserMicrophone : MonoBehaviour
                         int index = 28;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
                         psMain.startColor = new Color(1f, 1f, 0f, 1f); // Yellow (B3)
                         particleSystem.Emit(1);
                     }
@@ -99,7 +101,7 @@ public class UserMicrophone : MonoBehaviour
                         int index = 42;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
                         psMain.startColor = new Color(0f, 1f, 0f, 1f); // Green (C4)
                         particleSystem.Emit(1);
                     }
@@ -107,7 +109,7 @@ public class UserMicrophone : MonoBehaviour
                         int index = 56;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
                         psMain.startColor = new Color(0f, 0f, 1f, 1f); // Blue (D4)
                         particleSystem.Emit(1);
                     }
@@ -115,7 +117,7 @@ public class UserMicrophone : MonoBehaviour
                         int index = 71;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
                         psMain.startColor = new Color(0.29f, 0f, 0.51f, 1f); // Indigo (E4)
                         particleSystem.Emit(1);
                     }
@@ -123,7 +125,7 @@ public class UserMicrophone : MonoBehaviour
                         int index = 85;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
                         psMain.startColor = new Color(0.56f, 0f, 1f, 1f); // Violet (F#4)
                         particleSystem.Emit(1);
                     }
@@ -131,16 +133,11 @@ public class UserMicrophone : MonoBehaviour
                         int index = 99;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
                         psMain.startColor = new Color(1f, 1f, 1f, 1f); // White (G4)
                         particleSystem.Emit(1);
                     }
-
-
-
-
                 }
-            
             }
             else
             {
