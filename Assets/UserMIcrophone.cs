@@ -72,101 +72,72 @@ public class UserMicrophone : MonoBehaviour
 
                     Debug.Log("Rounded Pitch: " + roundedPitch);
                     if (roundedPitch >= 186 && roundedPitch <= 206) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[250].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[250].normal;
+                        int index = 0;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
                         psMain.startColor = new Color(1f, 0f, 0f, 1f); // Red (G3)
                         particleSystem.Emit(1);
                     }
                     else if (roundedPitch >= 210 && roundedPitch <= 230) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[270].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[270].normal;
+                        int index = 14;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
                         psMain.startColor = new Color(1f, 0.5f, 0f, 1f); // Orange (A3)
                         particleSystem.Emit(1);
                     }
                     else if (roundedPitch >= 237 && roundedPitch <= 257) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[280].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[280].normal;
+                        int index = 28;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
                         psMain.startColor = new Color(1f, 1f, 0f, 1f); // Yellow (B3)
                         particleSystem.Emit(1);
                     }
                     else if (roundedPitch >= 251 && roundedPitch <= 271) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[290].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[290].normal;
+                        int index = 42;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
                         psMain.startColor = new Color(0f, 1f, 0f, 1f); // Green (C4)
                         particleSystem.Emit(1);
                     }
                     else if (roundedPitch >= 284 && roundedPitch <= 304) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[300].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[300].normal;
+                        int index = 56;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
                         psMain.startColor = new Color(0f, 0f, 1f, 1f); // Blue (D4)
                         particleSystem.Emit(1);
                     }
                     else if (roundedPitch >= 320 && roundedPitch <= 340) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[355].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[355].normal;
+                        int index = 71;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
                         psMain.startColor = new Color(0.29f, 0f, 0.51f, 1f); // Indigo (E4)
                         particleSystem.Emit(1);
                     }
                     else if (roundedPitch >= 360 && roundedPitch <= 380) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[400].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[400].normal;
+                        int index = 85;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
                         psMain.startColor = new Color(0.56f, 0f, 1f, 1f); // Violet (F#4)
                         particleSystem.Emit(1);
                     }
                     else if (roundedPitch >= 382 && roundedPitch <= 402) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[425].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[425].normal;
+                        int index = 99;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psShape.rotation = Quaternion.LookRotation(direction).eulerAngles;
                         psMain.startColor = new Color(1f, 1f, 1f, 1f); // White (G4)
                         particleSystem.Emit(1);
                     }
-                    else if (roundedPitch >= 386 && roundedPitch <= 406) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[450].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[450].normal;
-                        psMain.startColor = new Color(1f, 0f, 0f, 1f); // Red (G4)
-                        particleSystem.Emit(1);
-                    }
-                    else if (roundedPitch >= 429 && roundedPitch <= 449) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[71].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[71].normal;
-                        psMain.startColor = new Color(1f, 0.5f, 0f, 1f); // Orange (A4)
-                        particleSystem.Emit(1);
-                    }
-                    else if (roundedPitch >= 484 && roundedPitch <= 504) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[142].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[142].normal;
-                        psMain.startColor = new Color(1f, 1f, 0f, 1f); // Yellow (B4)
-                        particleSystem.Emit(1);
-                    }
-                    else if (roundedPitch >= 511 && roundedPitch <= 531) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[213].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[213].normal;
-                        psMain.startColor = new Color(0f, 1f, 0f, 1f); // Green (C5)
-                        particleSystem.Emit(1);
-                    }
-                    else if (roundedPitch >= 558 && roundedPitch <= 578) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[450].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[450].normal;
-                        psMain.startColor = new Color(0f, 0f, 1f, 1f); // Blue (D5)
-                        particleSystem.Emit(1);
-                    }
-                    else if (roundedPitch >= 640 && roundedPitch <= 660) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[355].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[355].normal;
-                        psMain.startColor = new Color(0.29f, 0f, 0.51f, 1f); // Indigo (E5)
-                        particleSystem.Emit(1);
-                    }
-                    else if (roundedPitch >= 740 && roundedPitch <= 760) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[426].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[426].normal;
-                        psMain.startColor = new Color(0.56f, 0f, 1f, 1f); // Violet (F#5)
-                        particleSystem.Emit(1);
-                    }
-                    else if (roundedPitch >= 770 && roundedPitch <= 790) {
-                        psTransform.position = sphereSurfacePoints.surfacePoints[499].position;
-                        psShape.rotation = sphereSurfacePoints.surfacePoints[499].normal;
-                        psMain.startColor = new Color(1f, 1f, 1f, 1f); // White (G5)
-                        particleSystem.Emit(1);
-                    }
+
+
+
 
                 }
             

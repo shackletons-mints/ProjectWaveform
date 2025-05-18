@@ -10,7 +10,7 @@ public class SphereSurfacePoints
 
     [Tooltip("Total points on the sphere")]
     [Range(100, 2000)]
-    public int pointCount = 500;
+    public int pointCount = 100;
 
     [Tooltip("Positions and normals of sphere")]
     public List<SurfacePoint> surfacePoints = new List<SurfacePoint>();
@@ -36,27 +36,20 @@ public class SphereSurfacePoints
             return;
         }
 
-        float offset = 2f / pointCount;
-        float increment = Mathf.PI * (3f - Mathf.Sqrt(5f));
+        surfacePoints.Clear();
+
+        float goldenAngle = Mathf.PI * (3f - Mathf.Sqrt(5f));
 
         for (int i = 0; i < pointCount; i++)
         {
-            // n = 50
-            // goldenRatio = (1 + 5**0.5)/2
-            // i = arange(0, n)
-            // theta = 2 *pi * i / goldenRatio
-            // phi = arccos(1 - 2*(i+0.5)/n)
-            // x, y, z = cos(theta) * sin(phi), sin(theta) * sin(phi), cos(phi);
-            float goldenRation = (1 + Mathf.Sqrt(5)) / 2;
-            float theta = 2 * Mathf.PI * i / goldenRation;
-            float phi = Mathf.Acos(1 - 2*(i+0.5f)/pointCount);
-
-            float x = radius * Mathf.Cos(theta) * Mathf.Sin(phi);
-            float y = radius * Mathf.Sin(theta) * Mathf.Sin(phi);
-            float z = radius * Mathf.Cos(phi);
+            float y = 1f - (i + 0.5f) * (2f / pointCount);
+            float radiusAtY = Mathf.Sqrt(1f - y * y);
+            float theta = goldenAngle * i;
+            float x = Mathf.Cos(theta) * radiusAtY;
+            float z = Mathf.Sin(theta) * radiusAtY;
 
             Vector3 normal = new Vector3(x, y, z);
-            Vector3 position = center + normal * radius;
+            Vector3 position = normal * radius;
 
             surfacePoints.Add(new SurfacePoint(position, normal));
         }
