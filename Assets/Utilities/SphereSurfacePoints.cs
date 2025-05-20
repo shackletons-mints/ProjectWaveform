@@ -1,41 +1,43 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class SphereSurfacePoints
+[RequireComponent(typeof(SphereCollider))]
+public class SphereSurfacePoints : MonoBehaviour
 {
-    public GameObject sphere;
-    public float radius;
-    public Vector3 center;
-
     [Tooltip("Total points on the sphere")]
     [Range(100, 2000)]
-    public int pointCount = 100;
+    [SerializeField] private int pointCount = 100;
 
     [Tooltip("Positions and normals of sphere")]
     public List<SurfacePoint> surfacePoints = new List<SurfacePoint>();
 
-    public SphereSurfacePoints(GameObject sphere)
+    private float radius;
+    private Vector3 center;
+
+    private void Awake()
     {
-        this.sphere = sphere;
-        if (sphere == null)
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        SphereCollider collider = GetComponent<SphereCollider>();
+        if (collider == null)
         {
-            Debug.LogError("Sphere not assigned.");
+            Debug.LogError("No SphereCollider found on GameObject.");
             return;
         }
-        center = sphere.transform.position;
-        radius = sphere.GetComponent<SphereCollider>().radius * sphere.transform.lossyScale.x; // world-space radius
+
+        center = transform.position;
+        radius = collider.radius * collider.transform.lossyScale.x;
 
         GenerateSurfacePoints();
     }
+
+    [ContextMenu("Generate Surface Points")]
     public void GenerateSurfacePoints()
     {
         Debug.Log("Generating surface points...");
-        if (sphere == null)
-        {
-            Debug.LogError("Sphere not assigned.");
-            return;
-        }
 
         surfacePoints.Clear();
 
@@ -52,28 +54,13 @@ public class SphereSurfacePoints
             Vector3 normal = new Vector3(x, y, z).normalized;
             Vector3 position = center + normal * radius;
 
-            // adds red lines to signify the positions and their orientation (gay) on the sphere
-            // Debug.DrawRay(center + normal * radius, normal * 0.5f, Color.red, 10f);
-
             surfacePoints.Add(new SurfacePoint(position, normal));
+
+            // Optional: visualize with Debug.DrawRay
+            Debug.DrawRay(position, normal * 0.5f, Color.red, 10f);
         }
+
+        Debug.Log($"Generated {surfacePoints.Count} surface points.");
     }
 
-    public void LogAllSurfacePoints()
-
-    {
-        if (surfacePoints == null || surfacePoints.Count == 0)
-        {
-            Debug.LogWarning("No surface points to log.");
-            return;
-        }
-
-        for (int i = 0; i < surfacePoints.Count; i++)
-        {
-            SurfacePoint sp = surfacePoints[i];
-            Debug.Log($"Point {i}: Position = {sp.position}, Normal = {sp.normal}");
-        }
-
-        Debug.Log($"Total Surface Points Logged: {surfacePoints.Count}");
-    }
 }
