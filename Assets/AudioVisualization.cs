@@ -4,8 +4,6 @@ using UnityEngine;
 using Utilities;
 using UnityEngine.InputSystem;
 
-
-
 public class AudioVisualization : MonoBehaviour
 {
     public GameObject sphere;
@@ -23,7 +21,7 @@ public class AudioVisualization : MonoBehaviour
     public float[] spectrumData;
     public AudioPitchEstimator audioPitchEstimator;
     float emitTimer = 0f;
-    float emitInterval = 0.02f; // Emit every 0.1 seconds
+    float emitInterval = 0.01f; // Emit every 0.1 seconds
 
     [Tooltip("Toggle between using microphone or audio clip.")]
     public bool useMicrophone = true;
@@ -31,69 +29,85 @@ public class AudioVisualization : MonoBehaviour
     public AudioClip audioClip;
     public ToggleAudioHelper toggleAudioHelper;
 
-    void Start()
+void Start()
+{
+    particleSystem = GetComponentInChildren<ParticleSystem>();
+    if (particleSystem != null)
     {
-        ParticleSystem particleSystem = GetComponent<ParticleSystem>();
-        if (particleSystem != null)
+        particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        var emission = particleSystem.emission;
+        emission.enabled = false;
+    }
+
+    sphere = GameObject.Find("Sphere");
+    if (sphere != null)
+    {
+        sphereSurfacePoints = sphere.GetComponent<SphereSurfacePoints>();
+
+        if (sphereSurfacePoints != null)
         {
-            particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            var emission = particleSystem.emission;
-            emission.enabled = false;
-        }
-
-        sphere = GameObject.Find("Sphere");
-        if (sphere != null)
-        {
-            sphereSurfacePoints = new SphereSurfacePoints(sphere);
-            sphereSurfacePoints.LogAllSurfacePoints();
-        }
-
-        if (audioSource == null)
-        {
-            audioSource = GetComponent<AudioSource>();
-        }
-
-        if (toggleAudioHelper == null)
-        {
-            toggleAudioHelper = GetComponent<ToggleAudioHelper>();
-        }
-
-        audioPitchEstimator = GetComponent<AudioPitchEstimator>();
-
-        if (useMicrophone)
-        {
-            if (Microphone.devices.Length > 0)
-            {
-                Debug.Log("Using microphone: " + Microphone.devices[0]);
-                audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, sampleRate);
-                audioSource.loop = true;
-
-                while (!(Microphone.GetPosition(null) > 0)) { }
-
-                audioSource.Play();
-            }
-            else
-            {
-                Debug.LogWarning("No microphone devices found.");
-            }
+            sphereSurfacePoints.GenerateSurfacePoints();
         }
         else
         {
-            if (audioClip != null)
-            {
-                Debug.Log("Using audio clip.");
-                audioSource.clip = audioClip;
-                audioSource.loop = true;
-                audioSource.Play();
-            }
-            else
-            {
-                Debug.LogWarning("No audio clip assigned.");
-            }
+            Debug.LogError("SphereSurfacePoints component not found on the sphere GameObject.");
         }
-
-        spectrumData = new float[spectrumSize];
     }
+    else
+    {
+        Debug.LogWarning("Sphere GameObject not found.");
+    }
+
+    if (audioSource == null)
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    if (toggleAudioHelper == null)
+    {
+        toggleAudioHelper = GetComponent<ToggleAudioHelper>();
+    }
+
+    if (audioPitchEstimator == null)
+    {
+    audioPitchEstimator = GetComponent<AudioPitchEstimator>();
+    }
+
+    if (useMicrophone)
+    {
+        if (Microphone.devices.Length > 0)
+        {
+            Debug.Log("Using microphone: " + Microphone.devices[0]);
+            audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, sampleRate);
+            audioSource.loop = true;
+
+            while (!(Microphone.GetPosition(null) > 0)) { }
+
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("No microphone devices found.");
+        }
+    }
+    else
+    {
+        if (audioClip != null)
+        {
+            Debug.Log("Using audio clip.");
+            audioSource.clip = audioClip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("No audio clip assigned.");
+        }
+    }
+
+    spectrumData = new float[spectrumSize];
+}
+
 
 
     void Update()
@@ -105,9 +119,15 @@ public class AudioVisualization : MonoBehaviour
             float estimatedPitch = audioPitchEstimator.Estimate(audioSource);
             int roundedPitch = (int)Math.Round(estimatedPitch, 0);
             SpectrumAnalysis spectrumAnalysis = new SpectrumAnalysis(spectrumData);
-            if (!float.IsNaN(estimatedPitch) && emitTimer >= emitInterval)
+
+            bool validPitch = !float.IsNaN(estimatedPitch);
+            bool readyToEmit = emitTimer >= emitInterval;
+            Debug.Log("valid pitch " + validPitch);
+            Debug.Log("ready to emit " + readyToEmit);
+            if (validPitch && readyToEmit)
             {
                 emitTimer = 0f;
+                Debug.Log("PARTICLE SYSTEM " + particleSystem);
                 if (particleSystem != null)
                 {
                     var psTransform = particleSystem.transform;
@@ -115,10 +135,7 @@ public class AudioVisualization : MonoBehaviour
                     var psMain = particleSystem.main;
 
 
-                    Debug.Log("Rounded Pitch: " + roundedPitch);
-                    // I know... should abstract this, but I wanted to test it
-                    // and having chatGPT generate this slop is relatively quick
-                    if (roundedPitch >= 300 && roundedPitch < 330)
+                   if (roundedPitch >= 300 && roundedPitch < 330)
                     {
                         int index = 0;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
@@ -129,7 +146,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 330 && roundedPitch < 350)
                     {
-                        int index = 1;
+                        int index = 10;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -138,7 +155,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 350 && roundedPitch < 380)
                     {
-                        int index = 2;
+                        int index = 20;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -147,7 +164,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 380 && roundedPitch < 410)
                     {
-                        int index = 3;
+                        int index = 25;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -156,7 +173,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 410 && roundedPitch < 440)
                     {
-                        int index = 4;
+                        int index = 30;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -165,7 +182,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 440 && roundedPitch < 470)
                     {
-                        int index = 5;
+                        int index = 40;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -174,7 +191,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 470 && roundedPitch < 500)
                     {
-                        int index = 6;
+                        int index = 45;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -183,7 +200,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 500 && roundedPitch < 530)
                     {
-                        int index = 7;
+                        int index = 50;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -192,7 +209,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 530 && roundedPitch < 560)
                     {
-                        int index = 8;
+                        int index = 55;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -201,7 +218,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 560 && roundedPitch < 590)
                     {
-                        int index = 9;
+                        int index = 60;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -210,7 +227,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 590 && roundedPitch < 620)
                     {
-                        int index = 10;
+                        int index = 70;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -219,7 +236,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 620 && roundedPitch < 650)
                     {
-                        int index = 11;
+                        int index = 80;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -228,7 +245,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 650 && roundedPitch < 680)
                     {
-                        int index = 12;
+                        int index = 85;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -237,7 +254,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 680 && roundedPitch < 710)
                     {
-                        int index = 13;
+                        int index = 90;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -246,7 +263,7 @@ public class AudioVisualization : MonoBehaviour
                     }
                     else if (roundedPitch >= 710 && roundedPitch < 740)
                     {
-                        int index = 14;
+                        int index = 95;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -256,9 +273,13 @@ public class AudioVisualization : MonoBehaviour
 
                 }
             }
-            else
+            else if (!validPitch)
             {
                 Debug.Log("No clear pitch detected");
+            }
+            else if (!readyToEmit)
+            {
+                Debug.Log("Waiting to emit — pitch OK, timer not ready");
             }
         }
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
