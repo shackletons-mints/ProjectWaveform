@@ -1,15 +1,15 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 using UnityEngine.InputSystem;
 
-
-
 public class AudioVisualization : MonoBehaviour
 {
-    public ParticleSystem particleSystemG;
-    public ParticleSystem particleSystemD;
-    public ParticleSystem particleSystemFsharp;
+    public GameObject sphere;
+    public ParticleSystem particleSystem;
+    public SphereSurfacePoints sphereSurfacePoints;
+
     public AudioSource audioSource;
 
     [Tooltip("Number of spectrum samples. Must be a power of 2 (e.g., 64, 128, 256, 512, 1024, 2048).")]
@@ -20,6 +20,8 @@ public class AudioVisualization : MonoBehaviour
     public FFTWindow fftWindow = FFTWindow.BlackmanHarris;
     public float[] spectrumData;
     public AudioPitchEstimator audioPitchEstimator;
+    float emitTimer = 0f;
+    float emitInterval = 0.01f;
 
     [Tooltip("Toggle between using microphone or audio clip.")]
     public bool useMicrophone = true;
@@ -27,79 +29,93 @@ public class AudioVisualization : MonoBehaviour
     public AudioClip audioClip;
     public ToggleAudioHelper toggleAudioHelper;
 
-    void Start()
+void Start()
+{
+    if (particleSystem == null)
     {
-        ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>(true);
-        foreach (var ps in particleSystems)
+        particleSystem = GetComponentInChildren<ParticleSystem>();
+    }
+    if (particleSystem != null)
+    {
+        particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        var emission = particleSystem.emission;
+        emission.enabled = false;
+    }
+
+    sphere = GameObject.Find("Sphere");
+    if (sphere != null)
+    {
+        sphereSurfacePoints = sphere.GetComponent<SphereSurfacePoints>();
+
+        if (sphereSurfacePoints != null)
         {
-            if (ps.gameObject.name == "ParticleSystemG")
-            {
-                particleSystemG = ps;
-            }
-            else if (ps.gameObject.name == "ParticleSystemD")
-            {
-                particleSystemD = ps;
-            }
-            else if (ps.gameObject.name == "ParticleSystemFsharp")
-            {
-                particleSystemFsharp = ps;
-            }
-
-            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            var emission = ps.emission;
-            emission.enabled = false;
-        }
-
-        if (audioSource == null)
-        {
-            audioSource = GetComponent<AudioSource>();
-        }
-
-        if (toggleAudioHelper == null)
-        {
-            toggleAudioHelper = GetComponent<ToggleAudioHelper>();
-        }
-
-        audioPitchEstimator = GetComponent<AudioPitchEstimator>();
-
-        if (useMicrophone)
-        {
-            if (Microphone.devices.Length > 0)
-            {
-                Debug.Log("Using microphone: " + Microphone.devices[0]);
-                audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, sampleRate);
-                audioSource.loop = true;
-
-                while (!(Microphone.GetPosition(null) > 0)) { }
-
-                audioSource.Play();
-            }
-            else
-            {
-                Debug.LogWarning("No microphone devices found.");
-            }
+            sphereSurfacePoints.GenerateSurfacePoints();
         }
         else
         {
-            if (audioClip != null)
-            {
-                Debug.Log("Using audio clip.");
-                audioSource.clip = audioClip;
-                audioSource.loop = true;
-                audioSource.Play();
-            }
-            else
-            {
-                Debug.LogWarning("No audio clip assigned.");
-            }
+            Debug.LogError("SphereSurfacePoints component not found on the sphere GameObject.");
         }
-
-        spectrumData = new float[spectrumSize];
     }
+    else
+    {
+        Debug.LogWarning("Sphere GameObject not found.");
+    }
+
+    if (audioSource == null)
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    if (toggleAudioHelper == null)
+    {
+        toggleAudioHelper = GetComponent<ToggleAudioHelper>();
+    }
+
+    if (audioPitchEstimator == null)
+    {
+    audioPitchEstimator = GetComponent<AudioPitchEstimator>();
+    }
+
+    if (useMicrophone)
+    {
+        if (Microphone.devices.Length > 0)
+        {
+            Debug.Log("Using microphone: " + Microphone.devices[0]);
+            audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, sampleRate);
+            audioSource.loop = true;
+
+            while (!(Microphone.GetPosition(null) > 0)) { }
+
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("No microphone devices found.");
+        }
+    }
+    else
+    {
+        if (audioClip != null)
+        {
+            Debug.Log("Using audio clip.");
+            audioSource.clip = audioClip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("No audio clip assigned.");
+        }
+    }
+
+    spectrumData = new float[spectrumSize];
+}
+
 
 
     void Update()
     {
+        emitTimer += Time.deltaTime;
         if (audioSource != null && audioSource.isPlaying)
         {
             audioSource.GetSpectrumData(spectrumData, 0, fftWindow);
@@ -107,33 +123,130 @@ public class AudioVisualization : MonoBehaviour
             int roundedPitch = (int)Math.Round(estimatedPitch, 0);
             SpectrumAnalysis spectrumAnalysis = new SpectrumAnalysis(spectrumData);
 
-            if (!float.IsNaN(estimatedPitch))
+            bool validPitch = !float.IsNaN(estimatedPitch);
+            bool readyToEmit = emitTimer >= emitInterval;
+            if (validPitch && readyToEmit)
             {
-                Debug.Log("Rounded Pitch: " + roundedPitch);
-                if (roundedPitch >= 465 && roundedPitch <= 515)
+                emitTimer = 0f;
+                if (particleSystem != null)
                 {
-                    if (particleSystemG is not null)
-                    {
-                        particleSystemG.Emit(1);
-                    }
-                }
-                else if (roundedPitch >= 535 && roundedPitch <= 585)
-                {
-                    if (particleSystemD is not null)
-                    {
-                        particleSystemFsharp.Emit(1);
-                    }
-                }
-                else if (roundedPitch >= 175 && roundedPitch <= 225)
-                {
-                    if (particleSystemD is not null)
-                    {
-                        particleSystemD.Emit(1);
-                    }
-                }
+                    var psTransform = particleSystem.transform;
+                    var psShape = particleSystem.shape;
+                    var psMain = particleSystem.main;
+                    int normalizedPitch = roundedPitch % 1200;
 
+                    if (normalizedPitch >= 300 && normalizedPitch < 330)
+                    {
+                        int index = 0;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
+                        psMain.startColor = new Color(1f, 0f, 0f, 1f); // Red (C#)
+                        particleSystem.Emit(1);
+                    }
+                    else if (normalizedPitch >= 330 && normalizedPitch < 350)
+                    {
+                        int index = 10;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
+                        psMain.startColor = new Color(1f, 0.5f, 0f, 1f); // Orange (D)
+                        particleSystem.Emit(1);
+                    }
+                    else if (normalizedPitch >= 350 && normalizedPitch < 380)
+                    {
+                        int index = 20;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
+                        psMain.startColor = new Color(1f, 1f, 0f, 1f); // Yellow (D#)
+                        particleSystem.Emit(1);
+                    }
+                    else if (normalizedPitch >= 380 && normalizedPitch < 410)
+                    {
+                        int index = 25;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
+                        psMain.startColor = new Color(0f, 1f, 0f, 1f); // Green (E)
+                        particleSystem.Emit(1);
+                    }
+                    else if (normalizedPitch >= 410 && normalizedPitch < 440)
+                    {
+                        int index = 30;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
+                        psMain.startColor = new Color(0f, 0f, 1f, 1f); // Blue (F)
+                        particleSystem.Emit(1);
+                    }
+                    else if (normalizedPitch >= 440 && normalizedPitch < 470)
+                    {
+                        int index = 40;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
+                        psMain.startColor = new Color(0.29f, 0f, 0.51f, 1f); // Indigo (F#)
+                        particleSystem.Emit(1);
+                    }
+                    else if (normalizedPitch >= 470 && normalizedPitch < 500)
+                    {
+                        int index = 45;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
+                        psMain.startColor = new Color(0.56f, 0f, 1f, 1f); // Violet (G)
+                        particleSystem.Emit(1);
+                    }
+                    else if (normalizedPitch >= 500 && normalizedPitch < 530)
+                    {
+                        int index = 50;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
+                        psMain.startColor = new Color(1f, 1f, 1f, 1f); // White (G#)
+                        particleSystem.Emit(1);
+                    }
+                    else if (normalizedPitch >= 530 && normalizedPitch < 560)
+                    {
+                        int index = 55;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
+                        psMain.startColor = new Color(0.5f, 0.25f, 0f, 1f); // Brown (A)
+                        particleSystem.Emit(1);
+                    }
+                    else if (normalizedPitch >= 560 && normalizedPitch < 590)
+                    {
+                        int index = 60;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
+                        psMain.startColor = new Color(1f, 0f, 1f, 1f); // Magenta (A#)
+                        particleSystem.Emit(1);
+                    }
+                    else if (normalizedPitch >= 590 && normalizedPitch < 620)
+                    {
+                        int index = 70;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
+                        psMain.startColor = new Color(0f, 1f, 1f, 1f); // Cyan (B)
+                        particleSystem.Emit(1);
+                    }
+                    else if (normalizedPitch >= 620 && normalizedPitch < 650)
+                    {
+                        int index = 80;
+                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                        psTransform.rotation = Quaternion.LookRotation(direction);
+                        psMain.startColor = new Color(0.5f, 0.5f, 0f, 1f); // Olive (C)
+                        particleSystem.Emit(1);
+                    }
+
+                }
             }
-            else
+            else if (!validPitch)
             {
                 Debug.Log("No clear pitch detected");
             }
