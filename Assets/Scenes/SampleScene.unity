@@ -579,7 +579,7 @@ MonoBehaviour:
   fftWindow: 5
   spectrumData: []
   audioPitchEstimator: {fileID: 1146709736}
-  useMicrophone: 1
+  useMicrophone: 0
   audioClip: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
   toggleAudioHelper: {fileID: 1146709738}
 --- !u!135 &1146709732
@@ -821,7 +821,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 240
+      scalar: 100
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1309,7 +1309,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 100000
+    maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -1376,7 +1376,7 @@ ParticleSystem:
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 1, y: 0.03, z: 0.12}
+    m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -5563,7 +5563,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1196183805}
   - component: {fileID: 1196183808}
-  - component: {fileID: 1196183807}
   - component: {fileID: 1196183806}
   - component: {fileID: 1196183809}
   - component: {fileID: 1196183811}
@@ -5607,30 +5606,6 @@ MonoBehaviour:
   harmonicsToUse: 5
   smoothingWidth: 500
   thresholdSRH: 7
---- !u!114 &1196183807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196183804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cb1a9fd0c2ba419181ce1fb0b69358e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sphere: {fileID: 1146709730}
-  particleSystem: {fileID: 1177547902}
-  sphereSurfacePoints: {fileID: 1196183810}
-  audioSource: {fileID: 1196183808}
-  spectrumSize: 4096
-  sampleRate: 44100
-  fftWindow: 4
-  spectrumData: []
-  audioPitchEstimator: {fileID: 1196183806}
-  useMicrophone: 0
-  audioClip: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
-  toggleAudioHelper: {fileID: 1196183809}
 --- !u!82 &1196183808
 AudioSource:
   m_ObjectHideFlags: 0

@@ -137,7 +137,7 @@ void Start()
 
                     if (normalizedPitch >= 300 && normalizedPitch < 330)
                     {
-                        int index = 0;
+                        int index = 10;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -146,7 +146,7 @@ void Start()
                     }
                     else if (normalizedPitch >= 330 && normalizedPitch < 350)
                     {
-                        int index = 10;
+                        int index = 11;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -155,7 +155,7 @@ void Start()
                     }
                     else if (normalizedPitch >= 350 && normalizedPitch < 380)
                     {
-                        int index = 20;
+                        int index = 12;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -164,7 +164,7 @@ void Start()
                     }
                     else if (normalizedPitch >= 380 && normalizedPitch < 410)
                     {
-                        int index = 25;
+                        int index = 13;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -173,7 +173,7 @@ void Start()
                     }
                     else if (normalizedPitch >= 410 && normalizedPitch < 440)
                     {
-                        int index = 30;
+                        int index = 14;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -182,7 +182,7 @@ void Start()
                     }
                     else if (normalizedPitch >= 440 && normalizedPitch < 470)
                     {
-                        int index = 40;
+                        int index = 15;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -191,7 +191,7 @@ void Start()
                     }
                     else if (normalizedPitch >= 470 && normalizedPitch < 500)
                     {
-                        int index = 45;
+                        int index = 16;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -200,7 +200,7 @@ void Start()
                     }
                     else if (normalizedPitch >= 500 && normalizedPitch < 530)
                     {
-                        int index = 50;
+                        int index = 17;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -209,7 +209,7 @@ void Start()
                     }
                     else if (normalizedPitch >= 530 && normalizedPitch < 560)
                     {
-                        int index = 55;
+                        int index = 18;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -218,7 +218,7 @@ void Start()
                     }
                     else if (normalizedPitch >= 560 && normalizedPitch < 590)
                     {
-                        int index = 60;
+                        int index = 19;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -227,7 +227,7 @@ void Start()
                     }
                     else if (normalizedPitch >= 590 && normalizedPitch < 620)
                     {
-                        int index = 70;
+                        int index = 20;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
@@ -236,7 +236,7 @@ void Start()
                     }
                     else if (normalizedPitch >= 620 && normalizedPitch < 650)
                     {
-                        int index = 80;
+                        int index = 21;
                         psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
                         Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
                         psTransform.rotation = Quaternion.LookRotation(direction);
