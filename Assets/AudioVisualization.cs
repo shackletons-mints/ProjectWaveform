@@ -21,7 +21,26 @@ public class AudioVisualization : MonoBehaviour
     public float[] spectrumData;
     public AudioPitchEstimator audioPitchEstimator;
     float emitTimer = 0f;
-    float emitInterval = 0.05f;
+    float emitInterval = 0.125f; // ~eight of a second
+    string[] pitchNames = {
+        "C", "C#", "D", "D#", "E", "F",
+        "F#", "G", "G#", "A", "A#", "B"
+    };
+
+    Color[] pitchColors = {
+        new Color(0.5f, 0.5f, 0f, 1f),   // C - Olive
+        new Color(1f, 0f, 0f, 1f),       // C# - Red
+        new Color(1f, 0.5f, 0f, 1f),     // D - Orange
+        new Color(1f, 1f, 0f, 1f),       // D# - Yellow
+        new Color(0f, 1f, 0f, 1f),       // E - Green
+        new Color(0f, 0f, 1f, 1f),       // F - Blue
+        new Color(0.29f, 0f, 0.51f, 1f), // F# - Indigo
+        new Color(0.56f, 0f, 1f, 1f),    // G - Violet
+        new Color(1f, 1f, 1f, 1f),       // G# - White
+        new Color(0.5f, 0.25f, 0f, 1f),  // A - Brown
+        new Color(1f, 0f, 1f, 1f),       // A# - Magenta
+        new Color(0f, 1f, 1f, 1f)        // B - Cyan
+    };
 
     [Tooltip("Toggle between using microphone or audio clip.")]
     public bool useMicrophone = true;
@@ -111,75 +130,57 @@ void Start()
     spectrumData = new float[spectrumSize];
 }
 
-
-
-    void Update()
+void Update()
+{
+    emitTimer += Time.deltaTime;
+    if (audioSource != null && audioSource.isPlaying)
     {
-        emitTimer += Time.deltaTime;
-        if (audioSource != null && audioSource.isPlaying)
+        audioSource.GetSpectrumData(spectrumData, 0, fftWindow);
+        float estimatedPitch = audioPitchEstimator.Estimate(audioSource);
+        int roundedPitch = (int)Math.Round(estimatedPitch, 0);
+        SpectrumAnalysis spectrumAnalysis = new SpectrumAnalysis(spectrumData);
+
+        bool validPitch = !float.IsNaN(estimatedPitch);
+        bool readyToEmit = emitTimer >= emitInterval;
+        if (validPitch && readyToEmit)
         {
-            audioSource.GetSpectrumData(spectrumData, 0, fftWindow);
-            float estimatedPitch = audioPitchEstimator.Estimate(audioSource);
-            int roundedPitch = (int)Math.Round(estimatedPitch, 0);
-            SpectrumAnalysis spectrumAnalysis = new SpectrumAnalysis(spectrumData);
-
-            bool validPitch = !float.IsNaN(estimatedPitch);
-            bool readyToEmit = emitTimer >= emitInterval;
-            if (validPitch && readyToEmit)
+            emitTimer = 0f;
+            if (particleSystem != null)
             {
-                emitTimer = 0f;
-                if (particleSystem != null)
-                {
-                    var psTransform = particleSystem.transform;
-                    var psMain = particleSystem.main;
+                var psTransform = particleSystem.transform;
+                var psMain = particleSystem.main;
 
-                    // A dictionary mapping note bands to index and color
-                    var noteBands = new (float min, float max, int index, Color color, string note)[]
-                    {
-                        (435f, 445f, 10, new Color(0.5f, 0.25f, 0f, 1f), "A4"),
-                        (461f, 471f, 11, new Color(1f, 0f, 1f, 1f), "A#4"),
-                        (489f, 499f, 12, new Color(0f, 1f, 1f, 1f), "B4"),
-                        (256f, 266f, 13, new Color(0.5f, 0.5f, 0f, 1f), "C4"),
-                        (272f, 282f, 14, new Color(1f, 0f, 0f, 1f), "C#4"),
-                        (288f, 298f, 15, new Color(1f, 0.5f, 0f, 1f), "D4"),
-                        (306f, 316f, 16, new Color(1f, 1f, 0f, 1f), "D#4"),
-                        (324f, 334f, 17, new Color(0f, 1f, 0f, 1f), "E4"),
-                        (344f, 354f, 18, new Color(0f, 0f, 1f, 1f), "F4"),
-                        (365f, 375f, 19, new Color(0.29f, 0f, 0.51f, 1f), "F#4"),
-                        (387f, 397f, 20, new Color(0.56f, 0f, 1f, 1f), "G4"),
-                        (410f, 420f, 21, new Color(1f, 1f, 1f, 1f), "G#4")
-                    };
+                int midiNote = Mathf.FloorToInt(69 + 12 * Mathf.Log(estimatedPitch / 440f, 2));
+                int pitchClass = midiNote % 12; // 0 = C, 1 = C#, ..., 9 = A, ...
 
-                    foreach (var (min, max, index, color, pitch) in noteBands)
-                    {
-                        if (roundedPitch >= min && roundedPitch < max)
-                        {
-                            psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                            Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                            psTransform.rotation = Quaternion.LookRotation(direction);
-                            psMain.startColor = color;
-                            particleSystem.Emit(1);
-                            Debug.Log("Pitch " + pitch);
-                            break; // Exit after first match
-                        }
-                    }
-                }
-            }
-            else if (!validPitch)
-            {
-                Debug.Log("No clear pitch detected");
+                string pitchName = pitchNames[pitchClass];
+                Color pitchColor = pitchColors[pitchClass];
+                int index = pitchClass + 10;
+
+                psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                psTransform.rotation = Quaternion.LookRotation(direction);
+                psMain.startColor = pitchColor;
+                particleSystem.Emit(1);
+
+                Debug.Log($"Emitting: {pitchName} (Freq: {estimatedPitch} Hz, MIDI: {midiNote})");
             }
         }
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        else if (!validPitch)
         {
-            if (toggleAudioHelper != null)
-            {
-                toggleAudioHelper.ToggleAudio();
-            }
-            else
-            {
-                Debug.LogWarning("toggleAudioHelper is not assigned or missing on this GameObject.");
-            }
+            Debug.Log("No clear pitch detected");
         }
     }
+    if (Keyboard.current.spaceKey.wasPressedThisFrame)
+    {
+        if (toggleAudioHelper != null)
+        {
+            toggleAudioHelper.ToggleAudio();
+        }
+        else
+        {
+            Debug.LogWarning("toggleAudioHelper is not assigned or missing on this GameObject.");
+        }
+    }
+}
 }
