@@ -21,7 +21,7 @@ public class AudioVisualization : MonoBehaviour
     public float[] spectrumData;
     public AudioPitchEstimator audioPitchEstimator;
     float emitTimer = 0f;
-    float emitInterval = 0.01f;
+    float emitInterval = 0.05f;
 
     [Tooltip("Toggle between using microphone or audio clip.")]
     public bool useMicrophone = true;
@@ -131,119 +131,38 @@ void Start()
                 if (particleSystem != null)
                 {
                     var psTransform = particleSystem.transform;
-                    var psShape = particleSystem.shape;
                     var psMain = particleSystem.main;
-                    int normalizedPitch = roundedPitch % 1200;
 
-                    if (normalizedPitch >= 300 && normalizedPitch < 330)
+                    // A dictionary mapping note bands to index and color
+                    var noteBands = new (float min, float max, int index, Color color, string note)[]
                     {
-                        int index = 10;
-                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psTransform.rotation = Quaternion.LookRotation(direction);
-                        psMain.startColor = new Color(1f, 0f, 0f, 1f); // Red (C#)
-                        particleSystem.Emit(1);
-                    }
-                    else if (normalizedPitch >= 330 && normalizedPitch < 350)
-                    {
-                        int index = 11;
-                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psTransform.rotation = Quaternion.LookRotation(direction);
-                        psMain.startColor = new Color(1f, 0.5f, 0f, 1f); // Orange (D)
-                        particleSystem.Emit(1);
-                    }
-                    else if (normalizedPitch >= 350 && normalizedPitch < 380)
-                    {
-                        int index = 12;
-                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psTransform.rotation = Quaternion.LookRotation(direction);
-                        psMain.startColor = new Color(1f, 1f, 0f, 1f); // Yellow (D#)
-                        particleSystem.Emit(1);
-                    }
-                    else if (normalizedPitch >= 380 && normalizedPitch < 410)
-                    {
-                        int index = 13;
-                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psTransform.rotation = Quaternion.LookRotation(direction);
-                        psMain.startColor = new Color(0f, 1f, 0f, 1f); // Green (E)
-                        particleSystem.Emit(1);
-                    }
-                    else if (normalizedPitch >= 410 && normalizedPitch < 440)
-                    {
-                        int index = 14;
-                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psTransform.rotation = Quaternion.LookRotation(direction);
-                        psMain.startColor = new Color(0f, 0f, 1f, 1f); // Blue (F)
-                        particleSystem.Emit(1);
-                    }
-                    else if (normalizedPitch >= 440 && normalizedPitch < 470)
-                    {
-                        int index = 15;
-                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psTransform.rotation = Quaternion.LookRotation(direction);
-                        psMain.startColor = new Color(0.29f, 0f, 0.51f, 1f); // Indigo (F#)
-                        particleSystem.Emit(1);
-                    }
-                    else if (normalizedPitch >= 470 && normalizedPitch < 500)
-                    {
-                        int index = 16;
-                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psTransform.rotation = Quaternion.LookRotation(direction);
-                        psMain.startColor = new Color(0.56f, 0f, 1f, 1f); // Violet (G)
-                        particleSystem.Emit(1);
-                    }
-                    else if (normalizedPitch >= 500 && normalizedPitch < 530)
-                    {
-                        int index = 17;
-                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psTransform.rotation = Quaternion.LookRotation(direction);
-                        psMain.startColor = new Color(1f, 1f, 1f, 1f); // White (G#)
-                        particleSystem.Emit(1);
-                    }
-                    else if (normalizedPitch >= 530 && normalizedPitch < 560)
-                    {
-                        int index = 18;
-                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psTransform.rotation = Quaternion.LookRotation(direction);
-                        psMain.startColor = new Color(0.5f, 0.25f, 0f, 1f); // Brown (A)
-                        particleSystem.Emit(1);
-                    }
-                    else if (normalizedPitch >= 560 && normalizedPitch < 590)
-                    {
-                        int index = 19;
-                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psTransform.rotation = Quaternion.LookRotation(direction);
-                        psMain.startColor = new Color(1f, 0f, 1f, 1f); // Magenta (A#)
-                        particleSystem.Emit(1);
-                    }
-                    else if (normalizedPitch >= 590 && normalizedPitch < 620)
-                    {
-                        int index = 20;
-                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psTransform.rotation = Quaternion.LookRotation(direction);
-                        psMain.startColor = new Color(0f, 1f, 1f, 1f); // Cyan (B)
-                        particleSystem.Emit(1);
-                    }
-                    else if (normalizedPitch >= 620 && normalizedPitch < 650)
-                    {
-                        int index = 21;
-                        psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
-                        Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
-                        psTransform.rotation = Quaternion.LookRotation(direction);
-                        psMain.startColor = new Color(0.5f, 0.5f, 0f, 1f); // Olive (C)
-                        particleSystem.Emit(1);
-                    }
+                        (435f, 445f, 0, new Color(0.5f, 0.25f, 0f, 1f), "A4"),
+                        (461f, 471f, 1, new Color(1f, 0f, 1f, 1f), "A#4"),
+                        (489f, 499f, 2, new Color(0f, 1f, 1f, 1f), "B4"),
+                        (256f, 266f, 3, new Color(0.5f, 0.5f, 0f, 1f), "C4"),
+                        (272f, 282f, 4, new Color(1f, 0f, 0f, 1f), "C#4"),
+                        (288f, 298f, 5, new Color(1f, 0.5f, 0f, 1f), "D4"),
+                        (306f, 316f, 6, new Color(1f, 1f, 0f, 1f), "D#4"),
+                        (324f, 334f, 7, new Color(0f, 1f, 0f, 1f), "E4"),
+                        (344f, 354f, 8, new Color(0f, 0f, 1f, 1f), "F4"),
+                        (365f, 375f, 9, new Color(0.29f, 0f, 0.51f, 1f), "F#4"),
+                        (387f, 397f, 10, new Color(0.56f, 0f, 1f, 1f), "G4"),
+                        (410f, 420f, 11, new Color(1f, 1f, 1f, 1f), "G#4")
+                    };
 
+                    foreach (var (min, max, index, color, pitch) in noteBands)
+                    {
+                        if (roundedPitch >= min && roundedPitch < max)
+                        {
+                            psTransform.position = sphereSurfacePoints.surfacePoints[index].position;
+                            Vector3 direction = sphereSurfacePoints.surfacePoints[index].normal;
+                            psTransform.rotation = Quaternion.LookRotation(direction);
+                            psMain.startColor = color;
+                            particleSystem.Emit(1);
+                            Debug.Log("Pitch " + pitch);
+                            break; // Exit after first match
+                        }
+                    }
                 }
             }
             else if (!validPitch)
