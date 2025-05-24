@@ -1,0 +1,50 @@
+using UnityEngine;
+using Utilities;
+
+namespace AudioVisualization
+{
+    public static class AudioInitializer
+    {
+        public static void InitializeReferences(AudioVisualizer visualizer)
+        {
+            visualizer.particleSystem ??= visualizer.GetComponent<ParticleSystem>();
+            visualizer.particleSystem?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+            visualizer.audioSource ??= visualizer.GetComponent<AudioSource>();
+            visualizer.audioToggle ??= visualizer.GetComponent<AudioToggle>();
+            visualizer.audioPitchEstimator ??= visualizer.GetComponent<AudioPitchEstimator>();
+        }
+
+        public static void InitializeSphere(AudioVisualizer visualizer)
+        {
+            visualizer.sphere = GameObject.Find("Sphere");
+            visualizer.sphereSurfacePoints = visualizer.sphere?.GetComponent<SphereSurfacePoints>();
+            visualizer.sphereSurfacePoints?.GenerateSurfacePoints();
+        }
+
+        public static void InitializeAudio(AudioVisualizer visualizer)
+        {
+            var source = visualizer.audioSource;
+            if (visualizer.useMicrophone && Microphone.devices.Length > 0)
+            {
+                string mic = Microphone.devices[0];
+                Debug.Log("Using microphone: " + mic);
+                source.clip = Microphone.Start(mic, true, 10, visualizer.sampleRate);
+                source.loop = true;
+                while (Microphone.GetPosition(null) <= 0) { }
+                source.Play();
+            }
+            else if (!visualizer.useMicrophone && visualizer.audioClip != null)
+            {
+                Debug.Log("Using audio clip.");
+                source.clip = visualizer.audioClip;
+                source.loop = true;
+                source.Play();
+            }
+            else
+            {
+                Debug.LogWarning("No valid audio source found.");
+            }
+        }
+    }
+}
