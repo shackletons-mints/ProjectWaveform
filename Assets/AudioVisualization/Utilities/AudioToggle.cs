@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Utilities
 {
-    public class ToggleAudioHelper : MonoBehaviour
+    public class AudioToggle : MonoBehaviour
     {
         public AudioSource audioSource;
         public AudioClip audioClip;

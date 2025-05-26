@@ -1,0 +1,49 @@
+using System;
+using UnityEngine;
+using Utilities;
+using UnityEngine.InputSystem;
+
+namespace AudioVisualization
+{
+    public class AudioVisualizer : MonoBehaviour
+    {
+        public GameObject sphere;
+        public ParticleSystem particleSystem;
+        public SphereSurfacePoints sphereSurfacePoints;
+
+        public AudioSource audioSource;
+        public AudioClip audioClip;
+        public AudioToggle audioToggle;
+        public AudioPitchEstimator audioPitchEstimator;
+
+        public int spectrumSize = 1024;
+        public int sampleRate = 44100;
+        public FFTWindow fftWindow = FFTWindow.BlackmanHarris;
+
+        public bool useMicrophone = true;
+
+        internal float[] spectrumData;
+
+        internal float emitTimer = 0f;
+        internal float emitInterval = 0.125f;
+
+        void Start()
+        {
+            AudioInitializer.InitializeReferences(this);
+            AudioInitializer.InitializeSphere(this);
+            AudioInitializer.InitializeAudio(this);
+            spectrumData = new float[spectrumSize];
+        }
+
+        void Update()
+        {
+            emitTimer += Time.deltaTime;
+            if (audioSource != null && audioSource.isPlaying)
+            {
+                AudioAnalysisHandler.AnalyzeAudio(this);
+            }
+
+            InputHandler.HandleInput(this);
+        }
+    }
+}
