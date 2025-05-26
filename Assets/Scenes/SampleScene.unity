@@ -5738,11 +5738,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1660299409 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2787023468969688844, guid: b4ee579ca7840406e8e32ca81677cf10, type: 3}
+  m_PrefabInstance: {fileID: 3288606564688570960}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1864107659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2186931524826277395, guid: b4ee579ca7840406e8e32ca81677cf10, type: 3}
   m_PrefabInstance: {fileID: 3288606564688570960}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1864107662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660299409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fe67d6eecedc4e82acf7b6d29ffe0ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1196183808}
+  audioClip: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
+  sampleRate: 44100
+  isUsingMicrophone: 0
 --- !u!1001 &3288606564688570960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5796,9 +5817,17 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 5890648029003813430, guid: b4ee579ca7840406e8e32ca81677cf10, type: 3}
+      propertyPath: sphere
+      value: 
+      objectReference: {fileID: 1146709730}
+    - target: {fileID: 5890648029003813430, guid: b4ee579ca7840406e8e32ca81677cf10, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1196183808}
+    - target: {fileID: 5890648029003813430, guid: b4ee579ca7840406e8e32ca81677cf10, type: 3}
+      propertyPath: audioToggle
+      value: 
+      objectReference: {fileID: 1864107662}
     - target: {fileID: 5890648029003813430, guid: b4ee579ca7840406e8e32ca81677cf10, type: 3}
       propertyPath: particleSystem
       value: 
@@ -5810,7 +5839,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2787023468969688844, guid: b4ee579ca7840406e8e32ca81677cf10, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1864107662}
   m_SourcePrefab: {fileID: 100100000, guid: b4ee579ca7840406e8e32ca81677cf10, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

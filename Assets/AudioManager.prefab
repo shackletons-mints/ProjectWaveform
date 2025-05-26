@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2186931524826277395}
   - component: {fileID: 4631738305969479528}
   - component: {fileID: 5890648029003813430}
+  - component: {fileID: 2128533467065647690}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -67,9 +68,25 @@ MonoBehaviour:
   sphereSurfacePoints: {fileID: 0}
   audioSource: {fileID: 0}
   audioClip: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
-  audioToggle: {fileID: 0}
+  audioToggle: {fileID: 2128533467065647690}
   audioPitchEstimator: {fileID: 4631738305969479528}
   spectrumSize: 1024
   sampleRate: 44100
   fftWindow: 5
   useMicrophone: 0
+--- !u!114 &2128533467065647690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787023468969688844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fe67d6eecedc4e82acf7b6d29ffe0ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
+  sampleRate: 44100
+  isUsingMicrophone: 0
