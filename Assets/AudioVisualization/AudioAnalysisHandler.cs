@@ -28,7 +28,7 @@ namespace AudioVisualization
             SetConeAngle(visualizer, pitch);
             SetParticleColor(visualizer, pitchClass);
             SetParticlePosition(visualizer, pointIndex);
-            SetParticleStartVelocity(visualizer, visualizer.sceneTimer);
+            SetParticleStartSpeed(visualizer, visualizer.sceneTimer);
 
             visualizer.particleSystem.Emit(emitValue);
             Debug.Log($"Emitting: {pitchName} (Freq: {pitch} Hz, MIDI: {midiNote}), particles: {emitValue}");
@@ -103,11 +103,10 @@ namespace AudioVisualization
             }
         }
 
-        private static void SetParticleStartVelocity(AudioVisualizer visualizer, float elapsedTime)
+        private static void SetParticleStartSpeed(AudioVisualizer visualizer, float elapsedTime)
         {
             var psMain = visualizer.particleSystem.main;
             float startSpeed = (elapsedTime * 0.02f) + 0.5f;
-
             psMain.startSpeed = startSpeed;
         }
 
