@@ -25,8 +25,9 @@ namespace AudioVisualization
             visualizer.emitTimer = 0f;
             SetParticleColor(visualizer, pitchClass);
             SetParticlePosition(visualizer, pointIndex);
+            SetParticleStartVelocity(visualizer, visualizer.sceneTimer);
 
-            visualizer.particleSystem.Emit(10);
+            visualizer.particleSystem.Emit(1);
             Debug.Log($"Emitting: {pitchName} (Freq: {pitch} Hz, MIDI: {midiNote})");
         }
 
@@ -45,6 +46,14 @@ namespace AudioVisualization
                 psTransform.position = visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position;
                 psTransform.rotation = Quaternion.LookRotation(visualizer.sphereSurfacePoints.surfacePoints[pointIndex].normal);
             }
+        }
+
+        private static void SetParticleStartVelocity(AudioVisualizer visualizer, float elapsedTime)
+        {
+            var psMain = visualizer.particleSystem.main;
+            float startSpeed = (elapsedTime * 0.02f) + 1;
+
+            psMain.startSpeed = startSpeed;
         }
 
     }

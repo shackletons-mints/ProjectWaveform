@@ -26,6 +26,7 @@ namespace AudioVisualization
 
         internal float emitTimer = 0f;
         internal float emitInterval = 0.125f;
+        public float sceneTimer = 0f;
 
         void Start()
         {
@@ -38,6 +39,7 @@ namespace AudioVisualization
         void Update()
         {
             emitTimer += Time.deltaTime;
+            sceneTimer += Time.deltaTime;
             if (audioSource != null && audioSource.isPlaying)
             {
                 AudioAnalysisHandler.AnalyzeAudio(this);
