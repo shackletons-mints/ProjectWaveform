@@ -1218,7 +1218,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000000
+    maxNumParticles: 10000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -5642,7 +5642,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 8f63e37129f334b458a900321dfd5e21, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6000,7 +6000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8544808119360711233, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
       propertyPath: InitialModule.maxNumParticles
-      value: 1000000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 8544808119360711233, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
       propertyPath: InitialModule.startSize.scalar
