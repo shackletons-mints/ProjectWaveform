@@ -305,7 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8096272900075696801, guid: 6c23e8216c1b34b54a799d9a4de212c0, type: 3}
       propertyPath: m_Name
-      value: Point Light
+      value: Directional Light
       objectReference: {fileID: 0}
     - target: {fileID: 8565209368872529866, guid: 6c23e8216c1b34b54a799d9a4de212c0, type: 3}
       propertyPath: m_Intensity
