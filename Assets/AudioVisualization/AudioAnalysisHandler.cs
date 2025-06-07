@@ -15,7 +15,7 @@ namespace AudioVisualization
             int midiNote = Mathf.RoundToInt(69 + 12 * Mathf.Log(pitch / 440f, 2));
             int pitchClass = midiNote % 12;
             string pitchName = AudioConstants.PitchNames[pitchClass];
-            int pointIndex = AudioConstants.CircleOfFifthsPositions[pitchClass];
+            int pointIndex = visualizer.layoutSelector.GetPositionForPitchClass(pitchClass);
 
             if (float.IsNaN(pitch) || visualizer.emitTimer < visualizer.emitInterval)
             {

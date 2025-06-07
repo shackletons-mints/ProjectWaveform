@@ -24,16 +24,5 @@ namespace AudioVisualization
             Olive, Red, Orange, Yellow, Green, Blue,
             Indigo, Violet, White, Brown, Magenta, Cyan
         };
-        public static readonly int[] ChromaticPitchPositions = {
-            11, 12, 16, 21, 13, 20, 18, 19, 15, 17, 14, 10
-        };
-
-        public static readonly int[] CircleOfFifthsPositions = {
-            11, 19, 16, 17, 13, 10, 18, 12, 15, 21, 14, 20
-        };
-
-        public static readonly int[] RandomPitchPositions = {
-            10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21
-        };
     }
 }
