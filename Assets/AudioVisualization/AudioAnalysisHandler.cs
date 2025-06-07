@@ -12,10 +12,10 @@ namespace AudioVisualization
             float volume = CalculateVolume(visualizer.spectrumData); 
             int emitValue = CalculateEmitValue(volume);
             float pitch = visualizer.audioPitchEstimator.Estimate(source);
-            int midiNote = Mathf.FloorToInt(69 + 12 * Mathf.Log(pitch / 440f, 2));
+            int midiNote = Mathf.RoundToInt(69 + 12 * Mathf.Log(pitch / 440f, 2));
             int pitchClass = midiNote % 12;
             string pitchName = AudioConstants.PitchNames[pitchClass];
-            int pointIndex = pitchClass + 10;
+            int pointIndex = AudioConstants.CircleOfFifthsPositions[pitchClass];
 
             if (float.IsNaN(pitch) || visualizer.emitTimer < visualizer.emitInterval)
             {
@@ -91,6 +91,8 @@ namespace AudioVisualization
             var psMain = visualizer.particleSystem.main;
             Color pitchColor = AudioConstants.PitchColors[pitchClass];
             psMain.startColor = pitchColor;
+            visualizer.highlightLight.color = pitchColor;
+            visualizer.highlightLight.intensity = 6f;
         }
 
         private static void SetParticlePosition(AudioVisualizer visualizer, int pointIndex)
@@ -100,6 +102,13 @@ namespace AudioVisualization
                 var psTransform = visualizer.particleSystem.transform;
                 psTransform.position = visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position;
                 psTransform.rotation = Quaternion.LookRotation(visualizer.sphereSurfacePoints.surfacePoints[pointIndex].normal);
+
+                if (visualizer.highlightLight != null)
+                {
+                    visualizer.highlightLight.transform.position =
+                        visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position + new Vector3(0, 5f, 0);
+
+                }
             }
         }
 

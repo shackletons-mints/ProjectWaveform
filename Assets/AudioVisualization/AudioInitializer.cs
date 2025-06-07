@@ -8,6 +8,7 @@ namespace AudioVisualization
         public static void InitializeReferences(AudioVisualizer visualizer)
         {
             visualizer.particleSystem ??= visualizer.GetComponent<ParticleSystem>();
+            visualizer.highlightLight ??= visualizer.GetComponent<Light>();
             visualizer.particleSystem?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
             visualizer.audioSource ??= visualizer.GetComponent<AudioSource>();
@@ -18,6 +19,7 @@ namespace AudioVisualization
         public static void InitializeSphere(AudioVisualizer visualizer)
         {
             visualizer.sphere ??= GameObject.Find("Sphere");
+            // visualizer.highlightMarker ??= visualizer.sphere.transform.Find("HighlightMarker")?.gameObject;
             visualizer.sphereSurfacePoints = visualizer.sphere?.GetComponent<SphereSurfacePoints>();
             visualizer.sphereSurfacePoints?.GenerateSurfacePoints();
         }

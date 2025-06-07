@@ -59,8 +59,9 @@ public class SphereSurfacePoints : MonoBehaviour
             // Optional: visualize with Debug.DrawRay
             if (i >= 10 && i <= 21)
             {
-                Debug.DrawRay(position, normal * 5f, Color.red, 10f);
+                Debug.DrawRay(position, normal * 5f, Color.blue, 10f);
             }
+
         }
 
         Debug.Log($"Generated {surfacePoints.Count} surface points.");

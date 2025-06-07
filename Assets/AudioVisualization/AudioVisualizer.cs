@@ -8,6 +8,7 @@ namespace AudioVisualization
     public class AudioVisualizer : MonoBehaviour
     {
         public GameObject sphere;
+        public Light highlightLight;
         public ParticleSystem particleSystem;
         public SphereSurfacePoints sphereSurfacePoints;
 
