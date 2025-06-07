@@ -12,6 +12,9 @@ public class PitchLayoutSelector : MonoBehaviour
     [Tooltip("Choose which pitch layout to use.")]
     public PitchLayoutMode layoutMode = PitchLayoutMode.CircleOfFifths;
 
+
+	// corresponding to pitch names
+    //   C, C#,  D, D#,  E,  F, F#,  G, G#,  A, A#, B
     private static readonly int[] ChromaticPitchPositions = {
         11, 12, 16, 21, 13, 20, 18, 19, 15, 17, 14, 10
     };
