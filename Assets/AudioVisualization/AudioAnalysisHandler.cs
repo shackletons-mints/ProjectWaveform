@@ -9,18 +9,18 @@ namespace AudioVisualization
             var source = visualizer.audioSource;
             source.GetSpectrumData(visualizer.spectrumData, 0, visualizer.fftWindow);
 
-            float volume = CalculateVolume(visualizer.spectrumData); 
-            int emitValue = CalculateEmitValue(volume);
             float pitch = visualizer.audioPitchEstimator.Estimate(source);
             int midiNote = Mathf.RoundToInt(69 + 12 * Mathf.Log(pitch / 440f, 2));
             int pitchClass = midiNote % 12;
             if (pitchClass < 0 || pitchClass >= AudioConstants.PitchNames.Length)
             {
-                Debug.LogWarning($"Pitch class {pitchClass} is out of bounds for pitch names.");
+                Debug.LogWarning($"Pitch class {pitchClass} is out of bounds for pitch {pitch}.");
                 return;
             }
 			string pitchName = AudioConstants.PitchNames[pitchClass];
 			int pointIndex = visualizer.layoutSelector.GetPositionForPitchClass(pitchClass);
+            float volume = CalculateVolume(visualizer.spectrumData); 
+            int emitValue = CalculateEmitValue(volume);
 
             if (float.IsNaN(pitch) || visualizer.emitTimer < visualizer.emitInterval)
             {

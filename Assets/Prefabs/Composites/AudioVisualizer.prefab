@@ -44,7 +44,7 @@ PrefabInstance:
     - target: {fileID: 4530875510733346886, guid: ddb866218734c4ba697915b5e33b1775, type: 3}
       propertyPath: audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 047a4ed088ef4461b9ace9790ebf2e2c, type: 3}
+      objectReference: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
     - target: {fileID: 4670732863215167098, guid: ddb866218734c4ba697915b5e33b1775, type: 3}
       propertyPath: m_Name
       value: Managers
@@ -56,7 +56,7 @@ PrefabInstance:
     - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775, type: 3}
       propertyPath: audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 047a4ed088ef4461b9ace9790ebf2e2c, type: 3}
+      objectReference: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
     - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775, type: 3}
       propertyPath: highlightLight
       value: 
