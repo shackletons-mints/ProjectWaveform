@@ -108,8 +108,14 @@ namespace AudioVisualization
 			float normalizedDeviation = GetNormalizedPitchDeviation(detectedPitch);
 			pitchColor.a = normalizedDeviation;
             psMain.startColor = pitchColor;
-            visualizer.highlightLight.color = pitchColor;
-            visualizer.highlightLight.intensity = 6f;
+
+			foreach (var light in visualizer.highlightLights)
+			{
+
+				Debug.Log("Light: " + light);
+				light.color = pitchColor;
+				light.intensity = 6f;
+			}
         }
 
         private static void SetParticlePosition(AudioVisualizer visualizer, int pointIndex)
@@ -120,12 +126,23 @@ namespace AudioVisualization
                 psTransform.position = visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position;
                 psTransform.rotation = Quaternion.LookRotation(visualizer.sphereSurfacePoints.surfacePoints[pointIndex].normal);
 
-                if (visualizer.highlightLight != null)
-                {
-                    visualizer.highlightLight.transform.position =
-                        visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position + new Vector3(0, 5f, 0);
+				foreach (var light in visualizer.highlightLights)
+				{
+					if (light == null) continue;
 
-                }
+					Vector3 offset = Vector3.zero;
+
+					if (light.name == "Directional Light Top")
+					{
+						offset = new Vector3(0, 5f, 0);
+					}
+					else if (light.name == "Directional Light Bottom")
+					{
+						offset = new Vector3(0, -5f, 0);
+					}
+
+					light.transform.position = visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position + offset;
+				}
             }
         }
 

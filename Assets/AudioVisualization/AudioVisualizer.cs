@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 using UnityEngine.InputSystem;
@@ -12,7 +13,7 @@ namespace AudioVisualization
         public AudioSource audioSource;
         public AudioToggle audioToggle;
         public GameObject sphere;
-        public Light highlightLight;
+        public List<Light> highlightLights;
         public ParticleSystem particleSystem;
         public PitchLayoutSelector layoutSelector;
         public SphereSurfacePoints sphereSurfacePoints;
