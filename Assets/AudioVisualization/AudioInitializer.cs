@@ -21,7 +21,6 @@ namespace AudioVisualization
         public static void InitializeSphere(AudioVisualizer visualizer)
         {
             visualizer.sphere ??= GameObject.Find("Sphere");
-            // visualizer.highlightMarker ??= visualizer.sphere.transform.Find("HighlightMarker")?.gameObject;
             visualizer.sphereSurfacePoints = visualizer.sphere?.GetComponent<SphereSurfacePoints>();
             visualizer.sphereSurfacePoints?.GenerateSurfacePoints();
         }
