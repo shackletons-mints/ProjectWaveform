@@ -581,6 +581,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioVisualizer
       objectReference: {fileID: 0}
+    - target: {fileID: 4532193830220008726, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 047a4ed088ef4461b9ace9790ebf2e2c, type: 3}
+    - target: {fileID: 4532193830220008726, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
+      propertyPath: isUsingMicrophone
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5277357978233929004, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -619,6 +627,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5277357978233929004, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146621362936753449, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 047a4ed088ef4461b9ace9790ebf2e2c, type: 3}
+    - target: {fileID: 6146621362936753449, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
+      propertyPath: spectrumSize
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146621362936753449, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
+      propertyPath: useMicrophone
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7860096144931848931, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
+      propertyPath: layoutMode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
