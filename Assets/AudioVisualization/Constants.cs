@@ -21,7 +21,9 @@ namespace AudioVisualization
         public static readonly Color Cyan     = new Color(0f, 1f, 1f);         // B
 
         public static readonly Color[] PitchColors = {
+            // C, C#, D, D#, E, F, 
             Olive, Red, Orange, Yellow, Green, Blue,
+            // F#, G, G#, A, A#, B
             Indigo, Violet, White, Brown, Magenta, Cyan
         };
     }

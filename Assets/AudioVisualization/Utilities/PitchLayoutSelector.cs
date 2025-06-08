@@ -13,7 +13,7 @@ public class PitchLayoutSelector : MonoBehaviour
     public PitchLayoutMode layoutMode = PitchLayoutMode.CircleOfFifths;
 
 	// corresponding to pitch names
-    //   C, C#,  D, D#,  E,  F, F#,  G, G#,  A, A#, B
+    // C, C#, D, D#, E, F, F#, G, G#, A, A#, B
     private static readonly int[] ChromaticPitchPositions = {
         11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
     };
