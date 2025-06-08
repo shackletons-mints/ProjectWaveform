@@ -174,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 884478167251980781, guid: 7fc874203c20b4818ba967eb54febbe8, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 884478167251980781, guid: 7fc874203c20b4818ba967eb54febbe8, type: 3}
       propertyPath: CollisionModule.m_Bounce.scalar
@@ -186,7 +186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 884478167251980781, guid: 7fc874203c20b4818ba967eb54febbe8, type: 3}
       propertyPath: InitialModule.gravityModifier.scalar
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 884478167251980781, guid: 7fc874203c20b4818ba967eb54febbe8, type: 3}
       propertyPath: ClampVelocityModule.multiplyDragByParticleSize
