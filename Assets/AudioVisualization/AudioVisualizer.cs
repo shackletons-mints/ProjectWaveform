@@ -7,14 +7,15 @@ namespace AudioVisualization
 {
     public class AudioVisualizer : MonoBehaviour
     {
-        public GameObject sphere;
-        public ParticleSystem particleSystem;
-        public SphereSurfacePoints sphereSurfacePoints;
-
-        public AudioSource audioSource;
         public AudioClip audioClip;
-        public AudioToggle audioToggle;
         public AudioPitchEstimator audioPitchEstimator;
+        public AudioSource audioSource;
+        public AudioToggle audioToggle;
+        public GameObject sphere;
+        public Light highlightLight;
+        public ParticleSystem particleSystem;
+        public PitchLayoutSelector layoutSelector;
+        public SphereSurfacePoints sphereSurfacePoints;
 
         public int spectrumSize = 1024;
         public int sampleRate = 44100;
