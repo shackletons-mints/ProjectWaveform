@@ -16,6 +16,7 @@ namespace AudioVisualization
         public List<Light> highlightLights;
         public ParticleSystem particleSystem;
         public PitchLayoutSelector layoutSelector;
+		private Vector3 previousSpherePosition;
         public SphereSurfacePoints sphereSurfacePoints;
 
         public int spectrumSize = 1024;
@@ -36,18 +37,33 @@ namespace AudioVisualization
             AudioInitializer.InitializeSphere(this);
             AudioInitializer.InitializeAudio(this);
             spectrumData = new float[spectrumSize];
+			if (sphere != null)
+			{
+				previousSpherePosition = sphere.transform.position;
+			}
         }
 
         void Update()
         {
-            emitTimer += Time.deltaTime;
-            sceneTimer += Time.deltaTime;
-            if (audioSource != null && audioSource.isPlaying)
-            {
-                AudioAnalysisHandler.AnalyzeAudio(this);
-            }
+			emitTimer += Time.deltaTime;
+			sceneTimer += Time.deltaTime;
 
-            InputHandler.HandleInput(this);
+			if (sphere != null)
+			{
+				Vector3 currentPosition = sphere.transform.position;
+				if (currentPosition != previousSpherePosition)
+				{
+					sphereSurfacePoints?.SetPosition();
+					previousSpherePosition = currentPosition;
+				}
+			}
+
+			if (audioSource != null && audioSource.isPlaying)
+			{
+				AudioAnalysisHandler.AnalyzeAudio(this);
+			}
+
+			InputHandler.HandleInput(this);
         }
     }
 }
