@@ -164,6 +164,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioVisualizer
       objectReference: {fileID: 0}
+    - target: {fileID: 1019630083410552474, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1019630083410552474, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1019630083410552474, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707774089185352856, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: adfd584d4978246fc9d6f542de8848c0, type: 2}
     - target: {fileID: 5277357978233929004, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.72
