@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using Utilities;
 
@@ -8,14 +9,18 @@ namespace AudioVisualization
         public static void InitializeReferences(AudioVisualizer visualizer)
         {
             visualizer.particleSystem ??= visualizer.GetComponent<ParticleSystem>();
-            visualizer.highlightLight ??= visualizer.GetComponent<Light>();
             visualizer.particleSystem?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-
 
             visualizer.audioSource ??= visualizer.GetComponent<AudioSource>();
             visualizer.audioToggle ??= visualizer.GetComponent<AudioToggle>();
             visualizer.audioPitchEstimator ??= visualizer.GetComponent<AudioPitchEstimator>();
             visualizer.layoutSelector ??= visualizer.GetComponent<PitchLayoutSelector>();
+
+			Light[] lights = visualizer.GetComponents<Light>();
+			foreach (var light in lights)
+			{
+				visualizer.highlightLights.Add(light);
+			}
         }
 
         public static void InitializeSphere(AudioVisualizer visualizer)

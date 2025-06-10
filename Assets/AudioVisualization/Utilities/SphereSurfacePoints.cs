@@ -13,10 +13,10 @@ public class SphereSurfacePoints : MonoBehaviour
 
     private void Awake()
     {
-        Initialize();
+        SetPosition();
     }
 
-    private void Initialize()
+    public void SetPosition()
     {
         SphereCollider collider = GetComponent<SphereCollider>();
         if (collider == null)
