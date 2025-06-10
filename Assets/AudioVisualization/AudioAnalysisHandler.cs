@@ -111,8 +111,6 @@ namespace AudioVisualization
 
 			foreach (var light in visualizer.highlightLights)
 			{
-
-				Debug.Log("Light: " + light);
 				light.color = pitchColor;
 				light.intensity = 6f;
 			}
