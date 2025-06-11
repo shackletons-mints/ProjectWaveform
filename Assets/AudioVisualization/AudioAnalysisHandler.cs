@@ -114,6 +114,21 @@ namespace AudioVisualization
 				light.color = pitchColor;
 				light.intensity = 6f;
 			}
+
+			Renderer renderer = visualizer.sphere.GetComponent<Renderer>();
+			if (renderer != null)
+			{
+				Material mat = renderer.material;
+
+				// Enable Emission keyword if necessary
+				mat.EnableKeyword("_EMISSION");
+
+				// Set Emission color (you can multiply for brightness)
+				Color subduedColor = Color.Lerp(pitchColor, Color.gray, 0.4f); // 40% toward gray
+				Color darkerColor = subduedColor * 0.5f; // Multiply by factor < 1 to darken
+				Color emissionColor = pitchColor;
+				mat.SetColor("_EmissionColor", darkerColor);
+			}
         }
 
         private static void SetParticlePosition(AudioVisualizer visualizer, int pointIndex)
