@@ -165,6 +165,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5277357978233929004}
     m_Modifications:
     - target: {fileID: 3855693412377608749, guid: e41bc9a9a573e4ad9b9775b0cbed5a25, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3855693412377608749, guid: e41bc9a9a573e4ad9b9775b0cbed5a25, type: 3}
       propertyPath: m_Range
       value: 10
       objectReference: {fileID: 0}
@@ -177,12 +181,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3855693412377608749, guid: e41bc9a9a573e4ad9b9775b0cbed5a25, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3855693412377608749, guid: e41bc9a9a573e4ad9b9775b0cbed5a25, type: 3}
       propertyPath: m_Intensity
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3855693412377608749, guid: e41bc9a9a573e4ad9b9775b0cbed5a25, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443807669375063708, guid: e41bc9a9a573e4ad9b9775b0cbed5a25, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5764058374821688922, guid: e41bc9a9a573e4ad9b9775b0cbed5a25, type: 3}
       propertyPath: m_Name
