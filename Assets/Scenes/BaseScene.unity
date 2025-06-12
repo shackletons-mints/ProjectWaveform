@@ -481,10 +481,6 @@ PrefabInstance:
       value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 4033623942198774031, guid: ce3e08eb6a81b994da1bc9775659c616, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4033623942198774031, guid: ce3e08eb6a81b994da1bc9775659c616, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
