@@ -63,17 +63,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62d97c767c9924447a7cd4172b7b87ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphere: {fileID: 0}
-  particleSystem: {fileID: 0}
-  sphereSurfacePoints: {fileID: 0}
-  audioSource: {fileID: 0}
   audioClip: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
-  audioToggle: {fileID: 0}
   audioPitchEstimator: {fileID: 4631738305969479528}
+  audioSource: {fileID: 0}
+  audioToggle: {fileID: 2128533467065647690}
+  sphere: {fileID: 0}
+  highlightLights: []
+  particleSystem: {fileID: 0}
+  layoutSelector: {fileID: 0}
+  sphereSurfacePoints: {fileID: 0}
   spectrumSize: 1024
   sampleRate: 44100
   fftWindow: 5
   useMicrophone: 0
+  sceneTimer: 0
 --- !u!114 &2128533467065647690
 MonoBehaviour:
   m_ObjectHideFlags: 0
