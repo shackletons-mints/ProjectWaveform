@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Menu/Menu.unity
     guid: 904110ab8cef14f7d96c56ca20774e5a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MetaMenu.unity
     guid: f4c0e17cbc9b3465dbcc74faf0ef6059
   - enabled: 0
@@ -35,7 +35,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ARKit/ThermalState/ThermalState.unity
     guid: e5b0cb11dfe354e67a344c280bf8b611
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Anchors/Anchors.unity
     guid: 5cba9114a192a46a7aef31da62316e39
   - enabled: 0
@@ -107,7 +107,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Meshing/ClassificationMeshes/ClassificationMeshes.unity
     guid: edd18841a7a8f4a68a80239a5e7f14f9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Meshing/NormalMeshes/NormalMeshes.unity
     guid: b8abb254c2f424d54921b442ad2f9f2e
   - enabled: 0
@@ -122,13 +122,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PlaneDetection/PlaneMasking/PlaneMasking.unity
     guid: 82d84156010e4481498cad3bf12744bd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlaneDetection/PlaneDetectionMode/PlaneDetectionMode.unity
     guid: c9de49d98546b4b769099449d82806db
   - enabled: 0
     path: Assets/Scenes/PointClouds/AllPointCloudPoints.unity
     guid: a84b70115cd154cf59b84651a828ac60
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SimpleAR/SimpleAR.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
@@ -158,16 +158,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Camera/ExifData/ExifData.unity
     guid: 668735f787b9248c2bee5111449a40bf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BoundingBoxDetection/BoundingBoxes.unity
     guid: e5d8c18ab0c954fd4a7aee48dffe9836
   - enabled: 0
     path: Assets/Scenes/Meta/MetaOcclusion.unity
     guid: e8c7226bb201745eaba536ed20b8b529
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Meta/MetaSceneCapture.unity
     guid: 8d6a8fd41189d4105b00ec3d1b95330d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Meta/MetaDisplayRefreshRate.unity
     guid: 07970a1a9455f4309b8e99b1c88daa98
   - enabled: 0
@@ -179,6 +179,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Anchors/TestAnchors.unity
     guid: 59827dbbb0f3741848771ee28a1081d3
+  - enabled: 1
+    path: Assets/ProjectWaveformMenu.unity
+    guid: 873d83a13b126534a956282cf3c8adbe
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: c52d3bb36b4c86f47af54ab9c7a02589,
       type: 2}

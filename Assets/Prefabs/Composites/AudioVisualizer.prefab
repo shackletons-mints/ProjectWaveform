@@ -201,22 +201,27 @@ PrefabInstance:
     - target: {fileID: 3876330434556144887, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
       propertyPath: CollisionModule.type
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3876330434556144887, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
+        type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3876330434556144887, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
       propertyPath: CollisionModule.collidesWith.m_Bits
-      value: 8
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3876330434556144887, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
       propertyPath: CollisionModule.m_Planes.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3876330434556144887, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
       propertyPath: CollisionModule.multiplyColliderForceByParticleSize
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5764058374821688922, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
