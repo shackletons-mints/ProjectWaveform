@@ -1006,7 +1006,7 @@ MonoBehaviour:
   <trackablesChanged>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  m_PlanePrefab: {fileID: 1585201990951412, guid: d16dd8da7e4ccbe42b1b4a344a72ecbb,
+  m_PlanePrefab: {fileID: 1585201990951412, guid: bb039f2367acf3f469290f1923529f71,
     type: 3}
   m_DetectionMode: -1
 --- !u!1 &8571911243767107432
