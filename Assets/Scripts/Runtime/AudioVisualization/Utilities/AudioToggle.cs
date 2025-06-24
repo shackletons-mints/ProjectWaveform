@@ -7,7 +7,7 @@ namespace Utilities
         public AudioSource audioSource;
         public AudioClip audioClip;
         public int sampleRate = 44100;
-        public bool isUsingMicrophone = true;
+        [SerializeField] public bool isUsingMicrophone;
 
         public void ToggleAudio()
         {
