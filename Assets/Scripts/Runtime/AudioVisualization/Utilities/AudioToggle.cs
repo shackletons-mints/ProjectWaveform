@@ -26,7 +26,6 @@ namespace Utilities
                     audioSource.clip = audioClip;
                     audioSource.loop = true;
                     audioSource.Play();
-                    isUsingMicrophone = false;
                 }
                 else
                 {
@@ -44,7 +43,6 @@ namespace Utilities
                     while (!(Microphone.GetPosition(null) > 0)) { }
 
                     audioSource.Play();
-                    isUsingMicrophone = true;
                 }
                 else
                 {
@@ -56,7 +54,6 @@ namespace Utilities
         public void ToggleIsUsingMicrophone()
         {
 			isUsingMicrophone = !isUsingMicrophone;
-			ToggleAudio();
         }
     }
 }

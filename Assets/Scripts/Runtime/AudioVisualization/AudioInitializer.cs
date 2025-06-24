@@ -30,10 +30,10 @@ namespace AudioVisualization
             visualizer.sphereSurfacePoints?.GenerateSurfacePoints();
         }
 
-        public static void InitializeAudio(AudioVisualizer visualizer)
+        public static void InitializeAudio(AudioVisualizer visualizer, AudioToggle audioToggle)
         {
             var source = visualizer.audioSource;
-            if (visualizer.useMicrophone && Microphone.devices.Length > 0)
+            if (audioToggle.isUsingMicrophone && Microphone.devices.Length > 0)
             {
                 string mic = Microphone.devices[0];
                 Debug.Log("Using microphone: " + mic);
@@ -42,7 +42,7 @@ namespace AudioVisualization
                 while (Microphone.GetPosition(null) <= 0) { }
                 source.Play();
             }
-            else if (!visualizer.useMicrophone && visualizer.audioClip != null)
+            else if (!audioToggle.isUsingMicrophone && visualizer.audioClip != null)
             {
                 Debug.Log("Using audio clip.");
                 source.clip = visualizer.audioClip;

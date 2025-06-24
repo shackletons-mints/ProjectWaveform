@@ -11,7 +11,7 @@ namespace AudioVisualization
         public AudioClip audioClip;
         public AudioPitchEstimator audioPitchEstimator;
         public AudioSource audioSource;
-        public AudioToggle audioToggle;
+        [SerializeField] public AudioToggle audioToggle;
         public GameObject sphere;
         public List<Light> highlightLights;
         public ParticleSystem particleSystem;
@@ -23,8 +23,6 @@ namespace AudioVisualization
         public int sampleRate = 44100;
         public FFTWindow fftWindow = FFTWindow.BlackmanHarris;
 
-        public bool useMicrophone = true;
-
         internal float[] spectrumData;
 
         internal float emitTimer = 0f;
@@ -35,7 +33,7 @@ namespace AudioVisualization
         {
             AudioInitializer.InitializeReferences(this);
             AudioInitializer.InitializeSphere(this);
-            AudioInitializer.InitializeAudio(this);
+            AudioInitializer.InitializeAudio(this, audioToggle);
             spectrumData = new float[spectrumSize];
 			if (sphere != null)
 			{
