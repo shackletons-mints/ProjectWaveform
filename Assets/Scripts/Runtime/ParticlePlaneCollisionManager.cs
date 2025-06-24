@@ -64,9 +64,9 @@ public class ARPlaneColliderEnabler : MonoBehaviour
 		meshRenderer.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.BlendProbes;
 		meshRenderer.probeAnchor = null;
 		meshRenderer.allowOcclusionWhenDynamic = true;
-		meshRenderer.renderingLayerMask = 1 << 1;
-
+		// meshRenderer.renderingLayerMask = 1 << 1;
 	}	
+
 	void SetupRigidbody(ARPlane plane)
 	{
 		if (!plane.TryGetComponent<Rigidbody>(out var rb))
