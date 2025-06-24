@@ -2363,6 +2363,11 @@ PrefabInstance:
       propertyPath: planeManager
       value: 
       objectReference: {fileID: 7630328289069053877}
+    - target: {fileID: 2986016837193202402, guid: aa19450e968db6a4f8786dff401221dd,
+        type: 3}
+      propertyPath: planeMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4264987c30330d5408b0dd0b5c9c1769, type: 2}
     - target: {fileID: 5252564841016125172, guid: aa19450e968db6a4f8786dff401221dd,
         type: 3}
       propertyPath: m_Name
