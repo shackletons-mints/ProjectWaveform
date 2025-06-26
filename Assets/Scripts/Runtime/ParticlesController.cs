@@ -22,11 +22,15 @@ public class ParticlesController: MonoBehaviour{
     }
 
     void OnParticleCollision(GameObject other) {
+        // other.name is visuals and we want it to be some sort of plane
         int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
 
         Paintable p = other.GetComponent<Paintable>();
-        if(p != null){
-            for  (int i = 0; i< numCollisionEvents; i++){
+        // we are not getting p
+        if (p != null)
+        {
+            for (int i = 0; i < numCollisionEvents; i++)
+            {
                 Vector3 pos = collisionEvents[i].intersection;
                 float radius = Random.Range(minRadius, maxRadius);
                 PaintManager.instance.paint(p, pos, radius, hardness, strength, paintColor);
