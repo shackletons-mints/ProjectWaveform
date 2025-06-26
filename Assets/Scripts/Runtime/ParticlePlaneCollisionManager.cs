@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
-public class ARPlaneColliderEnabler : MonoBehaviour
+public class ParticlePlaneCollisionManager : MonoBehaviour
 {
-	[SerializeField] private Material planeMaterial;
     public ARPlaneManager planeManager;
 
     void OnEnable()
