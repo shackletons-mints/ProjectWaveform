@@ -2360,6 +2360,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2986016837193202402, guid: aa19450e968db6a4f8786dff401221dd,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986016837193202402, guid: aa19450e968db6a4f8786dff401221dd,
+        type: 3}
       propertyPath: planeManager
       value: 
       objectReference: {fileID: 7630328289069053877}
@@ -2372,6 +2377,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AR Particle Collision Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5252564841016125172, guid: aa19450e968db6a4f8786dff401221dd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7433972964705812101, guid: aa19450e968db6a4f8786dff401221dd,
         type: 3}

@@ -198,6 +198,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5277357978233929004}
     m_Modifications:
+    - target: {fileID: 1211872079405545068, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3855693412377608749, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
       propertyPath: m_Enabled
@@ -384,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paintColor: {r: 0.108134575, g: 0.8490566, b: 0.108150825, a: 1}
-  minRadius: 0.05
+  minRadius: 0.02
   maxRadius: 0.2
   strength: 1
   hardness: 1
