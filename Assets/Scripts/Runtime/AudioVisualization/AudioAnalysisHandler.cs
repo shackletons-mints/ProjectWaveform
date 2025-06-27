@@ -36,6 +36,7 @@ namespace AudioVisualization
             SetParticleStartSpeed(visualizer, visualizer.sceneTimer);
 
             visualizer.particleSystem.Emit(emitValue);
+			visualizer.rippleManager.EmitRipple(visualizer.sphereSurfacePoints, pointIndex);
             Debug.Log($"Emitting: {pitchName} (Freq: {pitch} Hz, MIDI: {midiNote}), particles: {emitValue}");
         }
 

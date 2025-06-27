@@ -18,6 +18,7 @@ namespace AudioVisualization
         public PitchLayoutSelector layoutSelector;
 		private Vector3 previousSpherePosition;
         public SphereSurfacePoints sphereSurfacePoints;
+		public RippleManager rippleManager;
 
         public int spectrumSize = 1024;
         public int sampleRate = 44100;
@@ -30,7 +31,7 @@ namespace AudioVisualization
         public float sceneTimer = 0f;
 
         void Start()
-        {
+		{
             AudioInitializer.InitializeReferences(this);
             AudioInitializer.InitializeSphere(this);
             AudioInitializer.InitializeAudio(this, audioToggle);
