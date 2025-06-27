@@ -29,8 +29,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField, Tooltip("The dimensions the canvas well be set to for HMD in world space in meters.")]
         Vector2 m_HMDCanvasDimensionsInMeters = new(1.15f, 0.85f);
 
-        [SerializeField, Tooltip("Distance in front of the camera for the UI to be placed in world space."), Range(.3f, 3)]
-        float m_DistanceFromCamera = 1.5f;
+        [SerializeField, Tooltip("Distance in front of the camera for the UI to be placed in world space."), Range(.3f, 6)]
+        float m_DistanceFromCamera = 6f;
 
         [SerializeField, Tooltip("Displays the background image when running on HMD.")]
         bool m_ShowBackgroundForHMD = true;

@@ -405,12 +405,12 @@ PrefabInstance:
     - target: {fileID: 2581305115919863542, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1846.935
+      value: 1300
       objectReference: {fileID: 0}
     - target: {fileID: 2581305115919863542, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1603.9763
+      value: 1100
       objectReference: {fileID: 0}
     - target: {fileID: 2581305115919863542, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
@@ -425,7 +425,7 @@ PrefabInstance:
     - target: {fileID: 2581305115919863542, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.1
+      value: 8.09
       objectReference: {fileID: 0}
     - target: {fileID: 2581305115919863542, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
@@ -455,7 +455,7 @@ PrefabInstance:
     - target: {fileID: 2581305115919863542, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2581305115919863542, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
@@ -479,8 +479,13 @@ PrefabInstance:
       objectReference: {fileID: 772719890}
     - target: {fileID: 2742089223469533462, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
-      propertyPath: m_CanvasBackground
-      value: 
+      propertyPath: m_EnableInEditor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742089223469533462, guid: b8f7382051281456a93ced9c504c48c4,
+        type: 3}
+      propertyPath: m_DistanceFromCamera
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4345495004138282345, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
@@ -507,16 +512,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6052322253848848125, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 6052322253848848125, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6172264712081021700, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
       propertyPath: m_Camera
@@ -539,6 +534,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AudioVisualizer
+      objectReference: {fileID: 0}
+    - target: {fileID: 951774819496624476, guid: 9bf986c9320b345cbae4c62ee67c14c6,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4840267816592946658, guid: 9bf986c9320b345cbae4c62ee67c14c6,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5277357978233929004, guid: 9bf986c9320b345cbae4c62ee67c14c6,
         type: 3}
@@ -595,6 +600,11 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 2094579013}
+    - target: {fileID: 7365082132079210361, guid: 9bf986c9320b345cbae4c62ee67c14c6,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
