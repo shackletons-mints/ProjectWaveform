@@ -154,6 +154,7 @@ namespace AudioVisualization
 
 		public static void SetRippleOrigin(AudioVisualizer visualizer, int pointIndex)
 		{
+			Debug.Log("ripple name: " + visualizer.rippleMaterial.name);
 			Vector3 origin = visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position;
 			visualizer.rippleMaterial.SetVector("_RippleOrigin_WS", origin);
 		}
