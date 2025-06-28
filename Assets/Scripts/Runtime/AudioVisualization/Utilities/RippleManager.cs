@@ -31,6 +31,8 @@ public class RippleManager : MonoBehaviour
         rippleData[currentIndex] = new Vector4(position.x, position.y, position.z, time);
         currentIndex = (currentIndex + 1) % MaxRipples;
 
+		Debug.Log("rippleData first: " + rippleData[0]);
+		Debug.Log("rippleData last: " + rippleData[7]);
         Shader.SetGlobalVectorArray("_RipplePoints", rippleData);
         Shader.SetGlobalFloat("_RippleTime", time);
 		Shader.SetGlobalFloat("_RippleDuration", rippleDuration);

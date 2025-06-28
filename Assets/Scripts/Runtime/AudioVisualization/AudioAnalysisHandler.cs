@@ -34,9 +34,9 @@ namespace AudioVisualization
             SetParticleColor(visualizer, pitchClass, pitch);
             SetParticlePosition(visualizer, pointIndex);
             SetParticleStartSpeed(visualizer, visualizer.sceneTimer);
+			SetRippleOrigin(visualizer, pointIndex);
 
             visualizer.particleSystem.Emit(emitValue);
-			visualizer.rippleManager.EmitRipple(visualizer.sphereSurfacePoints, pointIndex);
             Debug.Log($"Emitting: {pitchName} (Freq: {pitch} Hz, MIDI: {midiNote}), particles: {emitValue}");
         }
 
@@ -151,6 +151,12 @@ namespace AudioVisualization
             float startSpeed = (elapsedTime * 0.02f) + 0.5f;
             psMain.startSpeed = startSpeed;
         }
+
+		public static void SetRippleOrigin(AudioVisualizer visualizer, int pointIndex)
+		{
+			Vector3 origin = visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position;
+			visualizer.rippleMaterial.SetVector("_RippleOrigin_WS", origin);
+		}
 
     }
 }

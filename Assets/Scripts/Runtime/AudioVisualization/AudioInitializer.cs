@@ -30,6 +30,12 @@ namespace AudioVisualization
             visualizer.sphereSurfacePoints?.GenerateSurfacePoints();
         }
 
+		public static void InitializeRippleMaterial(AudioVisualizer visualizer)
+		{
+			Renderer rend = GameObject.Find("RippleSphere").GetComponent<Renderer>();
+			visualizer.rippleMaterial = rend.material;
+		}
+
         public static void InitializeAudio(AudioVisualizer visualizer, AudioToggle audioToggle)
         {
             var source = visualizer.audioSource;
