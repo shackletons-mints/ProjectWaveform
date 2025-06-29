@@ -93,6 +93,12 @@ PrefabInstance:
       objectReference: {fileID: 4840267816592946658}
     - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
         type: 3}
+      propertyPath: rippleMaterial
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: d70e59e139792eb4a912839b5bedad01,
+        type: 3}
+    - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
+        type: 3}
       propertyPath: sphereSurfacePoints
       value: 
       objectReference: {fileID: 3315732897775683314}
@@ -203,30 +209,60 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1019630083410552474}
     m_Modifications:
+    - target: {fileID: 2134499367085875479, guid: 1f3b09c86925e6e49b406f84582fd56b,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660593803126729032, guid: 1f3b09c86925e6e49b406f84582fd56b,
+        type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5660593803126729032, guid: 1f3b09c86925e6e49b406f84582fd56b,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5660593803126729032, guid: 1f3b09c86925e6e49b406f84582fd56b,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660593803126729032, guid: 1f3b09c86925e6e49b406f84582fd56b,
+        type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660593803126729032, guid: 1f3b09c86925e6e49b406f84582fd56b,
+        type: 3}
+      propertyPath: m_RayTracingAccelStructBuildFlagsOverride
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6157771416209547581, guid: 1f3b09c86925e6e49b406f84582fd56b,
         type: 3}
       propertyPath: m_Name
-      value: RippleSphere
+      value: GeometricPulse
+      objectReference: {fileID: 0}
+    - target: {fileID: 6157771416209547581, guid: 1f3b09c86925e6e49b406f84582fd56b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9130869988272558147, guid: 1f3b09c86925e6e49b406f84582fd56b,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9130869988272558147, guid: 1f3b09c86925e6e49b406f84582fd56b,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9130869988272558147, guid: 1f3b09c86925e6e49b406f84582fd56b,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9130869988272558147, guid: 1f3b09c86925e6e49b406f84582fd56b,
         type: 3}
@@ -236,7 +272,7 @@ PrefabInstance:
     - target: {fileID: 9130869988272558147, guid: 1f3b09c86925e6e49b406f84582fd56b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9130869988272558147, guid: 1f3b09c86925e6e49b406f84582fd56b,
         type: 3}
@@ -297,6 +333,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5277357978233929004}
     m_Modifications:
+    - target: {fileID: 306361875587314215, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 1211872079405545068, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -306,6 +347,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3855693412377608749, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3876330434556144887, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
@@ -340,12 +386,22 @@ PrefabInstance:
     - target: {fileID: 5443807669375063708, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443807669375063708, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5764058374821688922, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
       propertyPath: m_Name
       value: Visuals
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013600869707171213, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6013600869707171213, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
@@ -470,7 +526,12 @@ PrefabInstance:
     - target: {fileID: 8701266989382565775, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.002
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8812994722838324886, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -625,7 +686,7 @@ MonoBehaviour:
   m_StartingInteractionStrengthFilters: []
   m_AttachTransform: {fileID: 0}
   m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
+  m_UseDynamicAttach: 1
   m_MatchAttachPosition: 1
   m_MatchAttachRotation: 1
   m_SnapToColliderVolume: 1

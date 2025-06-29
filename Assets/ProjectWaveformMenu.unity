@@ -535,61 +535,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioVisualizer
       objectReference: {fileID: 0}
-    - target: {fileID: 1019630083410552474, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2603033023009191717, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2707774089185352856, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4425668625569140617, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4856363277800889144, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5131792967792789105, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5131792967792789105, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5131792967792789105, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5131792967792789105, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5131792967792789105, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5131792967792789105, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5277357978233929004, guid: 9bf986c9320b345cbae4c62ee67c14c6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -645,16 +590,6 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 2094579013}
-    - target: {fileID: 7851000217512490767, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8579057609104211834, guid: 9bf986c9320b345cbae4c62ee67c14c6,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
