@@ -28,13 +28,8 @@ namespace AudioVisualization
             visualizer.sphere ??= GameObject.Find("Sphere");
             visualizer.sphereSurfacePoints = visualizer.sphere?.GetComponent<SphereSurfacePoints>();
             visualizer.sphereSurfacePoints?.GenerateSurfacePoints();
+			visualizer.geometricPulse = visualizer.sphere?.GetComponent<Renderer>().material;
         }
-
-		public static void InitializeGeometricPulseMaterial(AudioVisualizer visualizer)
-		{
-			Renderer rend = GameObject.Find("GeometricPulse").GetComponent<Renderer>();
-			visualizer.geometricPulse = rend.material;
-		}
 
         public static void InitializeAudio(AudioVisualizer visualizer, AudioToggle audioToggle)
         {

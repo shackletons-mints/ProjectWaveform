@@ -34,7 +34,6 @@ namespace AudioVisualization
 		{
             AudioInitializer.InitializeReferences(this);
             AudioInitializer.InitializeSphere(this);
-			AudioInitializer.InitializeGeometricPulseMaterial(this);
             AudioInitializer.InitializeAudio(this, audioToggle);
             spectrumData = new float[spectrumSize];
 			if (sphere != null)

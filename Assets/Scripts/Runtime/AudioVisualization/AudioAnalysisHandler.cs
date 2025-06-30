@@ -34,7 +34,9 @@ namespace AudioVisualization
             SetParticleColor(visualizer, pitchClass, pitch);
             SetParticlePosition(visualizer, pointIndex);
             SetParticleStartSpeed(visualizer, visualizer.sceneTimer);
-			SetGeometricPulseColors(visualizer, pitchClass);
+			// SetRippleOrigin(visualizer, pitchClass);
+			SetShaderColor(visualizer, pitchClass);
+			SetRippleDensity(visualizer);
 
             visualizer.particleSystem.Emit(emitValue);
             Debug.Log($"Emitting: {pitchName} (Freq: {pitch} Hz, MIDI: {midiNote}), particles: {emitValue}");
@@ -152,22 +154,35 @@ namespace AudioVisualization
             psMain.startSpeed = startSpeed;
         }
 
-		public static void SetGeometricPulseColors(AudioVisualizer visualizer, int pitchClass)
+		public static void SetRippleOrigin(AudioVisualizer visualizer, int pointIndex)
 		{
-            Color pitchColor = AudioConstants.PitchColors[pitchClass];
-			Color darkerColor = _GetDarkerColor(pitchColor);
-			visualizer.geometricPulse.SetVector("_BaseColor", pitchColor);
-			visualizer.geometricPulse.SetVector("_DarkerBaseColor", darkerColor);
+
+			Vector3 rippleOrigin = visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position;
+			visualizer.geometricPulse.SetVector("_RippleOrigin", rippleOrigin);
 		}
 
-		private static Color _GetDarkerColor(Color originalColor, float darkeningFactor = 0.5f)
+		public static void SetShaderColor(AudioVisualizer visualizer, int pitchClass)
 		{
-			darkeningFactor = Mathf.Clamp01(darkeningFactor);
-			float r = originalColor.r * darkeningFactor;
-			float g = originalColor.g * darkeningFactor;
-			float b = originalColor.b * darkeningFactor;
-			float a = originalColor.a;
-			return new Color(r, g, b, a);
+            Color pitchColor = AudioConstants.PitchColors[pitchClass];
+			visualizer.geometricPulse.SetColor("_EmissionColor", pitchColor);
+		}
+
+		public static void SetRippleDensity(AudioVisualizer visualizer)
+		{
+			float peak = 0f;
+			for (int i = 0; i < visualizer.spectrumData.Length; i++)
+			{
+				if (visualizer.spectrumData[i] > peak)
+					peak = visualizer.spectrumData[i];
+			}
+			float intensityBase = peak;
+
+			float curved = Mathf.Pow(intensityBase, 0.25f);
+			Debug.Log("Curved: " + curved);
+			float rippleFrequency = Mathf.Lerp(0.5f, 5f, curved);
+
+
+			visualizer.geometricPulse.SetFloat("_RippleFrequency", rippleFrequency);
 		}
     }
 }
