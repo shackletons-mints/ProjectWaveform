@@ -30,10 +30,10 @@ namespace AudioVisualization
             visualizer.sphereSurfacePoints?.GenerateSurfacePoints();
         }
 
-		public static void InitializeRippleMaterial(AudioVisualizer visualizer)
+		public static void InitializeGeometricPulseMaterial(AudioVisualizer visualizer)
 		{
-			Renderer rend = GameObject.Find("RippleSphere").GetComponent<Renderer>();
-			visualizer.rippleMaterial = rend.material;
+			Renderer rend = GameObject.Find("GeometricPulse").GetComponent<Renderer>();
+			visualizer.geometricPulse = rend.material;
 		}
 
         public static void InitializeAudio(AudioVisualizer visualizer, AudioToggle audioToggle)

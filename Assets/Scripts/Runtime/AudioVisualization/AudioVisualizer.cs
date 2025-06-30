@@ -18,7 +18,7 @@ namespace AudioVisualization
         public PitchLayoutSelector layoutSelector;
 		private Vector3 previousSpherePosition;
         public SphereSurfacePoints sphereSurfacePoints;
-		public Material rippleMaterial;
+		public Material geometricPulse;
 
         public int spectrumSize = 1024;
         public int sampleRate = 44100;
@@ -34,7 +34,7 @@ namespace AudioVisualization
 		{
             AudioInitializer.InitializeReferences(this);
             AudioInitializer.InitializeSphere(this);
-			AudioInitializer.InitializeRippleMaterial(this);
+			AudioInitializer.InitializeGeometricPulseMaterial(this);
             AudioInitializer.InitializeAudio(this, audioToggle);
             spectrumData = new float[spectrumSize];
 			if (sphere != null)

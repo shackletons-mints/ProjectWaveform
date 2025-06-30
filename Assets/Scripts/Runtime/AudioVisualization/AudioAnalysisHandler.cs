@@ -34,7 +34,7 @@ namespace AudioVisualization
             SetParticleColor(visualizer, pitchClass, pitch);
             SetParticlePosition(visualizer, pointIndex);
             SetParticleStartSpeed(visualizer, visualizer.sceneTimer);
-			SetRippleOrigin(visualizer, pointIndex);
+			SetGeometricPulseColors(visualizer, pitchClass);
 
             visualizer.particleSystem.Emit(emitValue);
             Debug.Log($"Emitting: {pitchName} (Freq: {pitch} Hz, MIDI: {midiNote}), particles: {emitValue}");
@@ -152,13 +152,23 @@ namespace AudioVisualization
             psMain.startSpeed = startSpeed;
         }
 
-		public static void SetRippleOrigin(AudioVisualizer visualizer, int pointIndex)
+		public static void SetGeometricPulseColors(AudioVisualizer visualizer, int pitchClass)
 		{
-			Debug.Log("ripple name: " + visualizer.rippleMaterial.name);
-			Vector3 origin = visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position;
-			visualizer.rippleMaterial.SetVector("_RippleOrigin_WS", origin);
+            Color pitchColor = AudioConstants.PitchColors[pitchClass];
+			Color darkerColor = _GetDarkerColor(pitchColor);
+			visualizer.geometricPulse.SetVector("_BaseColor", pitchColor);
+			visualizer.geometricPulse.SetVector("_DarkerBaseColor", darkerColor);
 		}
 
+		private static Color _GetDarkerColor(Color originalColor, float darkeningFactor = 0.5f)
+		{
+			darkeningFactor = Mathf.Clamp01(darkeningFactor);
+			float r = originalColor.r * darkeningFactor;
+			float g = originalColor.g * darkeningFactor;
+			float b = originalColor.b * darkeningFactor;
+			float a = originalColor.a;
+			return new Color(r, g, b, a);
+		}
     }
 }
 
