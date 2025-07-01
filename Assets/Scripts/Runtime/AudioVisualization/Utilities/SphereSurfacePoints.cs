@@ -53,7 +53,6 @@ public class SphereSurfacePoints : MonoBehaviour
 
             Vector3 normal = new Vector3(x, y, z).normalized;
             Vector3 position = center + normal * radius;
-			Debug.Log("Position: " + position);
 
             surfacePoints.Add(new SurfacePoint(position, normal));
 
