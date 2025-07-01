@@ -28,7 +28,7 @@ namespace AudioVisualization
             visualizer.sphere ??= GameObject.Find("Sphere");
             visualizer.sphereSurfacePoints = visualizer.sphere?.GetComponent<SphereSurfacePoints>();
             visualizer.sphereSurfacePoints?.GenerateSurfacePoints();
-			visualizer.geometricPulse = visualizer.sphere?.GetComponent<Renderer>().material;
+			visualizer.rippleShader = visualizer.sphere?.GetComponent<Renderer>().material;
         }
 
         public static void InitializeAudio(AudioVisualizer visualizer, AudioToggle audioToggle)

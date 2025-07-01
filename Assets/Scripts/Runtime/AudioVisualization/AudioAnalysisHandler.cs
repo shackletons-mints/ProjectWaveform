@@ -126,24 +126,6 @@ namespace AudioVisualization
                 var psTransform = visualizer.particleSystem.transform;
                 psTransform.position = visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position;
                 psTransform.rotation = Quaternion.LookRotation(visualizer.sphereSurfacePoints.surfacePoints[pointIndex].normal);
-
-				foreach (var light in visualizer.highlightLights)
-				{
-					if (light == null) continue;
-
-					Vector3 offset = Vector3.zero;
-
-					if (light.name == "Directional Light Top")
-					{
-						offset = new Vector3(0, 5f, 0);
-					}
-					else if (light.name == "Directional Light Bottom")
-					{
-						offset = new Vector3(0, -5f, 0);
-					}
-
-					light.transform.position = visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position + offset;
-				}
             }
         }
 
@@ -158,13 +140,13 @@ namespace AudioVisualization
 		{
 
 			Vector3 rippleOrigin = visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position;
-			visualizer.geometricPulse.SetVector("_RippleOrigin", rippleOrigin);
+			visualizer.rippleShader.SetVector("_RippleOrigin", rippleOrigin);
 		}
 
 		public static void SetShaderColor(AudioVisualizer visualizer, int pitchClass)
 		{
             Color pitchColor = AudioConstants.PitchColors[pitchClass];
-			visualizer.geometricPulse.SetColor("_EmissionColor", pitchColor);
+			visualizer.rippleShader.SetColor("_EmissionColor", pitchColor);
 		}
 
 		public static void SetRippleDensity(AudioVisualizer visualizer)
@@ -175,14 +157,12 @@ namespace AudioVisualization
 				if (visualizer.spectrumData[i] > peak)
 					peak = visualizer.spectrumData[i];
 			}
-			float intensityBase = peak;
 
+			float intensityBase = peak;
 			float curved = Mathf.Pow(intensityBase, 0.25f);
-			Debug.Log("Curved: " + curved);
 			float rippleFrequency = Mathf.Lerp(0.5f, 5f, curved);
 
-
-			visualizer.geometricPulse.SetFloat("_RippleFrequency", rippleFrequency);
+			visualizer.rippleShader.SetFloat("_RippleFrequency", rippleFrequency);
 		}
     }
 }

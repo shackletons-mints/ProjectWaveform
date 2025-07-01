@@ -18,7 +18,7 @@ namespace AudioVisualization
         public PitchLayoutSelector layoutSelector;
 		private Vector3 previousSpherePosition;
         public SphereSurfacePoints sphereSurfacePoints;
-		public Material geometricPulse;
+		public Material rippleShader;
 
         public int spectrumSize = 1024;
         public int sampleRate = 44100;

@@ -50,17 +50,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Resource
       value: 
-      objectReference: {fileID: 8300000, guid: ed828725bbf0f594fb0431dbe19be759, type: 3}
+      objectReference: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
     - target: {fileID: 2808298410947820997, guid: ddb866218734c4ba697915b5e33b1775,
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: ed828725bbf0f594fb0431dbe19be759, type: 3}
+      objectReference: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
     - target: {fileID: 4530875510733346886, guid: ddb866218734c4ba697915b5e33b1775,
         type: 3}
       propertyPath: audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: ed828725bbf0f594fb0431dbe19be759, type: 3}
+      objectReference: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
     - target: {fileID: 4670732863215167098, guid: ddb866218734c4ba697915b5e33b1775,
         type: 3}
       propertyPath: m_Name
@@ -76,6 +76,12 @@ PrefabInstance:
       propertyPath: audioClip
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
+        type: 3}
+      propertyPath: rippleShader
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 12b4ca065d0868f48a1ba082d66c3a6f,
+        type: 3}
     - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
         type: 3}
       propertyPath: rippleManager
@@ -273,7 +279,7 @@ PrefabInstance:
     - target: {fileID: 5443807669375063708, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5443807669375063708, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
         type: 3}
