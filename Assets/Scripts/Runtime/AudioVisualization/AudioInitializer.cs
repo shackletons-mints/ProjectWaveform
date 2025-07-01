@@ -16,11 +16,11 @@ namespace AudioVisualization
             visualizer.audioPitchEstimator ??= visualizer.GetComponent<AudioPitchEstimator>();
             visualizer.layoutSelector ??= visualizer.GetComponent<PitchLayoutSelector>();
 
-			Light[] lights = visualizer.GetComponents<Light>();
-			foreach (var light in lights)
-			{
-				visualizer.highlightLights.Add(light);
-			}
+            Light[] lights = visualizer.GetComponents<Light>();
+            foreach (var light in lights)
+            {
+                visualizer.highlightLights.Add(light);
+            }
         }
 
         public static void InitializeSphere(AudioVisualizer visualizer)
@@ -28,6 +28,7 @@ namespace AudioVisualization
             visualizer.sphere ??= GameObject.Find("Sphere");
             visualizer.sphereSurfacePoints = visualizer.sphere?.GetComponent<SphereSurfacePoints>();
             visualizer.sphereSurfacePoints?.GenerateSurfacePoints();
+            visualizer.rippleShader = visualizer.sphere?.GetComponent<Renderer>().material;
         }
 
         public static void InitializeAudio(AudioVisualizer visualizer, AudioToggle audioToggle)
