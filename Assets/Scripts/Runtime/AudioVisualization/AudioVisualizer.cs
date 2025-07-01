@@ -16,9 +16,9 @@ namespace AudioVisualization
         public List<Light> highlightLights;
         public ParticleSystem particleSystem;
         public PitchLayoutSelector layoutSelector;
-		private Vector3 previousSpherePosition;
+        private Vector3 previousSpherePosition;
         public SphereSurfacePoints sphereSurfacePoints;
-		public Material rippleShader;
+        public Material rippleShader;
 
         public int spectrumSize = 1024;
         public int sampleRate = 44100;
@@ -31,38 +31,38 @@ namespace AudioVisualization
         public float sceneTimer = 0f;
 
         void Start()
-		{
+        {
             AudioInitializer.InitializeReferences(this);
             AudioInitializer.InitializeSphere(this);
             AudioInitializer.InitializeAudio(this, audioToggle);
             spectrumData = new float[spectrumSize];
-			if (sphere != null)
-			{
-				previousSpherePosition = sphere.transform.position;
-			}
+            if (sphere != null)
+            {
+                previousSpherePosition = sphere.transform.position;
+            }
         }
 
         void Update()
         {
-			emitTimer += Time.deltaTime;
-			sceneTimer += Time.deltaTime;
+            emitTimer += Time.deltaTime;
+            sceneTimer += Time.deltaTime;
 
-			if (sphere != null)
-			{
-				Vector3 currentPosition = sphere.transform.position;
-				if (currentPosition != previousSpherePosition)
-				{
-					sphereSurfacePoints?.SetPosition();
-					previousSpherePosition = currentPosition;
-				}
-			}
+            if (sphere != null)
+            {
+                Vector3 currentPosition = sphere.transform.position;
+                if (currentPosition != previousSpherePosition)
+                {
+                    sphereSurfacePoints?.SetPosition();
+                    previousSpherePosition = currentPosition;
+                }
+            }
 
-			if (audioSource != null && audioSource.isPlaying)
-			{
-				AudioAnalysisHandler.AnalyzeAudio(this);
-			}
+            if (audioSource != null && audioSource.isPlaying)
+            {
+                AudioAnalysisHandler.AnalyzeAudio(this);
+            }
 
-			InputHandler.HandleInput(this);
+            InputHandler.HandleInput(this);
         }
     }
 }
