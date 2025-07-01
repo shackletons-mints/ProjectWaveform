@@ -585,6 +585,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6146621362936753449, guid: 9bf986c9320b345cbae4c62ee67c14c6,
+        type: 3}
+      propertyPath: 'highlightLights.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146621362936753449, guid: 9bf986c9320b345cbae4c62ee67c14c6,
+        type: 3}
+      propertyPath: 'highlightLights.Array.data[1]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7237836866973836206, guid: 9bf986c9320b345cbae4c62ee67c14c6,
         type: 3}
       propertyPath: m_InteractionManager

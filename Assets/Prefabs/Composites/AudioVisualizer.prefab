@@ -95,11 +95,6 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
         type: 3}
-      propertyPath: highlightLight
-      value: 
-      objectReference: {fileID: 4856363277800889144}
-    - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
-        type: 3}
       propertyPath: layoutSelector
       value: 
       objectReference: {fileID: 7860096144931848931}
@@ -124,16 +119,6 @@ PrefabInstance:
       propertyPath: highlightLights.Array.size
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
-        type: 3}
-      propertyPath: 'highlightLights.Array.data[0]'
-      value: 
-      objectReference: {fileID: 4856363277800889144}
-    - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
-        type: 3}
-      propertyPath: 'highlightLights.Array.data[1]'
-      value: 
-      objectReference: {fileID: 4425668625569140617}
     - target: {fileID: 7299642565065583674, guid: ddb866218734c4ba697915b5e33b1775,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -428,7 +413,9 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5551333051180076023, guid: e41bc9a9a573e4ad9b9775b0cbed5a25, type: 3}
+    - {fileID: 3676113215169257286, guid: e41bc9a9a573e4ad9b9775b0cbed5a25, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5764058374821688922, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
@@ -618,21 +605,9 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
---- !u!108 &4425668625569140617 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 5443807669375063708, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
-    type: 3}
-  m_PrefabInstance: {fileID: 8567931238957324565}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &4840267816592946658 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3876330434556144887, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
-    type: 3}
-  m_PrefabInstance: {fileID: 8567931238957324565}
-  m_PrefabAsset: {fileID: 0}
---- !u!108 &4856363277800889144 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 3855693412377608749, guid: e41bc9a9a573e4ad9b9775b0cbed5a25,
     type: 3}
   m_PrefabInstance: {fileID: 8567931238957324565}
   m_PrefabAsset: {fileID: 0}
