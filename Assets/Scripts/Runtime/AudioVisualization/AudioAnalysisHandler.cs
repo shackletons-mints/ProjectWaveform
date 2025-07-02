@@ -111,12 +111,6 @@ namespace AudioVisualization
             float normalizedDeviation = GetNormalizedPitchDeviation(detectedPitch);
             pitchColor.a = normalizedDeviation;
             psMain.startColor = pitchColor;
-
-            foreach (var light in visualizer.highlightLights)
-            {
-                light.color = pitchColor;
-                light.intensity = 6f;
-            }
         }
 
         private static void SetParticlePosition(AudioVisualizer visualizer, int pointIndex)

@@ -924,6 +924,8 @@ GameObject:
   - component: {fileID: 7630328289069053877}
   - component: {fileID: 2069894020495046270}
   - component: {fileID: 7660501044059077715}
+  - component: {fileID: 5009689633534012307}
+  - component: {fileID: 7050944601939634265}
   m_Layer: 2
   m_Name: XR Origin
   m_TagString: Untagged
@@ -1025,7 +1027,6 @@ MonoBehaviour:
   _toggleAction: {fileID: 3336640699912901065, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   Canvas: {fileID: 0}
-  distanceFromCamera: 6
 --- !u!114 &7660501044059077715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,6 +1042,38 @@ MonoBehaviour:
   _toggleAction: {fileID: -2111390304292636114, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   _audioToggle: {fileID: 0}
+--- !u!114 &5009689633534012307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7957942351869948125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d2a4b7e64ed742827632f2783df1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visuals: {fileID: 0}
+  xrCamera: {fileID: 8766024634595469703}
+  leftController: {fileID: 8766024632898161151}
+  tooltip: {fileID: 0}
+  triggerDistance: 3
+--- !u!114 &7050944601939634265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7957942351869948125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35f626b12698c24d9de516f9bf408b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _toggleAction: {fileID: -2804321919024953142, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  visuals: {fileID: 0}
 --- !u!1 &8571911243767107432
 GameObject:
   m_ObjectHideFlags: 0

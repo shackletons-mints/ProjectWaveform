@@ -13,7 +13,6 @@ namespace AudioVisualization
         public AudioSource audioSource;
         [SerializeField] public AudioToggle audioToggle;
         public GameObject sphere;
-        public List<Light> highlightLights;
         public ParticleSystem particleSystem;
         public PitchLayoutSelector layoutSelector;
         private Vector3 previousSpherePosition;

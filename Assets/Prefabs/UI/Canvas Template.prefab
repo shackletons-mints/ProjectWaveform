@@ -778,7 +778,7 @@ MonoBehaviour:
   m_UIWindowHandlePrefab: {fileID: 3313702396020386592, guid: 0a3b2fece1a3b444a8806098d0eb32a6,
     type: 3}
   m_HMDCanvasDimensionsInMeters: {x: 1.15, y: 0.85}
-  m_DistanceFromCamera: 3
+  m_DistanceFromCamera: 6
   m_ShowBackgroundForHMD: 1
   m_EnableInEditor: 0
   m_Canvas: {fileID: 6172264712081021700}
