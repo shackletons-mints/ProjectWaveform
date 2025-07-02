@@ -8,6 +8,11 @@ public class GetSphere: MonoBehaviour
     [SerializeField] private GameObject visuals;
     private float _distanceFromCamera = 2;
 
+	void Start()
+	{
+		PositionVisualsInFrontOfCamera();
+	}
+
     private void OnEnable()
     {
         if (_toggleAction != null)

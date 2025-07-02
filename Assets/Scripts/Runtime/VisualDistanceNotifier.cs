@@ -17,6 +17,16 @@ public class VisualDistanceNotifier : MonoBehaviour
 
     private bool _isTooltipShown = false;
 
+	void Start()
+	{
+
+        if (tooltip != null)
+		{
+			tooltip.transform.position = leftHand.transform.position + leftHand.transform.up * 0.3f;
+			tooltip.transform.rotation = Quaternion.LookRotation(tooltip.transform.position - xrCamera.transform.position);
+		}
+	}
+
     void Update()
     {
         if (visuals == null || xrCamera == null || leftHand == null) return;
@@ -38,10 +48,10 @@ public class VisualDistanceNotifier : MonoBehaviour
         _isTooltipShown = true;
         if (tooltip != null)
         {
+			tooltip.SetActive(true);
+
 			tooltip.transform.position = leftHand.transform.position + leftHand.transform.up * 0.3f;
 			tooltip.transform.rotation = Quaternion.LookRotation(tooltip.transform.position - xrCamera.transform.position);
-
-			tooltip.SetActive(true);
         }
 
 
