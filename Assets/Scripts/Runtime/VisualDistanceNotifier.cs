@@ -38,12 +38,12 @@ public class VisualDistanceNotifier : MonoBehaviour
         _isTooltipShown = true;
         if (tooltip != null)
         {
-			tooltip.SetActive(true);
-			Canvas.ForceUpdateCanvases();
-
 			tooltip.transform.position = leftHand.transform.position + leftHand.transform.up * 0.3f;
 			tooltip.transform.rotation = Quaternion.LookRotation(tooltip.transform.position - xrCamera.transform.position);
+
+			tooltip.SetActive(true);
         }
+
 
 		if (buttonARenderer != null)
 		{
