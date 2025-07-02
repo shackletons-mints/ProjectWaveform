@@ -364,46 +364,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 266979177118201194, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 266979177118201194, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 266979177118201194, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 266979177118201194, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 748422168049888162, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 748422168049888162, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 748422168049888162, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 748422168049888162, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2581305115919863542, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
       propertyPath: m_Pivot.x
@@ -509,40 +469,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 772719890}
-    - target: {fileID: 2742089223469533462, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_ShowBackgroundForHMD
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2742089223469533462, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_UIWindowHandlePrefab
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4345495004138282345, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
       propertyPath: m_Name
       value: Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855464416749757358, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855464416749757358, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855464416749757358, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5855464416749757358, guid: b8f7382051281456a93ced9c504c48c4,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6172264712081021700, guid: b8f7382051281456a93ced9c504c48c4,
         type: 3}
