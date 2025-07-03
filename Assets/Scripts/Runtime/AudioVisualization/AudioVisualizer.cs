@@ -18,6 +18,11 @@ namespace AudioVisualization
         private Vector3 previousSpherePosition;
         public SphereSurfacePoints sphereSurfacePoints;
         public Material rippleShader;
+        public float currentRippleFrequency = 0.5f;
+        public float currentRippleDensity = 0.5f;
+        public float currentEffectRadius = 0.5f;
+        public float currentRippleAmplitude = 0.01f;
+        public float smoothingSpeed = 5f;
 
         public int spectrumSize = 1024;
         public int sampleRate = 44100;
