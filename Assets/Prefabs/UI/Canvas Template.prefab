@@ -897,6 +897,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Canvas: {fileID: 6172264712081021700}
-  m_HeaderGradientBackground: {fileID: 0}
   m_HmdCanvasController: {fileID: 2742089223469533462}
   m_RectTransform: {fileID: 0}
