@@ -13,12 +13,18 @@ namespace AudioVisualization
         public AudioSource audioSource;
         [SerializeField] public AudioToggle audioToggle;
         public GameObject sphere;
-        public List<Light> highlightLights;
         public ParticleSystem particleSystem;
         public PitchLayoutSelector layoutSelector;
         private Vector3 previousSpherePosition;
         public SphereSurfacePoints sphereSurfacePoints;
         public Material rippleShader;
+		public int previousPitchClass;
+		public float previousSpectrumEnergy = 0f;
+        public float currentRippleFrequency = 0.5f;
+        public float currentRippleDensity = 0.5f;
+        public float currentEffectRadius = 0.5f;
+        public float currentRippleAmplitude = 0.01f;
+        public float smoothingSpeed = 5f;
 
         public int spectrumSize = 1024;
         public int sampleRate = 44100;

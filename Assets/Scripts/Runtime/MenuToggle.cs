@@ -27,12 +27,11 @@ public class MenuToggle : MonoBehaviour
     private void OnToggle(InputAction.CallbackContext ctx)
     {
         bool newState = !Canvas.activeSelf;
-        Canvas.SetActive(newState);
-
         if (newState)
         {
             PositionCanvasInFrontOfCamera();
         }
+        Canvas.SetActive(newState);
     }
 
     private void PositionCanvasInFrontOfCamera()
