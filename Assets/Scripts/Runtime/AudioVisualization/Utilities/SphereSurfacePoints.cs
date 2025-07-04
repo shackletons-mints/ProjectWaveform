@@ -18,18 +18,20 @@ public class SphereSurfacePoints : MonoBehaviour
 
     public void SetPosition()
     {
-        SphereCollider collider = GetComponent<SphereCollider>();
-        if (collider == null)
-        {
-            Debug.LogError("No SphereCollider found on GameObject.");
-            return;
-        }
+		Renderer rend = GetComponent<Renderer>();
+		if (rend == null)
+		{
+			Debug.LogError("No Renderer found on GameObject.");
+			return;
+		}
+		Bounds bounds = rend.bounds;
 
-        center = transform.position;
-        radius = collider.radius * collider.transform.lossyScale.x;
+		center = bounds.center;
 
-        GenerateSurfacePoints();
-    }
+		radius = (bounds.extents.x + bounds.extents.y + bounds.extents.z) / 3f;
+
+		GenerateSurfacePoints();
+   }
 
     [ContextMenu("Generate Surface Points")]
     public void GenerateSurfacePoints()

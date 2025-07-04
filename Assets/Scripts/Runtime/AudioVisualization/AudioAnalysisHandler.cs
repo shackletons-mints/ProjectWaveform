@@ -29,20 +29,26 @@ namespace AudioVisualization
                 return;
             }
 
-            visualizer.emitTimer = 0f;
-            SetConeAngle(visualizer, pitch);
-            SetParticleColor(visualizer, pitchClass, pitch);
-            SetParticlePosition(visualizer, pointIndex);
-            SetParticleStartSpeed(visualizer, visualizer.sceneTimer);
-            // SetRippleOrigin(visualizer, pitchClass);
-            SetShaderColor(visualizer, pitchClass);
 
-            SetRippleDensity(visualizer);
-            SetRippleAmplitude(visualizer);
-            SetRippleFrequency(visualizer);
-            // SetEffectRadius(visualizer);
+			SetConeAngle(visualizer, pitch);
+			SetRippleDensity(visualizer);
+			SetRippleAmplitude(visualizer);
+			SetRippleFrequency(visualizer);
+
+
+            visualizer.emitTimer = 0f;
+            SetParticleStartSpeed(visualizer, visualizer.sceneTimer);
+			if (pitchClass != visualizer.previousPitchClass)
+			{
+				SetParticleColor(visualizer, pitchClass, pitch);
+				SetParticlePosition(visualizer, pointIndex);
+				SetShaderColor(visualizer, pitchClass);
+				// SetRippleOrigin(visualizer, pitchClass);
+				// SetEffectRadius(visualizer);
+			}
 
             visualizer.particleSystem.Emit(emitValue);
+			visualizer.previousPitchClass = pitchClass;
             Debug.Log($"Emitting: {pitchName} (Freq: {pitch} Hz, MIDI: {midiNote}), particles: {emitValue}");
         }
 
@@ -147,82 +153,111 @@ namespace AudioVisualization
             visualizer.rippleShader.SetColor("_EmissionColor", pitchColor);
         }
 
-        public static void SetRippleFrequency(AudioVisualizer visualizer)
-        {
-            float peak = 0f;
-            for (int i = 0; i < visualizer.spectrumData.Length; i++)
-            {
-                if (visualizer.spectrumData[i] > peak)
-                    peak = visualizer.spectrumData[i];
-            }
+		public static void SetRippleFrequency(AudioVisualizer visualizer)
+		{
+			float energy = 0f;
+			for (int i = 0; i < visualizer.spectrumData.Length; i++)
+			{
+				energy += visualizer.spectrumData[i];
+			}
 
-            float intensityBase = peak;
-            float curved = Mathf.Pow(intensityBase, 0.25f);
-            float rippleFrequency = Mathf.Lerp(0.5f, 5f, curved);
+			float delta = energy - visualizer.previousSpectrumEnergy;
+			visualizer.previousSpectrumEnergy = Mathf.Lerp(visualizer.previousSpectrumEnergy, energy, Time.deltaTime * 4f);
 
-            visualizer.rippleShader.SetFloat("_RippleFrequency", rippleFrequency);
-        }
+			// Frequency limits
+			float minFreq = 1f;
+			float maxFreq = 10f;
+			float growthSpeed = 5f;
+			float normalDecaySpeed = 2.5f;
+			float silentDecaySpeed = 10f;  // fast decay for silence
 
-        public static void SetRippleDensity(AudioVisualizer visualizer)
-        {
-            float peak = 0f;
-            for (int i = 0; i < visualizer.spectrumData.Length; i++)
-            {
-                if (visualizer.spectrumData[i] > peak)
-                    peak = visualizer.spectrumData[i];
-            }
+			// Decay faster if music is nearly silent
+			bool isSilent = energy < 0.001f;
 
-            float intensityBase = peak;
-            float curved = Mathf.Pow(intensityBase, 0.25f);
-            float rippleDensity = Mathf.Lerp(0.5f, 5f, curved);
+			if (delta > 0.0005f)
+			{
+				visualizer.currentRippleFrequency += delta * growthSpeed;
+			}
+			else
+			{
+				float decaySpeed = isSilent ? silentDecaySpeed : normalDecaySpeed;
 
-            visualizer.currentRippleDensity = Mathf.Lerp(
-                visualizer.currentRippleDensity,
-                rippleDensity,
-                Time.deltaTime * visualizer.smoothingSpeed
-            );
+				visualizer.currentRippleFrequency = Mathf.Lerp(
+					visualizer.currentRippleFrequency,
+					minFreq,
+					Time.deltaTime * decaySpeed
+				);
+			}
 
-            visualizer.rippleShader.SetFloat("_RippleDensity", visualizer.currentRippleDensity);
-        }
+			visualizer.currentRippleFrequency = Mathf.Clamp(
+				visualizer.currentRippleFrequency,
+				minFreq,
+				maxFreq
+			);
 
+			visualizer.rippleShader.SetFloat("_RippleFrequency", visualizer.currentRippleFrequency);
+		}
 
-        public static void SetEffectRadius(AudioVisualizer visualizer)
-        {
-            float sum = 0f;
-            for (int i = 0; i < visualizer.spectrumData.Length; i++)
-            {
-                sum += visualizer.spectrumData[i];
-            }
+		public static void SetRippleDensity(AudioVisualizer visualizer)
+		{
+			int activeBands = 0;
+			float threshold = 0.005f;
 
-            float average = sum / visualizer.spectrumData.Length;
-            float curved = Mathf.Pow(average, 0.5f);
-            float radius = Mathf.Lerp(0.5f, 1.5f, curved);
+			for (int i = 0; i < visualizer.spectrumData.Length; i++)
+			{
+				if (visualizer.spectrumData[i] > threshold)
+					activeBands++;
+			}
 
-            visualizer.currentEffectRadius = Mathf.Lerp(
-                visualizer.currentEffectRadius,
-                radius,
-                Time.deltaTime * visualizer.smoothingSpeed
-            );
+			float fullness = (float)activeBands / visualizer.spectrumData.Length;
+			float curved = Mathf.Pow(fullness, 0.75f);
+			float rippleDensity = Mathf.Lerp(1f, 10f, curved);
 
-            visualizer.rippleShader.SetFloat("_EffectRadius", visualizer.currentEffectRadius);
-        }
+			visualizer.currentRippleDensity = Mathf.Lerp(
+				visualizer.currentRippleDensity,
+				rippleDensity,
+				Time.deltaTime * visualizer.smoothingSpeed
+			);
 
-        public static void SetRippleAmplitude(AudioVisualizer visualizer)
-        {
-            float peak = 0f;
-            for (int i = 0; i < visualizer.spectrumData.Length; i++)
-            {
-                if (visualizer.spectrumData[i] > peak)
-                {
-                    peak = visualizer.spectrumData[i];
-                }
-            }
+			visualizer.rippleShader.SetFloat("_RippleDensity", visualizer.currentRippleDensity);
+		}
 
-            float curved = Mathf.Pow(peak, 0.5f);
-            float amplitude = Mathf.Lerp(0.01f, 0.15f, curved);
+		public static void SetEffectRadius(AudioVisualizer visualizer)
+		{
+			float weightedSum = 0f;
+			float weightTotal = 0f;
 
-            visualizer.rippleShader.SetFloat("_RippleAmplitude", amplitude);
-        }
+			for (int i = 0; i < visualizer.spectrumData.Length; i++)
+			{
+				float weight = 1f - (float)i / visualizer.spectrumData.Length; // Lower freqs heavier
+				weightedSum += visualizer.spectrumData[i] * weight;
+				weightTotal += weight;
+			}
+
+			float average = (weightTotal > 0f) ? weightedSum / weightTotal : 0f;
+			float curved = Mathf.Pow(average, 0.5f);
+			float radius = Mathf.Lerp(0.5f, 1.5f, curved);
+
+			visualizer.currentEffectRadius = Mathf.Lerp(
+				visualizer.currentEffectRadius,
+				radius,
+				Time.deltaTime * visualizer.smoothingSpeed
+			);
+
+			visualizer.rippleShader.SetFloat("_EffectRadius", visualizer.currentEffectRadius);
+		}
+
+		public static void SetRippleAmplitude(AudioVisualizer visualizer)
+		{
+			float peak = 0f;
+			for (int i = 0; i < visualizer.spectrumData.Length; i++)
+				peak = Mathf.Max(peak, visualizer.spectrumData[i]);
+
+			float curved = Mathf.Pow(peak, 0.35f); // more responsive for quiet dynamics
+			float amplitude = Mathf.Lerp(0.01f, 0.2f, curved);
+
+			visualizer.rippleShader.SetFloat("_RippleAmplitude", amplitude);
+		}
     }
 }
 
