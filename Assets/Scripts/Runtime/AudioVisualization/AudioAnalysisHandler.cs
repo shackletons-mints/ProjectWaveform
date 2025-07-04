@@ -165,13 +165,12 @@ namespace AudioVisualization
 			visualizer.previousSpectrumEnergy = Mathf.Lerp(visualizer.previousSpectrumEnergy, energy, Time.deltaTime * 4f);
 
 			// Frequency limits
-			float minFreq = 1f;
-			float maxFreq = 10f;
-			float growthSpeed = 5f;
-			float normalDecaySpeed = 2.5f;
+			float minFreq = 0.5f;
+			float maxFreq = 8f;
+			float growthSpeed = 3.5f;
+			float normalDecaySpeed = 3f;
 			float silentDecaySpeed = 10f;  // fast decay for silence
 
-			// Decay faster if music is nearly silent
 			bool isSilent = energy < 0.001f;
 
 			if (delta > 0.0005f)
