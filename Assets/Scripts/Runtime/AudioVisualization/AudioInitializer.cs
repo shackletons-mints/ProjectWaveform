@@ -15,7 +15,6 @@ namespace AudioVisualization
             visualizer.audioToggle ??= visualizer.GetComponent<AudioToggle>();
             visualizer.audioPitchEstimator ??= visualizer.GetComponent<AudioPitchEstimator>();
             visualizer.layoutSelector ??= visualizer.GetComponent<PitchLayoutSelector>();
-			visualizer.fluxAnalyzer ??= visualizer.GetComponent<SpectralFluxAnalyzer>();
         }
 
         public static void InitializeSphere(AudioVisualizer visualizer)

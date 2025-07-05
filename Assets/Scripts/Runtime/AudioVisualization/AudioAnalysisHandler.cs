@@ -8,7 +8,7 @@ namespace AudioVisualization
 		{
 			var source = visualizer.audioSource;
 			source.GetSpectrumData(visualizer.spectrumData, 0, visualizer.fftWindow);
-			visualizer.fluxAnalyzer.AnalyzeSpectrum(visualizer.spectrumData, Time.time);
+			// visualizer.fluxAnalyzer.AnalyzeSpectrum(visualizer.spectrumData, Time.time);
 
 			float pitch = visualizer.audioPitchEstimator.Estimate(source);
 			int midiNote = Mathf.RoundToInt(69 + 12 * Mathf.Log(pitch / 440f, 2));

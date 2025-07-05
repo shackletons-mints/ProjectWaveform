@@ -392,7 +392,7 @@ PrefabInstance:
     - target: {fileID: 7050944601939634265, guid: 8f2c1ffdafd49a943ac79dc0ff480220,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7630328289069053877, guid: 8f2c1ffdafd49a943ac79dc0ff480220,
         type: 3}
@@ -786,7 +786,7 @@ PrefabInstance:
     - target: {fileID: 951774819496624476, guid: 9bf986c9320b345cbae4c62ee67c14c6,
         type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1019630083410552474, guid: 9bf986c9320b345cbae4c62ee67c14c6,
         type: 3}
@@ -833,12 +833,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Resource
       value: 
-      objectReference: {fileID: 8300000, guid: ed828725bbf0f594fb0431dbe19be759, type: 3}
+      objectReference: {fileID: 8300000, guid: b27a379fdbca024418da542901203549, type: 3}
     - target: {fileID: 2809231890725906581, guid: 9bf986c9320b345cbae4c62ee67c14c6,
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: ed828725bbf0f594fb0431dbe19be759, type: 3}
+      objectReference: {fileID: 8300000, guid: b27a379fdbca024418da542901203549, type: 3}
     - target: {fileID: 3171386349936043791, guid: 9bf986c9320b345cbae4c62ee67c14c6,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -869,7 +869,7 @@ PrefabInstance:
         type: 3}
       propertyPath: audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: ed828725bbf0f594fb0431dbe19be759, type: 3}
+      objectReference: {fileID: 8300000, guid: b27a379fdbca024418da542901203549, type: 3}
     - target: {fileID: 4840267816592946658, guid: 9bf986c9320b345cbae4c62ee67c14c6,
         type: 3}
       propertyPath: looping
@@ -2218,8 +2218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445619c9f7ec6034ebe9bf7c3ff019ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thresholdWindowSize: 10
-  thresholdMultiplier: 0.1
 --- !u!114 &2094579013 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3447509974515340573, guid: 8f2c1ffdafd49a943ac79dc0ff480220,
