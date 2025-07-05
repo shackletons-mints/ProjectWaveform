@@ -21,12 +21,13 @@ namespace AudioVisualization
 		public SpectralFluxAnalyzer fluxAnalyzer;
 
 		public int previousPitchClass;
-		public float previousSpectrumEnergy = 0f;
-        public float currentRippleFrequency = 1f;
-        public float currentRippleDensity = 4f;
-        public float currentEffectRadius = 1.4f;
-        public float currentRippleAmplitude = 0.07f;
-        public float smoothingSpeed = 5f;
+		// Shader variables
+		// public float previousSpectrumEnergy = 0f;
+        // public float currentRippleFrequency = 1f;
+        // public float currentRippleDensity = 4f;
+        // public float currentEffectRadius = 1.4f;
+        // public float currentRippleAmplitude = 0.07f;
+        // public float smoothingSpeed = 5f;
 
         public int spectrumSize = 1024;
         public int sampleRate = 44100;
