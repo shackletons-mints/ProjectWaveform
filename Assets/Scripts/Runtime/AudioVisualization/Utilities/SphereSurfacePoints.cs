@@ -16,6 +16,11 @@ public class SphereSurfacePoints : MonoBehaviour
         SetPosition();
     }
 
+	private void Update()
+	{
+		SetPosition();
+	}
+
     public void SetPosition()
     {
 		Renderer rend = GetComponent<Renderer>();
@@ -42,8 +47,10 @@ public class SphereSurfacePoints : MonoBehaviour
 
         int pointCount = 12;
 
-        // Latitude halfway between top (90°) and equator (0°)
-        float latitudeAngle = Mathf.Deg2Rad * 45f;
+        // Latitude three quarters way between top (90°) and equator (0°) would be 22.5f
+        // Latitude halfway between top (90°) and equator (0°) would be 45f
+        // Latitude three quarters way between top (90°) and equator (0°) would be 67.5f
+        float latitudeAngle = Mathf.Deg2Rad * 22.5f;
         float y = Mathf.Cos(latitudeAngle);
         float ringRadius = Mathf.Sin(latitudeAngle);
 
