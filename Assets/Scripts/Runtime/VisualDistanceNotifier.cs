@@ -9,23 +9,23 @@ public class VisualDistanceNotifier : MonoBehaviour
     public Camera xrCamera;
     public GameObject leftHand;
     public GameObject tooltip;
-	public Renderer buttonARenderer;
-	public Material originalMaterial;
+    public Renderer buttonARenderer;
+    public Material originalMaterial;
 
     [Header("Settings")]
     public float triggerDistance = 6f;
 
     private bool _isTooltipShown = false;
 
-	void Start()
-	{
+    void Start()
+    {
 
         if (tooltip != null)
-		{
-			tooltip.transform.position = leftHand.transform.position + leftHand.transform.up * 0.3f;
-			tooltip.transform.rotation = Quaternion.LookRotation(tooltip.transform.position - xrCamera.transform.position);
-		}
-	}
+        {
+            tooltip.transform.position = leftHand.transform.position + leftHand.transform.up * 0.3f;
+            tooltip.transform.rotation = Quaternion.LookRotation(tooltip.transform.position - xrCamera.transform.position);
+        }
+    }
 
     void Update()
     {
@@ -48,17 +48,17 @@ public class VisualDistanceNotifier : MonoBehaviour
         _isTooltipShown = true;
         if (tooltip != null)
         {
-			tooltip.SetActive(true);
+            tooltip.SetActive(true);
 
-			tooltip.transform.position = leftHand.transform.position + leftHand.transform.up * 0.3f;
-			tooltip.transform.rotation = Quaternion.LookRotation(tooltip.transform.position - xrCamera.transform.position);
+            tooltip.transform.position = leftHand.transform.position + leftHand.transform.up * 0.3f;
+            tooltip.transform.rotation = Quaternion.LookRotation(tooltip.transform.position - xrCamera.transform.position);
         }
 
 
-		if (buttonARenderer != null)
-		{
-			buttonARenderer.material.color = Color.cyan;
-		}
+        if (buttonARenderer != null)
+        {
+            buttonARenderer.material.color = Color.cyan;
+        }
     }
 
     void HideTooltipAndHighlight()
@@ -69,10 +69,10 @@ public class VisualDistanceNotifier : MonoBehaviour
             tooltip.SetActive(false);
         }
 
-		if (buttonARenderer != null)
-		{
-			buttonARenderer.material= originalMaterial;
-		}
+        if (buttonARenderer != null)
+        {
+            buttonARenderer.material = originalMaterial;
+        }
     }
 }
 

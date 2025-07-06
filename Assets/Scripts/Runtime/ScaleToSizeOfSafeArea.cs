@@ -9,10 +9,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField, Tooltip("The canvas that this component is a part of.")]
         Canvas m_Canvas;
 
-        [SerializeField, Tooltip("The header gradient background used to add contrast " +
-             "to the top buttons when on non-HMD devices. Will be disabled on HMD.")]
-        GameObject m_HeaderGradientBackground;
-
         [SerializeField, Tooltip("The HMD canvas controller used to determine if the UI " +
              "should consider the safe area. If the canvas is in world space, then " +
              "this RectTransform will not be updated to the size of the safe area.")]
@@ -37,7 +33,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (m_Canvas == null)
                 m_Canvas = FindAnyObjectByType<Canvas>();
 
-            m_HeaderGradientBackground.SetActive(enabled);
         }
 
         void OnEnable()
@@ -48,15 +43,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 return;
             }
 
-            m_HeaderGradientBackground.SetActive(true);
             m_RectTransform.anchorMin = Vector2.zero;
             m_RectTransform.anchorMax = Vector2.zero;
             m_RectTransform.pivot = new(0.5f, 0.5f);
 
             UpdateSafeArea();
         }
-
-        void OnDisable() => m_HeaderGradientBackground.SetActive(false);
 
         void Update() => UpdateSafeArea();
 
