@@ -73,6 +73,8 @@ public class PaintManager : Singleton<PaintManager>
         if (Physics.Raycast(pos + Vector3.up * 0.1f, Vector3.down, out hit))
         {
             Vector2 uv = hit.textureCoord;
+            Debug.Log("UVX: " + uv.x);
+            Debug.Log("UVY: " + uv.y);
             paintMaterial.SetVector(positionID, new Vector4(uv.x, uv.y, 0, 0)); // Store UV in xy
         }
 
