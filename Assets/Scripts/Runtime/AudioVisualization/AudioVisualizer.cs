@@ -18,6 +18,7 @@ namespace AudioVisualization
         private Vector3 previousSpherePosition;
         public SphereSurfacePoints sphereSurfacePoints;
         public Material rippleShader;
+		public ParticlesController particlesController;
 
 		public int previousPitchClass;
 		// Shader variables
