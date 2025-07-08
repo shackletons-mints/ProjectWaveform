@@ -9,6 +9,7 @@ namespace AudioVisualization
         public static void InitializeReferences(AudioVisualizer visualizer)
         {
             visualizer.particleSystem ??= visualizer.GetComponent<ParticleSystem>();
+			visualizer.particlesController ??= visualizer.particleSystem.GetComponent<ParticlesController>();
             visualizer.particleSystem?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
             visualizer.audioSource ??= visualizer.GetComponent<AudioSource>();
