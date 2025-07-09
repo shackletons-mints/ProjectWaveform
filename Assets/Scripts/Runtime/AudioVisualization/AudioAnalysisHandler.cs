@@ -8,7 +8,6 @@ namespace AudioVisualization
 		{
 			var source = visualizer.audioSource;
 			source.GetSpectrumData(visualizer.spectrumData, 0, visualizer.fftWindow);
-			// visualizer.fluxAnalyzer.AnalyzeSpectrum(visualizer.spectrumData, Time.time);
 
 			float pitch = visualizer.audioPitchEstimator.Estimate(source);
 			int midiNote = Mathf.RoundToInt(69 + 12 * Mathf.Log(pitch / 440f, 2));
@@ -33,13 +32,11 @@ namespace AudioVisualization
 			SetParticlePosition(visualizer, pointIndex);
 			Utilities.ShaderSetters.SetShaderColor(visualizer, pitchClass);
 			SetConeAngle(visualizer, pitch);
-			// Utilities.ShaderSetters.SetRippleOrigin(visualizer, pointIndex);
-
 
 			visualizer.emitTimer = 0f;
+			visualizer.previousPitchClass = pitchClass;
 
 			visualizer.particleSystem.Emit(emitValue);
-			visualizer.previousPitchClass = pitchClass;
 
 			Debug.Log($"Emitting: {pitchName} (Freq: {pitch} Hz, MIDI: {midiNote}), particles: {emitValue}");
 		}
