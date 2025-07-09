@@ -4,6 +4,8 @@ using UnityEngine.XR.ARSubsystems;
 using System;
 using System.Reflection;
 
+using Utilities;
+
 public class RemoveCeilingPlanes : MonoBehaviour
 {
     public ARPlaneManager planeManager;
@@ -41,7 +43,9 @@ public class RemoveCeilingPlanes : MonoBehaviour
     void LogPlane(ARPlane plane)
     {
         if (plane == null) return;
-        // LogObjectDetails(plane, "ARPlane");
+		{
+			Utilities.Helpers.LogObjectDetails(plane, "ARPlane");
+		}
     }
 
     void ModifyCeiling(ARPlane plane)

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PaintableWall
-  m_Shader: {fileID: -6465566751694194690, guid: 3467462eda8ba404ab70be01a20e0026,
+  m_Shader: {fileID: -6465566751694194690, guid: 8df6e7bb744b114498414d39621715c5,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0

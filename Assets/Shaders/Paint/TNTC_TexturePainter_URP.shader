@@ -68,9 +68,11 @@ Shader "TNTC/TexturePainter"
                 if (_PrepareUV > 0) {
                     return float4(0, 0, 1, 1); // encode UV in blue channel?
                 }
-                float4 prevColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv); // previous paint
-                float2 centerUV = _PainterPosition.xy;
-                float d = distance(i.uv, centerUV);
+                float4 prevColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.worldPos); // previous paint
+                // float2 centerUV = _PainterPosition.xy;
+                // float d = distance(i.uv, centerUV);
+
+				float d = distance(i.worldPos, _PainterPosition.xyz);
                 float mask = 1 - smoothstep(_Radius * _Hardness, _Radius, d);
 
                 // blend previous paint with new paint

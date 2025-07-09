@@ -6,10 +6,10 @@ public class PaintManager : Singleton<PaintManager>
 {
 
     public Shader texturePaint;
-    public Shader customPainterShader;
     public Shader extendIslands;
 
     int prepareUVID = Shader.PropertyToID("_PrepareUV");
+	int paintCenterID = Shader.PropertyToID("_PainterCenter");
     int positionID = Shader.PropertyToID("_PainterPosition");
     int hardnessID = Shader.PropertyToID("_Hardness");
     int strengthID = Shader.PropertyToID("_Strength");
@@ -72,10 +72,18 @@ public class PaintManager : Singleton<PaintManager>
         RaycastHit hit;
         if (Physics.Raycast(pos + Vector3.up * 0.1f, Vector3.down, out hit))
         {
-            Vector2 uv = hit.textureCoord;
-            Debug.Log("UVX: " + uv.x);
-            Debug.Log("UVY: " + uv.y);
-            paintMaterial.SetVector(positionID, new Vector4(uv.x, uv.y, 0, 0)); // Store UV in xy
+			paintMaterial.SetVector(positionID, hit.point);
+			extendMaterial.SetVector(paintCenterID, hit.point);
+
+			// create object to track collision point
+			// GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+			// marker.transform.position = hit.point;
+			// marker.transform.localScale = Vector3.one * 0.2f;
+			// Destroy(marker, 2f);
+
+            // Vector2 uv = hit.textureCoord;
+            // Debug.Log("UV: " + uv);
+            // paintMaterial.SetVector(positionID, new Vector4(uv.x, uv.y, 0, 0)); // Store UV in xy
         }
 
         paintMaterial.SetFloat(prepareUVID, 0);
@@ -87,6 +95,7 @@ public class PaintManager : Singleton<PaintManager>
 
         extendMaterial.SetFloat(uvOffsetID, paintable.extendsIslandOffset);
         extendMaterial.SetTexture(uvIslandsID, uvIslands);
+		extendMaterial.SetFloat("_MaxExtendDistance", 0.1f);
 
         // command.SetRenderTarget(mask);
         // command.ClearRenderTarget(true, true, color ?? Color.red);

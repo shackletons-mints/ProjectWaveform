@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade2814dab4f02247b15ca03f198ae29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extendsIslandOffset: 1
+  extendsIslandOffset: 0.1
 --- !u!54 &8912778433308406373
 Rigidbody:
   m_ObjectHideFlags: 0
