@@ -34,7 +34,7 @@ public class GetSphere : MonoBehaviour
         PositionVisualsInFrontOfCamera();
     }
 
-    private void PositionVisualsInFrontOfCamera()
+	private void PositionVisualsInFrontOfCamera()
     {
         Transform cam = Camera.main.transform;
         Vector3 targetPosition = cam.position + cam.forward * _distanceFromCamera;
