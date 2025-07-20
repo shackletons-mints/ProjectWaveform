@@ -58,49 +58,11 @@ public class PaintManager : Singleton<PaintManager>
 
     public void Paint(Paintable paintable, Vector3 pos, float radius = 0.01f, float hardness = .5f, float strength = .5f, Color? color = null)
     {
-        RenderTexture mask = paintable.getMask();
-        RenderTexture uvIslands = paintable.getUVIslands();
-        RenderTexture extend = paintable.getExtend();
         RenderTexture support = paintable.getSupport();
-        Renderer rend = paintable.getRenderer();
 
-        // Get the Renderer & Mesh
-        MeshCollider meshCollider = paintable.GetComponent<MeshCollider>();
-        Mesh mesh = meshCollider.sharedMesh;
-        Renderer renderer = paintable.getRenderer();
-
-        RaycastHit hit;
-        if (Physics.Raycast(pos + Vector3.up * 0.1f, Vector3.down, out hit))
-        {
-            Vector2 uv = hit.textureCoord;
-            Debug.Log("UVX: " + uv.x);
-            Debug.Log("UVY: " + uv.y);
-            paintMaterial.SetVector(positionID, new Vector4(uv.x, uv.y, 0, 0)); // Store UV in xy
-        }
-
-        paintMaterial.SetFloat(prepareUVID, 0);
-        paintMaterial.SetFloat(hardnessID, hardness);
-        paintMaterial.SetFloat(strengthID, strength);
-        paintMaterial.SetFloat(radiusID, radius);
-        paintMaterial.SetTexture(textureID, support);
-        paintMaterial.SetColor(colorID, color ?? Color.red);
-
-        extendMaterial.SetFloat(uvOffsetID, paintable.extendsIslandOffset);
-        extendMaterial.SetTexture(uvIslandsID, uvIslands);
-
-        // command.SetRenderTarget(mask);
-        // command.ClearRenderTarget(true, true, color ?? Color.red);
-        // Graphics.ExecuteCommandBuffer(command);
-        // command.Clear();
-
-        command.SetRenderTarget(mask);
-        command.Blit(null, mask, paintMaterial);
-        command.SetRenderTarget(support);
-        command.Blit(mask, support);
-
-        command.SetRenderTarget(extend);
-        command.Blit(mask, extend, extendMaterial);
-
+        paintMaterial.SetFloat("_Radius", radius);
+        paintMaterial.SetTexture("_MainTex", support);
+        paintMaterial.SetColor("_Color", color ?? Color.red);
         Graphics.ExecuteCommandBuffer(command);
         // Utilities.Helpers.DebugRenderTexture(mask, "mask_debug");
         // Utilities.Helpers.DebugRenderTexture(support, "support_debug");

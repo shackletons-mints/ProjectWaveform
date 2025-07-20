@@ -410,7 +410,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PlanePrefab
       value: 
-      objectReference: {fileID: 1585201990951412, guid: cf1f91f59aea9fc41acaa7ff1414eb11,
+      objectReference: {fileID: 1585201990951412, guid: 3eb4163fb21cb594dbfa6576876b6116,
         type: 3}
     - target: {fileID: 7630328289069053877, guid: 8f2c1ffdafd49a943ac79dc0ff480220,
         type: 3}
@@ -1255,10 +1255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96407ae71baa5614da906181b377ded0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texturePaint: {fileID: 4800000, guid: 3cc889a5e6fd73446b3226e0d1b6f574, type: 3}
-  customPainterShader: {fileID: -6465566751694194690, guid: f8a9543869d6daa4b9f113b6acac495d,
-    type: 3}
-  extendIslands: {fileID: 4800000, guid: 2e380eae06138254fa5f1a64f65d8967, type: 3}
+  texturePaint: {fileID: 4800000, guid: 346914f747b1c3e428c910c3437fcbab, type: 3}
+  customPainterShader: {fileID: 0}
+  extendIslands: {fileID: 0}
   paintMaterial: {fileID: 0}
   extendMaterial: {fileID: 0}
 --- !u!4 &1783929773

@@ -248,6 +248,9 @@
         },
         {
             "m_Id": "721ed8d53fd54eef98ca2df1ba7cfdf5"
+        },
+        {
+            "m_Id": "751b9cd4c4a841bea40e3daf211c8a14"
         }
     ],
     "m_GroupDatas": [
@@ -829,20 +832,6 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "2e36cc2586dc491abb678f1f1cf3d350"
-                },
-                "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "a6a20b1ab84d42c59036028210848629"
-                },
-                "m_SlotId": 7
-            },
-            "m_InputSlot": {
-                "m_Node": {
                     "m_Id": "44bcc4e64933434780f8b817d3a0dffc"
                 },
                 "m_SlotId": 0
@@ -1061,6 +1050,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "df95a009d9374c2eb5e675bbb3e66274"
+                },
+                "m_SlotId": 7
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "751b9cd4c4a841bea40e3daf211c8a14"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "ed002c12350a46b69f196e5d728582cd"
                 },
                 "m_SlotId": 0
@@ -1197,6 +1200,9 @@
             },
             {
                 "m_Id": "240edc07da7a418fb5612752e65de68a"
+            },
+            {
+                "m_Id": "751b9cd4c4a841bea40e3daf211c8a14"
             }
         ]
     },
@@ -1786,10 +1792,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -3682.999755859375,
-            "y": 346.0000915527344,
-            "width": 167.0,
-            "height": 34.0
+            "x": -4087.33349609375,
+            "y": 323.9999694824219,
+            "width": 170.66650390625,
+            "height": 36.00006103515625
         }
     },
     "m_Slots": [
@@ -4191,6 +4197,40 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "751b9cd4c4a841bea40e3daf211c8a14",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.Alpha",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "c81f1797ef1d499aaae78f29035bc321"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.Alpha"
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "7560d8788be745479278705463058835",
     "m_Id": 2,
@@ -4267,8 +4307,8 @@
     "m_ObjectId": "76323c6b8d4f4941909a2ea11ff379f9",
     "m_Title": "Ink",
     "m_Position": {
-        "x": -3990.0,
-        "y": -787.0
+        "x": -4112.66650390625,
+        "y": -786.666748046875
     }
 }
 
@@ -6087,7 +6127,7 @@
         "m_Id": "f289e78aac424beb88b8669e32d2003f"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 0,
+    "m_SurfaceType": 1,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
@@ -6520,6 +6560,21 @@
         "b": 0.0,
         "a": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "c81f1797ef1d499aaae78f29035bc321",
+    "m_Id": 0,
+    "m_DisplayName": "Alpha",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Alpha",
+    "m_StageCapability": 2,
+    "m_Value": 1.0,
+    "m_DefaultValue": 1.0,
+    "m_Labels": []
 }
 
 {
@@ -7810,8 +7865,8 @@
     "m_ObjectId": "fdf105893c89463a863c71066a1083dd",
     "m_Title": "Glitter",
     "m_Position": {
-        "x": -3900.000244140625,
-        "y": 907.0
+        "x": -3900.00048828125,
+        "y": 907.3333129882813
     }
 }
 
