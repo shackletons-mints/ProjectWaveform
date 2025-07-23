@@ -319,6 +319,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1321262785920747274, guid: 8f2c1ffdafd49a943ac79dc0ff480220,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2069894020495046270, guid: 8f2c1ffdafd49a943ac79dc0ff480220,
         type: 3}
       propertyPath: Canvas
@@ -374,6 +379,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4846923417456722132, guid: 8f2c1ffdafd49a943ac79dc0ff480220,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5009689633534012307, guid: 8f2c1ffdafd49a943ac79dc0ff480220,
         type: 3}
       propertyPath: tooltip
@@ -427,7 +437,9 @@ PrefabInstance:
       objectReference: {fileID: 1001105266}
     m_RemovedComponents:
     - {fileID: 5009689633534012307, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1321262785920747274, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
+    - {fileID: 4846923417456722132, guid: 8f2c1ffdafd49a943ac79dc0ff480220, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7957942351869948125, guid: 8f2c1ffdafd49a943ac79dc0ff480220,
@@ -1125,7 +1137,7 @@ MonoBehaviour:
   xrCamera: {fileID: 772719890}
   leftHand: {fileID: 772719892}
   tooltip: {fileID: 939854340}
-  buttonARenderer: {fileID: 1786162121}
+  buttonARenderer: {fileID: 0}
   originalMaterial: {fileID: 2100000, guid: 99685157b02e4d446bbecb015645e5e8, type: 2}
   triggerDistance: 6
 --- !u!114 &1752296097 stripped
@@ -1154,12 +1166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeManager: {fileID: 1752296097}
   stencil: {fileID: 2100000, guid: a2c6f40608a1cd94fb9a50bc5b5002b4, type: 2}
---- !u!23 &1786162121 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1796310272793416435, guid: 8f2c1ffdafd49a943ac79dc0ff480220,
-    type: 3}
-  m_PrefabInstance: {fileID: 772719889}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1894226549
 GameObject:
   m_ObjectHideFlags: 0
