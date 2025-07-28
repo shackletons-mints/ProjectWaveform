@@ -404,7 +404,7 @@ PrefabInstance:
     - target: {fileID: 7050944601939634265, guid: 8f2c1ffdafd49a943ac79dc0ff480220,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7630328289069053877, guid: 8f2c1ffdafd49a943ac79dc0ff480220,
         type: 3}
@@ -479,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &773622197
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -925,12 +925,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Resource
       value: 
-      objectReference: {fileID: 8300000, guid: 03e7e054176949440b177ef996008684, type: 3}
+      objectReference: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
     - target: {fileID: 2809231890725906581, guid: 9bf986c9320b345cbae4c62ee67c14c6,
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 03e7e054176949440b177ef996008684, type: 3}
+      objectReference: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
     - target: {fileID: 3171386349936043791, guid: 9bf986c9320b345cbae4c62ee67c14c6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -956,7 +956,7 @@ PrefabInstance:
         type: 3}
       propertyPath: audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 03e7e054176949440b177ef996008684, type: 3}
+      objectReference: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
     - target: {fileID: 5277357978233929004, guid: 9bf986c9320b345cbae4c62ee67c14c6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1027,6 +1027,21 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 2094579013}
+    - target: {fileID: 9049840413072569715, guid: 9bf986c9320b345cbae4c62ee67c14c6,
+        type: 3}
+      propertyPath: paintColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049840413072569715, guid: 9bf986c9320b345cbae4c62ee67c14c6,
+        type: 3}
+      propertyPath: paintColor.g
+      value: 0.14668632
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049840413072569715, guid: 9bf986c9320b345cbae4c62ee67c14c6,
+        type: 3}
+      propertyPath: paintColor.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3214870060852804900, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
     - {fileID: 3175647498393912649, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
