@@ -22,12 +22,32 @@ namespace AudioVisualization
 			int pointIndex = visualizer.layoutSelector.GetPositionForPitchClass(pitchClass);
 			float volume = CalculateVolume(visualizer.spectrumData);
 			int emitValue = CalculateEmitValue(volume);
+			float pitch = visualizer.audioPitchEstimator.Estimate(source);
+			int midiNote = Mathf.RoundToInt(69 + 12 * Mathf.Log(pitch / 440f, 2));
+			int pitchClass = midiNote % 12;
+			if (pitchClass < 0 || pitchClass >= AudioConstants.PitchNames.Length)
+			{
+				Debug.LogWarning($"Pitch class {pitchClass} is out of bounds for pitch {pitch}.");
+				return;
+			}
+			string pitchName = AudioConstants.PitchNames[pitchClass];
+			int pointIndex = visualizer.layoutSelector.GetPositionForPitchClass(pitchClass);
+			float volume = CalculateVolume(visualizer.spectrumData);
+			int emitValue = CalculateEmitValue(volume);
 
 			if (float.IsNaN(pitch) || visualizer.emitTimer < visualizer.emitInterval)
 			{
 				return;
 			}
+			if (float.IsNaN(pitch) || visualizer.emitTimer < visualizer.emitInterval)
+			{
+				return;
+			}
 
+			SetParticleStartSpeed(visualizer, visualizer.sceneTimer);
+			SetParticleColor(visualizer, pitchClass, pitch);
+			SetParticlePosition(visualizer, pointIndex);
+			Utilities.ShaderSetters.SetShaderColor(visualizer, pitchClass);
 			SetParticleStartSpeed(visualizer, visualizer.sceneTimer);
 			SetParticleColor(visualizer, pitchClass, pitch);
 			SetParticlePosition(visualizer, pointIndex);
@@ -48,7 +68,16 @@ namespace AudioVisualization
 		{
 			if (spectrumData == null || spectrumData.Length == 0)
 				return -80f;
+		public static float CalculateVolume(float[] spectrumData)
+		{
+			if (spectrumData == null || spectrumData.Length == 0)
+				return -80f;
 
+			float sum = 0f;
+			for (int i = 0; i < spectrumData.Length; i++)
+			{
+				sum += spectrumData[i] * spectrumData[i];
+			}
 			float sum = 0f;
 			for (int i = 0; i < spectrumData.Length; i++)
 			{
@@ -57,13 +86,23 @@ namespace AudioVisualization
 
 			float rms = Mathf.Sqrt(sum / spectrumData.Length);
 			float db = 20f * Mathf.Log10(rms);
+			float rms = Mathf.Sqrt(sum / spectrumData.Length);
+			float db = 20f * Mathf.Log10(rms);
 
+			if (float.IsInfinity(db) || float.IsNaN(db))
+				db = -80f;
 			if (float.IsInfinity(db) || float.IsNaN(db))
 				db = -80f;
 
 			return Mathf.Clamp(db, -80f, 0f);
 		}
+			return Mathf.Clamp(db, -80f, 0f);
+		}
 
+		public static int CalculateEmitValue(float dbLevel)
+		{
+			const float minDb = -80f;
+			const float maxDb = -30f;
 		public static int CalculateEmitValue(float dbLevel)
 		{
 			const float minDb = -80f;
@@ -75,10 +114,22 @@ namespace AudioVisualization
 			float exponent = 1.5f;
 			float adjusted = Mathf.Pow(normalized, exponent);
 			int emitValue = Mathf.RoundToInt(Mathf.Lerp(1f, 12f, adjusted));
+			dbLevel = Mathf.Clamp(dbLevel, minDb, maxDb);
+			float normalized = (dbLevel - minDb) / (maxDb - minDb);
+			normalized = Mathf.Max(normalized, 0.001f);
+			float exponent = 1.5f;
+			float adjusted = Mathf.Pow(normalized, exponent);
+			int emitValue = Mathf.RoundToInt(Mathf.Lerp(1f, 12f, adjusted));
 
 			return emitValue;
 		}
+			return emitValue;
+		}
 
+		public static float GetNormalizedPitchDeviation(float detectedPitch)
+		{
+			float midiNoteFloat = 69 + 12 * Mathf.Log(detectedPitch / 440f, 2);
+			int nearestMidiNote = Mathf.RoundToInt(midiNoteFloat);
 		public static float GetNormalizedPitchDeviation(float detectedPitch)
 		{
 			float midiNoteFloat = 69 + 12 * Mathf.Log(detectedPitch / 440f, 2);
@@ -88,7 +139,13 @@ namespace AudioVisualization
 			float centsDifference = 1200f * Mathf.Log(detectedPitch / nearestFreq, 2);
 			float absCentsDiff = Mathf.Abs(centsDifference);
 			float maxCents = 50f;
+			float nearestFreq = 440f * Mathf.Pow(2f, (nearestMidiNote - 69) / 12f);
+			float centsDifference = 1200f * Mathf.Log(detectedPitch / nearestFreq, 2);
+			float absCentsDiff = Mathf.Abs(centsDifference);
+			float maxCents = 50f;
 
+			return Mathf.Clamp01(absCentsDiff / maxCents);
+		}
 			return Mathf.Clamp01(absCentsDiff / maxCents);
 		}
 
@@ -96,11 +153,20 @@ namespace AudioVisualization
 		public static void SetConeAngle(AudioVisualizer visualizer, float detectedPitch)
 		{
 			float normalizedDeviation = GetNormalizedPitchDeviation(detectedPitch);
+		public static void SetConeAngle(AudioVisualizer visualizer, float detectedPitch)
+		{
+			float normalizedDeviation = GetNormalizedPitchDeviation(detectedPitch);
 
+			float angle = Mathf.Lerp(5f, 30f, normalizedDeviation);
 			float angle = Mathf.Lerp(5f, 30f, normalizedDeviation);
 
 			float randomness = Mathf.Lerp(0.05f, 0.7f, normalizedDeviation);
+			float randomness = Mathf.Lerp(0.05f, 0.7f, normalizedDeviation);
 
+			var shape = visualizer.particleSystem.shape;
+			shape.angle = angle;
+			shape.randomDirectionAmount = randomness;
+		}
 			var shape = visualizer.particleSystem.shape;
 			shape.angle = angle;
 			shape.randomDirectionAmount = randomness;
@@ -126,6 +192,15 @@ namespace AudioVisualization
 				psTransform.rotation = Quaternion.LookRotation(visualizer.sphereSurfacePoints.surfacePoints[pointIndex].normal);
 			}
 		}
+		private static void SetParticlePosition(AudioVisualizer visualizer, int pointIndex)
+		{
+			if (visualizer.sphereSurfacePoints != null && pointIndex < visualizer.sphereSurfacePoints.surfacePoints.Count)
+			{
+				var psTransform = visualizer.particleSystem.transform;
+				psTransform.position = visualizer.sphereSurfacePoints.surfacePoints[pointIndex].position;
+				psTransform.rotation = Quaternion.LookRotation(visualizer.sphereSurfacePoints.surfacePoints[pointIndex].normal);
+			}
+		}
 
 		private static void SetParticleStartSpeed(AudioVisualizer visualizer, float elapsedTime)
 		{
@@ -133,7 +208,15 @@ namespace AudioVisualization
 			float startSpeed = (elapsedTime * 0.02f) + 0.5f;
 			psMain.startSpeed = startSpeed;
 		}
+		private static void SetParticleStartSpeed(AudioVisualizer visualizer, float elapsedTime)
+		{
+			var psMain = visualizer.particleSystem.main;
+			float startSpeed = (elapsedTime * 0.02f) + 0.5f;
+			psMain.startSpeed = startSpeed;
+		}
 
+
+	}
 
 	}
 }

@@ -73,8 +73,6 @@ public class PaintManager : Singleton<PaintManager>
         if (Physics.Raycast(pos + Vector3.up * 0.1f, Vector3.down, out hit))
         {
             Vector2 uv = hit.textureCoord;
-            Debug.Log("UVX: " + uv.x);
-            Debug.Log("UVY: " + uv.y);
             paintMaterial.SetVector(positionID, new Vector4(uv.x, uv.y, 0, 0)); // Store UV in xy
         }
 
@@ -88,18 +86,13 @@ public class PaintManager : Singleton<PaintManager>
         extendMaterial.SetFloat(uvOffsetID, paintable.extendsIslandOffset);
         extendMaterial.SetTexture(uvIslandsID, uvIslands);
 
-        // command.SetRenderTarget(mask);
-        // command.ClearRenderTarget(true, true, color ?? Color.red);
-        // Graphics.ExecuteCommandBuffer(command);
-        // command.Clear();
-
         command.SetRenderTarget(mask);
         command.Blit(null, mask, paintMaterial);
         command.SetRenderTarget(support);
         command.Blit(mask, support);
 
         command.SetRenderTarget(extend);
-        command.Blit(mask, extend, extendMaterial);
+        // command.Blit(mask, extend, extendMaterial);
 
         Graphics.ExecuteCommandBuffer(command);
         // Utilities.Helpers.DebugRenderTexture(mask, "mask_debug");
