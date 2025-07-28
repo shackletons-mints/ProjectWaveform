@@ -18,8 +18,17 @@ namespace AudioVisualization
         private Vector3 previousSpherePosition;
         public SphereSurfacePoints sphereSurfacePoints;
         public Material rippleShader;
+		public ParticlesController particlesController;
 
 		public int previousPitchClass;
+		// Shader variables
+		// public float previousSpectrumEnergy = 0f;
+        // public float currentRippleFrequency = 1f;
+        // public float currentRippleDensity = 4f;
+        // public float currentEffectRadius = 1.4f;
+        // public float currentRippleAmplitude = 0.07f;
+        // public float smoothingSpeed = 5f;
+
         public int spectrumSize = 1024;
         public int sampleRate = 44100;
         public FFTWindow fftWindow = FFTWindow.BlackmanHarris;
