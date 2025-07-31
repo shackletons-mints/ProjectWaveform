@@ -8,14 +8,13 @@ namespace AudioVisualization
 		{
 			var source = visualizer.audioSource;
 			source.GetSpectrumData(visualizer.spectrumData, 0, visualizer.fftWindow);
-			// visualizer.fluxAnalyzer.AnalyzeSpectrum(visualizer.spectrumData, Time.time);
 
 			float pitch = visualizer.audioPitchEstimator.Estimate(source);
 			int midiNote = Mathf.RoundToInt(69 + 12 * Mathf.Log(pitch / 440f, 2));
 			int pitchClass = midiNote % 12;
 			if (pitchClass < 0 || pitchClass >= AudioConstants.PitchNames.Length)
 			{
-				Debug.LogWarning($"Pitch class {pitchClass} is out of bounds for pitch {pitch}.");
+				// Debug.LogWarning($"Pitch class {pitchClass} is out of bounds for pitch {pitch}.");
 				return;
 			}
 			string pitchName = AudioConstants.PitchNames[pitchClass];
@@ -28,16 +27,13 @@ namespace AudioVisualization
 				return;
 			}
 
+			SetConeAngle(visualizer, pitch);
 			SetParticleStartSpeed(visualizer, visualizer.sceneTimer);
 			SetParticleColor(visualizer, pitchClass, pitch);
 			SetParticlePosition(visualizer, pointIndex);
 			Utilities.ShaderSetters.SetShaderColor(visualizer, pitchClass);
-			SetConeAngle(visualizer, pitch);
-			// Utilities.ShaderSetters.SetRippleOrigin(visualizer, pointIndex);
-
 
 			visualizer.emitTimer = 0f;
-
 			visualizer.particleSystem.Emit(emitValue);
 			visualizer.previousPitchClass = pitchClass;
 
@@ -133,8 +129,6 @@ namespace AudioVisualization
 			float startSpeed = (elapsedTime * 0.02f) + 0.5f;
 			psMain.startSpeed = startSpeed;
 		}
-
-
 	}
 }
 
