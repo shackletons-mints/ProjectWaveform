@@ -198,11 +198,8 @@ GameObject:
   - component: {fileID: 7892222037803824905}
   - component: {fileID: 3457758804001711308}
   - component: {fileID: 3759451060385750881}
-  - component: {fileID: 6960482149674919800}
   - component: {fileID: 6498374170834627027}
-  - component: {fileID: 4781170463226083296}
   - component: {fileID: 8307779263656305650}
-  - component: {fileID: 6473915760449705464}
   - component: {fileID: 6755602632447596596}
   m_Layer: 2
   m_Name: XR Origin
@@ -290,21 +287,6 @@ MonoBehaviour:
   m_PlanePrefab: {fileID: 1585201990951412, guid: bb039f2367acf3f469290f1923529f71,
     type: 3}
   m_DetectionMode: -1
---- !u!114 &6960482149674919800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3268494098926421400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2774459fc5e35b46a9909288dda7f48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _toggleAction: {fileID: 3336640699912901065, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  Canvas: {fileID: 0}
 --- !u!114 &6498374170834627027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,25 +302,6 @@ MonoBehaviour:
   _toggleAction: {fileID: -2111390304292636114, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   _audioToggle: {fileID: 0}
---- !u!114 &4781170463226083296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3268494098926421400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a073773aa92407a4182ccc3fe68359be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visuals: {fileID: 0}
-  xrCamera: {fileID: 0}
-  leftHand: {fileID: 0}
-  tooltip: {fileID: 0}
-  buttonARenderer: {fileID: 0}
-  originalMaterial: {fileID: 0}
-  triggerDistance: 6
 --- !u!114 &8307779263656305650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,25 +317,6 @@ MonoBehaviour:
   _toggleAction: {fileID: -2804321919024953142, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   visuals: {fileID: 0}
---- !u!114 &6473915760449705464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3268494098926421400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a073773aa92407a4182ccc3fe68359be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visuals: {fileID: 0}
-  xrCamera: {fileID: 8267469592097817197}
-  leftHand: {fileID: 5012705787581655441}
-  tooltip: {fileID: 8595472653080765177}
-  buttonARenderer: {fileID: 0}
-  originalMaterial: {fileID: 2100000, guid: 99685157b02e4d446bbecb015645e5e8, type: 2}
-  triggerDistance: 6
 --- !u!114 &6755602632447596596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2539,12 +2483,6 @@ PrefabInstance:
 --- !u!224 &7554136549317570918 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8608472933599628280, guid: d0fc3aac197b6af4fa12edc8731175a3,
-    type: 3}
-  m_PrefabInstance: {fileID: 2279630295644453534}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8595472653080765177 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7560311751517771879, guid: d0fc3aac197b6af4fa12edc8731175a3,
     type: 3}
   m_PrefabInstance: {fileID: 2279630295644453534}
   m_PrefabAsset: {fileID: 0}
