@@ -1628,7 +1628,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "ToggleMenu",
+                    "name": "StartVisualizer",
                     "type": "Button",
                     "id": "5a52fadf-3863-4b59-9a2e-69179a20bce2",
                     "expectedControlType": "",
@@ -1830,7 +1830,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ToggleMenu",
+                    "action": "StartVisualizer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
