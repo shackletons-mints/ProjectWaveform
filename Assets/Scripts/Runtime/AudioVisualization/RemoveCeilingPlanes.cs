@@ -14,29 +14,14 @@ public class RemoveCeilingPlanes : MonoBehaviour
         planeManager = GetComponent<ARPlaneManager>();
     }
 
-    void OnEnable()
-    {
-        planeManager.planesChanged += OnPlanesChanged;
-    }
-
-    void OnDisable()
-    {
-        planeManager.planesChanged -= OnPlanesChanged;
-    }
-
-    void OnPlanesChanged(ARPlanesChangedEventArgs args)
-    {
-        foreach (var plane in args.added)
-        {
-            ModifyCeiling(plane);
-        }
-
-        foreach (var plane in args.updated)
-        {
-            ModifyCeiling(plane);
-        }
-    }
-
+	void Update()
+	{
+		foreach (var plane in planeManager.trackables)
+		{
+			Debug.Log("ModifyCeiling");
+			ModifyCeiling(plane);
+		}
+	}
 
     void LogPlane(ARPlane plane)
     {

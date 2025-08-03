@@ -1586,6 +1586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 457563701782985561}
+  - component: {fileID: 5139403085064768993}
   m_Layer: 0
   m_Name: ARF XR Origin Start
   m_TagString: Untagged
@@ -1613,6 +1614,18 @@ Transform:
   - {fileID: 7286088855538988785}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5139403085064768993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3350782891354263696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67429b6a785fe6c4a8af36872154bd0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4106612308186184767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1673,7 +1686,6 @@ GameObject:
   - component: {fileID: 2535381829526608690}
   - component: {fileID: 8925936695146222648}
   - component: {fileID: 939498919498067495}
-  - component: {fileID: 6955459314594568314}
   m_Layer: 2
   m_Name: XR Origin
   m_TagString: Untagged
@@ -1774,20 +1786,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeManager: {fileID: 8925936695146222648}
   stencil: {fileID: 2100000, guid: a2c6f40608a1cd94fb9a50bc5b5002b4, type: 2}
---- !u!114 &6955459314594568314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4346563673813926127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c703b76ea5302804d90d79deb80a6485, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toggleAction: {fileID: 3336640699912901065, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
 --- !u!1 &5032874405729233768
 GameObject:
   m_ObjectHideFlags: 0
