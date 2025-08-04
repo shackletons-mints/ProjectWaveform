@@ -14,37 +14,44 @@ public class RemoveCeilingPlanes : MonoBehaviour
         planeManager = GetComponent<ARPlaneManager>();
     }
 
-	void Update()
+    void OnEnable()
+    {
+        planeManager.planesChanged += OnPlanesChanged;
+    }
+
+    void OnDisable()
+    {
+        planeManager.planesChanged -= OnPlanesChanged;
+    }
+
+	void OnPlanesChanged(ARPlanesChangedEventArgs args)
 	{
-		foreach (var plane in planeManager.trackables)
+		foreach (var plane in args.added)
 		{
-			Debug.Log("ModifyCeiling");
-			ModifyCeiling(plane);
+			if (plane.classifications == PlaneClassifications.Ceiling)
+				ModifyCeiling(plane);
+		}
+
+		foreach (var plane in args.updated)
+		{
+			if (plane.classifications == PlaneClassifications.Ceiling)
+				ModifyCeiling(plane);
 		}
 	}
 
-    void LogPlane(ARPlane plane)
-    {
-        if (plane == null) return;
-        // LogObjectDetails(plane, "ARPlane");
-    }
-
     void ModifyCeiling(ARPlane plane)
     {
-        if (plane.classifications == PlaneClassifications.Ceiling)
-        {
-            var collider = plane.GetComponent<Collider>();
-            if (collider)
-            {
-                collider.enabled = false;
-            }
+		var collider = plane.GetComponent<Collider>();
+		if (collider)
+		{
+			collider.enabled = false;
+		}
 
-            var renderer = plane.GetComponent<MeshRenderer>();
-            if (renderer)
-            {
-                renderer.material = stencil;
-            }
-        }
+		var renderer = plane.GetComponent<MeshRenderer>();
+		if (renderer)
+		{
+			renderer.material = stencil;
+		}
     }
 
 }

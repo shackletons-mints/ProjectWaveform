@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SpawnVisuals: MonoBehaviour
 {
-	public static GameObject Instance;
+	public static SpawnVisuals Instance { get; private set; }
 
 	[Header("References")]
     public GameObject prefab;
@@ -14,16 +14,17 @@ public class SpawnVisuals: MonoBehaviour
 
 	void Awake()
 	{
+		if (Instance != null && Instance != this)
+			Destroy(this);
+		else
+			Instance = this;
+
         Transform cam = Camera.main.transform;
-        Vector3 targetPosition = new Vector3(0f,1f,2f);
+        Vector3 targetPosition = new Vector3(0f,0.25f,2f);
         Quaternion targetRotation = Quaternion.LookRotation(cam.forward, cam.up);
 
 		if (visuals == null)
-		{
 			visuals = Instantiate(prefab, targetPosition, targetRotation);
-
-			Instance = visuals;
-		}
 	}
 
 	IEnumerator Start()
@@ -37,7 +38,7 @@ public class SpawnVisuals: MonoBehaviour
 
 	public void GrowVisuals()
 	{
-		StartCoroutine(GrowOverTime(visuals, 1f));
+		StartCoroutine(GrowOverTime(visuals));
 	}
 
 	public void DropVisuals()
@@ -50,16 +51,13 @@ public class SpawnVisuals: MonoBehaviour
 		}
 	}
 
-	private IEnumerator GrowOverTime(GameObject obj, float duration)
+	private IEnumerator GrowOverTime(GameObject obj)
 	{
-		Vector3 initialScale = obj.transform.localScale;
 		Vector3 targetScale = Vector3.one;
-		float elapsed = 0;
-
-		while (elapsed < duration)
+		float value = 0.001f;
+		while (obj.transform.localScale.x < targetScale.x)
 		{
-			obj.transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsed / duration);
-			elapsed += Time.deltaTime;
+			obj.transform.localScale += new Vector3(value, value, value);
 			yield return null;
 		}
 

@@ -182,10 +182,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: ARF XR Origin Start
       objectReference: {fileID: 0}
+    - target: {fileID: 4842489267658031607, guid: bedac471cf2327643ad9b1153fee923b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842489267658031607, guid: bedac471cf2327643ad9b1153fee923b,
+        type: 3}
+      propertyPath: m_LineLength
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6372294177356976272, guid: bedac471cf2327643ad9b1153fee923b,
         type: 3}
       propertyPath: m_RequestedTrackingOriginMode
-      value: 2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703867783841521849, guid: bedac471cf2327643ad9b1153fee923b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703867783841521849, guid: bedac471cf2327643ad9b1153fee923b,
+        type: 3}
+      propertyPath: m_LineLength
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
