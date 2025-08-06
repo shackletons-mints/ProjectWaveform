@@ -9,7 +9,6 @@ public class VisualDistanceNotifier : MonoBehaviour
     public Camera xrCamera;
     public GameObject leftHand;
     public GameObject tooltip;
-    public Renderer buttonARenderer;
     public Material originalMaterial;
 
     [Header("Settings")]
@@ -53,12 +52,6 @@ public class VisualDistanceNotifier : MonoBehaviour
             tooltip.transform.position = leftHand.transform.position + leftHand.transform.up * 0.3f;
             tooltip.transform.rotation = Quaternion.LookRotation(tooltip.transform.position - xrCamera.transform.position);
         }
-
-
-        if (buttonARenderer != null)
-        {
-            buttonARenderer.material.color = Color.cyan;
-        }
     }
 
     void HideTooltipAndHighlight()
@@ -67,11 +60,6 @@ public class VisualDistanceNotifier : MonoBehaviour
         if (tooltip != null)
         {
             tooltip.SetActive(false);
-        }
-
-        if (buttonARenderer != null)
-        {
-            buttonARenderer.material = originalMaterial;
         }
     }
 }

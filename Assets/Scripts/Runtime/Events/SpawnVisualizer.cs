@@ -10,7 +10,6 @@ public class SpawnVisualizer: MonoBehaviour
 	[Header("References")]
     public GameObject prefab;
     public float distanceFromCamera = 1f;
-
 	public GameObject visualizer;
 
 	void Awake()
@@ -62,8 +61,6 @@ public class SpawnVisualizer: MonoBehaviour
 		float value = 0.01f;
 		Vector3 scale = new Vector3(value, value, value);
 		float targetValue = 1f;
-
-
 
 		while (obj.transform.localScale.x < targetValue)
 		{

@@ -10,22 +10,22 @@ public class SceneToggleAudio : MonoBehaviour
     private void OnEnable()
     {
         if (_toggleAction != null)
-	    {
+	      {
             _toggleAction.action.performed += OnToggle;
-	    }
+	      }
     }
 
     private void OnDisable()
     {
         if (_toggleAction != null)
-	    {
+	      {
             _toggleAction.action.performed -= OnToggle;
-	    }
+	      }
     }
 
     private void OnToggle(InputAction.CallbackContext ctx)
     {
-		_audioToggle.ToggleIsUsingMicrophone();
-		_audioToggle.ToggleAudio();
+		    _audioToggle.ToggleIsUsingMicrophone();
+		    _audioToggle.ToggleAudio();
     }
 }
