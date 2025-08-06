@@ -250,7 +250,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1875454287}
   - component: {fileID: 1875454286}
-  - component: {fileID: 1875454288}
   m_Layer: 0
   m_Name: SpawnVisuals
   m_TagString: Untagged
@@ -271,8 +270,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 803569993395993439, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
-  visuals: {fileID: 0}
   distanceFromCamera: 1
+  visuals: {fileID: 0}
 --- !u!4 &1875454287
 Transform:
   m_ObjectHideFlags: 0
@@ -288,18 +287,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1875454288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875454285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67429b6a785fe6c4a8af36872154bd0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

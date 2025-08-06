@@ -91,6 +91,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: f741a265003948a46abe8d17fa689db8, type: 3}
     - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
         type: 3}
+      propertyPath: audioToggle
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
+        type: 3}
       propertyPath: rippleShader
       value: 
       objectReference: {fileID: -876546973899608171, guid: 12b4ca065d0868f48a1ba082d66c3a6f,
@@ -177,7 +182,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4530875510733346886, guid: ddb866218734c4ba697915b5e33b1775, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

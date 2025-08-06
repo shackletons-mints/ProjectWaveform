@@ -180,7 +180,7 @@ PrefabInstance:
     - target: {fileID: 3350782891354263696, guid: bedac471cf2327643ad9b1153fee923b,
         type: 3}
       propertyPath: m_Name
-      value: ARF XR Origin Start
+      value: ARF XR Origin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -11,7 +11,7 @@ namespace AudioVisualization
         public AudioClip audioClip;
         public AudioPitchEstimator audioPitchEstimator;
         public AudioSource audioSource;
-        [SerializeField] public AudioToggle audioToggle;
+        public AudioToggle audioToggle;
         public GameObject sphere;
         public ParticleSystem particleSystem;
         public PitchLayoutSelector layoutSelector;
