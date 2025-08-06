@@ -9,8 +9,9 @@ public class SpawnVisuals: MonoBehaviour
 
 	[Header("References")]
     public GameObject prefab;
-	public GameObject visuals;
     public float distanceFromCamera = 1f;
+
+	public GameObject visuals;
 
 	void Awake()
 	{
@@ -19,19 +20,24 @@ public class SpawnVisuals: MonoBehaviour
 		else
 			Instance = this;
 
-        Transform cam = Camera.main.transform;
-        Vector3 targetPosition = new Vector3(0f,2f,2f);
-        Quaternion targetRotation = Quaternion.LookRotation(cam.forward, cam.up);
+		Transform cam = Camera.main.transform;
+		Vector3 targetPosition = new Vector3(0f, 1.5f, 2f);
+		Quaternion targetRotation = Quaternion.LookRotation(cam.forward, cam.up);
 
 		if (visuals == null)
 			visuals = Instantiate(prefab, targetPosition, targetRotation);
+			
+		Rigidbody rb = visuals.GetComponentInChildren<Rigidbody>();
+		if (rb != null)
+		{
+			rb.isKinematic = true;
+			rb.useGravity = false;
+		}
 	}
 
 	IEnumerator Start()
 	{
 		GrowVisuals();
-		yield return new WaitForSeconds(3f);
-		DropVisuals();
 		yield return new WaitForSeconds(3f);
 		SceneManager.LoadScene(2);
 	}
@@ -43,7 +49,7 @@ public class SpawnVisuals: MonoBehaviour
 
 	public void DropVisuals()
 	{
-        Rigidbody rb = visuals.GetComponent<Rigidbody>();
+        Rigidbody rb = visuals.GetComponentInChildren<Rigidbody>();
 		if (rb != null)
 		{
 			rb.isKinematic = false;
@@ -64,5 +70,6 @@ public class SpawnVisuals: MonoBehaviour
 			obj.transform.localScale += scale;
 			yield return null;
 		}
+		DropVisuals();
 	}
 }
