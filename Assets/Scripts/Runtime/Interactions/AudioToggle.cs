@@ -4,10 +4,16 @@ namespace Utilities
 {
     public class AudioToggle : MonoBehaviour
     {
-        public AudioSource audioSource;
-        public AudioClip audioClip;
+        private AudioSource audioSource;
+        private AudioClip audioClip;
         public int sampleRate = 44100;
         [SerializeField] public bool isUsingMicrophone;
+
+        void Awake()
+        {
+            audioSource = SpawnVisualizer.Instance.visualizer.GetComponentInChildren<AudioSource>();
+            audioClip = audioSource.clip;
+        }
 
         public void ToggleAudio()
         {

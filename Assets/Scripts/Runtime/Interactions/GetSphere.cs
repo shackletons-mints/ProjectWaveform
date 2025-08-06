@@ -37,7 +37,7 @@ public class GetSphere : MonoBehaviour
         Vector3 targetPosition = cam.position + cam.forward * distanceFromCamera;
         Quaternion targetRotation = Quaternion.LookRotation(cam.forward, cam.up);
 
-		Rigidbody rb = SpawnVisuals.Instance.visuals.GetComponentInChildren<Rigidbody>();
+		Rigidbody rb = SpawnVisualizer.Instance.visualizer.GetComponentInChildren<Rigidbody>();
         if (rb != null)
         {
             rb.isKinematic = true;

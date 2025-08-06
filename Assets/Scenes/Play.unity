@@ -261,8 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc24d0a78a4ead145b26ece99ddcdea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  audioClip: {fileID: 0}
   sampleRate: 44100
   isUsingMicrophone: 0
 --- !u!4 &357689235

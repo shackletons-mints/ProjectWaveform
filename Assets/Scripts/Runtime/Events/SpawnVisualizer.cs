@@ -3,15 +3,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class SpawnVisuals: MonoBehaviour
+public class SpawnVisualizer: MonoBehaviour
 {
-	public static SpawnVisuals Instance { get; private set; }
+	public static SpawnVisualizer Instance { get; private set; }
 
 	[Header("References")]
     public GameObject prefab;
     public float distanceFromCamera = 1f;
 
-	public GameObject visuals;
+	public GameObject visualizer;
 
 	void Awake()
 	{
@@ -24,10 +24,10 @@ public class SpawnVisuals: MonoBehaviour
 		Vector3 targetPosition = new Vector3(0f, 1.5f, 2f);
 		Quaternion targetRotation = Quaternion.LookRotation(cam.forward, cam.up);
 
-		if (visuals == null)
-			visuals = Instantiate(prefab, targetPosition, targetRotation);
+		if (visualizer == null)
+			visualizer = Instantiate(prefab, targetPosition, targetRotation);
 			
-		Rigidbody rb = visuals.GetComponentInChildren<Rigidbody>();
+		Rigidbody rb = visualizer.GetComponentInChildren<Rigidbody>();
 		if (rb != null)
 		{
 			rb.isKinematic = true;
@@ -44,12 +44,12 @@ public class SpawnVisuals: MonoBehaviour
 
 	public void GrowVisuals()
 	{
-		StartCoroutine(GrowOverTime(visuals));
+		StartCoroutine(GrowOverTime(visualizer));
 	}
 
 	public void DropVisuals()
 	{
-        Rigidbody rb = visuals.GetComponentInChildren<Rigidbody>();
+        Rigidbody rb = visualizer.GetComponentInChildren<Rigidbody>();
 		if (rb != null)
 		{
 			rb.isKinematic = false;

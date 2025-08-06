@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 1875454287}
   - component: {fileID: 1875454286}
   m_Layer: 0
-  m_Name: SpawnVisuals
+  m_Name: SpawnVisualizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 803569993395993439, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
   distanceFromCamera: 1
-  visuals: {fileID: 0}
+  visualizer: {fileID: 0}
 --- !u!4 &1875454287
 Transform:
   m_ObjectHideFlags: 0
