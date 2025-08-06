@@ -1,7 +1,6 @@
-﻿using UnityEngine.UI;
-using System.Text;
-
+﻿using System.Text;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -11,7 +10,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
     [RequireComponent(typeof(HDRLightEstimation))]
     public class HDRLightEstimationUI : MonoBehaviour
     {
-        [Tooltip("The UI Text element used to display the estimated ambient intensity in the physical environment.")]
+        [Tooltip(
+            "The UI Text element used to display the estimated ambient intensity in the physical environment."
+        )]
         [SerializeField]
         Text m_AmbientIntensityText;
 
@@ -24,7 +25,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             set => m_AmbientIntensityText = ambientIntensityText;
         }
 
-        [Tooltip("The UI Text element used to display the estimated ambient color in the physical environment.")]
+        [Tooltip(
+            "The UI Text element used to display the estimated ambient color in the physical environment."
+        )]
         [SerializeField]
         Text m_AmbientColorText;
 
@@ -36,8 +39,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             get => m_AmbientColorText;
             set => m_AmbientColorText = value;
         }
-        
-        [Tooltip("The UI Text element used to display the estimated direction of the main light for the physical environment.")]
+
+        [Tooltip(
+            "The UI Text element used to display the estimated direction of the main light for the physical environment."
+        )]
         [SerializeField]
         Text m_MainLightDirectionText;
         public Text mainLightDirectionText
@@ -46,7 +51,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             set => m_MainLightDirectionText = value;
         }
 
-        [Tooltip("The UI Text element used to display the estimated intensity in lumens of the main light for the physical environment.")]
+        [Tooltip(
+            "The UI Text element used to display the estimated intensity in lumens of the main light for the physical environment."
+        )]
         [SerializeField]
         Text m_MainLightIntensityLumens;
         public Text mainLightIntensityLumens
@@ -55,7 +62,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             set => m_MainLightIntensityLumens = value;
         }
 
-        [Tooltip("The UI Text element used to display the estimated color of the main light for the physical environment.")]
+        [Tooltip(
+            "The UI Text element used to display the estimated color of the main light for the physical environment."
+        )]
         [SerializeField]
         Text m_MainLightColor;
         public Text mainLightColorText
@@ -64,7 +73,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             set => m_MainLightColor = value;
         }
 
-        [Tooltip("The UI Text element used to display the estimated spherical harmonics coefficients for the physical environment.")]
+        [Tooltip(
+            "The UI Text element used to display the estimated spherical harmonics coefficients for the physical environment."
+        )]
         [SerializeField]
         Text m_SphericalHarmonicsText;
         public Text ambientSphericalHarmonicsText
@@ -90,15 +101,21 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 SetUIValue(m_HDRLightEstimation.colorCorrection, ambientColorText);
             else
                 SetUIValue<float>(null, ambientColorText);
-            
+
             //Display HDR only light estimation info
             SetUIValue(m_HDRLightEstimation.mainLightDirection, mainLightDirectionText);
             SetUIValue(m_HDRLightEstimation.mainLightColor, mainLightColorText);
             SetUIValue(m_HDRLightEstimation.mainLightIntensityLumens, mainLightIntensityLumens);
-            SetSphericalHarmonicsUIValue(m_HDRLightEstimation.sphericalHarmonics, ambientSphericalHarmonicsText);
+            SetSphericalHarmonicsUIValue(
+                m_HDRLightEstimation.sphericalHarmonics,
+                ambientSphericalHarmonicsText
+            );
         }
 
-        void SetSphericalHarmonicsUIValue(SphericalHarmonicsL2? maybeAmbientSphericalHarmonics, Text text)
+        void SetSphericalHarmonicsUIValue(
+            SphericalHarmonicsL2? maybeAmbientSphericalHarmonics,
+            Text text
+        )
         {
             if (text != null)
             {
@@ -116,7 +133,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
                         for (int j = 0; j < 9; ++j)
                         {
-                            m_SphericalHarmonicsStringBuilder.Append(j != 8 ? $"{maybeAmbientSphericalHarmonics.Value[i, j]}, " : $"{maybeAmbientSphericalHarmonics.Value[i, j]}]\n");
+                            m_SphericalHarmonicsStringBuilder.Append(
+                                j != 8
+                                    ? $"{maybeAmbientSphericalHarmonics.Value[i, j]}, "
+                                    : $"{maybeAmbientSphericalHarmonics.Value[i, j]}]\n"
+                            );
                         }
                     }
                     text.text = m_SphericalHarmonicsStringBuilder.ToString();
@@ -128,10 +149,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-        void SetUIValue<T>(T? displayValue, Text text) where T : struct
+        void SetUIValue<T>(T? displayValue, Text text)
+            where T : struct
         {
             if (text != null)
-                text.text = displayValue.HasValue ? displayValue.Value.ToString(): k_UnavailableText;
+                text.text = displayValue.HasValue
+                    ? displayValue.Value.ToString()
+                    : k_UnavailableText;
         }
 
         const string k_UnavailableText = "Unavailable";

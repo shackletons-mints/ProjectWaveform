@@ -14,7 +14,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 m_Manager = FindAnyObjectByType<ARFaceManager>();
             }
-            if (m_Manager != null && m_Manager.subsystem != null && m_Manager.descriptor.supportsEyeTracking)
+            if (
+                m_Manager != null
+                && m_Manager.subsystem != null
+                && m_Manager.descriptor.supportsEyeTracking
+            )
             {
                 var infoGO = GetComponent<Text>();
                 infoGO.text = "This device supports eye tracking.";

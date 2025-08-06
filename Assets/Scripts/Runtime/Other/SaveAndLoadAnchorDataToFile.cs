@@ -12,7 +12,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
     /// </summary>
     public class SaveAndLoadAnchorDataToFile
     {
-        readonly string m_FilePath = Path.Combine(Application.persistentDataPath, "SavedAnchorIds.json");
+        readonly string m_FilePath = Path.Combine(
+            Application.persistentDataPath,
+            "SavedAnchorIds.json"
+        );
 
         bool m_Initialized;
         Awaitable m_InitializeAwaitable;

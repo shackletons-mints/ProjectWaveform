@@ -61,7 +61,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 if (m_CurrentInstructionLoggerText != null)
                 {
-                    m_CurrentInstructionLoggerText.text = "Please upgrade to iOS 17 or newer to enable this feature.";
+                    m_CurrentInstructionLoggerText.text =
+                        "Please upgrade to iOS 17 or newer to enable this feature.";
                 }
                 if (m_RoomCaptureButton != null)
                 {
@@ -116,7 +117,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 enabled = false;
                 if (m_CurrentInstructionLoggerText != null)
                 {
-                    m_CurrentInstructionLoggerText.text = "ARBoundingBoxManager component is not found.";
+                    m_CurrentInstructionLoggerText.text =
+                        "ARBoundingBoxManager component is not found.";
                 }
                 if (m_RoomCaptureButton != null)
                 {
@@ -131,7 +133,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 enabled = false;
                 if (m_CurrentInstructionLoggerText != null)
                 {
-                    m_CurrentInstructionLoggerText.text = "Room capture could not be set up without RoomPlanBoundingBoxSubsystem.";
+                    m_CurrentInstructionLoggerText.text =
+                        "Room capture could not be set up without RoomPlanBoundingBoxSubsystem.";
                 }
                 if (m_RoomCaptureButton != null)
                 {
@@ -145,7 +148,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 enabled = false;
                 if (m_CurrentInstructionLoggerText != null)
                 {
-                    m_CurrentInstructionLoggerText.text = "Room capture failed to set up.\nPlease ensure the device equipped with a LiDAR scanner.";
+                    m_CurrentInstructionLoggerText.text =
+                        "Room capture failed to set up.\nPlease ensure the device equipped with a LiDAR scanner.";
                 }
                 if (m_RoomCaptureButton != null)
                 {
@@ -171,7 +175,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
 
 #if UNITY_IOS
-            if (m_BoundingBoxManager.subsystem is not RoomPlanBoundingBoxSubsystem subsystem || !subsystem.IsRoomCapturing())
+            if (
+                m_BoundingBoxManager.subsystem is not RoomPlanBoundingBoxSubsystem subsystem
+                || !subsystem.IsRoomCapturing()
+            )
             {
                 return;
             }

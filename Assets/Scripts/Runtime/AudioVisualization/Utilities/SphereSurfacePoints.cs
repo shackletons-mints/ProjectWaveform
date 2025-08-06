@@ -4,7 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class SphereSurfacePoints : MonoBehaviour
 {
-
     [Tooltip("Positions and normals of sphere")]
     public List<SurfacePoint> surfacePoints = new List<SurfacePoint>();
 
@@ -16,27 +15,27 @@ public class SphereSurfacePoints : MonoBehaviour
         SetPosition();
     }
 
-	private void Update()
-	{
-		SetPosition();
-	}
+    private void Update()
+    {
+        SetPosition();
+    }
 
     public void SetPosition()
     {
-		Renderer rend = GetComponent<Renderer>();
-		if (rend == null)
-		{
-			Debug.LogError("No Renderer found on GameObject.");
-			return;
-		}
-		Bounds bounds = rend.bounds;
+        Renderer rend = GetComponent<Renderer>();
+        if (rend == null)
+        {
+            Debug.LogError("No Renderer found on GameObject.");
+            return;
+        }
+        Bounds bounds = rend.bounds;
 
-		center = bounds.center;
+        center = bounds.center;
 
-		radius = (bounds.extents.x + bounds.extents.y + bounds.extents.z) / 3f;
+        radius = (bounds.extents.x + bounds.extents.y + bounds.extents.z) / 3f;
 
-		GenerateSurfacePoints();
-   }
+        GenerateSurfacePoints();
+    }
 
     [ContextMenu("Generate Surface Points")]
     public void GenerateSurfacePoints()
@@ -70,5 +69,4 @@ public class SphereSurfacePoints : MonoBehaviour
 
         Debug.Log($"Generated {surfacePoints.Count} surface points.");
     }
-
 }

@@ -21,7 +21,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 s_Initialized = true;
                 SubsystemManager.GetSubsystemDescriptors(s_Descriptors);
-                s_LoadedSubsystem = LoaderUtility.GetActiveLoader()?.GetLoadedSubsystem<TSubsystem>();
+                s_LoadedSubsystem = LoaderUtility
+                    .GetActiveLoader()
+                    ?.GetLoadedSubsystem<TSubsystem>();
             }
 
             return s_LoadedSubsystem != null && s_Descriptors.Count != 0;

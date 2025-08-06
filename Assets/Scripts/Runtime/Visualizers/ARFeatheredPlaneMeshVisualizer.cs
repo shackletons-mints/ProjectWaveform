@@ -62,7 +62,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             // Reuse the list of UVs
             s_FeatheringUVs.Clear();
-            if (s_FeatheringUVs.Capacity < vertexCount) { s_FeatheringUVs.Capacity = vertexCount; }
+            if (s_FeatheringUVs.Capacity < vertexCount)
+            {
+                s_FeatheringUVs.Capacity = vertexCount;
+            }
 
             mesh.GetVertices(s_Vertices);
 
@@ -84,7 +87,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 // All the UV mappings will be different. In the shader we need to know the UV value we need to fade out by.
                 // Choose the shortest UV to guarentee we fade out before the border.
                 // This means the feathering widths will be slightly different, we again rely on a fairly uniform plane.
-                if (shortestUVMapping > uvMapping) { shortestUVMapping = uvMapping; }
+                if (shortestUVMapping > uvMapping)
+                {
+                    shortestUVMapping = uvMapping;
+                }
 
                 s_FeatheringUVs.Add(uv);
             }

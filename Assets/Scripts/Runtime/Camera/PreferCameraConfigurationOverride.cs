@@ -1,4 +1,3 @@
-
 namespace UnityEngine.XR.ARFoundation.Samples.Runtime
 {
     public class PreferCameraConfigurationOverride : MonoBehaviour

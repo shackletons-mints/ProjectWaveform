@@ -5,7 +5,7 @@ namespace Unity.iOS.Multipeer
     public class NSErrorException : Exception
     {
         public NSErrorException(long code, string description)
-        : base($"NSError {code}: {description}")
+            : base($"NSError {code}: {description}")
         {
             Code = code;
             Description = description;

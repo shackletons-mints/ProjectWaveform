@@ -2,7 +2,8 @@ using UnityEngine.XR.ARSubsystems;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
-    public class RequiresOcclusion : RequiresARSubsystem<XROcclusionSubsystem, XROcclusionSubsystemDescriptor>
+    public class RequiresOcclusion
+        : RequiresARSubsystem<XROcclusionSubsystem, XROcclusionSubsystemDescriptor>
     {
         [SerializeField]
         bool m_RequiresDepth;
@@ -14,10 +15,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             var descriptor = s_LoadedSubsystem.subsystemDescriptor;
 
-            if (m_RequiresDepth && 
-                descriptor.environmentDepthImageSupported == Supported.Unsupported &&
-                descriptor.humanSegmentationDepthImageSupported == Supported.Unsupported &&
-                descriptor.humanSegmentationStencilImageSupported == Supported.Unsupported)
+            if (
+                m_RequiresDepth
+                && descriptor.environmentDepthImageSupported == Supported.Unsupported
+                && descriptor.humanSegmentationDepthImageSupported == Supported.Unsupported
+                && descriptor.humanSegmentationStencilImageSupported == Supported.Unsupported
+            )
             {
                 return false;
             }

@@ -53,7 +53,10 @@ namespace UnityEngine.XR.ARFoundation.Samples.VisualScripting
             if (asset == null)
                 return;
 
-            void OnEventRaised(object sender, EventArgs args) { Trigger(graphReference); }
+            void OnEventRaised(object sender, EventArgs args)
+            {
+                Trigger(graphReference);
+            }
             asset.eventRaised += OnEventRaised;
             m_DelegateClosures.Add(graphReference, OnEventRaised);
         }
@@ -62,14 +65,18 @@ namespace UnityEngine.XR.ARFoundation.Samples.VisualScripting
         {
             if (!eventAsset.hasAnyConnection)
             {
-                Debug.LogError($"{k_UnitTitle} node has no input connection. Make sure there is a non-null {nameof(EventAsset)}.");
+                Debug.LogError(
+                    $"{k_UnitTitle} node has no input connection. Make sure there is a non-null {nameof(EventAsset)}."
+                );
                 return null;
             }
-        
+
             var flow = Flow.New(graphReference);
             var asset = flow.GetValue(eventAsset) as EventAsset;
             if (asset == null)
-                Debug.LogError($"{k_UnitTitle} node has an invalid input connection. Make sure there is a non-null {nameof(EventAsset)}");
+                Debug.LogError(
+                    $"{k_UnitTitle} node has an invalid input connection. Make sure there is a non-null {nameof(EventAsset)}"
+                );
 
             flow.Dispose();
             return asset;

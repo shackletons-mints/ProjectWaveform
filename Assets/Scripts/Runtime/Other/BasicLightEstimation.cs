@@ -8,7 +8,9 @@
     public class BasicLightEstimation : MonoBehaviour
     {
         [SerializeField]
-        [Tooltip("The ARCameraManager which will produce frame events containing light estimation information.")]
+        [Tooltip(
+            "The ARCameraManager which will produce frame events containing light estimation information."
+        )]
         ARCameraManager m_CameraManager;
 
         /// <summary>
@@ -46,8 +48,8 @@
         /// The estimated color correction value of the physical environment, if available.
         /// </summary>
         public Color? colorCorrection { get; private set; }
-        
-        void Awake ()
+
+        void Awake()
         {
             m_Light = GetComponent<Light>();
         }
@@ -63,7 +65,7 @@
             if (m_CameraManager != null)
                 m_CameraManager.frameReceived -= FrameChanged;
         }
-        
+
         void FrameChanged(ARCameraFrameEventArgs args)
         {
             if (args.lightEstimation.averageBrightness.HasValue)

@@ -46,7 +46,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// <summary>
         /// ID of the display rotation matrix in the shader.
         /// </summary>
-        static readonly int k_DisplayRotationPerFrameId = Shader.PropertyToID(k_DisplayRotationPerFrameName);
+        static readonly int k_DisplayRotationPerFrameId = Shader.PropertyToID(
+            k_DisplayRotationPerFrameName
+        );
 
         /// <summary>
         /// A string builder for construction of strings.
@@ -193,8 +195,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void Awake()
         {
 #if UNITY_ANDROID
-            k_AndroidFlipYMatrix[1,1] = -1.0f;
-            k_AndroidFlipYMatrix[2,1] = 1.0f;
+            k_AndroidFlipYMatrix[1, 1] = -1.0f;
+            k_AndroidFlipYMatrix[2, 1] = 1.0f;
 #endif // UNITY_ANDROID
         }
 
@@ -236,16 +238,25 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 case DisplayMode.HumanDepth:
                 case DisplayMode.HumanStencil:
                 {
-                    if (descriptor != null &&
-                        (descriptor.humanSegmentationDepthImageSupported == Supported.Supported ||
-                        descriptor.humanSegmentationStencilImageSupported == Supported.Supported))
+                    if (
+                        descriptor != null
+                        && (
+                            descriptor.humanSegmentationDepthImageSupported == Supported.Supported
+                            || descriptor.humanSegmentationStencilImageSupported
+                                == Supported.Supported
+                        )
+                    )
                     {
                         break;
                     }
 
-                    if (descriptor != null &&
-                        (descriptor.humanSegmentationStencilImageSupported == Supported.Unknown ||
-                         descriptor.humanSegmentationDepthImageSupported == Supported.Unknown))
+                    if (
+                        descriptor != null
+                        && (
+                            descriptor.humanSegmentationStencilImageSupported == Supported.Unknown
+                            || descriptor.humanSegmentationDepthImageSupported == Supported.Unknown
+                        )
+                    )
                     {
                         LogText("Determining human segmentation support...");
                     }
@@ -267,7 +278,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 case DisplayMode.EnvironmentDepthSmooth:
                 default:
                 {
-                    if (descriptor == null || descriptor.environmentDepthImageSupported == Supported.Unsupported)
+                    if (
+                        descriptor == null
+                        || descriptor.environmentDepthImageSupported == Supported.Unsupported
+                    )
                     {
                         LogText("Environment depth is not supported on this device.");
                     }
@@ -277,7 +291,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     }
                     else if (descriptor.environmentDepthImageSupported == Supported.Supported)
                     {
-                        m_OcclusionManager.environmentDepthTemporalSmoothingRequested = m_DisplayMode == DisplayMode.EnvironmentDepthSmooth;
+                        m_OcclusionManager.environmentDepthTemporalSmoothingRequested =
+                            m_DisplayMode == DisplayMode.EnvironmentDepthSmooth;
                         break;
                     }
 
@@ -301,7 +316,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
             Texture2D envDepth2D = envDepth as Texture2D;
             Texture2D confidence2D = null;
-            if (m_OcclusionManager.TryGetEnvironmentDepthConfidenceTexture(out var confidenceGpuTex))
+            if (
+                m_OcclusionManager.TryGetEnvironmentDepthConfidenceTexture(out var confidenceGpuTex)
+            )
                 confidence2D = confidenceGpuTex.texture as Texture2D;
 
             // Display some text information about each of the textures.
@@ -338,12 +355,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_RawImage.texture = displayTexture;
 
             // Get the aspect ratio for the current texture.
-            float textureAspectRatio = (displayTexture == null) ? 1.0f : ((float)displayTexture.width / (float)displayTexture.height);
+            float textureAspectRatio =
+                (displayTexture == null)
+                    ? 1.0f
+                    : ((float)displayTexture.width / (float)displayTexture.height);
 
             // If the raw image needs to be updated because of a device orientation change or because of a texture
             // aspect ratio difference, then update the raw image with the new values.
-            if ((m_CurrentScreenOrientation != Screen.orientation)
-                || !Mathf.Approximately(m_TextureAspectRatio, textureAspectRatio))
+            if (
+                (m_CurrentScreenOrientation != Screen.orientation)
+                || !Mathf.Approximately(m_TextureAspectRatio, textureAspectRatio)
+            )
             {
                 m_CurrentScreenOrientation = Screen.orientation;
                 m_TextureAspectRatio = textureAspectRatio;
@@ -374,12 +396,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 affineBasisX = affineBasisX.normalized;
                 affineBasisY = affineBasisY.normalized;
                 m_DisplayRotationMatrix = Matrix4x4.identity;
-                m_DisplayRotationMatrix[0,0] = affineBasisX.x;
-                m_DisplayRotationMatrix[0,1] = affineBasisY.x;
-                m_DisplayRotationMatrix[1,0] = affineBasisX.y;
-                m_DisplayRotationMatrix[1,1] = affineBasisY.y;
-                m_DisplayRotationMatrix[2,0] = Mathf.Round(affineTranslation.x);
-                m_DisplayRotationMatrix[2,1] = Mathf.Round(affineTranslation.y);
+                m_DisplayRotationMatrix[0, 0] = affineBasisX.x;
+                m_DisplayRotationMatrix[0, 1] = affineBasisY.x;
+                m_DisplayRotationMatrix[1, 0] = affineBasisX.y;
+                m_DisplayRotationMatrix[1, 1] = affineBasisY.y;
+                m_DisplayRotationMatrix[2, 0] = Mathf.Round(affineTranslation.x);
+                m_DisplayRotationMatrix[2, 1] = Mathf.Round(affineTranslation.y);
 
                 // Set the matrix to the raw image material.
                 m_RawImage.material.SetMatrix(k_DisplayRotationPerFrameId, m_DisplayRotationMatrix);

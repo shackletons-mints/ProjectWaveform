@@ -17,9 +17,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             ENABLED_ON,
             ENABLED_OFF,
-            DISABLED_OFF
+            DISABLED_OFF,
         }
-        
+
         [Tooltip("The Slider element used to display the on/off state of this element.")]
         [SerializeField]
         Slider m_Slider;
@@ -27,9 +27,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [Tooltip("The Button element used for hit detection.")]
         [SerializeField]
         Button m_Button;
-        
+
         [Space]
-        
         [Tooltip("The Image element used for displaying the background.")]
         [SerializeField]
         Image m_Background;
@@ -37,35 +36,33 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [Tooltip("The background color to use when the SliderToggle is enabled and on.")]
         [SerializeField]
         Color m_EnabledOnBackgroundColor;
-        
+
         [Tooltip("The background color to use when the SliderToggle is enabled and off.")]
         [SerializeField]
         Color m_EnabledOffBackgroundColor;
-        
+
         [Tooltip("The background color to use when the SliderToggle is disabled.")]
         [SerializeField]
         Color m_DisabledBackgroundColor;
-        
+
         [Space]
-        
         [Tooltip("The Image element used for displaying the handle.")]
         [SerializeField]
         Image m_Handle;
-        
+
         [Tooltip("The handle color to use when the SliderToggle is enabled.")]
         [SerializeField]
         Color m_EnabledHandleColor;
-        
+
         [Tooltip("The handle color to use when the SliderToggle is disabled.")]
         [SerializeField]
         Color m_DisabledHandleColor;
-        
+
         [Space]
-        
         [Tooltip("The Image element that is used for the outline.")]
         [SerializeField]
         Image m_Outline;
-        
+
         [Tooltip("The outline color to use when the SliderToggle is enabled and on.")]
         [SerializeField]
         Color m_EnabledOnOutlineColor;
@@ -73,21 +70,20 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [Tooltip("The outline color to use when the SliderToggle is enabled and off.")]
         [SerializeField]
         Color m_EnabledOffOutlineColor;
-        
+
         [Tooltip("The outline color to use when the SliderToggle is disabled.")]
         [SerializeField]
         Color m_DisabledOutlineColor;
-        
+
         [Space]
-        
         [Tooltip("The text label associated with this SliderToggle.")]
         [SerializeField]
         TextMeshProUGUI m_Text;
-        
+
         [Tooltip("The text color to use when the SliderToggle is enabled.")]
         [SerializeField]
         Color m_EnabledTextColor;
-        
+
         [Tooltip("The text color to use when the SliderToggle is disabled.")]
         [SerializeField]
         Color m_DisabledTextColor;
@@ -96,9 +92,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_Slider == null)
             {
-                throw new InvalidOperationException("The value of 'Slider' on component SliderToggle must be set in the inspector in order to use this component.");
+                throw new InvalidOperationException(
+                    "The value of 'Slider' on component SliderToggle must be set in the inspector in order to use this component."
+                );
             }
-            
+
             SetState(value ? State.ENABLED_ON : State.ENABLED_OFF);
         }
 
@@ -106,9 +104,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_Slider == null)
             {
-                throw new InvalidOperationException("The value of 'Slider' on component SliderToggle must be set in the inspector in order to use this component.");
+                throw new InvalidOperationException(
+                    "The value of 'Slider' on component SliderToggle must be set in the inspector in order to use this component."
+                );
             }
-            
+
             if (value)
                 // If setting enabled=true, use current slider value to determine on/off state
                 SetState(m_Slider.value == 0 ? State.ENABLED_OFF : State.ENABLED_ON);

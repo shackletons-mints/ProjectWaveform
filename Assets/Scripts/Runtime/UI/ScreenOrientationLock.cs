@@ -6,7 +6,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
     public class ScreenOrientationLock : MonoBehaviour
     {
 #pragma warning disable 0414
-        [SerializeField, Tooltip("The orientation to lock the screen while this component is enabled.")]
+        [
+            SerializeField,
+            Tooltip("The orientation to lock the screen while this component is enabled.")
+        ]
         ScreenOrientation m_LockOrientation = ScreenOrientation.Portrait;
 #pragma warning restore 0414
 

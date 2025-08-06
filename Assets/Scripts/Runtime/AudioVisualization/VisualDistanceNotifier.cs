@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class VisualDistanceNotifier : MonoBehaviour
 {
@@ -18,17 +18,19 @@ public class VisualDistanceNotifier : MonoBehaviour
 
     void Start()
     {
-
         if (tooltip != null)
         {
             tooltip.transform.position = leftHand.transform.position + leftHand.transform.up * 0.3f;
-            tooltip.transform.rotation = Quaternion.LookRotation(tooltip.transform.position - xrCamera.transform.position);
+            tooltip.transform.rotation = Quaternion.LookRotation(
+                tooltip.transform.position - xrCamera.transform.position
+            );
         }
     }
 
     void Update()
     {
-        if (visuals == null || xrCamera == null || leftHand == null) return;
+        if (visuals == null || xrCamera == null || leftHand == null)
+            return;
 
         float distance = Vector3.Distance(visuals.transform.position, xrCamera.transform.position);
 
@@ -50,7 +52,9 @@ public class VisualDistanceNotifier : MonoBehaviour
             tooltip.SetActive(true);
 
             tooltip.transform.position = leftHand.transform.position + leftHand.transform.up * 0.3f;
-            tooltip.transform.rotation = Quaternion.LookRotation(tooltip.transform.position - xrCamera.transform.position);
+            tooltip.transform.rotation = Quaternion.LookRotation(
+                tooltip.transform.position - xrCamera.transform.position
+            );
         }
     }
 
@@ -63,4 +67,3 @@ public class VisualDistanceNotifier : MonoBehaviour
         }
     }
 }
-

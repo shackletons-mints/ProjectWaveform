@@ -6,10 +6,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
 {
     public class DisplayCameraWhiteBalanceInformation
 #if UNITY_IOS
-        : ARKitDisplayAdvancedCameraConfigurationInformation<CameraWhiteBalanceController, ARKitWhiteBalanceMode, ARKitWhiteBalanceGains>
+        : ARKitDisplayAdvancedCameraConfigurationInformation<
+            CameraWhiteBalanceController,
+            ARKitWhiteBalanceMode,
+            ARKitWhiteBalanceGains
+        >
 #else
         : ARKitDisplayAdvancedCameraConfigurationInformation<CameraWhiteBalanceController>
 #endif
-    {
-    }
+    { }
 }

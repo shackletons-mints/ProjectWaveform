@@ -26,8 +26,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         ARRaycastManager m_RaycastManager;
 
         [SerializeField]
-        [Tooltip("The Input Action References to use. You can create this by right clicking in the Project Window " +
-             "and going to <b>XR</b> > AR Foundation > Input Action References.")]
+        [Tooltip(
+            "The Input Action References to use. You can create this by right clicking in the Project Window "
+                + "and going to <b>XR</b> > AR Foundation > Input Action References."
+        )]
         InputActionReferences m_InputActionReferences;
 
         [SerializeField]
@@ -84,7 +86,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     m_GraphicRaycaster = null;
                 }
             }
-            
+
             m_HasGraphicRaycaster = m_GraphicRaycaster != null;
             m_PointerEventData = new PointerEventData(m_EventSystem);
         }
@@ -93,7 +95,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_RaycastManager == null || m_XROrigin == null || m_InputActionReferences == null)
             {
-                Debug.LogWarning($"{nameof(RaycastEventController)} component on {name} has null inputs and will have no effect in this scene.", this);
+                Debug.LogWarning(
+                    $"{nameof(RaycastEventController)} component on {name} has null inputs and will have no effect in this scene.",
+                    this
+                );
                 return;
             }
 
@@ -126,8 +131,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (context.control.device is not Pointer pointer)
             {
-               Debug.LogError("Input actions are incorrectly configured. Expected a Pointer binding ScreenTapped.", this);
-               return;
+                Debug.LogError(
+                    "Input actions are incorrectly configured. Expected a Pointer binding ScreenTapped.",
+                    this
+                );
+                return;
             }
 
             if (m_HasGraphicRaycaster)
@@ -143,8 +151,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
 
             var tapPosition = pointer.position.ReadValue();
-            if (m_ARRaycastHitEvent != null &&
-                m_RaycastManager.Raycast(tapPosition, s_Hits, m_TrackableType))
+            if (
+                m_ARRaycastHitEvent != null
+                && m_RaycastManager.Raycast(tapPosition, s_Hits, m_TrackableType)
+            )
             {
                 m_ARRaycastHitEvent.Raise(s_Hits[0]);
             }
@@ -152,27 +162,40 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void RightTriggerPressed(InputAction.CallbackContext context)
         {
-            RaycastFromHandPose(new Pose(
-                m_InputActionReferences.rightHandPosition.action.ReadValue<Vector3>(),
-                m_InputActionReferences.rightHandRotation.action.ReadValue<Quaternion>()));
+            RaycastFromHandPose(
+                new Pose(
+                    m_InputActionReferences.rightHandPosition.action.ReadValue<Vector3>(),
+                    m_InputActionReferences.rightHandRotation.action.ReadValue<Quaternion>()
+                )
+            );
         }
 
         void LeftTriggerPressed(InputAction.CallbackContext context)
         {
-            RaycastFromHandPose(new Pose(
-                m_InputActionReferences.leftHandPosition.action.ReadValue<Vector3>(),
-                m_InputActionReferences.leftHandRotation.action.ReadValue<Quaternion>()));
+            RaycastFromHandPose(
+                new Pose(
+                    m_InputActionReferences.leftHandPosition.action.ReadValue<Vector3>(),
+                    m_InputActionReferences.leftHandRotation.action.ReadValue<Quaternion>()
+                )
+            );
         }
 
         void RaycastFromHandPose(Pose handPose)
         {
             s_RaycastRay = new Ray(handPose.position, handPose.forward);
-            var size = Physics.RaycastNonAlloc(s_RaycastRay, m_UIRaycastHits, float.PositiveInfinity, m_UILayerMask);
+            var size = Physics.RaycastNonAlloc(
+                s_RaycastRay,
+                m_UIRaycastHits,
+                float.PositiveInfinity,
+                m_UILayerMask
+            );
             if (size > 0)
                 return;
 
-            if (m_ARRaycastHitEvent != null &&
-                m_RaycastManager.Raycast(s_RaycastRay, s_Hits, m_TrackableType))
+            if (
+                m_ARRaycastHitEvent != null
+                && m_RaycastManager.Raycast(s_RaycastRay, s_Hits, m_TrackableType)
+            )
             {
                 m_ARRaycastHitEvent.Raise(s_Hits[0]);
             }

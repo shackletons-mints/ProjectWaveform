@@ -28,7 +28,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             ChangeToOriginalPrefab,
             AlternativePrefab,
             ChangeToAlternativePrefab,
-            Error
+            Error,
         }
 
         State m_State;
@@ -39,7 +39,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             switch (m_State)
             {
-                case State.OriginalPrefab: 
+                case State.OriginalPrefab:
                     m_State = State.ChangeToAlternativePrefab;
                     break;
                 case State.AlternativePrefab:
@@ -56,12 +56,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 case State.OriginalPrefab:
                 {
-                    m_textField.text = $"Alternative Prefab for {GetComponent<PrefabImagePairManager>().imageLibrary[0].name}";
+                    m_textField.text =
+                        $"Alternative Prefab for {GetComponent<PrefabImagePairManager>().imageLibrary[0].name}";
                     break;
                 }
                 case State.AlternativePrefab:
                 {
-                    m_textField.text = $"Original Prefab for {GetComponent<PrefabImagePairManager>().imageLibrary[0].name}";
+                    m_textField.text =
+                        $"Original Prefab for {GetComponent<PrefabImagePairManager>().imageLibrary[0].name}";
                     break;
                 }
                 case State.Error:

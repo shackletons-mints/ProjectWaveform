@@ -20,7 +20,7 @@ namespace UnityEngine.XR.ARFoundation
 
         [SerializeField, Tooltip("")]
         TextMeshProUGUI m_DebugLabelTypes;
-        
+
         [SerializeField, Tooltip("")]
         TextMeshProUGUI m_DebugLabelValues;
 
@@ -95,7 +95,10 @@ namespace UnityEngine.XR.ARFoundation
             var widthPlusSpacingAndPadding = width + m_ColumnWidth + k_DebugInfoBackgroundPadding;
             var height = Math.Max(debugLabelTypesSize.y, debugLabelValuesSize.y);
 
-            m_BackgroundRT.sizeDelta = new(widthPlusSpacingAndPadding, height + m_Icon.sizeDelta.y + k_DebugInfoBackgroundPadding);
+            m_BackgroundRT.sizeDelta = new(
+                widthPlusSpacingAndPadding,
+                height + m_Icon.sizeDelta.y + k_DebugInfoBackgroundPadding
+            );
 
             // shift background to the left to center
             var halfWidth = width * 0.5f;

@@ -6,7 +6,9 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
     public class DestroySelf : MonoBehaviour
     {
         [SerializeField]
-        [Tooltip("The amount of time, in seconds, to wait after Start before destroying the GameObject.")]
+        [Tooltip(
+            "The amount of time, in seconds, to wait after Start before destroying the GameObject."
+        )]
         float m_Lifetime = 0.25f;
 
         /// <summary>
@@ -17,7 +19,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             get => m_Lifetime;
             set => m_Lifetime = value;
         }
-    
+
         /// <summary>
         /// See <see cref="MonoBehaviour"/>.
         /// </summary>

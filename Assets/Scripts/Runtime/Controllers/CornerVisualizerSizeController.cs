@@ -64,7 +64,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
             else
             {
-
                 var size = m_XAxis.localScale;
                 size.x = m_DefaultLength;
                 m_XAxis.localScale = size;
@@ -74,7 +73,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 m_XAxis.localPosition = position;
             }
         }
-        
+
         void SetYAxisVisualizer(float length)
         {
             if (length < m_DefaultLength)

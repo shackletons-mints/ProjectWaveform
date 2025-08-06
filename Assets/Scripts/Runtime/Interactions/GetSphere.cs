@@ -6,7 +6,7 @@ using Utilities;
 
 public class GetSphere : MonoBehaviour
 {
-	[Header("References")]
+    [Header("References")]
     public InputActionReference toggleAction;
     public float distanceFromCamera = 2;
 
@@ -31,7 +31,7 @@ public class GetSphere : MonoBehaviour
         PositionVisualsInFrontOfCamera();
     }
 
-	private void PositionVisualsInFrontOfCamera()
+    private void PositionVisualsInFrontOfCamera()
     {
         Transform cam = Camera.main.transform;
         Vector3 targetPosition = cam.position + cam.forward * distanceFromCamera;

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using Unity.XR.CoreUtils;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
-using Unity.XR.CoreUtils;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -74,10 +74,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         float scale
         {
-            get
-            {
-                return m_Origin.transform.localScale.x;
-            }
+            get { return m_Origin.transform.localScale.x; }
             set
             {
                 m_Origin.transform.localScale = Vector3.one * value;

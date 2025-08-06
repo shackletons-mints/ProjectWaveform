@@ -15,8 +15,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         [SerializeField]
         [Tooltip(
-            "The Input Action References to use. You can create this by right clicking in the Project Window " +
-            "and going to <b>XR</b> > AR Foundation > Input Action References.")]
+            "The Input Action References to use. You can create this by right clicking in the Project Window "
+                + "and going to <b>XR</b> > AR Foundation > Input Action References."
+        )]
         InputActionReferences m_InputActionReferences;
 
         [SerializeField]
@@ -43,7 +44,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 Debug.LogWarning(
                     $"{nameof(RaycastEventController)} component on {name} has null inputs and will have no effect in this scene.",
-                    this);
+                    this
+                );
                 return;
             }
 
@@ -79,7 +81,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 Debug.LogError(
                     "Input actions are incorrectly configured. Expected a Pointer binding ScreenTapped.",
-                    this);
+                    this
+                );
                 return;
             }
 
@@ -104,7 +107,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             RaycastFromHandPose(
                 new Pose(
                     m_InputActionReferences.rightHandPosition.action.ReadValue<Vector3>(),
-                    m_InputActionReferences.rightHandRotation.action.ReadValue<Quaternion>()));
+                    m_InputActionReferences.rightHandRotation.action.ReadValue<Quaternion>()
+                )
+            );
         }
 
         void LeftTriggerPressed(InputAction.CallbackContext context)
@@ -112,7 +117,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             RaycastFromHandPose(
                 new Pose(
                     m_InputActionReferences.leftHandPosition.action.ReadValue<Vector3>(),
-                    m_InputActionReferences.leftHandRotation.action.ReadValue<Quaternion>()));
+                    m_InputActionReferences.leftHandRotation.action.ReadValue<Quaternion>()
+                )
+            );
         }
 
         void RaycastFromHandPose(Pose handPose)

@@ -9,9 +9,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField, Tooltip("The canvas that this component is a part of.")]
         Canvas m_Canvas;
 
-        [SerializeField, Tooltip("The HMD canvas controller used to determine if the UI " +
-             "should consider the safe area. If the canvas is in world space, then " +
-             "this RectTransform will not be updated to the size of the safe area.")]
+        [
+            SerializeField,
+            Tooltip(
+                "The HMD canvas controller used to determine if the UI "
+                    + "should consider the safe area. If the canvas is in world space, then "
+                    + "this RectTransform will not be updated to the size of the safe area."
+            )
+        ]
         HMDCanvasController m_HmdCanvasController;
 
         [SerializeField, HideInInspector]
@@ -32,7 +37,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             if (m_Canvas == null)
                 m_Canvas = FindAnyObjectByType<Canvas>();
-
         }
 
         void OnEnable()

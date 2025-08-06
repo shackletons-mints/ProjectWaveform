@@ -30,7 +30,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             LeftEye = 15, // parent: Head [0]
             Root = 16, // parent: <none> [-1]
             RightEar = 17, // parent: RightEye [14] (iOS 16 and up)
-            LeftEar = 18 // parent: LeftEye [15] (iOS 16 and up)
+            LeftEar = 18, // parent: LeftEye [15] (iOS 16 and up)
         }
 
         [SerializeField]
@@ -60,7 +60,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         [SerializeField]
-        [Tooltip("A prefab that contains a LineRenderer component that will be used for rendering lines, representing the skeleton joints.")]
+        [Tooltip(
+            "A prefab that contains a LineRenderer component that will be used for rendering lines, representing the skeleton joints."
+        )]
         GameObject m_LineRendererPrefab;
 
         /// <summary>
@@ -114,7 +116,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 {
                     var position = positions[i];
                     var worldPosition = m_ARCamera.ViewportToWorldPoint(
-                        new Vector3(position.x, position.y, m_ARCamera.nearClipPlane));
+                        new Vector3(position.x, position.y, m_ARCamera.nearClipPlane)
+                    );
                     lineRenderer.SetPosition(i, worldPosition);
                 }
                 lineRendererGO.SetActive(true);

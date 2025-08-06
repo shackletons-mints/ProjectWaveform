@@ -2,7 +2,8 @@ using UnityEngine.XR.ARSubsystems;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
-    public class RequiresFaceTracking : RequiresARSubsystem<XRFaceSubsystem, XRFaceSubsystemDescriptor>
+    public class RequiresFaceTracking
+        : RequiresARSubsystem<XRFaceSubsystem, XRFaceSubsystemDescriptor>
     {
         [SerializeField]
         bool m_RequiresEyeTracking;

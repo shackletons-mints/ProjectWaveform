@@ -54,9 +54,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void OnHumanBodiesChanged(ARTrackablesChangedEventArgs<ARHumanBody> eventArgs)
         {
             // Currently, the ARKit provider only ever produces one body anchor, so just reference the first
-            float scale = ((eventArgs.added.Count > 0) ? eventArgs.added.First().estimatedHeightScaleFactor
-                        : ((eventArgs.updated.Count > 0) ? eventArgs.updated.First().estimatedHeightScaleFactor
-                            : Single.NaN));
+            float scale = (
+                (eventArgs.added.Count > 0)
+                    ? eventArgs.added.First().estimatedHeightScaleFactor
+                    : (
+                        (eventArgs.updated.Count > 0)
+                            ? eventArgs.updated.First().estimatedHeightScaleFactor
+                            : Single.NaN
+                    )
+            );
 
             Debug.Assert(m_ImageInfo != null, "text field is required");
             m_ImageInfo.text = scale.ToString("F10");

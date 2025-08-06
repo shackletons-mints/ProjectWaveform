@@ -14,26 +14,26 @@ public class RemoveCeilingPlanes : MonoBehaviour
     {
         planeManager = FindFirstObjectByType<ARPlaneManager>();
     }
-	
-	public void OnTrackablesChanged(ARTrackablesChangedEventArgs<ARPlane> changes)
-	{
-		foreach (var plane in changes.added)
-		{
-			if (plane.classifications == PlaneClassifications.Ceiling)
-				ModifyCeiling(plane);
-		}
 
-		foreach (var plane in changes.updated)
-		{
-			if (plane.classifications == PlaneClassifications.Ceiling)
-				ModifyCeiling(plane);
-		}
-	}
+    public void OnTrackablesChanged(ARTrackablesChangedEventArgs<ARPlane> changes)
+    {
+        foreach (var plane in changes.added)
+        {
+            if (plane.classifications == PlaneClassifications.Ceiling)
+                ModifyCeiling(plane);
+        }
+
+        foreach (var plane in changes.updated)
+        {
+            if (plane.classifications == PlaneClassifications.Ceiling)
+                ModifyCeiling(plane);
+        }
+    }
 
     void ModifyCeiling(ARPlane plane)
     {
-		var collider = plane.GetComponent<Collider>();
-		if (collider)
+        var collider = plane.GetComponent<Collider>();
+        if (collider)
         {
             collider.enabled = false;
         }
@@ -44,5 +44,4 @@ public class RemoveCeilingPlanes : MonoBehaviour
             renderer.material = stencil;
         }
     }
-
 }

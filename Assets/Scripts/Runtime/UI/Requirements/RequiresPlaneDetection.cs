@@ -2,7 +2,8 @@ using UnityEngine.XR.ARSubsystems;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
-    public class RequiresPlaneDetection : RequiresARSubsystem<XRPlaneSubsystem, XRPlaneSubsystemDescriptor>
+    public class RequiresPlaneDetection
+        : RequiresARSubsystem<XRPlaneSubsystem, XRPlaneSubsystemDescriptor>
     {
         [SerializeField]
         bool m_RequiresPlaneClassifications;

@@ -20,7 +20,9 @@ namespace Unity.iOS.Multipeer
             get
             {
                 if (!Valid)
-                    throw new InvalidOperationException($"The {typeof(NSError).Name} is not valid.");
+                    throw new InvalidOperationException(
+                        $"The {typeof(NSError).Name} is not valid."
+                    );
 
                 return GetCode(this);
             }
@@ -31,7 +33,9 @@ namespace Unity.iOS.Multipeer
             get
             {
                 if (!Valid)
-                    throw new InvalidOperationException($"The {typeof(NSError).Name} is not valid.");
+                    throw new InvalidOperationException(
+                        $"The {typeof(NSError).Name} is not valid."
+                    );
 
                 using (var description = GetLocalizedDescription(this))
                 {
@@ -41,16 +45,21 @@ namespace Unity.iOS.Multipeer
         }
 
         public void Dispose() => NativeApi.CFRelease(ref m_Ptr);
-        public override int GetHashCode() => m_Ptr.GetHashCode();
-        public override bool Equals(object obj) => (obj is NSError) && Equals((NSError)obj);
-        public bool Equals(NSError other) => m_Ptr == other.m_Ptr;
-        public static bool operator==(NSError lhs, NSError rhs) => lhs.Equals(rhs);
-        public static bool operator!=(NSError lhs, NSError rhs) => !lhs.Equals(rhs);
 
-        [DllImport("__Internal", EntryPoint="UnityMC_NSError_code")]
+        public override int GetHashCode() => m_Ptr.GetHashCode();
+
+        public override bool Equals(object obj) => (obj is NSError) && Equals((NSError)obj);
+
+        public bool Equals(NSError other) => m_Ptr == other.m_Ptr;
+
+        public static bool operator ==(NSError lhs, NSError rhs) => lhs.Equals(rhs);
+
+        public static bool operator !=(NSError lhs, NSError rhs) => !lhs.Equals(rhs);
+
+        [DllImport("__Internal", EntryPoint = "UnityMC_NSError_code")]
         static extern long GetCode(NSError error);
 
-        [DllImport("__Internal", EntryPoint="UnityMC_NSError_localizedDescription")]
+        [DllImport("__Internal", EntryPoint = "UnityMC_NSError_localizedDescription")]
         static extern NSString GetLocalizedDescription(NSError error);
     }
 }

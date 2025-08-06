@@ -2,7 +2,8 @@ using UnityEngine.XR.ARSubsystems;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
-    public class RequiresAnchors : RequiresARSubsystem<XRAnchorSubsystem, XRAnchorSubsystemDescriptor>
+    public class RequiresAnchors
+        : RequiresARSubsystem<XRAnchorSubsystem, XRAnchorSubsystemDescriptor>
     {
         [SerializeField]
         bool m_RequiresSaveAnchor;

@@ -1,8 +1,8 @@
 using System.Text;
 using Unity.Collections;
+using Unity.XR.CoreUtils;
 using UnityEngine.UI;
 using UnityEngine.XR.ARSubsystems;
-using Unity.XR.CoreUtils;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -31,7 +31,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         [SerializeField]
-        [Tooltip("The Text to display instructions to the user that face tracking is not supported")]
+        [Tooltip(
+            "The Text to display instructions to the user that face tracking is not supported"
+        )]
         Text m_InstructionsText;
 
         public Text instructionsText
@@ -100,7 +102,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
                                 m_FaceTrackingSupported = true;
                             }
 
-                            if (config.capabilities.All(Feature.WorldFacingCamera | Feature.FaceTracking))
+                            if (
+                                config.capabilities.All(
+                                    Feature.WorldFacingCamera | Feature.FaceTracking
+                                )
+                            )
                             {
                                 m_FaceTrackingWithWorldCameraSupported = true;
                             }
@@ -126,7 +132,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 {
                     m_FaceControlledObject.transform.rotation = face.transform.rotation;
                     var camera = m_CameraManager.GetComponent<Camera>();
-                    m_FaceControlledObject.transform.position = camera.transform.position + camera.transform.forward * 0.5f;
+                    m_FaceControlledObject.transform.position =
+                        camera.transform.position + camera.transform.forward * 0.5f;
                 }
             }
         }
@@ -137,15 +144,23 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             if (m_FaceManager.subsystem != null)
             {
-                m_Info.Append($"Supported number of tracked faces: {m_FaceManager.supportedFaceCount}\n");
-                m_Info.Append($"Max number of faces to track: {m_FaceManager.currentMaximumFaceCount}\n");
+                m_Info.Append(
+                    $"Supported number of tracked faces: {m_FaceManager.supportedFaceCount}\n"
+                );
+                m_Info.Append(
+                    $"Max number of faces to track: {m_FaceManager.currentMaximumFaceCount}\n"
+                );
                 m_Info.Append($"Number of tracked faces: {m_FaceManager.trackables.count}\n");
             }
 
             if (m_CameraManager)
             {
-                m_Info.Append($"Requested camera facing direction: {m_CameraManager.requestedFacingDirection}\n");
-                m_Info.Append($"Current camera facing direction: {m_CameraManager.currentFacingDirection}\n");
+                m_Info.Append(
+                    $"Requested camera facing direction: {m_CameraManager.requestedFacingDirection}\n"
+                );
+                m_Info.Append(
+                    $"Current camera facing direction: {m_CameraManager.currentFacingDirection}\n"
+                );
             }
 
             m_Info.Append($"Requested tracking mode: {m_Session.requestedTrackingMode}\n");
@@ -162,19 +177,27 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     m_Info.Append("Face tracking is not supported.\n");
                 }
             }
-            else if (m_CameraManager.requestedFacingDirection == CameraFacingDirection.World && !m_FaceTrackingWithWorldCameraSupported)
+            else if (
+                m_CameraManager.requestedFacingDirection == CameraFacingDirection.World
+                && !m_FaceTrackingWithWorldCameraSupported
+            )
             {
                 m_Info.Append("Face tracking in world facing camera mode is not supported.\n");
             }
 
             if (m_FaceControlledObject)
             {
-                m_FaceControlledObject.gameObject.SetActive(m_CameraManager.currentFacingDirection == CameraFacingDirection.World);
+                m_FaceControlledObject.gameObject.SetActive(
+                    m_CameraManager.currentFacingDirection == CameraFacingDirection.World
+                );
             }
 
             if (m_NotSupportedElement)
             {
-                m_NotSupportedElement.SetActive(m_CameraManager.requestedFacingDirection == CameraFacingDirection.World && !m_FaceTrackingWithWorldCameraSupported);
+                m_NotSupportedElement.SetActive(
+                    m_CameraManager.requestedFacingDirection == CameraFacingDirection.World
+                        && !m_FaceTrackingWithWorldCameraSupported
+                );
             }
 
             if (m_FaceInfoText)

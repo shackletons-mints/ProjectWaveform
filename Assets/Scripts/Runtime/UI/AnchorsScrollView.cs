@@ -18,34 +18,53 @@ namespace UnityEngine.XR.ARFoundation.Samples
             actionOnDestroy: null,
             collectionCheck: false,
             defaultCapacity: 8,
-            maxSize: 1024);
+            maxSize: 1024
+        );
 
-        static readonly Pool.ObjectPool<Dictionary<AsyncInstantiateOperation<AnchorScrollViewEntry>, ARSaveOrLoadAnchorResult>> s_AsyncInstantiateMaps = new(
-            createFunc: () => new Dictionary<AsyncInstantiateOperation<AnchorScrollViewEntry>, ARSaveOrLoadAnchorResult>(),
+        static readonly Pool.ObjectPool<
+            Dictionary<AsyncInstantiateOperation<AnchorScrollViewEntry>, ARSaveOrLoadAnchorResult>
+        > s_AsyncInstantiateMaps = new(
+            createFunc: () =>
+                new Dictionary<
+                    AsyncInstantiateOperation<AnchorScrollViewEntry>,
+                    ARSaveOrLoadAnchorResult
+                >(),
             actionOnGet: null,
             actionOnRelease: null,
             actionOnDestroy: null,
             collectionCheck: false,
             defaultCapacity: 8,
-            maxSize: 1024);
+            maxSize: 1024
+        );
 
-        static readonly Pool.ObjectPool<Dictionary<AsyncInstantiateOperation<AnchorScrollViewEntry>, SerializableGuid>> s_ErasedEntryAwaitablesMaps = new(
-            createFunc: () => new Dictionary<AsyncInstantiateOperation<AnchorScrollViewEntry>, SerializableGuid>(),
+        static readonly Pool.ObjectPool<
+            Dictionary<AsyncInstantiateOperation<AnchorScrollViewEntry>, SerializableGuid>
+        > s_ErasedEntryAwaitablesMaps = new(
+            createFunc: () =>
+                new Dictionary<
+                    AsyncInstantiateOperation<AnchorScrollViewEntry>,
+                    SerializableGuid
+                >(),
             actionOnGet: null,
             actionOnRelease: null,
             actionOnDestroy: null,
             collectionCheck: false,
             defaultCapacity: 8,
-            maxSize: 1024);
+            maxSize: 1024
+        );
 
-        static readonly Pool.ObjectPool<Dictionary<AsyncInstantiateOperation<AnchorScrollViewEntry>, ARAnchor>> s_AddNewEntryAwaitablesMaps = new(
-            createFunc: () => new Dictionary<AsyncInstantiateOperation<AnchorScrollViewEntry>, ARAnchor>(),
+        static readonly Pool.ObjectPool<
+            Dictionary<AsyncInstantiateOperation<AnchorScrollViewEntry>, ARAnchor>
+        > s_AddNewEntryAwaitablesMaps = new(
+            createFunc: () =>
+                new Dictionary<AsyncInstantiateOperation<AnchorScrollViewEntry>, ARAnchor>(),
             actionOnGet: null,
             actionOnRelease: null,
             actionOnDestroy: null,
             collectionCheck: false,
             defaultCapacity: 8,
-            maxSize: 1024);
+            maxSize: 1024
+        );
 
         [Header("References")]
         [SerializeField]
@@ -86,7 +105,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         int m_EntryCount = 1;
         HashSet<TrackableId> m_LoadRequests = new();
         Dictionary<TrackableId, AnchorScrollViewEntry> m_NewAnchorEntriesByAnchorId = new();
-        Dictionary<SerializableGuid, AnchorScrollViewEntry> m_SavedAnchorEntriesBySavedAnchorGuid = new();
+        Dictionary<SerializableGuid, AnchorScrollViewEntry> m_SavedAnchorEntriesBySavedAnchorGuid =
+            new();
         Dictionary<TrackableId, SerializableGuid> m_SavedAnchorGuidByAnchorId = new();
 
         List<ARSaveOrLoadAnchorResult> m_SaveAnchorResults = new();
@@ -105,17 +125,24 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 m_AnchorManager = FindAnyObjectByType<ARAnchorManager>();
                 if (m_AnchorManager == null)
                 {
-                    Debug.LogError($"{nameof(AnchorsScrollView)} component requires an {nameof(ARAnchorManager)}.", this);
+                    Debug.LogError(
+                        $"{nameof(AnchorsScrollView)} component requires an {nameof(ARAnchorManager)}.",
+                        this
+                    );
                     enabled = false;
                     return;
                 }
 
-                Debug.LogWarning($"Null serialized field. Set the {nameof(ARAnchorManager)} reference on the " +
-                    $"{nameof(AnchorsScrollView)} component for better performance.", this);
+                Debug.LogWarning(
+                    $"Null serialized field. Set the {nameof(ARAnchorManager)} reference on the "
+                        + $"{nameof(AnchorsScrollView)} component for better performance.",
+                    this
+                );
             }
 
             var descriptor = m_AnchorManager.descriptor;
-            m_SupportsSaveAndLoadAnchors = descriptor.supportsSaveAnchor && descriptor.supportsLoadAnchor;
+            m_SupportsSaveAndLoadAnchors =
+                descriptor.supportsSaveAnchor && descriptor.supportsLoadAnchor;
 
             if (!m_SupportsSaveAndLoadAnchors)
             {
@@ -165,14 +192,18 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 var newAnchorEntry = m_NewAnchorEntriesByAnchorId[result.anchor.trackableId];
                 var saveToFileAwaitable = SavePersistentAnchorGuidToFile(
                     result.resultStatus,
-                    newAnchorEntry.representedAnchor);
+                    newAnchorEntry.representedAnchor
+                );
 
                 if (saveToFileAwaitable != null)
                     saveToFileAwaitables.Add(saveToFileAwaitable);
 
                 if (!m_SavedAnchorEntriesBySavedAnchorGuid.ContainsKey(result.savedAnchorGuid))
                 {
-                    var saveEntryAwaitable = InstantiateAsync(m_SavedAnchorEntryPrefab, m_ContentTransform);
+                    var saveEntryAwaitable = InstantiateAsync(
+                        m_SavedAnchorEntryPrefab,
+                        m_ContentTransform
+                    );
                     createSavedEntryAwaitables.Add(saveEntryAwaitable, result);
                 }
             }
@@ -187,9 +218,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     result.savedAnchorGuid,
                     isAnchorActive,
                     DateTime.Now,
-                    newAnchorEntry.AnchorDisplayText);
+                    newAnchorEntry.AnchorDisplayText
+                );
 
-                UpdateSavedAnchorEntry(saveAnchorEntry[0], result.savedAnchorGuid, newAnchorEntry.representedAnchor);
+                UpdateSavedAnchorEntry(
+                    saveAnchorEntry[0],
+                    result.savedAnchorGuid,
+                    newAnchorEntry.representedAnchor
+                );
             }
 
             foreach (var awaitable in saveToFileAwaitables)
@@ -201,7 +237,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
             foreach (var result in m_SaveAnchorResults)
             {
                 var entry = m_NewAnchorEntriesByAnchorId[result.anchor.trackableId];
-                var showResultAwaitable = ShowEntryActionResult(entry, result.resultStatus, result.savedAnchorGuid);
+                var showResultAwaitable = ShowEntryActionResult(
+                    entry,
+                    result.resultStatus,
+                    result.savedAnchorGuid
+                );
                 showResultAwaitables.Add(showResultAwaitable);
             }
 
@@ -234,7 +274,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             await m_AnchorManager.TryLoadAnchorsAsync(
                 anchorGuidsToLoad,
                 loadAnchorResults,
-                OnIncrementalLoadResultsAvailable);
+                OnIncrementalLoadResultsAvailable
+            );
 
             var awaitables = new List<Awaitable>();
             foreach (var loadAnchorResult in loadAnchorResults)
@@ -256,7 +297,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-        async void OnIncrementalLoadResultsAvailable(ReadOnlyListSpan<ARSaveOrLoadAnchorResult> loadAnchorResults)
+        async void OnIncrementalLoadResultsAvailable(
+            ReadOnlyListSpan<ARSaveOrLoadAnchorResult> loadAnchorResults
+        )
         {
             var showResultAwaitables = s_VoidAwaitableLists.Get();
             foreach (var loadAnchorResult in loadAnchorResults)
@@ -267,7 +310,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
                 m_SavedAnchorGuidByAnchorId.TryAdd(
                     loadAnchorResult.anchor.trackableId,
-                    loadAnchorResult.savedAnchorGuid);
+                    loadAnchorResult.savedAnchorGuid
+                );
 
                 // add anchor id to the load request list so when the added anchor change event
                 // is raised from the anchor trackable manager, we can know if an entry for this anchor already exists
@@ -306,13 +350,18 @@ namespace UnityEngine.XR.ARFoundation.Samples
             var showResultAwaitables = s_VoidAwaitableLists.Get();
             for (var i = 0; i < m_OutputEraseAnchorResults.Count; i += 1)
             {
-                var savedAnchorEntry = m_SavedAnchorEntriesBySavedAnchorGuid[m_OutputEraseAnchorResults[i].savedAnchorGuid];
+                var savedAnchorEntry = m_SavedAnchorEntriesBySavedAnchorGuid[
+                    m_OutputEraseAnchorResults[i].savedAnchorGuid
+                ];
                 var isAnchorInScene = savedAnchorEntry.representedAnchor != null;
 
                 savedAnchorEntry.StopEraseLoadingAnimation();
                 if (m_OutputEraseAnchorResults[i].resultStatus.IsError())
                 {
-                    var showFailedResultAwaitable = savedAnchorEntry.ShowEraseResult(false, m_ResultDurationInSeconds);
+                    var showFailedResultAwaitable = savedAnchorEntry.ShowEraseResult(
+                        false,
+                        m_ResultDurationInSeconds
+                    );
                     showResultAwaitables.Add(showFailedResultAwaitable);
                     savedAnchorEntry.EnableEraseButton(true);
                     savedAnchorEntry.EnableActionButton(!isAnchorInScene);
@@ -321,11 +370,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
                 if (!m_SupportsGetSavedAnchorIds)
                 {
-                    var eraseAnchorAwaitable = m_SaveAndLoadAnchorDataToFile.EraseAnchorIdAsync(savedAnchorEntry.savedAnchorGuid);
+                    var eraseAnchorAwaitable = m_SaveAndLoadAnchorDataToFile.EraseAnchorIdAsync(
+                        savedAnchorEntry.savedAnchorGuid
+                    );
                     showResultAwaitables.Add(eraseAnchorAwaitable);
                 }
 
-                var showSuccessResultAwaitable = savedAnchorEntry.ShowEraseResult(true, m_ResultDurationInSeconds);
+                var showSuccessResultAwaitable = savedAnchorEntry.ShowEraseResult(
+                    true,
+                    m_ResultDurationInSeconds
+                );
                 showResultAwaitables.Add(showSuccessResultAwaitable);
             }
 
@@ -340,12 +394,20 @@ namespace UnityEngine.XR.ARFoundation.Samples
             var erasedEntryAwaitables = s_ErasedEntryAwaitablesMaps.Get();
             foreach (var eraseAnchorResult in m_OutputEraseAnchorResults)
             {
-                var savedAnchorEntry = m_SavedAnchorEntriesBySavedAnchorGuid[eraseAnchorResult.savedAnchorGuid];
+                var savedAnchorEntry = m_SavedAnchorEntriesBySavedAnchorGuid[
+                    eraseAnchorResult.savedAnchorGuid
+                ];
                 var isAnchorInScene = savedAnchorEntry.representedAnchor != null;
                 if (isAnchorInScene)
                 {
-                    var addNewEntryAwaitable = InstantiateAsync(m_NewAnchorEntryPrefab, m_ContentTransform);
-                    erasedEntryAwaitables.Add(addNewEntryAwaitable, eraseAnchorResult.savedAnchorGuid);
+                    var addNewEntryAwaitable = InstantiateAsync(
+                        m_NewAnchorEntryPrefab,
+                        m_ContentTransform
+                    );
+                    erasedEntryAwaitables.Add(
+                        addNewEntryAwaitable,
+                        eraseAnchorResult.savedAnchorGuid
+                    );
                 }
                 else
                 {
@@ -360,7 +422,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 SetupNewAnchorEntry(
                     newAnchorEntry[0],
                     savedAnchorEntry.representedAnchor,
-                    savedAnchorEntry.AnchorDisplayText);
+                    savedAnchorEntry.AnchorDisplayText
+                );
 
                 RemoveSavedAnchorEntry(savedAnchorEntry);
             }
@@ -371,7 +434,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         async void InitializeUI()
         {
-            var addSavedEntryAwaitables = new Dictionary<AsyncInstantiateOperation<AnchorScrollViewEntry>, SerializableGuid>();
+            var addSavedEntryAwaitables =
+                new Dictionary<
+                    AsyncInstantiateOperation<AnchorScrollViewEntry>,
+                    SerializableGuid
+                >();
             Dictionary<SerializableGuid, DateTime> savedAnchorData = new();
             if (m_SupportsGetSavedAnchorIds)
             {
@@ -382,7 +449,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     {
                         if (!m_SavedAnchorEntriesBySavedAnchorGuid.ContainsKey(savedAnchorGuid))
                         {
-                            var saveEntryAwaitable = InstantiateAsync(m_SavedAnchorEntryPrefab, m_ContentTransform);
+                            var saveEntryAwaitable = InstantiateAsync(
+                                m_SavedAnchorEntryPrefab,
+                                m_ContentTransform
+                            );
                             addSavedEntryAwaitables.Add(saveEntryAwaitable, savedAnchorGuid);
                         }
                     }
@@ -396,7 +466,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 {
                     if (!m_SavedAnchorEntriesBySavedAnchorGuid.ContainsKey(savedAnchorGuid))
                     {
-                        var saveEntryAwaitable = InstantiateAsync(m_SavedAnchorEntryPrefab, m_ContentTransform);
+                        var saveEntryAwaitable = InstantiateAsync(
+                            m_SavedAnchorEntryPrefab,
+                            m_ContentTransform
+                        );
                         addSavedEntryAwaitables.Add(saveEntryAwaitable, savedAnchorGuid);
                     }
                 }
@@ -414,7 +487,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     serializableGuid,
                     false,
                     dateTime,
-                    $"Anchor {m_EntryCount}");
+                    $"Anchor {m_EntryCount}"
+                );
 
                 m_EntryCount += 1;
             }
@@ -424,7 +498,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             var addNewEntryAwaitables = s_AddNewEntryAwaitablesMaps.Get();
             foreach (var anchor in m_AnchorManager.trackables)
             {
-                var addNewEntryAwaitable = InstantiateAsync(m_NewAnchorEntryPrefab, m_ContentTransform);
+                var addNewEntryAwaitable = InstantiateAsync(
+                    m_NewAnchorEntryPrefab,
+                    m_ContentTransform
+                );
                 addNewEntryAwaitables.Add(addNewEntryAwaitable, anchor);
             }
 
@@ -432,10 +509,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             foreach (var (awaitable, anchor) in addNewEntryAwaitables)
             {
                 var newAnchorEntry = await awaitable;
-                SetupNewAnchorEntry(
-                    newAnchorEntry[0],
-                    anchor,
-                    null);
+                SetupNewAnchorEntry(newAnchorEntry[0], anchor, null);
             }
 
             addNewEntryAwaitables.Clear();
@@ -453,7 +527,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 }
                 else
                 {
-                    var addNewEntryAwaitable = InstantiateAsync(m_NewAnchorEntryPrefab, m_ContentTransform);
+                    var addNewEntryAwaitable = InstantiateAsync(
+                        m_NewAnchorEntryPrefab,
+                        m_ContentTransform
+                    );
                     addNewEntryAwaitables.Add(addNewEntryAwaitable, anchor);
                 }
             }
@@ -461,10 +538,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             foreach (var (awaitable, anchor) in addNewEntryAwaitables)
             {
                 var newAnchorEntry = await awaitable;
-                SetupNewAnchorEntry(
-                    newAnchorEntry[0],
-                    anchor,
-                    null);
+                SetupNewAnchorEntry(newAnchorEntry[0], anchor, null);
             }
 
             addNewEntryAwaitables.Clear();
@@ -472,9 +546,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             foreach (var (anchorId, _) in changes.removed)
             {
-                var doesSavedEntryExist = m_SavedAnchorGuidByAnchorId.TryGetValue(anchorId, out var savedAnchorGuid);
-                if (doesSavedEntryExist &&
-                    m_SavedAnchorEntriesBySavedAnchorGuid.TryGetValue(savedAnchorGuid, out var savedAnchorEntry))
+                var doesSavedEntryExist = m_SavedAnchorGuidByAnchorId.TryGetValue(
+                    anchorId,
+                    out var savedAnchorGuid
+                );
+                if (
+                    doesSavedEntryExist
+                    && m_SavedAnchorEntriesBySavedAnchorGuid.TryGetValue(
+                        savedAnchorGuid,
+                        out var savedAnchorEntry
+                    )
+                )
                 {
                     savedAnchorEntry.EnableActionButton(true);
                 }
@@ -492,7 +574,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
             UnityObjectUtils.Destroy(entry.gameObject);
         }
 
-        void SetupNewAnchorEntry(AnchorScrollViewEntry newAnchorEntry, ARAnchor anchor, string displayLabelText)
+        void SetupNewAnchorEntry(
+            AnchorScrollViewEntry newAnchorEntry,
+            ARAnchor anchor,
+            string displayLabelText
+        )
         {
             newAnchorEntry.transform.localRotation = Quaternion.identity;
             newAnchorEntry.transform.localPosition = Vector3.zero;
@@ -513,7 +599,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             SerializableGuid savedAnchorGuid,
             bool isAnchorActive,
             DateTime savedDateTime = default,
-            string displayLabelText = null)
+            string displayLabelText = null
+        )
         {
             savedAnchorEntry.transform.localRotation = Quaternion.identity;
             savedAnchorEntry.transform.localPosition = Vector3.zero;
@@ -561,10 +648,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
             newAnchorEntry.StartActionLoadingAnimation();
 
             var result = await m_AnchorManager.TrySaveAnchorAsync(newAnchorEntry.representedAnchor);
-            var saveToFileAwaitable = SavePersistentAnchorGuidToFile(result.status, newAnchorEntry.representedAnchor);
+            var saveToFileAwaitable = SavePersistentAnchorGuidToFile(
+                result.status,
+                newAnchorEntry.representedAnchor
+            );
             var savedAnchorGuid = result.value;
             AsyncInstantiateOperation<AnchorScrollViewEntry> saveEntryAwaitable = null;
-            if (result.status.IsSuccess() && !m_SavedAnchorEntriesBySavedAnchorGuid.ContainsKey(savedAnchorGuid))
+            if (
+                result.status.IsSuccess()
+                && !m_SavedAnchorEntriesBySavedAnchorGuid.ContainsKey(savedAnchorGuid)
+            )
             {
                 saveEntryAwaitable = InstantiateAsync(m_SavedAnchorEntryPrefab, m_ContentTransform);
             }
@@ -581,9 +674,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     savedAnchorGuid,
                     isAnchorActive,
                     DateTime.Now,
-                    newAnchorEntry.AnchorDisplayText);
+                    newAnchorEntry.AnchorDisplayText
+                );
 
-                UpdateSavedAnchorEntry(savedAnchorEntry[0], savedAnchorGuid, newAnchorEntry.representedAnchor);
+                UpdateSavedAnchorEntry(
+                    savedAnchorEntry[0],
+                    savedAnchorGuid,
+                    newAnchorEntry.representedAnchor
+                );
             }
 
             await ShowEntryActionResult(newAnchorEntry, result.status, result.value);
@@ -598,13 +696,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
 
             m_SaveAndLoadAnchorDataToFile ??= new SaveAndLoadAnchorDataToFile();
-            return m_SaveAndLoadAnchorDataToFile.SaveAnchorIdAsync(anchor.trackableId, DateTime.Now);
+            return m_SaveAndLoadAnchorDataToFile.SaveAnchorIdAsync(
+                anchor.trackableId,
+                DateTime.Now
+            );
         }
 
         void UpdateSavedAnchorEntry(
             AnchorScrollViewEntry savedAnchorEntry,
             SerializableGuid savedAnchorGuid,
-            ARAnchor anchor)
+            ARAnchor anchor
+        )
         {
             m_SavedAnchorEntriesBySavedAnchorGuid.TryAdd(savedAnchorGuid, savedAnchorEntry);
             m_SavedAnchorGuidByAnchorId.TryAdd(anchor.trackableId, savedAnchorGuid);
@@ -615,11 +717,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
         Awaitable ShowEntryActionResult(
             AnchorScrollViewEntry newAnchorEntry,
             XRResultStatus resultStatus,
-            SerializableGuid savedAnchorGuid)
+            SerializableGuid savedAnchorGuid
+        )
         {
             newAnchorEntry.StopActionLoadingAnimation();
             var wasSaveSuccessful = resultStatus.IsSuccess();
-            var awaitable = newAnchorEntry.ShowActionResult(wasSaveSuccessful, m_ResultDurationInSeconds);
+            var awaitable = newAnchorEntry.ShowActionResult(
+                wasSaveSuccessful,
+                m_ResultDurationInSeconds
+            );
             newAnchorEntry.EnableActionButton(true);
 
             if (wasSaveSuccessful)
@@ -627,7 +733,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 // we remove the entry in the new entry section of the scroll view
                 // and enable the entry in the saved anchor section of the scroll view
                 RemoveNewAnchorEntry(newAnchorEntry);
-                if (m_SavedAnchorEntriesBySavedAnchorGuid.TryGetValue(savedAnchorGuid, out var savedAnchorEntry))
+                if (
+                    m_SavedAnchorEntriesBySavedAnchorGuid.TryGetValue(
+                        savedAnchorGuid,
+                        out var savedAnchorEntry
+                    )
+                )
                 {
                     savedAnchorEntry.gameObject.SetActive(true);
                 }
@@ -650,7 +761,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 // add anchor id to the load request list so when the added anchor change event
                 // is raised from the anchor trackable manager, we can know if an entry for this anchor already exists
                 m_LoadRequests.Add(entry.representedAnchor.trackableId);
-                m_SavedAnchorGuidByAnchorId.TryAdd(entry.representedAnchor.trackableId, entry.savedAnchorGuid);
+                m_SavedAnchorGuidByAnchorId.TryAdd(
+                    entry.representedAnchor.trackableId,
+                    entry.savedAnchorGuid
+                );
             }
 
             entry.StopActionLoadingAnimation();
@@ -664,7 +778,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             savedAnchorEntry.EnableEraseButton(false);
             savedAnchorEntry.StartEraseLoadingAnimation();
 
-            var result = await m_AnchorManager.TryEraseAnchorAsync(savedAnchorEntry.savedAnchorGuid);
+            var result = await m_AnchorManager.TryEraseAnchorAsync(
+                savedAnchorEntry.savedAnchorGuid
+            );
             var isAnchorInScene = savedAnchorEntry.representedAnchor != null;
 
             if (!result.IsSuccess())
@@ -677,18 +793,24 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
 
             if (!m_SupportsGetSavedAnchorIds)
-                await m_SaveAndLoadAnchorDataToFile.EraseAnchorIdAsync(savedAnchorEntry.savedAnchorGuid);
+                await m_SaveAndLoadAnchorDataToFile.EraseAnchorIdAsync(
+                    savedAnchorEntry.savedAnchorGuid
+                );
 
             savedAnchorEntry.StopEraseLoadingAnimation();
             await savedAnchorEntry.ShowEraseResult(true, m_ResultDurationInSeconds);
 
             if (isAnchorInScene)
             {
-                var newAnchorEntry = await InstantiateAsync(m_NewAnchorEntryPrefab, m_ContentTransform);
+                var newAnchorEntry = await InstantiateAsync(
+                    m_NewAnchorEntryPrefab,
+                    m_ContentTransform
+                );
                 SetupNewAnchorEntry(
                     newAnchorEntry[0],
                     savedAnchorEntry.representedAnchor,
-                    savedAnchorEntry.AnchorDisplayText);
+                    savedAnchorEntry.AnchorDisplayText
+                );
             }
 
             RemoveSavedAnchorEntry(savedAnchorEntry);

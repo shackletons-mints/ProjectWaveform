@@ -7,7 +7,9 @@ namespace Utilities
         private AudioSource audioSource;
         private AudioClip audioClip;
         public int sampleRate = 44100;
-        [SerializeField] public bool isUsingMicrophone;
+
+        [SerializeField]
+        public bool isUsingMicrophone;
 
         void Awake()
         {
@@ -24,7 +26,12 @@ namespace Utilities
                 if (Microphone.devices.Length > 0)
                 {
                     // Debug.Log("Switching to microphone: " + Microphone.devices[0]);
-                    audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, sampleRate);
+                    audioSource.clip = Microphone.Start(
+                        Microphone.devices[0],
+                        true,
+                        10,
+                        sampleRate
+                    );
                     audioSource.loop = true;
 
                     while (!(Microphone.GetPosition(null) > 0)) { }
@@ -54,7 +61,6 @@ namespace Utilities
                 {
                     Debug.LogWarning("No audio clip assigned.");
                 }
-
             }
         }
 
@@ -64,4 +70,3 @@ namespace Utilities
         }
     }
 }
-

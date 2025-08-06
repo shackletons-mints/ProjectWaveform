@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using Object = UnityEngine.Object;
 #if UNITY_IOS && !UNITY_EDITOR
 using UnityEngine.XR.ARKit;
 #endif // UNITY_IOS && !UNITY_EDITOR
 
-using Object = UnityEngine.Object;
+
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -65,12 +66,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// </summary>
         public MeshFilter m_DoorMeshPrefab;
 
-    #if UNITY_IOS && !UNITY_EDITOR
+#if UNITY_IOS && !UNITY_EDITOR
 
         /// <summary>
         /// A mapping from tracking ID to instantiated mesh filters.
         /// </summary>
-        readonly Dictionary<TrackableId, MeshFilter[]> m_MeshFrackingMap = new Dictionary<TrackableId, MeshFilter[]>();
+        readonly Dictionary<TrackableId, MeshFilter[]> m_MeshFrackingMap =
+            new Dictionary<TrackableId, MeshFilter[]>();
 
         /// <summary>
         /// The delegate to call to breakup a mesh.
@@ -169,7 +171,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// <param name="selectedMeshClassification">A single classification to extract the faces from the
         /// <paramref="baseMesh"/>into the <paramref name="classifiedMesh"/></param>
         /// <param name="classifiedMesh">The output mesh to be updated with the extracted mesh.</param>
-        void ExtractClassifiedMesh(Mesh baseMesh, NativeArray<ARMeshClassification> faceClassifications, ARMeshClassification selectedMeshClassification, Mesh classifiedMesh)
+        void ExtractClassifiedMesh(
+            Mesh baseMesh,
+            NativeArray<ARMeshClassification> faceClassifications,
+            ARMeshClassification selectedMeshClassification,
+            Mesh classifiedMesh
+        )
         {
             // Count the number of faces matching the selected classification.
             int classifiedFaceCount = 0;
@@ -188,8 +195,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (classifiedFaceCount > 0)
             {
                 baseMesh.GetTriangles(m_BaseTriangles, 0);
-                Debug.Assert(m_BaseTriangles.Count == (faceClassifications.Length * 3),
-                            "unexpected mismatch between triangle count and face classification count");
+                Debug.Assert(
+                    m_BaseTriangles.Count == (faceClassifications.Length * 3),
+                    "unexpected mismatch between triangle count and face classification count"
+                );
 
                 m_ClassifiedTriangles.Clear();
                 m_ClassifiedTriangles.Capacity = classifiedFaceCount * 3;
@@ -210,7 +219,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 classifiedMesh.normals = baseMesh.normals;
                 classifiedMesh.SetTriangles(m_ClassifiedTriangles, 0);
             }
-
         }
 
         /// <summary>
@@ -227,7 +235,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
 
             var meshId = ExtractTrackableId(meshFilter.name);
-            var faceClassifications = meshSubsystem.GetFaceClassifications(meshId, Allocator.Persistent);
+            var faceClassifications = meshSubsystem.GetFaceClassifications(
+                meshId,
+                Allocator.Persistent
+            );
 
             if (!faceClassifications.IsCreated)
             {
@@ -245,14 +256,22 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
                 MeshFilter[] meshFilters = new MeshFilter[k_NumClassifications];
 
-                meshFilters[(int)ARMeshClassification.None] = (m_NoneMeshPrefab == null) ? null : Instantiate(m_NoneMeshPrefab, parent);
-                meshFilters[(int)ARMeshClassification.Wall] = (m_WallMeshPrefab == null) ? null : Instantiate(m_WallMeshPrefab, parent);
-                meshFilters[(int)ARMeshClassification.Floor] = (m_FloorMeshPrefab == null) ? null : Instantiate(m_FloorMeshPrefab, parent);
-                meshFilters[(int)ARMeshClassification.Ceiling] = (m_CeilingMeshPrefab == null) ? null : Instantiate(m_CeilingMeshPrefab, parent);
-                meshFilters[(int)ARMeshClassification.Table] = (m_TableMeshPrefab == null) ? null : Instantiate(m_TableMeshPrefab, parent);
-                meshFilters[(int)ARMeshClassification.Seat] = (m_SeatMeshPrefab == null) ? null : Instantiate(m_SeatMeshPrefab, parent);
-                meshFilters[(int)ARMeshClassification.Window] = (m_WindowMeshPrefab == null) ? null : Instantiate(m_WindowMeshPrefab, parent);
-                meshFilters[(int)ARMeshClassification.Door] = (m_DoorMeshPrefab == null) ? null : Instantiate(m_DoorMeshPrefab, parent);
+                meshFilters[(int)ARMeshClassification.None] =
+                    (m_NoneMeshPrefab == null) ? null : Instantiate(m_NoneMeshPrefab, parent);
+                meshFilters[(int)ARMeshClassification.Wall] =
+                    (m_WallMeshPrefab == null) ? null : Instantiate(m_WallMeshPrefab, parent);
+                meshFilters[(int)ARMeshClassification.Floor] =
+                    (m_FloorMeshPrefab == null) ? null : Instantiate(m_FloorMeshPrefab, parent);
+                meshFilters[(int)ARMeshClassification.Ceiling] =
+                    (m_CeilingMeshPrefab == null) ? null : Instantiate(m_CeilingMeshPrefab, parent);
+                meshFilters[(int)ARMeshClassification.Table] =
+                    (m_TableMeshPrefab == null) ? null : Instantiate(m_TableMeshPrefab, parent);
+                meshFilters[(int)ARMeshClassification.Seat] =
+                    (m_SeatMeshPrefab == null) ? null : Instantiate(m_SeatMeshPrefab, parent);
+                meshFilters[(int)ARMeshClassification.Window] =
+                    (m_WindowMeshPrefab == null) ? null : Instantiate(m_WindowMeshPrefab, parent);
+                meshFilters[(int)ARMeshClassification.Door] =
+                    (m_DoorMeshPrefab == null) ? null : Instantiate(m_DoorMeshPrefab, parent);
 
                 m_MeshFrackingMap[meshId] = meshFilters;
 
@@ -263,7 +282,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     if (classifiedMeshFilter != null)
                     {
                         var classifiedMesh = classifiedMeshFilter.mesh;
-                        ExtractClassifiedMesh(baseMesh, faceClassifications, (ARMeshClassification)i, classifiedMesh);
+                        ExtractClassifiedMesh(
+                            baseMesh,
+                            faceClassifications,
+                            (ARMeshClassification)i,
+                            classifiedMesh
+                        );
                         meshFilters[i].mesh = classifiedMesh;
                     }
                 }
@@ -283,7 +307,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
 
             var meshId = ExtractTrackableId(meshFilter.name);
-            var faceClassifications = meshSubsystem.GetFaceClassifications(meshId, Allocator.Persistent);
+            var faceClassifications = meshSubsystem.GetFaceClassifications(
+                meshId,
+                Allocator.Persistent
+            );
 
             if (!faceClassifications.IsCreated)
             {
@@ -306,7 +333,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     if (classifiedMeshFilter != null)
                     {
                         var classifiedMesh = classifiedMeshFilter.mesh;
-                        ExtractClassifiedMesh(baseMesh, faceClassifications, (ARMeshClassification)i, classifiedMesh);
+                        ExtractClassifiedMesh(
+                            baseMesh,
+                            faceClassifications,
+                            (ARMeshClassification)i,
+                            classifiedMesh
+                        );
                         meshFilters[i].mesh = classifiedMesh;
                     }
                 }
@@ -332,6 +364,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             m_MeshFrackingMap.Remove(meshId);
         }
-    #endif // UNITY_IOS && !UNITY_EDITOR
+#endif // UNITY_IOS && !UNITY_EDITOR
     }
 }

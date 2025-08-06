@@ -5,8 +5,8 @@ using Utilities;
 
 public class Transistion : MonoBehaviour
 {
-    
-    [SerializeField] public InputActionReference toggleAction;
+    [SerializeField]
+    public InputActionReference toggleAction;
 
     private void OnEnable()
     {
@@ -22,6 +22,6 @@ public class Transistion : MonoBehaviour
 
     private void OnToggle(InputAction.CallbackContext ctx)
     {
-        SceneManager.LoadScene(1); 
+        SceneManager.LoadScene(1);
     }
 }
