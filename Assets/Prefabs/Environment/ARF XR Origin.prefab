@@ -1769,7 +1769,7 @@ MonoBehaviour:
   <trackablesChanged>k__BackingField:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1144986062397556837}
+      - m_Target: {fileID: 560303231160586274}
         m_TargetAssemblyTypeName: RemoveCeilingPlanes, Unity.XR.ARFoundation.Samples
         m_MethodName: OnTrackablesChanged
         m_Mode: 0
@@ -2349,8 +2349,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4157819144668008362}
-  - component: {fileID: 1144986062397556837}
   - component: {fileID: 4917761963975466305}
+  - component: {fileID: 560303231160586274}
   m_Layer: 0
   m_Name: RemoveCeilingPlanes
   m_TagString: Untagged
@@ -2373,20 +2373,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 457563701782985561}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1144986062397556837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8843510824731586728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b20e62d8fb74d0449ff037c929989d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planeManager: {fileID: 8925936695146222648}
-  stencil: {fileID: 2100000, guid: a2c6f40608a1cd94fb9a50bc5b5002b4, type: 2}
 --- !u!114 &4917761963975466305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2399,6 +2385,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67429b6a785fe6c4a8af36872154bd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &560303231160586274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8843510824731586728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18bed073a2c1d12459bfebdd7b3ecead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planeManager: {fileID: 8925936695146222648}
+  stencil: {fileID: 2100000, guid: a2c6f40608a1cd94fb9a50bc5b5002b4, type: 2}
 --- !u!1001 &1749332146913349623
 PrefabInstance:
   m_ObjectHideFlags: 0
