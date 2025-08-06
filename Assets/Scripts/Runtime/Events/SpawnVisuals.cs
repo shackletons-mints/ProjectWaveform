@@ -20,7 +20,7 @@ public class SpawnVisuals: MonoBehaviour
 			Instance = this;
 
         Transform cam = Camera.main.transform;
-        Vector3 targetPosition = new Vector3(0f,0.25f,2f);
+        Vector3 targetPosition = new Vector3(0f,2f,2f);
         Quaternion targetRotation = Quaternion.LookRotation(cam.forward, cam.up);
 
 		if (visuals == null)
@@ -30,10 +30,10 @@ public class SpawnVisuals: MonoBehaviour
 	IEnumerator Start()
 	{
 		GrowVisuals();
-		yield return new WaitForSeconds(0.6f);
+		yield return new WaitForSeconds(3f);
 		DropVisuals();
-		yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(2);
+		yield return new WaitForSeconds(3f);
+		SceneManager.LoadScene(2);
 	}
 
 	public void GrowVisuals()
@@ -53,14 +53,16 @@ public class SpawnVisuals: MonoBehaviour
 
 	private IEnumerator GrowOverTime(GameObject obj)
 	{
-		Vector3 targetScale = Vector3.one;
-		float value = 0.001f;
-		while (obj.transform.localScale.x < targetScale.x)
+		float value = 0.01f;
+		Vector3 scale = new Vector3(value, value, value);
+		float targetValue = 1f;
+
+
+
+		while (obj.transform.localScale.x < targetValue)
 		{
-			obj.transform.localScale += new Vector3(value, value, value);
+			obj.transform.localScale += scale;
 			yield return null;
 		}
-
-		obj.transform.localScale = targetScale;
 	}
 }

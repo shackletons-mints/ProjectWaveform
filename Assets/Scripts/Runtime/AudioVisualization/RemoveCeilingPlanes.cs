@@ -1,8 +1,9 @@
+using System;
+using System.Collections;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-using System;
-using System.Reflection;
 
 public class RemoveCeilingPlanes : MonoBehaviour
 {
@@ -11,28 +12,18 @@ public class RemoveCeilingPlanes : MonoBehaviour
 
     void Awake()
     {
-        planeManager = GetComponent<ARPlaneManager>();
+        planeManager = FindFirstObjectByType<ARPlaneManager>();
     }
-
-    void OnEnable()
-    {
-        planeManager.planesChanged += OnPlanesChanged;
-    }
-
-    void OnDisable()
-    {
-        planeManager.planesChanged -= OnPlanesChanged;
-    }
-
-	void OnPlanesChanged(ARPlanesChangedEventArgs args)
+	
+	public void OnTrackablesChanged(ARTrackablesChangedEventArgs<ARPlane> changes)
 	{
-		foreach (var plane in args.added)
+		foreach (var plane in changes.added)
 		{
 			if (plane.classifications == PlaneClassifications.Ceiling)
 				ModifyCeiling(plane);
 		}
 
-		foreach (var plane in args.updated)
+		foreach (var plane in changes.updated)
 		{
 			if (plane.classifications == PlaneClassifications.Ceiling)
 				ModifyCeiling(plane);
@@ -43,15 +34,15 @@ public class RemoveCeilingPlanes : MonoBehaviour
     {
 		var collider = plane.GetComponent<Collider>();
 		if (collider)
-		{
-			collider.enabled = false;
-		}
+        {
+            collider.enabled = false;
+        }
 
-		var renderer = plane.GetComponent<MeshRenderer>();
-		if (renderer)
-		{
-			renderer.material = stencil;
-		}
+        var renderer = plane.GetComponent<MeshRenderer>();
+        if (renderer)
+        {
+            renderer.material = stencil;
+        }
     }
 
 }
