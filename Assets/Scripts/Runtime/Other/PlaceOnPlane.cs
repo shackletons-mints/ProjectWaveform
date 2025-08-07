@@ -42,7 +42,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void Update()
         {
-
             if (Pointer.current == null || m_Pressed == false)
                 return;
 

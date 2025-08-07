@@ -26,16 +26,28 @@ namespace UnityEngine.XR.ARFoundation.Samples
         GameObject m_UIWindowHandlePrefab;
 
         [Header("Settings")]
-        [SerializeField, Tooltip("The dimensions the canvas well be set to for HMD in world space in meters.")]
+        [
+            SerializeField,
+            Tooltip("The dimensions the canvas well be set to for HMD in world space in meters.")
+        ]
         Vector2 m_HMDCanvasDimensionsInMeters = new(1.15f, 0.85f);
 
-        [SerializeField, Tooltip("Distance in front of the camera for the UI to be placed in world space."), Range(.3f, 6)]
+        [
+            SerializeField,
+            Tooltip("Distance in front of the camera for the UI to be placed in world space."),
+            Range(.3f, 6)
+        ]
         float m_DistanceFromCamera = 6f;
 
         [SerializeField, Tooltip("Displays the background image when running on HMD.")]
         bool m_ShowBackgroundForHMD = true;
 
-        [SerializeField, Tooltip("Will convert the canvas to world space in the editor for testing how the UI will look on HMD.")]
+        [
+            SerializeField,
+            Tooltip(
+                "Will convert the canvas to world space in the editor for testing how the UI will look on HMD."
+            )
+        ]
         bool m_EnableInEditor;
 
         [SerializeField, HideInInspector]
@@ -54,7 +66,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
         Vector2 m_HMDCanvasTargetSize;
         const float k_CanvasWorldSpaceScale = 0.001f;
         const float k_UIHandleSpacing = 0.05f;
-
 
         void Reset()
         {
@@ -120,7 +131,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void AddUIWindowHandle()
         {
-            var handleVerticalOffset = -m_CanvasRT.sizeDelta.y * transform.localScale.x * 0.5f - k_UIHandleSpacing;
+            var handleVerticalOffset =
+                -m_CanvasRT.sizeDelta.y * transform.localScale.x * 0.5f - k_UIHandleSpacing;
             var handlePosition = transform.position + (Vector3.up * handleVerticalOffset);
             var handle = Instantiate(m_UIWindowHandlePrefab);
             handle.transform.position = handlePosition;

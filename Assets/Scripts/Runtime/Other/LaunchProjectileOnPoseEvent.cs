@@ -9,7 +9,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
     public class LaunchProjectileOnPoseEvent : MonoBehaviour
     {
         [SerializeField]
-        [Tooltip("The PoseEvent containing the position and rotation from which to launch the projectile.")]
+        [Tooltip(
+            "The PoseEvent containing the position and rotation from which to launch the projectile."
+        )]
         PoseEventAsset m_PoseEvent;
 
         [SerializeField]
@@ -53,7 +55,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (m_ProjectilePrefab == null || m_PoseEvent == null)
             {
                 Debug.LogWarning(
-                    $"{nameof(LaunchProjectileOnPoseEvent)} component on {name} has null inputs and will have no effect in this scene.", this);
+                    $"{nameof(LaunchProjectileOnPoseEvent)} component on {name} has null inputs and will have no effect in this scene.",
+                    this
+                );
 
                 return;
             }

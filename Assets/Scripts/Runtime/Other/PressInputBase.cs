@@ -44,10 +44,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_PressAction.Dispose();
         }
 
-        protected virtual void OnPress(Vector3 position) {}
+        protected virtual void OnPress(Vector3 position) { }
 
-        protected virtual void OnPressBegan(Vector3 position) {}
+        protected virtual void OnPressBegan(Vector3 position) { }
 
-        protected virtual void OnPressCancel() {}
+        protected virtual void OnPressCancel() { }
     }
 }

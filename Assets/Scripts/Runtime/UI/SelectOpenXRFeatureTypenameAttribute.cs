@@ -7,7 +7,5 @@ namespace UnityEngine.XR.ARFoundation.Samples
     /// in the Inspector.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
-    public class SelectOpenXRFeatureTypenameAttribute : PropertyAttribute
-    {
-    }
+    public class SelectOpenXRFeatureTypenameAttribute : PropertyAttribute { }
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.XR.ARFoundation;
-
 #if UNITY_IOS && !UNITY_EDITOR
 using Unity.iOS.Multipeer;
 using UnityEngine.XR.ARKit;
@@ -12,7 +11,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
     public class CollaborativeSession : MonoBehaviour
     {
         [SerializeField]
-        [Tooltip("The name for this network service. It should be 15 characters or less and can contain ASCII, lowercase letters, numbers, and hyphens.")]
+        [Tooltip(
+            "The name for this network service. It should be 15 characters or less and can contain ASCII, lowercase letters, numbers, and hyphens."
+        )]
         string m_ServiceType;
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void OnEnable()
         {
-    #if UNITY_IOS && !UNITY_EDITOR
+#if UNITY_IOS && !UNITY_EDITOR
             var subsystem = GetSubsystem();
             if (!ARKitSessionSubsystem.supportsCollaboration || subsystem == null)
             {
@@ -46,12 +47,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             subsystem.collaborationRequested = true;
             m_MCSession.Enabled = true;
-    #else
-            DisableNotSupported("Collaborative sessions are an ARKit 3 feature; This platform does not support them.");
-    #endif
+#else
+            DisableNotSupported(
+                "Collaborative sessions are an ARKit 3 feature; This platform does not support them."
+            );
+#endif
         }
 
-    #if UNITY_IOS && !UNITY_EDITOR
+#if UNITY_IOS && !UNITY_EDITOR
         MCSession m_MCSession;
 
         ARKitSessionSubsystem GetSubsystem()
@@ -96,9 +99,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     using (var serializedData = collaborationData.ToSerialized())
                     using (var data = NSData.CreateWithBytesNoCopy(serializedData.bytes))
                     {
-                        m_MCSession.SendToAllPeers(data, collaborationData.priority == ARCollaborationDataPriority.Critical
-                            ? MCSessionSendDataMode.Reliable
-                            : MCSessionSendDataMode.Unreliable);
+                        m_MCSession.SendToAllPeers(
+                            data,
+                            collaborationData.priority == ARCollaborationDataPriority.Critical
+                                ? MCSessionSendDataMode.Reliable
+                                : MCSessionSendDataMode.Unreliable
+                        );
 
                         CollaborationNetworkingIndicator.NotifyOutgoingDataSent();
 
@@ -124,12 +130,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
                         subsystem.UpdateWithCollaborationData(collaborationData);
                         if (collaborationData.priority == ARCollaborationDataPriority.Critical)
                         {
-                            Logger.Log($"Received {data.Bytes.Length} bytes of collaboration data.");
+                            Logger.Log(
+                                $"Received {data.Bytes.Length} bytes of collaboration data."
+                            );
                         }
                     }
                     else
                     {
-                        Logger.Log($"Received {data.Bytes.Length} bytes from remote, but the collaboration data was not valid.");
+                        Logger.Log(
+                            $"Received {data.Bytes.Length} bytes from remote, but the collaboration data was not valid."
+                        );
                     }
                 }
             }
@@ -139,6 +149,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             m_MCSession.Dispose();
         }
-    #endif
+#endif
     }
 }

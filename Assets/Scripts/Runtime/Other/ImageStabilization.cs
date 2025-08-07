@@ -46,7 +46,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             if (m_Supported == Supported.Supported)
             {
-                m_CameraManager.imageStabilizationRequested = !m_CameraManager.imageStabilizationRequested;
+                m_CameraManager.imageStabilizationRequested =
+                    !m_CameraManager.imageStabilizationRequested;
             }
             else
             {
@@ -61,7 +62,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (m_SupportedOnPrevFrame != m_Supported || m_EnabledOnPrevFrame != enabledThisFrame)
             {
                 var enabledString = m_CameraManager.imageStabilizationEnabled ? "On" : "Off";
-                m_Information.text = $"Support: {m_Supported.ToString()}\nStabilization: {enabledString}";
+                m_Information.text =
+                    $"Support: {m_Supported.ToString()}\nStabilization: {enabledString}";
                 m_SupportedOnPrevFrame = m_Supported;
                 m_EnabledOnPrevFrame = enabledThisFrame;
             }

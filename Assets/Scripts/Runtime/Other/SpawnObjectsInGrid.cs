@@ -32,7 +32,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_PrefabToSpawn == null)
             {
-                Debug.LogError($"{nameof(SpawnObjectsInGrid)} component needs to be set up in Inspector. Disabling.", this);
+                Debug.LogError(
+                    $"{nameof(SpawnObjectsInGrid)} component needs to be set up in Inspector. Disabling.",
+                    this
+                );
                 enabled = false;
             }
         }
@@ -48,7 +51,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_SpawnedCopies.Count > 0)
             {
-                Debug.LogWarning("Ignoring request to spawn grid because objects are already spawned", this);
+                Debug.LogWarning(
+                    "Ignoring request to spawn grid because objects are already spawned",
+                    this
+                );
                 return;
             }
 
@@ -64,9 +70,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     var spawnPos = new Vector3(
                         pos.x + rowMult * m_GridPadding,
                         m_SpawnHeight,
-                        pos.z + colMult * m_GridPadding);
+                        pos.z + colMult * m_GridPadding
+                    );
 
-                    if (Vector2.Distance(new Vector2(spawnPos.x, spawnPos.z), new Vector2(pos.x, pos.z)) < m_DistanceToClosestObject)
+                    if (
+                        Vector2.Distance(
+                            new Vector2(spawnPos.x, spawnPos.z),
+                            new Vector2(pos.x, pos.z)
+                        ) < m_DistanceToClosestObject
+                    )
                         continue;
 
                     var g = Instantiate(m_PrefabToSpawn, spawnPos, Quaternion.identity, transform);

@@ -11,10 +11,18 @@ namespace UnityEngine.XR.ARFoundation.Samples
         const string k_MenuSelectorErrorMsg =
             "Could not find a MenuSelector component in the scene. Add a MenuSelector then Reset this component.";
 
-        [SerializeField, Tooltip("Children of this GameObject should have SceneLauncher components.")]
+        [
+            SerializeField,
+            Tooltip("Children of this GameObject should have SceneLauncher components.")
+        ]
         GameObject m_CategoryRootGameObject;
 
-        [SerializeField, Tooltip("Will be displayed at the top of the Menu scene when this category is selected.")]
+        [
+            SerializeField,
+            Tooltip(
+                "Will be displayed at the top of the Menu scene when this category is selected."
+            )
+        ]
         string m_CategoryName;
 
         [SerializeField, HideInInspector]
@@ -29,7 +37,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_CategoryRootGameObject == null)
             {
-                Debug.LogError($"{nameof(MenuCategory)} component on {name} has null Inspector properties and will be disabled.", this);
+                Debug.LogError(
+                    $"{nameof(MenuCategory)} component on {name} has null Inspector properties and will be disabled.",
+                    this
+                );
                 return;
             }
 
@@ -59,7 +70,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             m_Button.onClick.RemoveListener(SelectCategory);
         }
-        
+
         void SelectCategory()
         {
             if (m_MenuSelector == null)

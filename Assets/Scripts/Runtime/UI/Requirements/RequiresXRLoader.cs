@@ -1,11 +1,12 @@
 using System;
+using UnityEngine.XR.OpenXR;
 #if UNITY_ANDROID
 using UnityEngine.XR.ARCore;
 #endif
 #if UNITY_IOS
 using UnityEngine.XR.ARKit;
 #endif
-using UnityEngine.XR.OpenXR;
+
 #if UNITY_EDITOR
 using UnityEngine.XR.Simulation;
 #endif
@@ -15,7 +16,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
     [Serializable]
     public class RequiresXRLoader : IBooleanExpression
     {
-        enum XRLoaderType { OpenXR, ARCore, ARKit, Simulation }
+        enum XRLoaderType
+        {
+            OpenXR,
+            ARCore,
+            ARKit,
+            Simulation,
+        }
 
         [SerializeField]
         XRLoaderType m_LoaderType;

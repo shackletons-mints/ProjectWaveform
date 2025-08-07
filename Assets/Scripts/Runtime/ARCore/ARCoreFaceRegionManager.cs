@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Unity.Collections;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.XR.ARSubsystems;
-using Unity.XR.CoreUtils;
 #if UNITY_ANDROID && ARCORE_4_2_OR_NEWER && !UNITY_EDITOR
 using UnityEngine.XR.ARCore;
 #endif
@@ -47,7 +47,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_FaceManager = GetComponent<ARFaceManager>();
             m_Origin = GetComponent<XROrigin>();
 #if UNITY_ANDROID && ARCORE_4_2_OR_NEWER && !UNITY_EDITOR
-            m_InstantiatedPrefabs = new Dictionary<TrackableId, Dictionary<ARCoreFaceRegion, GameObject>>();
+            m_InstantiatedPrefabs =
+                new Dictionary<TrackableId, Dictionary<ARCoreFaceRegion, GameObject>>();
 #endif
         }
 

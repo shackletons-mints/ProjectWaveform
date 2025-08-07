@@ -1,31 +1,28 @@
 using System.Collections;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utilities;
 
 public class GetSphere : MonoBehaviour
 {
-    [SerializeField] private InputActionReference _toggleAction;
-    [SerializeField] private GameObject visuals;
-    private float _distanceFromCamera = 2;
-
-    void Start()
-    {
-        PositionVisualsInFrontOfCamera();
-    }
+    [Header("References")]
+    public InputActionReference toggleAction;
+    public float distanceFromCamera = 2;
 
     private void OnEnable()
     {
-        if (_toggleAction != null)
+        if (toggleAction != null)
         {
-            _toggleAction.action.performed += OnToggle;
+            toggleAction.action.performed += OnToggle;
         }
     }
 
     private void OnDisable()
     {
-        if (_toggleAction != null)
+        if (toggleAction != null)
         {
-            _toggleAction.action.performed -= OnToggle;
+            toggleAction.action.performed -= OnToggle;
         }
     }
 
@@ -34,13 +31,13 @@ public class GetSphere : MonoBehaviour
         PositionVisualsInFrontOfCamera();
     }
 
-	private void PositionVisualsInFrontOfCamera()
+    private void PositionVisualsInFrontOfCamera()
     {
         Transform cam = Camera.main.transform;
-        Vector3 targetPosition = cam.position + cam.forward * _distanceFromCamera;
+        Vector3 targetPosition = cam.position + cam.forward * distanceFromCamera;
         Quaternion targetRotation = Quaternion.LookRotation(cam.forward, cam.up);
 
-        Rigidbody rb = visuals.GetComponent<Rigidbody>();
+        Rigidbody rb = SpawnVisualizer.Instance.visualizer.GetComponentInChildren<Rigidbody>();
         if (rb != null)
         {
             rb.isKinematic = true;

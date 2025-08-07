@@ -1,8 +1,10 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
-[RequireComponent(typeof(UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals.XRInteractorLineVisual))]
+[RequireComponent(
+    typeof(UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals.XRInteractorLineVisual)
+)]
 #pragma warning disable CS0618 // temporary fix to remove console warnings while we decide what to do with this component
 [RequireComponent(typeof(ActionBasedController))]
 #pragma warning restore CS0618
@@ -24,9 +26,12 @@ public class CheckRenderLine : MonoBehaviour
 
     void LogDeprecatedWarning()
     {
-        Debug.LogWarning($"{nameof(CheckRenderLine)} uses deprecated functionality from XRI 2.0. Avoid using this component.", this);
+        Debug.LogWarning(
+            $"{nameof(CheckRenderLine)} uses deprecated functionality from XRI 2.0. Avoid using this component.",
+            this
+        );
     }
-    
+
     void Reset()
     {
         LogDeprecatedWarning();
@@ -36,14 +41,15 @@ public class CheckRenderLine : MonoBehaviour
     {
         LogDeprecatedWarning();
 
-        if(!m_CameraAR.stereoEnabled)
+        if (!m_CameraAR.stereoEnabled)
         {
             enabled = false;
         }
 #pragma warning disable CS0618
         m_Controller = GetComponent<ActionBasedController>();
 #pragma warning restore CS0618
-        m_InteractorLine = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals.XRInteractorLineVisual>();
+        m_InteractorLine =
+            GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals.XRInteractorLineVisual>();
     }
 
     void Update()
@@ -54,7 +60,7 @@ public class CheckRenderLine : MonoBehaviour
     void HandleLineRender()
     {
         var state = m_Controller.currentControllerState;
-        if(state != null && (state.inputTrackingState & InputTrackingState.Position) != 0)
+        if (state != null && (state.inputTrackingState & InputTrackingState.Position) != 0)
         {
             m_InteractorLine.enabled = true;
             if (m_InteractorLine.reticle != null)

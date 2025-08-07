@@ -89,8 +89,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
             else
             {
                 stringBuilder.AppendLine("   Facing direction:");
-                stringBuilder.AppendLine($"      Requested: {m_CameraManager.requestedFacingDirection}");
-                stringBuilder.AppendLine($"      Current: {m_CameraManager.currentFacingDirection}");
+                stringBuilder.AppendLine(
+                    $"      Requested: {m_CameraManager.requestedFacingDirection}"
+                );
+                stringBuilder.AppendLine(
+                    $"      Current: {m_CameraManager.currentFacingDirection}"
+                );
                 stringBuilder.AppendLine("   Auto-focus:");
                 stringBuilder.AppendLine($"      Requested: {m_CameraManager.autoFocusRequested}");
                 stringBuilder.AppendLine($"      Current: {m_CameraManager.autoFocusEnabled}");
@@ -114,7 +118,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             else
             {
                 stringBuilder.AppendLine("   Detection mode:");
-                stringBuilder.AppendLine($"      Requested: {m_PlaneManager.requestedDetectionMode}");
+                stringBuilder.AppendLine(
+                    $"      Requested: {m_PlaneManager.requestedDetectionMode}"
+                );
                 stringBuilder.AppendLine($"      Current: {m_PlaneManager.currentDetectionMode}");
             }
         }
@@ -136,14 +142,26 @@ namespace UnityEngine.XR.ARFoundation.Samples
             else
             {
                 stringBuilder.AppendLine("   Environment depth mode:");
-                stringBuilder.AppendLine($"      Requested: {m_OcclusionManager.requestedEnvironmentDepthMode}");
-                stringBuilder.AppendLine($"      Current: {m_OcclusionManager.currentEnvironmentDepthMode}");
+                stringBuilder.AppendLine(
+                    $"      Requested: {m_OcclusionManager.requestedEnvironmentDepthMode}"
+                );
+                stringBuilder.AppendLine(
+                    $"      Current: {m_OcclusionManager.currentEnvironmentDepthMode}"
+                );
                 stringBuilder.AppendLine("   Human stencil mode:");
-                stringBuilder.AppendLine($"      Requested: {m_OcclusionManager.requestedHumanStencilMode}");
-                stringBuilder.AppendLine($"      Current: {m_OcclusionManager.currentHumanStencilMode}");
+                stringBuilder.AppendLine(
+                    $"      Requested: {m_OcclusionManager.requestedHumanStencilMode}"
+                );
+                stringBuilder.AppendLine(
+                    $"      Current: {m_OcclusionManager.currentHumanStencilMode}"
+                );
                 stringBuilder.AppendLine("   Human depth mode:");
-                stringBuilder.AppendLine($"      Requested: {m_OcclusionManager.requestedHumanDepthMode}");
-                stringBuilder.AppendLine($"      Current: {m_OcclusionManager.currentHumanDepthMode}");
+                stringBuilder.AppendLine(
+                    $"      Requested: {m_OcclusionManager.requestedHumanDepthMode}"
+                );
+                stringBuilder.AppendLine(
+                    $"      Current: {m_OcclusionManager.currentHumanDepthMode}"
+                );
             }
         }
 

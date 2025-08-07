@@ -60,7 +60,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             transform.SetPositionAndRotation(
                 Vector3.Lerp(currentPosition, targetPosition, m_SmoothFactor),
-                cameraTransform.rotation);
+                cameraTransform.rotation
+            );
 
             float height;
             if (m_CameraAR.orthographic)

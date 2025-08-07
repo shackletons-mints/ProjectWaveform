@@ -67,7 +67,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 m_SupportedModes.Add(ARKitWhiteBalanceMode.Auto);
             }
 
-            if ((supportedModes & ARKitWhiteBalanceMode.ContinuousAuto) != ARKitWhiteBalanceMode.None)
+            if (
+                (supportedModes & ARKitWhiteBalanceMode.ContinuousAuto)
+                != ARKitWhiteBalanceMode.None
+            )
             {
                 m_SupportedModes.Add(ARKitWhiteBalanceMode.ContinuousAuto);
             }
@@ -109,26 +112,38 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void RefreshUI(ARKitWhiteBalanceGains whiteBalance)
         {
-            if (m_BlueGainSlider != null && Math.Abs(m_BlueGainSlider.value - whiteBalance.blue) > float.Epsilon)
+            if (
+                m_BlueGainSlider != null
+                && Math.Abs(m_BlueGainSlider.value - whiteBalance.blue) > float.Epsilon
+            )
             {
                 blueGain = whiteBalance.blue;
                 m_BlueGainSlider.SetValueWithoutNotify(whiteBalance.blue);
             }
 
-            if (m_GreenGainSlider != null && Math.Abs(m_GreenGainSlider.value - whiteBalance.green) > float.Epsilon)
+            if (
+                m_GreenGainSlider != null
+                && Math.Abs(m_GreenGainSlider.value - whiteBalance.green) > float.Epsilon
+            )
             {
                 greenGain = whiteBalance.green;
                 m_GreenGainSlider.SetValueWithoutNotify(whiteBalance.green);
             }
 
-            if (m_RedGainSlider != null && Math.Abs(m_RedGainSlider.value - whiteBalance.red) > float.Epsilon)
+            if (
+                m_RedGainSlider != null
+                && Math.Abs(m_RedGainSlider.value - whiteBalance.red) > float.Epsilon
+            )
             {
                 redGain = whiteBalance.red;
                 m_RedGainSlider.SetValueWithoutNotify(whiteBalance.red);
             }
         }
 
-        protected override void UpdateMode(ARKitLockedCamera lockedCamera, ARKitWhiteBalanceMode mode)
+        protected override void UpdateMode(
+            ARKitLockedCamera lockedCamera,
+            ARKitWhiteBalanceMode mode
+        )
         {
             Debug.Log($"Updating white balance mode to {mode.ToString()}.");
             lockedCamera.requestedWhiteBalanceMode = mode;

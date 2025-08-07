@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -15,7 +15,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
     public class TrackedImageInfoManager : MonoBehaviour
     {
         [SerializeField]
-        [Tooltip("The camera to set on the world space UI canvas for each instantiated image info.")]
+        [Tooltip(
+            "The camera to set on the world space UI canvas for each instantiated image info."
+        )]
         Camera m_WorldSpaceCanvasCamera;
 
         /// <summary>
@@ -29,7 +31,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         [SerializeField]
-        [Tooltip("If an image is detected but no source texture can be found, this texture is used instead.")]
+        [Tooltip(
+            "If an image is detected but no source texture can be found, this texture is used instead."
+        )]
         Texture2D m_DefaultTexture;
 
         /// <summary>
@@ -73,7 +77,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 trackedImage.trackingState,
                 trackedImage.referenceImage.guid,
                 trackedImage.referenceImage.size * 100f,
-                trackedImage.size * 100f);
+                trackedImage.size * 100f
+            );
 
             var planeParentGo = trackedImage.transform.GetChild(0).gameObject;
             var planeGo = planeParentGo.transform.GetChild(0).gameObject;
@@ -84,11 +89,18 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 planeGo.SetActive(true);
 
                 // The image extents is only valid when the image is being tracked
-                trackedImage.transform.localScale = new Vector3(trackedImage.size.x, 1f, trackedImage.size.y);
+                trackedImage.transform.localScale = new Vector3(
+                    trackedImage.size.x,
+                    1f,
+                    trackedImage.size.y
+                );
 
                 // Set the texture
                 var material = planeGo.GetComponentInChildren<MeshRenderer>().material;
-                material.mainTexture = (trackedImage.referenceImage.texture == null) ? defaultTexture : trackedImage.referenceImage.texture;
+                material.mainTexture =
+                    (trackedImage.referenceImage.texture == null)
+                        ? defaultTexture
+                        : trackedImage.referenceImage.texture;
             }
             else
             {

@@ -122,7 +122,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             try
             {
-                await Awaitable.WaitForSecondsAsync(durationInSeconds, m_CancellationTokenSource.Token);
+                await Awaitable.WaitForSecondsAsync(
+                    durationInSeconds,
+                    m_CancellationTokenSource.Token
+                );
             }
             catch (OperationCanceledException)
             {
@@ -142,7 +145,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             try
             {
-                await Awaitable.WaitForSecondsAsync(durationInSeconds, m_CancellationTokenSource.Token);
+                await Awaitable.WaitForSecondsAsync(
+                    durationInSeconds,
+                    m_CancellationTokenSource.Token
+                );
             }
             catch (OperationCanceledException)
             {
@@ -160,9 +166,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         public void SetAnchorSavedDateTime(DateTime dateTime)
         {
-            var formattedDateTime = string.Format(
-                "{0:d}\n<color=#bbb>{0:t}</color>",
-                dateTime);
+            var formattedDateTime = string.Format("{0:d}\n<color=#bbb>{0:t}</color>", dateTime);
 
             m_AnchorSavedDateLabel.text = formattedDateTime;
         }

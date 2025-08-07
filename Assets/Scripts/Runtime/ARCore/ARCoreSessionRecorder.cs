@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-
 #if UNITY_ANDROID && ARCORE_4_2_OR_NEWER
 using UnityEngine.XR.ARCore;
 #endif
@@ -68,7 +67,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             m_Session = GetComponent<ARSession>();
             m_Mp4LocalFilePath = Path.Combine(Application.persistentDataPath, "arcore-session.mp4");
-            // NOTE: The Uri class with C# does NOT correctly format the URI needed for 
+            // NOTE: The Uri class with C# does NOT correctly format the URI needed for
             // native Android APIs that require a "Uri as string" parameter.
             // However, so long as the path does not require escaping, or slash separator
             // modification, then prepending "file://" is sufficient.
@@ -76,14 +75,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
             Log($"Setting recording Uri to [{m_Mp4PathUri}]");
         }
 
-        static int GetRotation() => Screen.orientation switch
-        {
-            ScreenOrientation.Portrait => 0,
-            ScreenOrientation.LandscapeLeft => 90,
-            ScreenOrientation.PortraitUpsideDown => 180,
-            ScreenOrientation.LandscapeRight => 270,
-            _ => 0
-        };
+        static int GetRotation() =>
+            Screen.orientation switch
+            {
+                ScreenOrientation.Portrait => 0,
+                ScreenOrientation.LandscapeLeft => 90,
+                ScreenOrientation.PortraitUpsideDown => 180,
+                ScreenOrientation.LandscapeRight => 270,
+                _ => 0,
+            };
 
         void Log(string msg)
         {
@@ -129,17 +129,21 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 var playbackStatus = subsystem.playbackStatus;
                 var recordingStatus = subsystem.recordingStatus;
 
-                if (!playbackStatus.Playing() &&
-                    !recordingStatus.Recording())
+                if (!playbackStatus.Playing() && !recordingStatus.Recording())
                 {
-                    if (playbackStatus != ArPlaybackStatus.Finished && GUILayout.Button("Start recording"))
+                    if (
+                        playbackStatus != ArPlaybackStatus.Finished
+                        && GUILayout.Button("Start recording")
+                    )
                     {
                         using (var config = new ArRecordingConfig(session))
                         {
                             config.SetMp4DatasetUri(session, m_Mp4PathUri);
                             config.SetRecordingRotation(session, GetRotation());
                             var status = subsystem.StartRecording(config);
-                            Log($"StartRecording to {config.GetMp4DatasetUri(session)} => {status}");
+                            Log(
+                                $"StartRecording to {config.GetMp4DatasetUri(session)} => {status}"
+                            );
                         }
                     }
 
@@ -150,32 +154,37 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     }
                 }
 
-                if (playbackStatus.Playing() &&
-                    !recordingStatus.Recording() &&
-                    GUILayout.Button("Stop playback"))
+                if (
+                    playbackStatus.Playing()
+                    && !recordingStatus.Recording()
+                    && GUILayout.Button("Stop playback")
+                )
                 {
                     var status = subsystem.StopPlaybackUri();
                     Log($"StopPlayback() => {status}");
                 }
 
-                if (playbackStatus == ArPlaybackStatus.Finished &&
-                    GUILayout.Button("Return to live feed"))
+                if (
+                    playbackStatus == ArPlaybackStatus.Finished
+                    && GUILayout.Button("Return to live feed")
+                )
                 {
                     var status = subsystem.StopPlaybackUri();
                     Log($"StopPlayback() => {status}");
                 }
 
-                if (recordingStatus.Recording() &&
-                    GUILayout.Button("Stop recording"))
+                if (recordingStatus.Recording() && GUILayout.Button("Stop recording"))
                 {
                     var status = subsystem.StopRecording();
                     Log($"StopRecording() => {status}");
 
                     if (status == ArStatus.Success)
                     {
-                        Log(File.Exists(m_Mp4LocalFilePath)
-                            ? $"ARCore session saved to {m_Mp4LocalFilePath} ({GetFileSize(m_Mp4LocalFilePath)})"
-                            : "Recording completed, but no file was produced.");
+                        Log(
+                            File.Exists(m_Mp4LocalFilePath)
+                                ? $"ARCore session saved to {m_Mp4LocalFilePath} ({GetFileSize(m_Mp4LocalFilePath)})"
+                                : "Recording completed, but no file was produced."
+                        );
                     }
                 }
 
@@ -198,7 +207,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
             else
             {
-                GUILayout.Label("No " + nameof(ARCoreSessionSubsystem) + " available. Cannot perform session recording.");
+                GUILayout.Label(
+                    "No "
+                        + nameof(ARCoreSessionSubsystem)
+                        + " available. Cannot perform session recording."
+                );
             }
 #else
             GUILayout.Label("ARCore session recording is only supported on Android.");

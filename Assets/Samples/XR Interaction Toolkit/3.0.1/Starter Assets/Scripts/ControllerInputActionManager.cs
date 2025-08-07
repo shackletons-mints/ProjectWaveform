@@ -28,33 +28,41 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
     {
         [Space]
         [Header("Interactors")]
-
         [SerializeField]
-        [Tooltip("The interactor used for distant/ray manipulation. Use this or Near-Far Interactor, not both.")]
+        [Tooltip(
+            "The interactor used for distant/ray manipulation. Use this or Near-Far Interactor, not both."
+        )]
         XRRayInteractor m_RayInteractor;
 
         [SerializeField]
-        [Tooltip("Near-Far Interactor used for distant/ray manipulation. Use this or Ray Interactor, not both.")]
+        [Tooltip(
+            "Near-Far Interactor used for distant/ray manipulation. Use this or Ray Interactor, not both."
+        )]
         NearFarInteractor m_NearFarInteractor;
-        
+
         [SerializeField]
         [Tooltip("The interactor used for teleportation.")]
         XRRayInteractor m_TeleportInteractor;
 
         [Space]
         [Header("Controller Actions")]
-
         [SerializeField]
-        [Tooltip("The reference to the action to start the teleport aiming mode for this controller.")]
+        [Tooltip(
+            "The reference to the action to start the teleport aiming mode for this controller."
+        )]
         [FormerlySerializedAs("m_TeleportModeActivate")]
         InputActionReference m_TeleportMode;
 
         [SerializeField]
-        [Tooltip("The reference to the action to cancel the teleport aiming mode for this controller.")]
+        [Tooltip(
+            "The reference to the action to cancel the teleport aiming mode for this controller."
+        )]
         InputActionReference m_TeleportModeCancel;
 
         [SerializeField]
-        [Tooltip("The reference to the action of continuous turning the XR Origin with this controller.")]
+        [Tooltip(
+            "The reference to the action of continuous turning the XR Origin with this controller."
+        )]
         InputActionReference m_Turn;
 
         [SerializeField]
@@ -71,31 +79,38 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 
         [Space]
         [Header("Locomotion Settings")]
+        [SerializeField]
+        [Tooltip(
+            "If true, continuous movement will be enabled. If false, teleport will be enabled."
+        )]
+        bool m_SmoothMotionEnabled;
 
         [SerializeField]
-        [Tooltip("If true, continuous movement will be enabled. If false, teleport will be enabled.")]
-        bool m_SmoothMotionEnabled;
-        
-        [SerializeField]
-        [Tooltip("If true, continuous turn will be enabled. If false, snap turn will be enabled. Note: If smooth motion is enabled and enable strafe is enabled on the continuous move provider, turn will be overriden in favor of strafe.")]
+        [Tooltip(
+            "If true, continuous turn will be enabled. If false, snap turn will be enabled. Note: If smooth motion is enabled and enable strafe is enabled on the continuous move provider, turn will be overriden in favor of strafe."
+        )]
         bool m_SmoothTurnEnabled;
-        
+
         [SerializeField]
-        [Tooltip("With the Near-Far Interactor, if true, teleport will be enabled during near interaction. If false, teleport will be disabled during near interaction.")]
+        [Tooltip(
+            "With the Near-Far Interactor, if true, teleport will be enabled during near interaction. If false, teleport will be disabled during near interaction."
+        )]
         bool m_NearFarEnableTeleportDuringNearInteraction = true;
 
         [Space]
         [Header("UI Settings")]
-
         [SerializeField]
-        [Tooltip("If true, UI scrolling will be enabled. Locomotion will be disabled when pointing at UI to allow it to be scrolled.")]
+        [Tooltip(
+            "If true, UI scrolling will be enabled. Locomotion will be disabled when pointing at UI to allow it to be scrolled."
+        )]
         bool m_UIScrollingEnabled = true;
 
         [Space]
         [Header("Mediation Events")]
-
         [SerializeField]
-        [Tooltip("Event fired when the active ray interactor changes between interaction and teleport.")]
+        [Tooltip(
+            "Event fired when the active ray interactor changes between interaction and teleport."
+        )]
         UnityEvent<IXRRayProvider> m_RayInteractorChanged;
 
         public bool smoothMotionEnabled
@@ -133,7 +148,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         bool m_HoveringScrollableUI;
 
         readonly HashSet<InputAction> m_LocomotionUsers = new HashSet<InputAction>();
-        readonly BindingsGroup m_BindingsGroup = new BindingsGroup(); 
+        readonly BindingsGroup m_BindingsGroup = new BindingsGroup();
 
         void SetupInteractorEvents()
         {
@@ -141,9 +156,11 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             {
                 m_NearFarInteractor.uiHoverEntered.AddListener(OnUIHoverEntered);
                 m_NearFarInteractor.uiHoverExited.AddListener(OnUIHoverExited);
-                m_BindingsGroup.AddBinding(m_NearFarInteractor.selectionRegion.Subscribe(OnNearFarSelectionRegionChanged));
+                m_BindingsGroup.AddBinding(
+                    m_NearFarInteractor.selectionRegion.Subscribe(OnNearFarSelectionRegionChanged)
+                );
             }
-            
+
             if (m_RayInteractor != null)
             {
                 m_RayInteractor.selectEntered.AddListener(OnRaySelectEntered);
@@ -192,13 +209,13 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         void TeardownInteractorEvents()
         {
             m_BindingsGroup.Clear();
-            
+
             if (m_NearFarInteractor != null)
             {
                 m_NearFarInteractor.uiHoverEntered.RemoveListener(OnUIHoverEntered);
                 m_NearFarInteractor.uiHoverExited.RemoveListener(OnUIHoverExited);
             }
-            
+
             if (m_RayInteractor != null)
             {
                 m_RayInteractor.selectEntered.RemoveListener(OnRaySelectEntered);
@@ -254,9 +271,12 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             if (m_RayInteractor != null)
                 m_RayInteractor.gameObject.SetActive(false);
 
-            if (m_NearFarInteractor != null && m_NearFarInteractor.selectionRegion.Value != NearFarInteractor.Region.Near)
+            if (
+                m_NearFarInteractor != null
+                && m_NearFarInteractor.selectionRegion.Value != NearFarInteractor.Region.Near
+            )
                 m_NearFarInteractor.gameObject.SetActive(false);
-    
+
             m_RayInteractorChanged?.Invoke(m_TeleportInteractor);
         }
 
@@ -270,17 +290,22 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 
             if (m_RayInteractor != null)
                 m_RayInteractor.gameObject.SetActive(true);
-            
+
             if (m_NearFarInteractor != null)
                 m_NearFarInteractor.gameObject.SetActive(true);
 
             m_RayInteractorChanged?.Invoke(m_RayInteractor);
         }
-        
+
         void OnNearFarSelectionRegionChanged(NearFarInteractor.Region selectionRegion)
         {
-            if (selectionRegion == NearFarInteractor.Region.Far ||
-                (selectionRegion == NearFarInteractor.Region.Near && !m_NearFarEnableTeleportDuringNearInteraction))
+            if (
+                selectionRegion == NearFarInteractor.Region.Far
+                || (
+                    selectionRegion == NearFarInteractor.Region.Near
+                    && !m_NearFarEnableTeleportDuringNearInteraction
+                )
+            )
                 DisableTeleportActions();
             else
                 UpdateLocomotionActions();
@@ -346,7 +371,10 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         {
             if (m_RayInteractor != null && m_NearFarInteractor != null)
             {
-                Debug.LogWarning("Both Ray Interactor and Near-Far Interactor are assigned. Only one should be assigned, not both. Clearing Ray Interactor.", this);
+                Debug.LogWarning(
+                    "Both Ray Interactor and Near-Far Interactor are assigned. Only one should be assigned, not both. Clearing Ray Interactor.",
+                    this
+                );
                 m_RayInteractor = null;
             }
 
@@ -427,7 +455,10 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 
         void UpdateUIActions()
         {
-            SetEnabled(m_UIScroll, m_UIScrollingEnabled && m_HoveringScrollableUI && m_LocomotionUsers.Count == 0);
+            SetEnabled(
+                m_UIScroll,
+                m_UIScrollingEnabled && m_HoveringScrollableUI && m_LocomotionUsers.Count == 0
+            );
         }
 
         static void SetEnabled(InputActionReference actionReference, bool enabled)

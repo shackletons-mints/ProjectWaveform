@@ -19,10 +19,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField, Tooltip("Show tracking state visualizer.")]
         bool m_ShowTrackingState = true;
 
-        [SerializeField, Tooltip("Show the hit type the raycast hit to place this anchor if a raycast was used.")]
+        [
+            SerializeField,
+            Tooltip("Show the hit type the raycast hit to place this anchor if a raycast was used.")
+        ]
         bool m_ShowRaycastTrackableHitType = true;
 
-        [SerializeField, Tooltip("Show the trackable the anchor is attached to if the feature is supported.")]
+        [
+            SerializeField,
+            Tooltip("Show the trackable the anchor is attached to if the feature is supported.")
+        ]
         bool m_ShowTrackableAttachedTo = true;
 
         [SerializeField, HideInInspector]
@@ -58,7 +64,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// <param name="isPlacedWithRaycast"><see langword="true"/> if the anchor was placed using a raycast, otherwise <see langword="false"/>.</param>
         /// <param name="trackableHitType">The trackable that was hit with a raycast
         /// if a raycast was used to place the anchor.</param>
-        public void SetAnchorCreationMethod(bool isPlacedWithRaycast, TrackableType trackableHitType)
+        public void SetAnchorCreationMethod(
+            bool isPlacedWithRaycast,
+            TrackableType trackableHitType
+        )
         {
             m_IsPlacedWithRaycast = isPlacedWithRaycast;
             m_RaycastTrackableHitType = trackableHitType;
@@ -78,7 +87,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (m_DebugInfoDisplayController == null)
                 m_DebugInfoDisplayController = GetComponent<DebugInfoDisplayController>();
 
-            if (!m_ShowTrackableId && !m_ShowSessionIdType && !m_ShowTrackingState && !m_ShowTrackableAttachedTo && !m_ShowRaycastTrackableHitType)
+            if (
+                !m_ShowTrackableId
+                && !m_ShowSessionIdType
+                && !m_ShowTrackingState
+                && !m_ShowTrackableAttachedTo
+                && !m_ShowRaycastTrackableHitType
+            )
                 m_DebugInfoDisplayController.Show(false);
         }
 
@@ -94,12 +109,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void UpdateDebugInfo()
         {
-            m_DebugInfoDisplayController.SetPosition(m_ARAnchor.transform.position + k_CanvasVerticalOffset);
+            m_DebugInfoDisplayController.SetPosition(
+                m_ARAnchor.transform.position + k_CanvasVerticalOffset
+            );
 
-            if (m_ARAnchor.trackableId == m_TrackableId &&
-                m_ARAnchor.sessionId == m_AnchorSessionId &&
-                m_CurrentSubsystemSessionId == m_PreviousSubsystemSessionId &&
-                m_ARAnchor.trackingState == m_TrackingState)
+            if (
+                m_ARAnchor.trackableId == m_TrackableId
+                && m_ARAnchor.sessionId == m_AnchorSessionId
+                && m_CurrentSubsystemSessionId == m_PreviousSubsystemSessionId
+                && m_ARAnchor.trackingState == m_TrackingState
+            )
                 return;
 
             m_TrackableId = m_ARAnchor.trackableId;
@@ -108,29 +127,44 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_TrackingState = m_ARAnchor.trackingState;
 
             if (m_ShowTrackableId)
-                m_DebugInfoDisplayController.AppendDebugEntry("TrackableId:", m_TrackableId.ToString());
+                m_DebugInfoDisplayController.AppendDebugEntry(
+                    "TrackableId:",
+                    m_TrackableId.ToString()
+                );
 
             if (m_ShowSessionIdType)
             {
-                var sessionIdType = m_CurrentSubsystemSessionId == Guid.Empty ||
-                    m_AnchorSessionId.Equals(m_CurrentSubsystemSessionId) ? "Local" : "Remote";
+                var sessionIdType =
+                    m_CurrentSubsystemSessionId == Guid.Empty
+                    || m_AnchorSessionId.Equals(m_CurrentSubsystemSessionId)
+                        ? "Local"
+                        : "Remote";
                 m_DebugInfoDisplayController.AppendDebugEntry("SessionId Type:", sessionIdType);
             }
 
             if (m_ShowTrackingState)
-                m_DebugInfoDisplayController.AppendDebugEntry("Tracking State:", m_TrackingState.ToString());
+                m_DebugInfoDisplayController.AppendDebugEntry(
+                    "Tracking State:",
+                    m_TrackingState.ToString()
+                );
 
             if (m_ShowRaycastTrackableHitType)
             {
                 if (m_IsPlacedWithRaycast)
-                    m_DebugInfoDisplayController.AppendDebugEntry("Raycast Hit:", m_RaycastTrackableHitType.ToString());
+                    m_DebugInfoDisplayController.AppendDebugEntry(
+                        "Raycast Hit:",
+                        m_RaycastTrackableHitType.ToString()
+                    );
                 else
                     m_DebugInfoDisplayController.AppendDebugEntry("Raycast Hit:", "N/A");
             }
 
             if (m_ShowTrackableAttachedTo)
             {
-                m_DebugInfoDisplayController.AppendDebugEntry("Attached:", m_IsAnchorAttachedToTrackable.ToString());
+                m_DebugInfoDisplayController.AppendDebugEntry(
+                    "Attached:",
+                    m_IsAnchorAttachedToTrackable.ToString()
+                );
             }
 
             m_DebugInfoDisplayController.RefreshDisplayInfo();

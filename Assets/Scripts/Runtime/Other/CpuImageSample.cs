@@ -127,13 +127,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 XRCpuImage.Transformation.None => XRCpuImage.Transformation.MirrorX,
                 XRCpuImage.Transformation.MirrorX => XRCpuImage.Transformation.MirrorY,
-                XRCpuImage.Transformation.MirrorY => XRCpuImage.Transformation.MirrorX | XRCpuImage.Transformation.MirrorY,
-                _ => XRCpuImage.Transformation.None
+                XRCpuImage.Transformation.MirrorY => XRCpuImage.Transformation.MirrorX
+                    | XRCpuImage.Transformation.MirrorY,
+                _ => XRCpuImage.Transformation.None,
             };
 
             if (m_TransformationButton)
             {
-                m_TransformationButton.GetComponentInChildren<Text>().text = m_Transformation.ToString();
+                m_TransformationButton.GetComponentInChildren<Text>().text =
+                    m_Transformation.ToString();
             }
         }
 
@@ -141,8 +143,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_CameraManager == null)
             {
-                Debug.LogException(new NullReferenceException(
-                    $"Serialized properties were not initialized on {name}'s {nameof(CpuImageSample)} component."), this);
+                Debug.LogException(
+                    new NullReferenceException(
+                        $"Serialized properties were not initialized on {name}'s {nameof(CpuImageSample)} component."
+                    ),
+                    this
+                );
                 return;
             }
 
@@ -159,9 +165,18 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             UpdateCameraImage();
             UpdateDepthImage(m_OcclusionManager.TryAcquireHumanDepthCpuImage, m_RawHumanDepthImage);
-            UpdateDepthImage(m_OcclusionManager.TryAcquireHumanStencilCpuImage, m_RawHumanStencilImage);
-            UpdateDepthImage(m_OcclusionManager.TryAcquireEnvironmentDepthCpuImage, m_RawEnvironmentDepthImage);
-            UpdateDepthImage(m_OcclusionManager.TryAcquireEnvironmentDepthConfidenceCpuImage, m_RawEnvironmentDepthConfidenceImage);
+            UpdateDepthImage(
+                m_OcclusionManager.TryAcquireHumanStencilCpuImage,
+                m_RawHumanStencilImage
+            );
+            UpdateDepthImage(
+                m_OcclusionManager.TryAcquireEnvironmentDepthCpuImage,
+                m_RawEnvironmentDepthImage
+            );
+            UpdateDepthImage(
+                m_OcclusionManager.TryAcquireEnvironmentDepthConfidenceCpuImage,
+                m_RawEnvironmentDepthConfidenceImage
+            );
         }
 
         unsafe void UpdateCameraImage()
@@ -176,7 +191,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
             // Display some information about the camera image
             m_ImageInfo.text = string.Format(
                 "Image info:\n\twidth: {0}\n\theight: {1}\n\tplaneCount: {2}\n\ttimestamp: {3}\n\tformat: {4}",
-                image.width, image.height, image.planeCount, image.timestamp, image.format);
+                image.width,
+                image.height,
+                image.planeCount,
+                image.timestamp,
+                image.format
+            );
 
             // Once we have a valid XRCpuImage, we can access the individual image "planes"
             // (the separate channels in the image). XRCpuImage.GetPlane provides
@@ -188,7 +208,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
             // See XRCpuImage.FormatSupported for a complete list of supported formats.
             const TextureFormat format = TextureFormat.RGBA32;
 
-            if (m_CameraTexture == null || m_CameraTexture.width != image.width || m_CameraTexture.height != image.height)
+            if (
+                m_CameraTexture == null
+                || m_CameraTexture.width != image.width
+                || m_CameraTexture.height != image.height
+            )
                 m_CameraTexture = new Texture2D(image.width, image.height, format, false);
 
             // Convert the image to format, flipping the image across the Y axis.
@@ -200,7 +224,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
             var rawTextureData = m_CameraTexture.GetRawTextureData<byte>();
             try
             {
-                image.Convert(conversionParams, new IntPtr(rawTextureData.GetUnsafePtr()), rawTextureData.Length);
+                image.Convert(
+                    conversionParams,
+                    new IntPtr(rawTextureData.GetUnsafePtr()),
+                    rawTextureData.Length
+                );
             }
             finally
             {
@@ -221,7 +249,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// </summary>
         /// <param name="tryAcquireDepthImageDelegate">The method to call to acquire a depth image.</param>
         /// <param name="rawImage">The Raw Image to use to render the depth image to the screen.</param>
-        void UpdateDepthImage(TryAcquireDepthImageDelegate tryAcquireDepthImageDelegate, RawImage rawImage)
+        void UpdateDepthImage(
+            TryAcquireDepthImageDelegate tryAcquireDepthImageDelegate,
+            RawImage rawImage
+        )
         {
             if (tryAcquireDepthImageDelegate(out XRCpuImage cpuImage))
             {
@@ -238,7 +269,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-        static void UpdateRawImage(RawImage rawImage, XRCpuImage cpuImage, XRCpuImage.Transformation transformation)
+        static void UpdateRawImage(
+            RawImage rawImage,
+            XRCpuImage cpuImage,
+            XRCpuImage.Transformation transformation
+        )
         {
             // Get the texture associated with the UI.RawImage that we wish to display on screen.
             var texture = rawImage.texture as Texture2D;
@@ -247,21 +282,40 @@ namespace UnityEngine.XR.ARFoundation.Samples
             // Note: Although texture dimensions do not normally change frame-to-frame, they can change in response to
             //    a change in the camera resolution (for camera images) or changes to the quality of the human depth
             //    and human stencil buffers.
-            if (texture == null || texture.width != cpuImage.width || texture.height != cpuImage.height)
+            if (
+                texture == null
+                || texture.width != cpuImage.width
+                || texture.height != cpuImage.height
+            )
             {
-                texture = new Texture2D(cpuImage.width, cpuImage.height, cpuImage.format.AsTextureFormat(), false);
+                texture = new Texture2D(
+                    cpuImage.width,
+                    cpuImage.height,
+                    cpuImage.format.AsTextureFormat(),
+                    false
+                );
                 rawImage.texture = texture;
             }
 
             // For display, we need to mirror about the vertical access.
-            var conversionParams = new XRCpuImage.ConversionParams(cpuImage, cpuImage.format.AsTextureFormat(), transformation);
+            var conversionParams = new XRCpuImage.ConversionParams(
+                cpuImage,
+                cpuImage.format.AsTextureFormat(),
+                transformation
+            );
 
             // Get the Texture2D's underlying pixel buffer.
             var rawTextureData = texture.GetRawTextureData<byte>();
 
             // Make sure the destination buffer is large enough to hold the converted data (they should be the same size)
-            Debug.Assert(rawTextureData.Length == cpuImage.GetConvertedDataSize(conversionParams.outputDimensions, conversionParams.outputFormat),
-                "The Texture2D is not the same size as the converted data.");
+            Debug.Assert(
+                rawTextureData.Length
+                    == cpuImage.GetConvertedDataSize(
+                        conversionParams.outputDimensions,
+                        conversionParams.outputFormat
+                    ),
+                "The Texture2D is not the same size as the converted data."
+            );
 
             // Perform the conversion.
             cpuImage.Convert(conversionParams, rawTextureData);

@@ -45,10 +45,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
             Debug.Assert(m_DepthAvailabilityInfo != null, "no text box");
             var descriptor = m_OcclusionManager.descriptor;
             m_DepthAvailabilityInfo.enabled =
-                descriptor == null ||
-                (descriptor.humanSegmentationStencilImageSupported == Supported.Unsupported &&
-                descriptor.humanSegmentationDepthImageSupported == Supported.Unsupported &&
-                descriptor.environmentDepthImageSupported == Supported.Unsupported);
+                descriptor == null
+                || (
+                    descriptor.humanSegmentationStencilImageSupported == Supported.Unsupported
+                    && descriptor.humanSegmentationDepthImageSupported == Supported.Unsupported
+                    && descriptor.environmentDepthImageSupported == Supported.Unsupported
+                );
         }
     }
 }

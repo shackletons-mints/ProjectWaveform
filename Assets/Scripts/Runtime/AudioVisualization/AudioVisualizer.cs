@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Utilities;
 using UnityEngine.InputSystem;
+using Utilities;
 
 namespace AudioVisualization
 {
@@ -11,7 +11,7 @@ namespace AudioVisualization
         public AudioClip audioClip;
         public AudioPitchEstimator audioPitchEstimator;
         public AudioSource audioSource;
-        [SerializeField] public AudioToggle audioToggle;
+        public AudioToggle audioToggle;
         public GameObject sphere;
         public ParticleSystem particleSystem;
         public PitchLayoutSelector layoutSelector;
@@ -19,7 +19,7 @@ namespace AudioVisualization
         public SphereSurfacePoints sphereSurfacePoints;
         public Material rippleShader;
 
-		public int previousPitchClass;
+        public int previousPitchClass;
         public int spectrumSize = 1024;
         public int sampleRate = 44100;
         public FFTWindow fftWindow = FFTWindow.BlackmanHarris;

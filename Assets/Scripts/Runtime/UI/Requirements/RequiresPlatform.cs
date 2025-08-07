@@ -5,7 +5,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
     [Serializable]
     public class RequiresPlatform : IBooleanExpression
     {
-        enum Platform { iOS, Android }
+        enum Platform
+        {
+            iOS,
+            Android,
+        }
 
         [SerializeField]
         Platform m_RequiredPlatform;

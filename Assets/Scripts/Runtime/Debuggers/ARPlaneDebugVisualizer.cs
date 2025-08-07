@@ -14,8 +14,13 @@ namespace UnityEngine.XR.ARFoundation
         [SerializeField, Tooltip("The prefab to visualize the plane orientation.")]
         GameObject m_PlaneNormalPrefab;
 
-        [SerializeField, Tooltip("Material used for planes that also have bounding boxes " +
-             "to handle z fighting visual artifacts.")]
+        [
+            SerializeField,
+            Tooltip(
+                "Material used for planes that also have bounding boxes "
+                    + "to handle z fighting visual artifacts."
+            )
+        ]
         Material m_SpecialPlaneMaterial;
 
         [SerializeField]
@@ -38,29 +43,48 @@ namespace UnityEngine.XR.ARFoundation
         bool m_ShowTrackingState = true;
 
         [Header("Tracking state visualization settings")]
-        [SerializeField, Tooltip("The texture the plane will have when the tracking state is set to tracking.")]
+        [
+            SerializeField,
+            Tooltip("The texture the plane will have when the tracking state is set to tracking.")
+        ]
         Texture m_TrackingTexture;
 
-        [SerializeField, Tooltip("The mesh color used for planes when the tracking state is set to tracking")]
+        [
+            SerializeField,
+            Tooltip("The mesh color used for planes when the tracking state is set to tracking")
+        ]
         Color m_TrackingMeshColor;
 
-        [SerializeField, Tooltip("The outline color gradient when the tracking state is set to tracking.")]
+        [
+            SerializeField,
+            Tooltip("The outline color gradient when the tracking state is set to tracking.")
+        ]
         Gradient m_TrackingOutlineGradient;
 
         [Space]
-
-        [SerializeField, Tooltip("The outline color gradient when the tracking state is set to limited.")]
+        [
+            SerializeField,
+            Tooltip("The outline color gradient when the tracking state is set to limited.")
+        ]
         Gradient m_LimitedTrackingOutlineGradient;
 
         [Space]
-
-        [SerializeField, Tooltip("The texture the plane will have when the tracking state is set to none.")]
+        [
+            SerializeField,
+            Tooltip("The texture the plane will have when the tracking state is set to none.")
+        ]
         Texture m_NoneTrackingTexture;
 
-        [SerializeField, Tooltip("The mesh color used for planes when the tracking state is set to none.")]
+        [
+            SerializeField,
+            Tooltip("The mesh color used for planes when the tracking state is set to none.")
+        ]
         Color m_NoneTrackingMeshColor;
-        
-        [SerializeField, Tooltip("The outline color gradient when the tracking state is set to none.")]
+
+        [
+            SerializeField,
+            Tooltip("The outline color gradient when the tracking state is set to none.")
+        ]
         Gradient m_NoneTrackingOutlineGradient;
 
         [SerializeField, HideInInspector]
@@ -99,7 +123,12 @@ namespace UnityEngine.XR.ARFoundation
             if (m_DebugInfoDisplayController == null)
                 m_DebugInfoDisplayController = GetComponent<DebugInfoDisplayController>();
 
-            if (!m_ShowAlignment && !m_ShowClassifications && !m_ShowTrackableId && !m_ShowTrackingState)
+            if (
+                !m_ShowAlignment
+                && !m_ShowClassifications
+                && !m_ShowTrackableId
+                && !m_ShowTrackingState
+            )
                 m_DebugInfoDisplayController.Show(false);
 
             if (m_ARPlane == null)
@@ -108,15 +137,22 @@ namespace UnityEngine.XR.ARFoundation
             if (m_MeshRenderer == null)
                 m_MeshRenderer = GetComponent<MeshRenderer>();
 
-            if ((m_ARPlane.classifications & PlaneClassifications.Couch) == PlaneClassifications.Couch || 
-                (m_ARPlane.classifications & PlaneClassifications.Table) == PlaneClassifications.Table)
+            if (
+                (m_ARPlane.classifications & PlaneClassifications.Couch)
+                    == PlaneClassifications.Couch
+                || (m_ARPlane.classifications & PlaneClassifications.Table)
+                    == PlaneClassifications.Table
+            )
             {
                 m_MeshRenderer.material = m_SpecialPlaneMaterial;
             }
 
             if (m_ShowPlaneNormal && m_PlaneNormalPrefab == null)
             {
-                Debug.LogWarning($"{nameof(m_ShowPlaneNormal)} is enabled but {nameof(m_PlaneNormalPrefab)} is not assigned. To show the plane normal vector visualizer assign a prefab to the {nameof(m_PlaneNormalPrefab)} in the inspector.", this);
+                Debug.LogWarning(
+                    $"{nameof(m_ShowPlaneNormal)} is enabled but {nameof(m_PlaneNormalPrefab)} is not assigned. To show the plane normal vector visualizer assign a prefab to the {nameof(m_PlaneNormalPrefab)} in the inspector.",
+                    this
+                );
             }
 
             if (m_PlaneNormalPrefab != null)
@@ -152,10 +188,12 @@ namespace UnityEngine.XR.ARFoundation
             canvasPosition += m_ShowPlaneNormal ? k_CanvasVerticalOffset : Vector3.zero;
             m_DebugInfoDisplayController.SetPosition(canvasPosition);
 
-            if (m_ARPlane.trackableId == m_TrackableId &&
-                m_ARPlane.classifications == m_Classifications &&
-                m_ARPlane.alignment == m_Alignment &&
-                m_ARPlane.trackingState == m_TrackingState)
+            if (
+                m_ARPlane.trackableId == m_TrackableId
+                && m_ARPlane.classifications == m_Classifications
+                && m_ARPlane.alignment == m_Alignment
+                && m_ARPlane.trackingState == m_TrackingState
+            )
                 return;
 
             m_TrackableId = m_ARPlane.trackableId;
@@ -164,23 +202,35 @@ namespace UnityEngine.XR.ARFoundation
             UpdateTrackingState();
 
             if (m_ShowTrackableId)
-                m_DebugInfoDisplayController.AppendDebugEntry("TrackableId:", m_TrackableId.ToString());
+                m_DebugInfoDisplayController.AppendDebugEntry(
+                    "TrackableId:",
+                    m_TrackableId.ToString()
+                );
 
             if (m_ShowClassifications)
-                m_DebugInfoDisplayController.AppendDebugEntry("Classifications:", m_Classifications.ToString());
+                m_DebugInfoDisplayController.AppendDebugEntry(
+                    "Classifications:",
+                    m_Classifications.ToString()
+                );
 
             if (m_ShowAlignment)
                 m_DebugInfoDisplayController.AppendDebugEntry("Alignment:", m_Alignment.ToString());
 
             if (m_ShowTrackingState)
-                m_DebugInfoDisplayController.AppendDebugEntry("Tracking State:", m_TrackingState.ToString());
+                m_DebugInfoDisplayController.AppendDebugEntry(
+                    "Tracking State:",
+                    m_TrackingState.ToString()
+                );
 
             m_DebugInfoDisplayController.RefreshDisplayInfo();
         }
 
         void UpdatePlaneNormal()
         {
-            if (m_PlaneNormalVisualizer != null && m_ShowPlaneNormal != m_PlaneNormalVisualizer.activeSelf)
+            if (
+                m_PlaneNormalVisualizer != null
+                && m_ShowPlaneNormal != m_PlaneNormalVisualizer.activeSelf
+            )
                 m_PlaneNormalVisualizer.SetActive(m_ShowPlaneNormal);
 
             if (!m_ShowPlaneNormal || m_PlaneNormalVisualizer == null)

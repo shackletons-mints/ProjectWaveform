@@ -45,14 +45,18 @@ namespace UnityEngine.XR.ARFoundation.Samples.VisualScripting
 
         class PointerPressedListener
         {
-            public static PointerPressedListener instance => m_Instance ??= new PointerPressedListener();
+            public static PointerPressedListener instance =>
+                m_Instance ??= new PointerPressedListener();
             static PointerPressedListener m_Instance;
 
             InputAction s_PressAction;
 
             PointerPressedListener()
             {
-                s_PressAction = new InputAction(k_PointerPressedEventHook, binding: "<Pointer>/press");
+                s_PressAction = new InputAction(
+                    k_PointerPressedEventHook,
+                    binding: "<Pointer>/press"
+                );
                 s_PressAction.performed += ctx =>
                 {
                     if (ctx.control.device is Pointer device)

@@ -40,7 +40,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
             if (m_CameraManager == null)
             {
-                Debug.LogError("Failed to find ARCameraManager in current scene. As a result, this component will be disabled.", this);
+                Debug.LogError(
+                    "Failed to find ARCameraManager in current scene. As a result, this component will be disabled.",
+                    this
+                );
                 enabled = false;
             }
         }
@@ -49,12 +52,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             m_Dropdown = GetComponent<Dropdown>();
             m_Dropdown.ClearOptions();
-            m_Dropdown.onValueChanged.AddListener(
-                _ =>
-                {
-                    OnDropdownValueChanged(m_Dropdown);
-                }
-            );
+            m_Dropdown.onValueChanged.AddListener(_ =>
+            {
+                OnDropdownValueChanged(m_Dropdown);
+            });
             ARSession.stateChanged += SessionChanged;
         }
 
@@ -90,9 +91,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (m_CameraManager == null)
                 return;
 
-            if ((change.state == ARSessionState.Ready
-                || change.state == ARSessionState.SessionTracking)
-                && m_CameraManager.DoesCurrentCameraSupportTorch())
+            if (
+                (
+                    change.state == ARSessionState.Ready
+                    || change.state == ARSessionState.SessionTracking
+                ) && m_CameraManager.DoesCurrentCameraSupportTorch()
+            )
             {
                 if (torchModeSupported != null)
                     torchModeSupported.Invoke(true);

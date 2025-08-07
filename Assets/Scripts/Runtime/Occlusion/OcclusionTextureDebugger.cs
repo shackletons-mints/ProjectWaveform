@@ -13,11 +13,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 if (m_OcclusionManager != null)
                 {
                     Debug.LogWarning(
-                        $"Serialized field on {nameof(OcclusionTextureDebugger)} was not set. Set this in the Inspector for better performance.", this);
+                        $"Serialized field on {nameof(OcclusionTextureDebugger)} was not set. Set this in the Inspector for better performance.",
+                        this
+                    );
                 }
                 else
                 {
-                    Debug.LogError($"Serialized field on {nameof(OcclusionTextureDebugger)} was not set. Disabling component.", this);
+                    Debug.LogError(
+                        $"Serialized field on {nameof(OcclusionTextureDebugger)} was not set. Disabling component.",
+                        this
+                    );
                     enabled = false;
                     return;
                 }

@@ -33,9 +33,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void CreateEyeGameObjectsIfNecessary()
         {
             var canvas = FindAnyObjectByType<Canvas>();
-            if (m_Face.fixationPoint != null && canvas != null && m_FixationReticleGameObject == null)
+            if (
+                m_Face.fixationPoint != null
+                && canvas != null
+                && m_FixationReticleGameObject == null
+            )
             {
-                m_FixationReticleGameObject = Instantiate(m_GUIFixationReticlePrefab, canvas.transform);
+                m_FixationReticleGameObject = Instantiate(
+                    m_GUIFixationReticlePrefab,
+                    canvas.transform
+                );
             }
         }
 
@@ -48,9 +55,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void OnEnable()
         {
             var faceManager = FindAnyObjectByType<ARFaceManager>();
-            if (faceManager != null && faceManager.subsystem != null && faceManager.descriptor.supportsEyeTracking)
+            if (
+                faceManager != null
+                && faceManager.subsystem != null
+                && faceManager.descriptor.supportsEyeTracking
+            )
             {
-                SetVisible((m_Face.trackingState == TrackingState.Tracking) && (ARSession.state > ARSessionState.Ready));
+                SetVisible(
+                    (m_Face.trackingState == TrackingState.Tracking)
+                        && (ARSession.state > ARSessionState.Ready)
+                );
                 m_Face.updated += OnUpdated;
             }
             else
@@ -68,7 +82,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void OnUpdated(ARFaceUpdatedEventArgs eventArgs)
         {
             CreateEyeGameObjectsIfNecessary();
-            SetVisible((m_Face.trackingState == TrackingState.Tracking) && (ARSession.state > ARSessionState.Ready));
+            SetVisible(
+                (m_Face.trackingState == TrackingState.Tracking)
+                    && (ARSession.state > ARSessionState.Ready)
+            );
             UpdateScreenReticle();
         }
 
@@ -76,14 +93,21 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             var mainCamera = Camera.main;
 
-            var fixationInViewSpace = mainCamera.WorldToViewportPoint(m_Face.fixationPoint.position);
+            var fixationInViewSpace = mainCamera.WorldToViewportPoint(
+                m_Face.fixationPoint.position
+            );
 
             // The camera texture is mirrored so x and y must be changed to match where the fixation point is in relation to the face.
-            var mirrorFixationInView = new Vector3(1 - fixationInViewSpace.x, 1 - fixationInViewSpace.y, fixationInViewSpace.z);
+            var mirrorFixationInView = new Vector3(
+                1 - fixationInViewSpace.x,
+                1 - fixationInViewSpace.y,
+                fixationInViewSpace.z
+            );
 
             if (m_FixationReticleGameObject != null)
             {
-                m_FixationReticleGameObject.GetComponent<RectTransform>().anchoredPosition3D = mainCamera.ViewportToScreenPoint(mirrorFixationInView);
+                m_FixationReticleGameObject.GetComponent<RectTransform>().anchoredPosition3D =
+                    mainCamera.ViewportToScreenPoint(mirrorFixationInView);
             }
         }
     }

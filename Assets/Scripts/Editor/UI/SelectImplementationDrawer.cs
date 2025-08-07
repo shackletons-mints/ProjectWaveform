@@ -21,15 +21,16 @@ namespace UnityEditor.XR.ARFoundation.Samples
         {
             if (m_Implementations == null)
             {
-                m_Implementations = TypeCache.GetTypesDerivedFrom(
-                    (attribute as SelectImplementationAttribute)!.fieldType)
+                m_Implementations = TypeCache
+                    .GetTypesDerivedFrom((attribute as SelectImplementationAttribute)!.fieldType)
                     .Where(t => t.IsPublic && !t.IsAbstract && !t.IsInterface)
                     .ToArray();
 
                 Array.Sort(m_Implementations, s_Comparer);
 
                 m_ImplementationNames = new string[m_Implementations.Length + 1];
-                m_ImplementationNames[0] = m_Implementations.Length > 0 ? "Choose a Type" : "No implementations available";
+                m_ImplementationNames[0] =
+                    m_Implementations.Length > 0 ? "Choose a Type" : "No implementations available";
 
                 for (var i = 0; i < m_Implementations.Length; i++)
                 {
@@ -46,7 +47,7 @@ namespace UnityEditor.XR.ARFoundation.Samples
                 {
                     if (string.Equals(t.Name, instanceType.Name))
                     {
-                        m_SelectedNameIndex = i; 
+                        m_SelectedNameIndex = i;
                         break;
                     }
 
@@ -58,14 +59,20 @@ namespace UnityEditor.XR.ARFoundation.Samples
                 m_SelectedNameIndex = 0;
             }
 
-            var selectedIndex = EditorGUILayout.Popup("Type", m_SelectedNameIndex, m_ImplementationNames);
+            var selectedIndex = EditorGUILayout.Popup(
+                "Type",
+                m_SelectedNameIndex,
+                m_ImplementationNames
+            );
             if (selectedIndex == 0)
             {
                 property.managedReferenceValue = null;
             }
             else if (m_SelectedNameIndex != selectedIndex)
             {
-                property.managedReferenceValue = Activator.CreateInstance(m_Implementations[selectedIndex - 1]);
+                property.managedReferenceValue = Activator.CreateInstance(
+                    m_Implementations[selectedIndex - 1]
+                );
                 m_SelectedNameIndex = selectedIndex;
             }
 
@@ -80,7 +87,7 @@ namespace UnityEditor.XR.ARFoundation.Samples
             }
             ((IDisposable)childEnumerator).Dispose();
         }
-        
+
         class TypenameComparer : IComparer<Type>
         {
             int IComparer<Type>.Compare(Type x, Type y)

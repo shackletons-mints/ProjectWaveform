@@ -5,9 +5,19 @@ namespace UnityEngine.XR.ARFoundation.Samples
 {
     public static class ButtonUtils
     {
-        public static readonly Color enabledButtonTextColor = new(228f / 255, 228f / 255, 228f / 255, 1.0f);
+        public static readonly Color enabledButtonTextColor = new(
+            228f / 255,
+            228f / 255,
+            228f / 255,
+            1.0f
+        );
 
-        public static readonly Color disabledButtonTextColor = new(228f / 255, 228f / 255, 228f / 255, 0.1f);
+        public static readonly Color disabledButtonTextColor = new(
+            228f / 255,
+            228f / 255,
+            228f / 255,
+            0.1f
+        );
 
         public static void SetEnabled(this Button button, bool isOn)
         {

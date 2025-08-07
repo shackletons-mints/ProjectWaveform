@@ -4,7 +4,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
 {
     public static class SubsystemsUtility
     {
-        public static bool TryGetLoadedSubsystem<TSubsystemBase, TSubsystemConcrete>(out TSubsystemConcrete subsystem)
+        public static bool TryGetLoadedSubsystem<TSubsystemBase, TSubsystemConcrete>(
+            out TSubsystemConcrete subsystem
+        )
             where TSubsystemBase : class, ISubsystem
             where TSubsystemConcrete : class, TSubsystemBase
         {
@@ -15,7 +17,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
 
             var loader = XRGeneralSettings.Instance.Manager.activeLoader;
-            var asBaseSubsystem = loader != null ? loader.GetLoadedSubsystem<TSubsystemBase>() : null;
+            var asBaseSubsystem =
+                loader != null ? loader.GetLoadedSubsystem<TSubsystemBase>() : null;
             subsystem = asBaseSubsystem as TSubsystemConcrete;
             return subsystem != null;
         }

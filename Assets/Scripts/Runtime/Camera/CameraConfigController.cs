@@ -43,7 +43,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// <param name="dropdown">The <c>Dropdown</c> which changed.</param>
         void OnDropdownValueChanged(Dropdown dropdown)
         {
-            if ((cameraManager == null) || (cameraManager.subsystem == null) || !cameraManager.subsystem.running)
+            if (
+                (cameraManager == null)
+                || (cameraManager.subsystem == null)
+                || !cameraManager.subsystem.running
+            )
             {
                 return;
             }
@@ -70,13 +74,22 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             m_Dropdown = GetComponent<Dropdown>();
             m_Dropdown.ClearOptions();
-            m_Dropdown.onValueChanged.AddListener(delegate { OnDropdownValueChanged(m_Dropdown); });
+            m_Dropdown.onValueChanged.AddListener(
+                delegate
+                {
+                    OnDropdownValueChanged(m_Dropdown);
+                }
+            );
             m_ConfigurationNames = new List<string>();
         }
 
         void PopulateDropdown()
         {
-            if ((cameraManager == null) || (cameraManager.subsystem == null) || !cameraManager.subsystem.running)
+            if (
+                (cameraManager == null)
+                || (cameraManager.subsystem == null)
+                || !cameraManager.subsystem.running
+            )
                 return;
 
             // No configurations available probably means this feature
@@ -93,7 +106,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 // 1. Use a foreach to iterate over all the available configurations
                 foreach (var config in configurations)
                 {
-                    m_ConfigurationNames.Add($"{config.width}x{config.height}{(config.framerate.HasValue ? $" at {config.framerate.Value} Hz" : "")}{(config.depthSensorSupported == Supported.Supported ? " depth sensor" : "")}");
+                    m_ConfigurationNames.Add(
+                        $"{config.width}x{config.height}{(config.framerate.HasValue ? $" at {config.framerate.Value} Hz" : "")}{(config.depthSensorSupported == Supported.Supported ? " depth sensor" : "")}"
+                    );
                 }
                 m_Dropdown.AddOptions(m_ConfigurationNames);
 

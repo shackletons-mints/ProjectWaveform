@@ -34,7 +34,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void CreateEyeGameObjectsIfNecessary()
         {
-            if (m_Face.leftEye != null && m_LeftEyeGameObject == null )
+            if (m_Face.leftEye != null && m_LeftEyeGameObject == null)
             {
                 m_LeftEyeGameObject = Instantiate(m_EyePrefab, m_Face.leftEye);
                 m_LeftEyeGameObject.SetActive(false);
@@ -55,13 +55,19 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-
         void OnEnable()
         {
             var faceManager = FindAnyObjectByType<ARFaceManager>();
-            if (faceManager != null && faceManager.subsystem != null && faceManager.descriptor.supportsEyeTracking)
+            if (
+                faceManager != null
+                && faceManager.subsystem != null
+                && faceManager.descriptor.supportsEyeTracking
+            )
             {
-                SetVisible((m_Face.trackingState == TrackingState.Tracking) && (ARSession.state > ARSessionState.Ready));
+                SetVisible(
+                    (m_Face.trackingState == TrackingState.Tracking)
+                        && (ARSession.state > ARSessionState.Ready)
+                );
                 m_Face.updated += OnUpdated;
             }
             else
@@ -79,7 +85,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void OnUpdated(ARFaceUpdatedEventArgs eventArgs)
         {
             CreateEyeGameObjectsIfNecessary();
-            SetVisible((m_Face.trackingState == TrackingState.Tracking) && (ARSession.state > ARSessionState.Ready));
+            SetVisible(
+                (m_Face.trackingState == TrackingState.Tracking)
+                    && (ARSession.state > ARSessionState.Ready)
+            );
         }
     }
 }

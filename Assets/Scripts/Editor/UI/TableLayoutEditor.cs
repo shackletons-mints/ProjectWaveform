@@ -63,7 +63,7 @@ namespace UnityEditor.XR.ARFoundation.Samples
             m_CellsProp.ClearArray();
             iterator.intValue = childCount;
             iterator.Next(true); // advance to first array index
-            
+
             var lastIndex = childCount - 1;
             for (var i = 0; i < childCount; i++)
             {
@@ -71,7 +71,9 @@ namespace UnityEditor.XR.ARFoundation.Samples
                 var rect = child.GetComponent<RectTransform>();
                 if (rect == null)
                 {
-                    Debug.LogWarning($"{child.name} is missing a RectTransform component. Add the component and try again?");
+                    Debug.LogWarning(
+                        $"{child.name} is missing a RectTransform component. Add the component and try again?"
+                    );
                     continue;
                 }
 

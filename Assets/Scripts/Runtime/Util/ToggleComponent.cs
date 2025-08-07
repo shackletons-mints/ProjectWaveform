@@ -20,7 +20,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_TargetComponent == null)
             {
-                Debug.LogError($"{nameof(m_TargetComponent)} is null in {nameof(ToggleComponent)} on GameObject {name}. Disabling component.", this);
+                Debug.LogError(
+                    $"{nameof(m_TargetComponent)} is null in {nameof(ToggleComponent)} on GameObject {name}. Disabling component.",
+                    this
+                );
                 enabled = false;
             }
         }

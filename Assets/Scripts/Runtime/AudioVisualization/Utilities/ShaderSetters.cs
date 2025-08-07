@@ -1,21 +1,20 @@
-using UnityEngine;
 using AudioVisualization;
+using UnityEngine;
 
 namespace Utilities
 {
     public static class ShaderSetters
     {
-		public static void SetShaderColor(AudioVisualizer visualizer, int pitchClass)
-		{
-			Color pitchColor = AudioConstants.PitchColors[pitchClass];
-			Color previousPitchColor = AudioConstants.PitchColors[visualizer.previousPitchClass];
-			visualizer.rippleShader.SetColor("_EmissionColor", pitchColor);
+        public static void SetShaderColor(AudioVisualizer visualizer, int pitchClass)
+        {
+            Color pitchColor = AudioConstants.PitchColors[pitchClass];
+            Color previousPitchColor = AudioConstants.PitchColors[visualizer.previousPitchClass];
+            visualizer.rippleShader.SetColor("_EmissionColor", pitchColor);
 
-			if (pitchColor != previousPitchColor)
-			{
-				visualizer.rippleShader.SetColor("_PreviousColor", previousPitchColor);
-			}
-		}
+            if (pitchColor != previousPitchColor)
+            {
+                visualizer.rippleShader.SetColor("_PreviousColor", previousPitchColor);
+            }
+        }
     }
 }
-

@@ -19,7 +19,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             m_ARPlane = GetComponent<ARPlane>();
             m_PlaneMeshRenderer = GetComponent<MeshRenderer>();
-            m_OriginalColor =  m_PlaneMeshRenderer.material.color;
+            m_OriginalColor = m_PlaneMeshRenderer.material.color;
         }
 
         void Update()
@@ -29,7 +29,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void UpdatePlaneColor()
         {
-
             Color planeMatColor = Color.cyan;
 
             switch (m_ARPlane.trackingState)

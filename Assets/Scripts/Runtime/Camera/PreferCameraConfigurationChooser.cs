@@ -12,21 +12,33 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// <summary>
         /// Selects a configuration from the given <paramref name="descriptors"/> and <paramref name="requestedFeatures"/>.
         /// </summary>
-        public override Configuration ChooseConfiguration(NativeSlice<ConfigurationDescriptor> descriptors, Feature requestedFeatures)
+        public override Configuration ChooseConfiguration(
+            NativeSlice<ConfigurationDescriptor> descriptors,
+            Feature requestedFeatures
+        )
         {
             if (descriptors.Length == 0)
             {
-                throw new ArgumentException("No configuration descriptors to choose from.", nameof(descriptors));
+                throw new ArgumentException(
+                    "No configuration descriptors to choose from.",
+                    nameof(descriptors)
+                );
             }
 
             if (requestedFeatures.Intersection(Feature.AnyTrackingMode).Count() > 1)
             {
-                throw new ArgumentException($"Zero or one tracking mode must be requested. Requested tracking modes => {requestedFeatures.Intersection(Feature.AnyTrackingMode).ToStringList()}", nameof(requestedFeatures));
+                throw new ArgumentException(
+                    $"Zero or one tracking mode must be requested. Requested tracking modes => {requestedFeatures.Intersection(Feature.AnyTrackingMode).ToStringList()}",
+                    nameof(requestedFeatures)
+                );
             }
 
             if (requestedFeatures.Intersection(Feature.AnyCamera).Count() > 1)
             {
-                throw new ArgumentException($"Zero or one camera mode must be requested. Requested camera modes => {requestedFeatures.Intersection(Feature.AnyCamera).ToStringList()}", nameof(requestedFeatures));
+                throw new ArgumentException(
+                    $"Zero or one camera mode must be requested. Requested camera modes => {requestedFeatures.Intersection(Feature.AnyCamera).ToStringList()}",
+                    nameof(requestedFeatures)
+                );
             }
 
             // Get the requested camera features out of the set of requested features.
@@ -47,8 +59,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 }
 
                 // Store the descriptor with the highest feature weight.
-                if ((featureWeight <= highestFeatureWeight)
-                    && (featureWeight != highestFeatureWeight || descriptor.rank <= highestRank))
+                if (
+                    (featureWeight <= highestFeatureWeight)
+                    && (featureWeight != highestFeatureWeight || descriptor.rank <= highestRank)
+                )
                     continue;
 
                 highestFeatureWeight = featureWeight;
@@ -57,7 +71,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
 
             // Return the configuration with the best matching descriptor.
-            return new Configuration(bestDescriptor, requestedFeatures.Intersection(bestDescriptor.capabilities));
+            return new Configuration(
+                bestDescriptor,
+                requestedFeatures.Intersection(bestDescriptor.capabilities)
+            );
         }
     }
 }

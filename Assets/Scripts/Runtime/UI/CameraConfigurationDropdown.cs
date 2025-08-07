@@ -27,14 +27,22 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (m_CameraManager == null)
                 TryInitializeSerializedFields();
 
-            m_CameraConfigurationDropdown.onValueChanged.AddListener(delegate { OnCameraDropdownValueChanged(m_CameraConfigurationDropdown); });
+            m_CameraConfigurationDropdown.onValueChanged.AddListener(
+                delegate
+                {
+                    OnCameraDropdownValueChanged(m_CameraConfigurationDropdown);
+                }
+            );
             StartCoroutine(PopulateCameraDropdown());
         }
 
         void LateUpdate()
         {
             var cameraConfigOption = m_CameraManager.currentConfiguration;
-            if(cameraConfigOption.HasValue && cameraConfigOption.Value != m_CurrentCameraConfiguration)
+            if (
+                cameraConfigOption.HasValue
+                && cameraConfigOption.Value != m_CurrentCameraConfiguration
+            )
                 m_CurrentCameraConfiguration = cameraConfigOption.Value;
         }
 
@@ -50,7 +58,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             yield return null;
 
-            if (m_CameraManager == null || m_CameraManager.subsystem is not {running: true})
+            if (m_CameraManager == null || m_CameraManager.subsystem is not { running: true })
                 yield break;
 
             using var configurations = m_CameraManager.GetConfigurations(Allocator.Temp);
@@ -58,7 +66,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             var configurationNames = new List<string>();
             foreach (var config in configurations)
             {
-                configurationNames.Add($"{config.width}x{config.height}{(config.framerate.HasValue ? $" at {config.framerate.Value} Hz" : "")}");
+                configurationNames.Add(
+                    $"{config.width}x{config.height}{(config.framerate.HasValue ? $" at {config.framerate.Value} Hz" : "")}"
+                );
             }
             m_CameraConfigurationDropdown.AddOptions(configurationNames);
 

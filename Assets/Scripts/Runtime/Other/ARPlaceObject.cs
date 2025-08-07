@@ -40,7 +40,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_RaycastHitEvent == null || m_PrefabToPlace == null)
             {
-                Debug.LogWarning($"{nameof(ARPlaceObject)} component on {name} has null inputs and will have no effect in this scene.", this);
+                Debug.LogWarning(
+                    $"{nameof(ARPlaceObject)} component on {name} has null inputs and will have no effect in this scene.",
+                    this
+                );
                 return;
             }
 

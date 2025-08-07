@@ -11,7 +11,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
 {
     [RequireComponent(typeof(ARCameraManager))]
 #if UNITY_IOS
-    public abstract class ARKitAdvancedCameraConfigurationController<TMode, TConfigValue> : MonoBehaviour
+    public abstract class ARKitAdvancedCameraConfigurationController<TMode, TConfigValue>
+        : MonoBehaviour
         where TMode : Enum
         where TConfigValue : struct
 #else
@@ -97,11 +98,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (m_Subsystem == null)
             {
                 Debug.LogWarning(
-                    $"No active instance of {nameof(ARKitCameraSubsystem)} found. {GetType().Name} will be disabled.");
+                    $"No active instance of {nameof(ARKitCameraSubsystem)} found. {GetType().Name} will be disabled."
+                );
                 enabled = false;
                 return;
             }
-            
+
             if (m_UnsupportedMessage)
             {
                 m_UnsupportedMessage.SetActive(false);
@@ -142,7 +144,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     // AR is unsupported; don't keep waiting for session tracking
                     yield break;
                 }
-                
+
                 // wait until next frame
                 yield return null;
             }
@@ -161,7 +163,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
 
             Debug.LogWarning(
-                $"Advance camera configuration is not supported on this device. {GetType().Name} will be disabled.");
+                $"Advance camera configuration is not supported on this device. {GetType().Name} will be disabled."
+            );
             enabled = false;
         }
 
@@ -182,7 +185,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         IEnumerator PopulateControls()
         {
             // wait to check support and the platform plug-in to initialize
-            yield return new WaitWhile(() => m_Status == SupportStatus.Pending || m_Status == SupportStatus.Checking);
+            yield return new WaitWhile(() =>
+                m_Status == SupportStatus.Pending || m_Status == SupportStatus.Checking
+            );
 
             if (m_Status == SupportStatus.Unsupported)
             {
@@ -261,6 +266,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         protected virtual bool InteractableUpdateButton(TMode mode) => true;
+
         protected virtual void PostUpdate() { }
 
         protected abstract void PopulateSupportedModes(ARKitLockedCamera lockedCamera);
@@ -275,7 +281,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             Pending,
             Checking,
             Supported,
-            Unsupported
+            Unsupported,
         }
 #endif // UNITY_IOS
     }

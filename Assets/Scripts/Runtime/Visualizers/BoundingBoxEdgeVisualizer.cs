@@ -112,12 +112,12 @@ public class BoundingBoxEdgeVisualizer : MonoBehaviour
         m_PreviouseSize = m_ARBoundingBox.size;
         var size = m_ARBoundingBox.size;
         var halfSize = size * 0.5f;
-        
+
         UpdateTopEdges(size, halfSize);
         UpdateVerticalEdges(size, halfSize);
         UpdateBottomEdges(size, halfSize);
     }
-    
+
     void UpdateTopEdges(Vector3 size, Vector3 halfSize)
     {
         // update sizes

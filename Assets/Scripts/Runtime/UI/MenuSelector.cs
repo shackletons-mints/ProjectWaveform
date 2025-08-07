@@ -41,7 +41,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 // If we have a selected menu on awake, this means the scene was unloaded and reloaded.
                 // In this case our selected menu GameObject will be null, but we can find it again by name.
-                s_SelectedMenu = transform.parent.Find(s_SelectedMenuInfo.gameObjectName).gameObject;
+                s_SelectedMenu = transform
+                    .parent.Find(s_SelectedMenuInfo.gameObjectName)
+                    .gameObject;
                 if (s_SelectedMenuInfo.menuName != null)
                     SetTitleLabelMenuName(s_SelectedMenuInfo.menuName);
 
@@ -62,7 +64,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (menu == null)
             {
                 Debug.LogWarning(
-                    $"{nameof(MenuSelector)}.{nameof(SelectMenu)}: {nameof(menu)} was null and could not be selected.");
+                    $"{nameof(MenuSelector)}.{nameof(SelectMenu)}: {nameof(menu)} was null and could not be selected."
+                );
 
                 return;
             }

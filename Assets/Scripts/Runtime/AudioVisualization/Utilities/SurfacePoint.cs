@@ -5,6 +5,7 @@ public class SurfacePoint
 {
     [Tooltip("Position on the sphere")]
     public Vector3 position;
+
     [Tooltip("Direction perpendicular to the surface at this point")]
     public Vector3 normal;
 

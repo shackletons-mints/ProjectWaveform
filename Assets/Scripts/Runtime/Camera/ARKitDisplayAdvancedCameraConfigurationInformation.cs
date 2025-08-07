@@ -5,12 +5,17 @@ using TMPro;
 namespace UnityEngine.XR.ARFoundation.Samples
 {
 #if UNITY_IOS
-    public abstract class ARKitDisplayAdvancedCameraConfigurationInformation<TController, TMode, TConfigValue> : MonoBehaviour
+    public abstract class ARKitDisplayAdvancedCameraConfigurationInformation<
+        TController,
+        TMode,
+        TConfigValue
+    > : MonoBehaviour
         where TController : ARKitAdvancedCameraConfigurationController<TMode, TConfigValue>
         where TMode : Enum
         where TConfigValue : struct
 #else
-    public abstract class ARKitDisplayAdvancedCameraConfigurationInformation<TController> : MonoBehaviour
+    public abstract class ARKitDisplayAdvancedCameraConfigurationInformation<TController>
+        : MonoBehaviour
         where TController : ARKitAdvancedCameraConfigurationController
 #endif
     {
@@ -52,7 +57,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (m_Controller == null)
             {
                 Debug.LogWarning(
-                    $"A reference to {nameof(TController)} is required. {GetType().Name} will be disabled.");
+                    $"A reference to {nameof(TController)} is required. {GetType().Name} will be disabled."
+                );
                 enabled = false;
             }
         }

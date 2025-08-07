@@ -46,7 +46,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void OnEnable()
         {
             var faceManager = FindAnyObjectByType<ARFaceManager>();
-            if (faceManager != null && faceManager.subsystem != null && faceManager.descriptor.supportsEyeTracking)
+            if (
+                faceManager != null
+                && faceManager.subsystem != null
+                && faceManager.descriptor.supportsEyeTracking
+            )
             {
                 m_Face.updated += OnUpdated;
             }
@@ -65,7 +69,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void OnUpdated(ARFaceUpdatedEventArgs eventArgs)
         {
             CreateEyeGameObjectsIfNecessary();
-            SetVisible((m_Face.trackingState == TrackingState.Tracking) && (ARSession.state > ARSessionState.Ready));
+            SetVisible(
+                (m_Face.trackingState == TrackingState.Tracking)
+                    && (ARSession.state > ARSessionState.Ready)
+            );
             UpdateFixationPoint();
         }
 

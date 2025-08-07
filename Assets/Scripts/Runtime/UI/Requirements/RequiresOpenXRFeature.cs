@@ -8,7 +8,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
     [Serializable]
     public class RequiresOpenXRFeature : IBooleanExpression
     {
-        [SerializeField, SelectOpenXRFeatureTypename, Tooltip("The assembly qualified type name of the OpenXR feature.")]
+        [
+            SerializeField,
+            SelectOpenXRFeatureTypename,
+            Tooltip("The assembly qualified type name of the OpenXR feature.")
+        ]
         string m_RequiredFeature;
 
         public bool Evaluate()

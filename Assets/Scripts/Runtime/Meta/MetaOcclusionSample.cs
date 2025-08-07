@@ -20,7 +20,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void OnEnable()
         {
-            if (!SubsystemsUtility.TryGetLoadedSubsystem<XROcclusionSubsystem, MetaOpenXROcclusionSubsystem>(out m_OcclusionSubsystem))
+            if (
+                !SubsystemsUtility.TryGetLoadedSubsystem<
+                    XROcclusionSubsystem,
+                    MetaOpenXROcclusionSubsystem
+                >(out m_OcclusionSubsystem)
+            )
             {
                 Debug.LogError("Meta Occlusion subsystem not loaded.");
                 enabled = false;
@@ -28,7 +33,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
             if (m_DebugText == null)
             {
-                Debug.LogError($"{nameof(MetaOcclusionSample)} has null references. Fix in the Inspector.", this);
+                Debug.LogError(
+                    $"{nameof(MetaOcclusionSample)} has null references. Fix in the Inspector.",
+                    this
+                );
                 enabled = false;
                 return;
             }
@@ -44,8 +52,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_DebugText.text = m_OcclusionSubsystem.isHandRemovalSupported switch
             {
                 Supported.Unsupported => k_NotSupportedMsg,
-                Supported.Supported => m_OcclusionSubsystem.isHandRemovalEnabled ? k_EnabledMsg : k_DisabledMsg,
-                _ => m_DebugText.text
+                Supported.Supported => m_OcclusionSubsystem.isHandRemovalEnabled
+                    ? k_EnabledMsg
+                    : k_DisabledMsg,
+                _ => m_DebugText.text,
             };
         }
 #endif // METAOPENXR_2_1_OR_NEWER && (UNITY_EDITOR || UNITY_ANDROID)
@@ -53,13 +63,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
         public void ToggleHandRemoval()
         {
 #if METAOPENXR_2_1_OR_NEWER && (UNITY_EDITOR || UNITY_ANDROID)
-            var result = m_OcclusionSubsystem.TrySetHandRemovalEnabled(!m_OcclusionSubsystem.isHandRemovalEnabled);
+            var result = m_OcclusionSubsystem.TrySetHandRemovalEnabled(
+                !m_OcclusionSubsystem.isHandRemovalEnabled
+            );
             if (result < 0)
                 Debug.LogError($"Setting hand removal failed with error: {result.ToString()}");
             else
                 UpdateDebugText();
 #endif // METAOPENXR_2_1_OR_NEWER && (UNITY_EDITOR || UNITY_ANDROID)
-
         }
     }
 }

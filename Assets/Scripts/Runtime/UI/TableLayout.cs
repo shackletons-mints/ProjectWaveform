@@ -10,7 +10,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
     [RequireComponent(typeof(RectTransform))]
     public class TableLayout : MonoBehaviour
     {
-        enum Alignment { Left, Center }
+        enum Alignment
+        {
+            Left,
+            Center,
+        }
 
         RectTransform m_RectTransform;
 
@@ -58,7 +62,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 return;
 
             if (m_RectTransform == null)
-               m_RectTransform = GetComponent<RectTransform>();
+                m_RectTransform = GetComponent<RectTransform>();
 
             ResetCells();
             RegenerateLayout();
@@ -109,11 +113,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
-                    
+
                     cell.AnchorToTopCenter();
-                    cell.SetTopLeftPosition(new Vector2(
-                        xLeft + j * (m_CellWidth + m_CellPadding), 
-                        rect.yMax - i * (m_CellHeight + m_CellPadding)));
+                    cell.SetTopLeftPosition(
+                        new Vector2(
+                            xLeft + j * (m_CellWidth + m_CellPadding),
+                            rect.yMax - i * (m_CellHeight + m_CellPadding)
+                        )
+                    );
                 }
             }
         }

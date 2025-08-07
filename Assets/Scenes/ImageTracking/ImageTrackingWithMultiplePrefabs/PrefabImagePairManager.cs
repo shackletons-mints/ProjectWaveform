@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.XR.ARSubsystems;
-using UnityEngine.XR.ARFoundation;
+
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -94,7 +95,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 // Give the initial image a reasonable default scale
                 var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
-                trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
+                trackedImage.transform.localScale = new Vector3(
+                    minLocalScalar,
+                    minLocalScalar,
+                    minLocalScalar
+                );
                 AssignPrefab(trackedImage);
             }
         }
@@ -102,18 +107,27 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void AssignPrefab(ARTrackedImage trackedImage)
         {
             if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
-                m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
+                m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(
+                    prefab,
+                    trackedImage.transform
+                );
         }
 
-        public GameObject GetPrefabForReferenceImage(XRReferenceImage referenceImage)
-            => m_PrefabsDictionary.TryGetValue(referenceImage.guid, out var prefab) ? prefab : null;
+        public GameObject GetPrefabForReferenceImage(XRReferenceImage referenceImage) =>
+            m_PrefabsDictionary.TryGetValue(referenceImage.guid, out var prefab) ? prefab : null;
 
-        public void SetPrefabForReferenceImage(XRReferenceImage referenceImage, GameObject alternativePrefab)
+        public void SetPrefabForReferenceImage(
+            XRReferenceImage referenceImage,
+            GameObject alternativePrefab
+        )
         {
             m_PrefabsDictionary[referenceImage.guid] = alternativePrefab;
             if (m_Instantiated.TryGetValue(referenceImage.guid, out var instantiatedPrefab))
             {
-                m_Instantiated[referenceImage.guid] = Instantiate(alternativePrefab, instantiatedPrefab.transform.parent);
+                m_Instantiated[referenceImage.guid] = Instantiate(
+                    alternativePrefab,
+                    instantiatedPrefab.transform.parent
+                );
                 Destroy(instantiatedPrefab);
             }
         }
@@ -169,7 +183,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                         var tempDictionary = new Dictionary<Guid, GameObject>();
                         foreach (var referenceImage in library)
                         {
-                            tempDictionary.Add(referenceImage.guid, behaviour.GetPrefabForReferenceImage(referenceImage));
+                            tempDictionary.Add(
+                                referenceImage.guid,
+                                behaviour.GetPrefabForReferenceImage(referenceImage)
+                            );
                         }
                         behaviour.m_PrefabsDictionary = tempDictionary;
                     }
@@ -196,7 +213,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
                         var tempDictionary = new Dictionary<Guid, GameObject>();
                         foreach (var image in library)
                         {
-                            var prefab = (GameObject) EditorGUILayout.ObjectField(image.name, behaviour.m_PrefabsDictionary[image.guid], typeof(GameObject), false);
+                            var prefab = (GameObject)
+                                EditorGUILayout.ObjectField(
+                                    image.name,
+                                    behaviour.m_PrefabsDictionary[image.guid],
+                                    typeof(GameObject),
+                                    false
+                                );
                             tempDictionary.Add(image.guid, prefab);
                         }
 

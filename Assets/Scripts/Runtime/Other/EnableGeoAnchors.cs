@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-
 #if UNITY_IOS
 using System.Runtime.InteropServices;
 using UnityEngine.XR.ARKit;
@@ -19,30 +18,36 @@ namespace UnityEngine.XR.ARFoundation.Samples
     {
         static readonly ConfigurationChooser s_DefaultChooser = new DefaultConfigurationChooser();
 
-        static readonly ConfigurationDescriptor s_ARGeoConfigurationDescriptor = new ConfigurationDescriptor(
-            // On iOS, the "identifier" used by the ConfigurationDescriptor is the Objective-C metaclass for the type
-            // of configuration that should be used. In general, you should not create new ConfigurationDescriptors
-            // (you should pick one of the descriptors passed into ChooseConfiguration); however, this will do for this
-            // specific case.
-            ARGeoTrackingConfigurationClass,
+        static readonly ConfigurationDescriptor s_ARGeoConfigurationDescriptor =
+            new ConfigurationDescriptor(
+                // On iOS, the "identifier" used by the ConfigurationDescriptor is the Objective-C metaclass for the type
+                // of configuration that should be used. In general, you should not create new ConfigurationDescriptors
+                // (you should pick one of the descriptors passed into ChooseConfiguration); however, this will do for this
+                // specific case.
+                ARGeoTrackingConfigurationClass,
+                // These are the "features" supported by the ARGeoTrackingConfiguration
+                Feature.WorldFacingCamera
+                    | Feature.PositionAndRotation
+                    | Feature.ImageTracking
+                    | Feature.PlaneTracking
+                    | Feature.ObjectTracking
+                    | Feature.EnvironmentProbes,
+                // Rank is meant to be used as a tie breaker in our implementation of ChooseConfiguration, but since we will
+                // always choose this descriptor, it doesn't matter what value we use here.
+                0
+            );
 
-            // These are the "features" supported by the ARGeoTrackingConfiguration
-            Feature.WorldFacingCamera |
-            Feature.PositionAndRotation |
-            Feature.ImageTracking |
-            Feature.PlaneTracking |
-            Feature.ObjectTracking |
-            Feature.EnvironmentProbes,
-
-            // Rank is meant to be used as a tie breaker in our implementation of ChooseConfiguration, but since we will
-            // always choose this descriptor, it doesn't matter what value we use here.
-            0);
-
-        public override Configuration ChooseConfiguration(NativeSlice<ConfigurationDescriptor> descriptors, Feature requestedFeatures)
+        public override Configuration ChooseConfiguration(
+            NativeSlice<ConfigurationDescriptor> descriptors,
+            Feature requestedFeatures
+        )
         {
             // If location services are running, then we can request an ARGeoTrackingConfiguration by its class pointer
             return Input.location.status == LocationServiceStatus.Running
-                ? new Configuration(s_ARGeoConfigurationDescriptor, requestedFeatures.Intersection(s_ARGeoConfigurationDescriptor.capabilities))
+                ? new Configuration(
+                    s_ARGeoConfigurationDescriptor,
+                    requestedFeatures.Intersection(s_ARGeoConfigurationDescriptor.capabilities)
+                )
                 : s_DefaultChooser.ChooseConfiguration(descriptors, requestedFeatures);
         }
 
@@ -58,7 +63,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
     public class EnableGeoAnchors : PressInputBase
     {
 #if UNITY_IOS && !UNITY_EDITOR
-        public static bool IsSupported => ARGeoAnchorConfigurationChooser.ARGeoTrackingConfigurationClass != IntPtr.Zero;
+        public static bool IsSupported =>
+            ARGeoAnchorConfigurationChooser.ARGeoTrackingConfigurationClass != IntPtr.Zero;
 
         // See https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.0/manual/extensions.html
         public struct NativePtrData
@@ -114,18 +120,22 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (GetComponent<ARSession>().subsystem is ARKitSessionSubsystem subsystem)
             {
                 var isValidSession = TryGetSession(subsystem, out var session);
-                if(!isValidSession)
+                if (!isValidSession)
                     return;
 
                 // Get last known location data
                 var locationData = Input.location.lastData;
 
                 // Add a geo anchor. See GeoAnchorsNativeInterop.m to see how this works.
-                AddGeoAnchor(session, new CLLocationCoordinate2D
-                {
-                    latitude = locationData.latitude,
-                    longitude = locationData.longitude
-                }, locationData.altitude);
+                AddGeoAnchor(
+                    session,
+                    new CLLocationCoordinate2D
+                    {
+                        latitude = locationData.latitude,
+                        longitude = locationData.longitude,
+                    },
+                    locationData.altitude
+                );
             }
         }
 
@@ -144,7 +154,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 subsystem.requestedWorldAlignment = ARWorldAlignment.GravityAndHeading;
 
                 var isValidSession = TryGetSession(subsystem, out var session);
-                if(!isValidSession)
+                if (!isValidSession)
                     return;
 
                 DoSomethingWithSession(session);
@@ -170,7 +180,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
         static extern void DoSomethingWithSession(IntPtr session);
 
         [DllImport("__Internal", EntryPoint = "ARSession_addGeoAnchor")]
-        static extern void AddGeoAnchor(IntPtr session, CLLocationCoordinate2D coordinate, double altitude);
+        static extern void AddGeoAnchor(
+            IntPtr session,
+            CLLocationCoordinate2D coordinate,
+            double altitude
+        );
 #else
         public static bool IsSupported => false;
 #endif

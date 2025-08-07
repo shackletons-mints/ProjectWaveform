@@ -38,7 +38,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             if (!m_SceneDescriptor.EvaluateRequirements())
             {
-                Debug.LogError($"Cannot launch scene {m_SceneDescriptor.sceneName} because it is not supported on this device.");
+                Debug.LogError(
+                    $"Cannot launch scene {m_SceneDescriptor.sceneName} because it is not supported on this device."
+                );
                 return;
             }
 

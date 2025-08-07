@@ -9,7 +9,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
     {
         [SerializeField, HideInInspector]
         ScrollRect m_ScrollView;
-        
+
         [SerializeField]
         RectTransform m_Viewport;
 

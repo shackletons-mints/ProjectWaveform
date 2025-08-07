@@ -9,7 +9,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             var oldSize = rt.rect.size;
             var deltaSize = size - oldSize;
             rt.offsetMin -= new Vector2(deltaSize.x * rt.pivot.x, deltaSize.y * rt.pivot.y);
-            rt.offsetMax += new Vector2(deltaSize.x * (1f - rt.pivot.x), deltaSize.y * (1f - rt.pivot.y));
+            rt.offsetMax += new Vector2(
+                deltaSize.x * (1f - rt.pivot.x),
+                deltaSize.y * (1f - rt.pivot.y)
+            );
         }
 
         public static float GetWidth(this RectTransform rt)
@@ -37,7 +40,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             rt.localPosition = new Vector3(
                 pos.x + (rt.pivot.x * rt.rect.width),
                 pos.y - ((1f - rt.pivot.y) * rt.rect.height),
-                rt.localPosition.z);
+                rt.localPosition.z
+            );
         }
 
         public static void SetTopCenterPosition(this RectTransform rt, Vector2 pos)
@@ -45,36 +49,27 @@ namespace UnityEngine.XR.ARFoundation.Samples
             rt.localPosition = new Vector3(
                 pos.x + (rt.pivot.x * rt.rect.width / 2),
                 pos.y - ((1f - rt.pivot.y) * rt.rect.height),
-                rt.localPosition.z);
+                rt.localPosition.z
+            );
         }
 
         public static void TranslateX(this RectTransform rt, float x)
         {
             Vector3 pos = rt.localPosition;
-            rt.localPosition = new Vector3(
-                pos.x + x,
-                pos.y,
-                pos.z);
+            rt.localPosition = new Vector3(pos.x + x, pos.y, pos.z);
         }
 
         public static void TranslateY(this RectTransform rt, float y)
         {
             Vector3 pos = rt.localPosition;
-            rt.localPosition = new Vector3(
-                pos.x,
-                pos.y + y,
-                pos.z);
+            rt.localPosition = new Vector3(pos.x, pos.y + y, pos.z);
         }
 
         public static void Translate(this RectTransform rt, Vector2 translation)
         {
             Vector3 pos = rt.localPosition;
-            rt.localPosition = new Vector3(
-                pos.x + translation.x,
-                pos.y + translation.y,
-                pos.z);
+            rt.localPosition = new Vector3(pos.x + translation.x, pos.y + translation.y, pos.z);
         }
-
 
         public static void AnchorToTopCenter(this RectTransform rt)
         {

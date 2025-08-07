@@ -13,6 +13,6 @@
         /// <summary>
         /// Sent immediately without queuing, no guaranteed delivery.
         /// </summary>
-        Unreliable
+        Unreliable,
     }
 }

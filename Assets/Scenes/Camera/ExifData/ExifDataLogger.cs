@@ -1,9 +1,9 @@
 using System;
+using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARSubsystems;
-using System.Runtime.InteropServices;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -31,7 +31,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_CameraManager == null)
                 m_CameraManager = FindAnyObjectByType<ARCameraManager>();
-            
+
             if (m_CameraManager != null)
             {
                 m_CameraManager.frameReceived += OnCameraFrameReceived;
@@ -49,7 +49,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 m_CameraManager.frameReceived -= OnCameraFrameReceived;
             }
         }
-        
+
         /// <summary>
         /// Logs all available EXIF data.
         /// </summary>

@@ -24,7 +24,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// <summary>
         /// The mesh manager for the scene.
         /// </summary>
-        public ARMeshManager meshManager { get => m_MeshManager; set => m_MeshManager = value; }
+        public ARMeshManager meshManager
+        {
+            get => m_MeshManager;
+            set => m_MeshManager = value;
+        }
 
         /// <summary>
         /// Whether mesh classification should be enabled.
@@ -52,13 +56,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// </summary>
         void UpdateMeshSubsystem()
         {
-    #if UNITY_IOS && !UNITY_EDITOR
+#if UNITY_IOS && !UNITY_EDITOR
             Debug.Assert(m_MeshManager != null, "mesh manager cannot be null");
-            if ((m_MeshManager != null) && (m_MeshManager.subsystem is XRMeshSubsystem meshSubsystem))
+            if (
+                (m_MeshManager != null)
+                && (m_MeshManager.subsystem is XRMeshSubsystem meshSubsystem)
+            )
             {
                 meshSubsystem.SetClassificationEnabled(m_ClassificationEnabled);
             }
-    #endif // UNITY_IOS && !UNITY_EDITOR
+#endif // UNITY_IOS && !UNITY_EDITOR
         }
     }
 }

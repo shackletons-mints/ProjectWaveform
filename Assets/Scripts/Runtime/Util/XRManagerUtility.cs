@@ -12,7 +12,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// <typeparam name="TLoader">The <see cref="XRLoader"/> type to check the active status of.</typeparam>
         /// <returns><see langword="true"/> if <c>TLoader</c> is active. Otherwise, <see langword="false"/>.</returns>
         /// <seealso href="https://docs.unity3d.com/Packages/com.unity.xr.management@4.3/manual/index.html"/>
-        public static bool IsLoaderActive<TLoader>() where TLoader : XRLoader
+        public static bool IsLoaderActive<TLoader>()
+            where TLoader : XRLoader
         {
             var settingsInstance = XRGeneralSettings.Instance;
             if (settingsInstance == null)

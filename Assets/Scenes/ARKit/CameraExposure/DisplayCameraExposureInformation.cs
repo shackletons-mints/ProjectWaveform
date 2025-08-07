@@ -6,10 +6,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
 {
     public class DisplayCameraExposureInformation
 #if UNITY_IOS
-        : ARKitDisplayAdvancedCameraConfigurationInformation<CameraExposureController, ARKitExposureMode, ARKitExposure>
+        : ARKitDisplayAdvancedCameraConfigurationInformation<
+            CameraExposureController,
+            ARKitExposureMode,
+            ARKitExposure
+        >
 #else
         : ARKitDisplayAdvancedCameraConfigurationInformation<CameraExposureController>
 #endif
-    {
-    }
+    { }
 }

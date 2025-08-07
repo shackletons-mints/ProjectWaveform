@@ -102,7 +102,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// </summary>
         void OnThermalStateChanged(ThermalStateForIOS.ThermalStateChange thermalStateChangeArgs)
         {
-            m_ThermalStateText.text = $"Thermal State: {thermalStateChangeArgs.currentThermalState}";
+            m_ThermalStateText.text =
+                $"Thermal State: {thermalStateChangeArgs.currentThermalState}";
             SetARFeaturesBasedOnThermalState(thermalStateChangeArgs.currentThermalState);
         }
 
@@ -183,14 +184,20 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void ToggleHumanSegmentationFeatures(bool active)
         {
             Debug.Assert(m_OcclusionManager != null, "occlusion manager not found");
-            m_OcclusionManager.requestedHumanDepthMode = active ? HumanSegmentationDepthMode.Best : HumanSegmentationDepthMode.Disabled;
-            m_OcclusionManager.requestedHumanStencilMode = active ? HumanSegmentationStencilMode.Best : HumanSegmentationStencilMode.Disabled;
+            m_OcclusionManager.requestedHumanDepthMode = active
+                ? HumanSegmentationDepthMode.Best
+                : HumanSegmentationDepthMode.Disabled;
+            m_OcclusionManager.requestedHumanStencilMode = active
+                ? HumanSegmentationStencilMode.Best
+                : HumanSegmentationStencilMode.Disabled;
         }
 
         void ToggleEnvironmentDepthFeature(bool active)
         {
             Debug.Assert(m_OcclusionManager != null, "occlusion manager not found");
-            m_OcclusionManager.requestedEnvironmentDepthMode = active ? EnvironmentDepthMode.Best : EnvironmentDepthMode.Disabled;
+            m_OcclusionManager.requestedEnvironmentDepthMode = active
+                ? EnvironmentDepthMode.Best
+                : EnvironmentDepthMode.Disabled;
         }
 
         void ToggleARSession(bool active)
