@@ -51,8 +51,8 @@ public class SpawnVisualizer : MonoBehaviour
         Rigidbody rb = visualizer.GetComponentInChildren<Rigidbody>();
         if (rb != null)
         {
-            rb.isKinematic = false;
             rb.useGravity = true;
+            rb.isKinematic = false;
         }
     }
 
