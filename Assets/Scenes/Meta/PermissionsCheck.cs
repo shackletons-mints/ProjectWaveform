@@ -1,8 +1,9 @@
+using UnityEngine.Events;
 #if UNITY_ANDROID
 using UnityEngine.Android;
 #endif// UNITY_ANDROID
 
-using UnityEngine.Events;
+
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -10,14 +11,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
     {
         private const string k_DefaultPermissionId = "com.oculus.permission.USE_SCENE";
 
-#pragma warning disable CS0414 
-        [SerializeField, Tooltip("The Android system permission to request when this component Starts")] 
+#pragma warning disable CS0414
+        [
+            SerializeField,
+            Tooltip("The Android system permission to request when this component Starts")
+        ]
         string m_PermissionId = k_DefaultPermissionId;
 
-        [SerializeField] 
+        [SerializeField]
         UnityEvent<string> m_PermissionDenied;
 
-        [SerializeField] 
+        [SerializeField]
         UnityEvent<string> m_PermissionGranted;
 #pragma warning restore CS0414
 

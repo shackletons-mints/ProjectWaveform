@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Collections;
-
 // Ensure that dropdown works on Windows standalone for Meta Quest Link
 #if METAOPENXR_0_2_OR_NEWER && (UNITY_ANDROID || UNITY_EDITOR_WIN)
 using UnityEngine.XR.OpenXR.Features.Meta;
@@ -36,18 +35,26 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void Start()
         {
-            if (!SubsystemsUtility.TryGetLoadedSubsystem<XRDisplaySubsystem, XRDisplaySubsystem>(out m_DisplaySubsystem))
+            if (
+                !SubsystemsUtility.TryGetLoadedSubsystem<XRDisplaySubsystem, XRDisplaySubsystem>(
+                    out m_DisplaySubsystem
+                )
+            )
             {
                 Debug.LogError(
                     $"No {nameof(XRDisplaySubsystem)} is loaded. {nameof(MetaDisplayRefreshRateDropdown)} will have no effect.",
-                    this);
+                    this
+                );
 
                 enabled = false;
                 return;
             }
 
 #if UNITY_EDITOR || !UNITY_ANDROID
-            Debug.LogError($"{nameof(MetaDisplayRefreshRateDropdown)} is only supported on the Android platform.", this);
+            Debug.LogError(
+                $"{nameof(MetaDisplayRefreshRateDropdown)} is only supported on the Android platform.",
+                this
+            );
             enabled = false;
             return;
 #elif METAOPENXR_0_2_OR_NEWER
@@ -55,17 +62,26 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 Debug.LogError(
                     $"{DisplayUtilitiesFeature.displayName} is not enabled. {nameof(MetaDisplayRefreshRateDropdown)} will have no effect.",
-                    this);
+                    this
+                );
 
                 enabled = false;
                 return;
             }
 
-            m_Dropdown.onValueChanged.AddListener(delegate { OnDropdownValueChanged(m_Dropdown); });
+            m_Dropdown.onValueChanged.AddListener(
+                delegate
+                {
+                    OnDropdownValueChanged(m_Dropdown);
+                }
+            );
             StartCoroutine(PopulateDropdown());
 
 #else
-            Debug.LogError($"{nameof(MetaDisplayRefreshRateDropdown)} requires the package com.unity.xr.meta-openxr", this);
+            Debug.LogError(
+                $"{nameof(MetaDisplayRefreshRateDropdown)} requires the package com.unity.xr.meta-openxr",
+                this
+            );
             enabled = false;
             return;
 #endif
@@ -73,9 +89,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void Update()
         {
-            if (m_CurrentRefreshRateLabel != null && m_DisplaySubsystem.TryGetDisplayRefreshRate(out var currentRefreshRate))
+            if (
+                m_CurrentRefreshRateLabel != null
+                && m_DisplaySubsystem.TryGetDisplayRefreshRate(out var currentRefreshRate)
+            )
             {
-                m_CurrentRefreshRateLabel.text = $"Current display refresh rate: {currentRefreshRate} Hz";
+                m_CurrentRefreshRateLabel.text =
+                    $"Current display refresh rate: {currentRefreshRate} Hz";
             }
         }
 
@@ -105,7 +125,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
             yield return null;
 
 #if METAOPENXR_0_2_OR_NEWER && (UNITY_ANDROID || UNITY_EDITOR_WIN)
-            if (!m_DisplaySubsystem.TryGetSupportedDisplayRefreshRates(Allocator.Persistent, out m_DisplayRefreshRates))
+            if (
+                !m_DisplaySubsystem.TryGetSupportedDisplayRefreshRates(
+                    Allocator.Persistent,
+                    out m_DisplayRefreshRates
+                )
+            )
                 yield break;
 
             var dropdownItems = new List<string>();

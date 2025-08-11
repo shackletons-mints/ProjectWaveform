@@ -1,8 +1,8 @@
-﻿using UnityEngine.XR.ARFoundation;
-using UnityEngine;
-using UnityEngine.XR.ARSubsystems;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using UnityEngine;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -104,6 +104,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             RightHandThumb2 = 89, // parent: RightHandThumb1 [88]
             RightHandThumbEnd = 90, // parent: RightHandThumb2 [89]
         }
+
         const int k_NumSkeletonJoints = 91;
 
         [SerializeField]
@@ -115,14 +116,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// </summary>
         public Transform skeletonRoot
         {
-            get
-            {
-                return m_SkeletonRoot;
-            }
-            set
-            {
-                m_SkeletonRoot = value;
-            }
+            get { return m_SkeletonRoot; }
+            set { m_SkeletonRoot = value; }
         }
 
         Transform[] m_BoneMapping = new Transform[k_NumSkeletonJoints];

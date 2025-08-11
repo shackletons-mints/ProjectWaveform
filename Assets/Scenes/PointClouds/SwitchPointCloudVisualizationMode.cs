@@ -25,7 +25,9 @@ public class SwitchPointCloudVisualizationMode : MonoBehaviour
     }
 
     [SerializeField]
-    ARAllPointCloudPointsParticleVisualizer.Mode m_Mode = ARAllPointCloudPointsParticleVisualizer.Mode.All;
+    ARAllPointCloudPointsParticleVisualizer.Mode m_Mode = ARAllPointCloudPointsParticleVisualizer
+        .Mode
+        .All;
 
     public ARAllPointCloudPointsParticleVisualizer.Mode mode
     {

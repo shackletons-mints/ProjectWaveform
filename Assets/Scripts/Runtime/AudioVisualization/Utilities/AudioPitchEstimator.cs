@@ -19,7 +19,9 @@ public class AudioPitchEstimator : MonoBehaviour
     [Range(1, 8)]
     public int harmonicsToUse = 5;
 
-    [Tooltip("Frequency bandwidth of spectral smoothing filter [Hz]\nWider bandwidth smoothes the estimation, however the accuracy decreases.")]
+    [Tooltip(
+        "Frequency bandwidth of spectral smoothing filter [Hz]\nWider bandwidth smoothes the estimation, however the accuracy decreases."
+    )]
     public float smoothingWidth = 500;
 
     [Tooltip("Threshold to judge silence or not\nLarger the value, stricter the judgment.")]
@@ -40,13 +42,14 @@ public class AudioPitchEstimator : MonoBehaviour
         var nyquistFreq = AudioSettings.outputSampleRate / 2.0f;
 
         // Get the audio spectrum
-        if (!audioSource.isPlaying) return float.NaN;
+        if (!audioSource.isPlaying)
+            return float.NaN;
         audioSource.GetSpectrumData(spectrum, 0, FFTWindow.Hanning);
 
         // Calculate the logarithm of the amplitude spectrum
         for (int i = 0; i < spectrumSize; i++)
         {
-            // When the amplitude is zero, it becomes -∞, 
+            // When the amplitude is zero, it becomes -∞,
             // so a small value is added to prevent that.
             specRaw[i] = Mathf.Log(spectrum[i] + 1e-9f);
         }
@@ -74,10 +77,12 @@ public class AudioPitchEstimator : MonoBehaviour
         }
 
         // SRH (Summation of Residual Harmonics)
-        float bestFreq = 0, bestSRH = 0;
+        float bestFreq = 0,
+            bestSRH = 0;
         for (int i = 0; i < outputResolution; i++)
         {
-            var currentFreq = (float)i / (outputResolution - 1) * (frequencyMax - frequencyMin) + frequencyMin;
+            var currentFreq =
+                (float)i / (outputResolution - 1) * (frequencyMax - frequencyMin) + frequencyMin;
 
             // Calculate the SRH score at the current frequency
             var currentSRH = GetSpectrumAmplitude(specRes, currentFreq, nyquistFreq);
@@ -96,9 +101,10 @@ public class AudioPitchEstimator : MonoBehaviour
             }
         }
 
-        // If the SRH score does not meet the threshold → 
+        // If the SRH score does not meet the threshold →
         // consider that no clear fundamental frequency exists.
-        if (bestSRH < thresholdSRH) return float.NaN;
+        if (bestSRH < thresholdSRH)
+            return float.NaN;
 
         return bestFreq;
     }
@@ -112,5 +118,4 @@ public class AudioPitchEstimator : MonoBehaviour
         var delta = position - index0;
         return (1 - delta) * spec[index0] + delta * spec[index1];
     }
-
 }

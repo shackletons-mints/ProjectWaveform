@@ -14,7 +14,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 s_MeshingChecked = true;
                 var activeLoader = LoaderUtility.GetActiveLoader();
-                if(activeLoader && activeLoader.GetLoadedSubsystem<XRMeshSubsystem>() != null)
+                if (activeLoader && activeLoader.GetLoadedSubsystem<XRMeshSubsystem>() != null)
                     s_MeshingSupported = true;
             }
 

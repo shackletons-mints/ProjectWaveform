@@ -47,7 +47,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_ScrollViewContent == null)
             {
-                Debug.LogError($"{nameof(LogObjectPool)} component on {name} has a null Scroll View Content.", this);
+                Debug.LogError(
+                    $"{nameof(LogObjectPool)} component on {name} has a null Scroll View Content.",
+                    this
+                );
                 return;
             }
 

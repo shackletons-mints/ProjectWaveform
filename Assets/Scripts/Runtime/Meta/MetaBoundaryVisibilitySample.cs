@@ -18,16 +18,25 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (!enabled)
                 return;
 
-            var result = m_Feature.TryRequestBoundaryVisibility(GetOpposite(m_Feature.currentVisibility));
+            var result = m_Feature.TryRequestBoundaryVisibility(
+                GetOpposite(m_Feature.currentVisibility)
+            );
             if (result != XrResult.Success)
             {
-                if ((int)result == BoundaryVisibilityFeature.XR_BOUNDARY_VISIBILITY_SUPPRESSION_NOT_ALLOWED_META)
+                if (
+                    (int)result
+                    == BoundaryVisibilityFeature.XR_BOUNDARY_VISIBILITY_SUPPRESSION_NOT_ALLOWED_META
+                )
                 {
-                    Debug.Log("Boundary visibility suppression is not allowed. This is expected if passthrough is not enabled.");
+                    Debug.Log(
+                        "Boundary visibility suppression is not allowed. This is expected if passthrough is not enabled."
+                    );
                 }
                 else
                 {
-                    Debug.Log($"Toggle boundary visibility returned a result other than unqualified success: {result}");
+                    Debug.Log(
+                        $"Toggle boundary visibility returned a result other than unqualified success: {result}"
+                    );
                 }
             }
         }
@@ -45,7 +54,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             if (!m_Feature.enabled)
             {
-                Debug.LogError($"{nameof(BoundaryVisibilityFeature)} isn't enabled. Enable it in XR Plug-in Management.");
+                Debug.LogError(
+                    $"{nameof(BoundaryVisibilityFeature)} isn't enabled. Enable it in XR Plug-in Management."
+                );
                 enabled = false;
                 return;
             }
@@ -69,9 +80,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         static XrBoundaryVisibility GetOpposite(XrBoundaryVisibility visibility)
         {
-            return visibility == XrBoundaryVisibility.VisibilitySuppressed ?
-                    XrBoundaryVisibility.VisibilityNotSuppressed :
-                    XrBoundaryVisibility.VisibilitySuppressed;
+            return visibility == XrBoundaryVisibility.VisibilitySuppressed
+                ? XrBoundaryVisibility.VisibilityNotSuppressed
+                : XrBoundaryVisibility.VisibilitySuppressed;
         }
     }
 }

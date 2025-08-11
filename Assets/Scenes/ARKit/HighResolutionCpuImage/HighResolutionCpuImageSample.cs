@@ -14,7 +14,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
     /// </summary>
     public class HighResolutionCpuImageSample : MonoBehaviour
     {
-        const string k_BadDeviceErrorMsg = "This sample requires the ARKit platform and is not supported on this device";
+        const string k_BadDeviceErrorMsg =
+            "This sample requires the ARKit platform and is not supported on this device";
 
         /// <summary>
         /// The desired texture format to display on screen.
@@ -45,8 +46,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             if (m_CameraManager == null || m_RawImage == null)
             {
-                Debug.LogException(new InvalidOperationException(
-                    $"Serialized fields of {nameof(HighResolutionCpuImageSample)} component on {name} are not initialized."), this);
+                Debug.LogException(
+                    new InvalidOperationException(
+                        $"Serialized fields of {nameof(HighResolutionCpuImageSample)} component on {name} are not initialized."
+                    ),
+                    this
+                );
             }
         }
 
@@ -57,7 +62,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (Application.isEditor)
             {
-                Debug.LogError("This sample requires the ARKit platform and is not supported in the Editor");
+                Debug.LogError(
+                    "This sample requires the ARKit platform and is not supported in the Editor"
+                );
                 return;
             }
 
@@ -102,9 +109,18 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             // If the Raw Image texture is not the same size as the CPU image, re-initialize the texture to match.
             var texture = m_RawImage.texture as Texture2D;
-            if (texture == null || texture.width != cpuImage.width || texture.height != cpuImage.height)
+            if (
+                texture == null
+                || texture.width != cpuImage.width
+                || texture.height != cpuImage.height
+            )
             {
-                texture = new Texture2D(cpuImage.width, cpuImage.height, k_DesiredTextureFormat, false);
+                texture = new Texture2D(
+                    cpuImage.width,
+                    cpuImage.height,
+                    k_DesiredTextureFormat,
+                    false
+                );
                 m_RawImage.texture = texture;
 
                 // Scale the Raw Image rect so that the CPU image will fit on screen.
@@ -113,7 +129,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
 
             // Render the CPU image to our Raw Image texture
-            var conversionParams = new XRCpuImage.ConversionParams(cpuImage, k_DesiredTextureFormat, XRCpuImage.Transformation.MirrorY);
+            var conversionParams = new XRCpuImage.ConversionParams(
+                cpuImage,
+                k_DesiredTextureFormat,
+                XRCpuImage.Transformation.MirrorY
+            );
             var rawTextureData = texture.GetRawTextureData<byte>();
             try
             {
@@ -131,7 +151,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             // Update any other UI elements
             if (m_ImageSizeValueText != null)
                 m_ImageSizeValueText.text = $"{cpuImage.width} x {cpuImage.height}";
-            
+
             if (m_ResultsPanel != null)
                 m_ResultsPanel.SetActive(true);
         }

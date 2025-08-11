@@ -52,19 +52,25 @@ namespace UnityEditor.XR.ARFoundation.Samples
             if (root["NSLocalNetworkUsageDescription"] == null)
             {
                 // If no entry exists, then we will add one with the prompt "Collaborative Session"
-                root["NSLocalNetworkUsageDescription"] = new PlistElementString("Collaborative Session");
+                root["NSLocalNetworkUsageDescription"] = new PlistElementString(
+                    "Collaborative Session"
+                );
             }
 
             // Collect all the service names we need to add
             var bonjourServices = GetOrCreatePlistElementArray(root, "NSBonjourServices");
-            var existingValues = new HashSet<string>(bonjourServices.values
-                .Where(value => value is PlistElementString)
-                .Select(value => value.AsString()));
+            var existingValues = new HashSet<string>(
+                bonjourServices
+                    .values.Where(value => value is PlistElementString)
+                    .Select(value => value.AsString())
+            );
             var valuesToAdd = new HashSet<string>();
 
-            foreach (var serviceType in s_CollaborativeSessions
-                .Select(collaborativeSession => collaborativeSession.serviceType)
-                .Where(serviceType => !string.IsNullOrEmpty(serviceType)))
+            foreach (
+                var serviceType in s_CollaborativeSessions
+                    .Select(collaborativeSession => collaborativeSession.serviceType)
+                    .Where(serviceType => !string.IsNullOrEmpty(serviceType))
+            )
             {
                 // Each "serviceType" must be registered as a Bonjour Service or the app will crash
                 // See https://developer.apple.com/documentation/bundleresources/information_property_list/nsbonjourservices
@@ -80,7 +86,11 @@ namespace UnityEditor.XR.ARFoundation.Samples
             File.WriteAllText(plistPath, plist.WriteToString());
         }
 
-        static void AddIfNecessary(HashSet<string> existingValues, HashSet<string> valuesToAdd, string value)
+        static void AddIfNecessary(
+            HashSet<string> existingValues,
+            HashSet<string> valuesToAdd,
+            string value
+        )
         {
             if (!existingValues.Contains(value))
                 valuesToAdd.Add(value);
@@ -92,7 +102,11 @@ namespace UnityEditor.XR.ARFoundation.Samples
         [PostProcessScene]
         static void OnPostProcessScene()
         {
-            foreach (var collaborativeSession in Object.FindObjectsByType<CollaborativeSession>(FindObjectsSortMode.None))
+            foreach (
+                var collaborativeSession in Object.FindObjectsByType<CollaborativeSession>(
+                    FindObjectsSortMode.None
+                )
+            )
             {
                 s_CollaborativeSessions.Add(collaborativeSession);
             }

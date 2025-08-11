@@ -34,7 +34,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void Update()
         {
             var updatedCameraFacingDirection = m_CameraManager.currentFacingDirection;
-            if (updatedCameraFacingDirection != CameraFacingDirection.None && updatedCameraFacingDirection != m_CurrentCameraFacingDirection)
+            if (
+                updatedCameraFacingDirection != CameraFacingDirection.None
+                && updatedCameraFacingDirection != m_CurrentCameraFacingDirection
+            )
             {
                 if (updatedCameraFacingDirection == CameraFacingDirection.User)
                 {
@@ -72,7 +75,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             var camera = GetComponent<XROrigin>().Camera;
             if (camera && worldSpaceObject)
             {
-                worldSpaceObject.transform.position = camera.transform.position + camera.transform.forward;
+                worldSpaceObject.transform.position =
+                    camera.transform.position + camera.transform.forward;
             }
         }
 

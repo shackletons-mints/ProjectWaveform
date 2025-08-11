@@ -45,14 +45,20 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if ((m_AnchorManager ? m_AnchorManager.subsystem : null) == null)
             {
                 enabled = false;
-                Debug.LogWarning($"No XRAnchorSubsystem was found in {nameof(ARPlaceAnchor)}'s {nameof(m_AnchorManager)}, so this script will be disabled.", this);
+                Debug.LogWarning(
+                    $"No XRAnchorSubsystem was found in {nameof(ARPlaceAnchor)}'s {nameof(m_AnchorManager)}, so this script will be disabled.",
+                    this
+                );
                 return;
             }
 
             if (m_RaycastHitEvent == null)
             {
                 enabled = false;
-                Debug.LogWarning($"{nameof(m_RaycastHitEvent)} field on {nameof(ARPlaceAnchor)} component of {name} is not assigned.", this);
+                Debug.LogWarning(
+                    $"{nameof(m_RaycastHitEvent)} field on {nameof(ARPlaceAnchor)} component of {name} is not assigned.",
+                    this
+                );
                 return;
             }
 
@@ -94,7 +100,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// </summary>
         void CreateAnchor(object sender, ARRaycastHit hit)
         {
-            if (m_AnchorManager.descriptor.supportsTrackableAttachments && hit.trackable is ARPlane plane)
+            if (
+                m_AnchorManager.descriptor.supportsTrackableAttachments
+                && hit.trackable is ARPlane plane
+            )
             {
                 AttachAnchorToTrackable(plane, hit);
             }

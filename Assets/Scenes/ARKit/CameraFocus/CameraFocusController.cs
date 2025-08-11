@@ -61,7 +61,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
 
             var range = lockedCamera.focusRange;
-            Debug.Log($"Lens Position Range: {range.minimumLensPosition}, {range.maximumLensPosition}");
+            Debug.Log(
+                $"Lens Position Range: {range.minimumLensPosition}, {range.maximumLensPosition}"
+            );
 
             // update range of lens position slider
             if (m_LensPositionSlider)
@@ -75,7 +77,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void RefreshUI(ARKitFocus focus)
         {
-            if (m_LensPositionSlider != null && Math.Abs(m_LensPositionSlider.value - focus.lensPosition) > float.Epsilon)
+            if (
+                m_LensPositionSlider != null
+                && Math.Abs(m_LensPositionSlider.value - focus.lensPosition) > float.Epsilon
+            )
             {
                 m_LensPosition = focus.lensPosition;
                 m_LensPositionSlider.SetValueWithoutNotify(focus.lensPosition);

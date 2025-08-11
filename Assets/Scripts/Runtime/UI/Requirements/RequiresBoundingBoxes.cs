@@ -2,7 +2,8 @@ using UnityEngine.XR.ARSubsystems;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
-    public class RequiresBoundingBoxes : RequiresARSubsystem<XRBoundingBoxSubsystem, XRBoundingBoxSubsystemDescriptor>
+    public class RequiresBoundingBoxes
+        : RequiresARSubsystem<XRBoundingBoxSubsystem, XRBoundingBoxSubsystemDescriptor>
     {
         [SerializeField]
         bool m_RequiresBoundingBoxClassifications;

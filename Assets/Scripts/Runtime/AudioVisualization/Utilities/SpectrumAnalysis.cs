@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class SpectrumAnalysis
 {
-
     public float[] spectrumData;
+
     // use this to filter out low values
     const float epsilon = 0.00001f;
+
     public SpectrumAnalysis(float[] spectrumData)
     {
         this.spectrumData = spectrumData;
     }
 
-    public float GetSmallestValue() 
+    public float GetSmallestValue()
     {
         float min = 1;
         foreach (var val in spectrumData)
@@ -28,7 +29,7 @@ public class SpectrumAnalysis
         return min;
     }
 
-    public float GetLargestValue() 
+    public float GetLargestValue()
     {
         float max = -1;
         foreach (var val in spectrumData)

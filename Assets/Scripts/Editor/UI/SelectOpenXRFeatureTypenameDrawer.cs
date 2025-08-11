@@ -24,17 +24,28 @@ namespace UnityEditor.XR.ARFoundation.Samples
         {
             if (m_FeatureTypes == null)
             {
-                m_FeatureTypes = TypeCache.GetTypesWithAttribute<OpenXRFeatureAttribute>()
+                m_FeatureTypes = TypeCache
+                    .GetTypesWithAttribute<OpenXRFeatureAttribute>()
                     .Where(t =>
                         t.IsPublic
                         && !t.IsAbstract
-                        && !((OpenXRFeatureAttribute)Attribute.GetCustomAttribute(t, typeof(OpenXRFeatureAttribute))).Hidden
-                        && !((OpenXRFeatureAttribute)Attribute.GetCustomAttribute(t, typeof(OpenXRFeatureAttribute))).Category.Equals(FeatureCategory.Interaction))
+                        && !(
+                            (OpenXRFeatureAttribute)
+                                Attribute.GetCustomAttribute(t, typeof(OpenXRFeatureAttribute))
+                        ).Hidden
+                        && !(
+                            (OpenXRFeatureAttribute)
+                                Attribute.GetCustomAttribute(t, typeof(OpenXRFeatureAttribute))
+                        ).Category.Equals(FeatureCategory.Interaction)
+                    )
                     .ToArray();
 
                 Array.Sort(m_FeatureTypes, s_Comparer);
                 m_FeatureDisplayNames = new string[m_FeatureTypes.Length + 1];
-                m_FeatureDisplayNames[0] = m_FeatureTypes.Length > 0 ? "Choose an OpenXR feature" : "No OpenXR features available";
+                m_FeatureDisplayNames[0] =
+                    m_FeatureTypes.Length > 0
+                        ? "Choose an OpenXR feature"
+                        : "No OpenXR features available";
 
                 for (var i = 0; i < m_FeatureTypes.Length; i++)
                 {
@@ -51,7 +62,7 @@ namespace UnityEditor.XR.ARFoundation.Samples
                 {
                     if (string.Equals(t.AssemblyQualifiedName, serializedTypename))
                     {
-                        m_SelectedDisplayNameIndex = i; 
+                        m_SelectedDisplayNameIndex = i;
                         break;
                     }
 
@@ -71,7 +82,11 @@ namespace UnityEditor.XR.ARFoundation.Samples
                 m_SelectedDisplayNameIndex = 0;
             }
 
-            var selectedIndex = EditorGUILayout.Popup("Feature", m_SelectedDisplayNameIndex, m_FeatureDisplayNames);
+            var selectedIndex = EditorGUILayout.Popup(
+                "Feature",
+                m_SelectedDisplayNameIndex,
+                m_FeatureDisplayNames
+            );
             if (selectedIndex == 0)
             {
                 property.stringValue = string.Empty;
@@ -82,10 +97,13 @@ namespace UnityEditor.XR.ARFoundation.Samples
                 m_SelectedDisplayNameIndex = selectedIndex;
             }
         }
-        
+
         static string GetOpenXRDisplayName(Type t)
         {
-            return ((OpenXRFeatureAttribute)Attribute.GetCustomAttribute(t, typeof(OpenXRFeatureAttribute))).UiName;
+            return (
+                (OpenXRFeatureAttribute)
+                    Attribute.GetCustomAttribute(t, typeof(OpenXRFeatureAttribute))
+            ).UiName;
         }
 
         class TypenameCompareByOpenXRDisplayName : IComparer<Type>

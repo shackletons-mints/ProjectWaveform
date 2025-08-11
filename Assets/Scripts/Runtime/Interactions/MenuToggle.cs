@@ -4,8 +4,11 @@ using UnityEngine.InputSystem;
 
 public class MenuToggle : MonoBehaviour
 {
-    [SerializeField] private InputActionReference _toggleAction;
-    [SerializeField] private GameObject Canvas;
+    [SerializeField]
+    private InputActionReference _toggleAction;
+
+    [SerializeField]
+    private GameObject Canvas;
     private float _distanceFromCamera = 6;
 
     private void OnEnable()

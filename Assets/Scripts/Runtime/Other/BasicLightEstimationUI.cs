@@ -8,7 +8,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
     [RequireComponent(typeof(BasicLightEstimation))]
     public class BasicLightEstimationUI : MonoBehaviour
     {
-        [Tooltip("The UI Text element used to display the estimated ambient intensity in the physical environment.")]
+        [Tooltip(
+            "The UI Text element used to display the estimated ambient intensity in the physical environment."
+        )]
         [SerializeField]
         Text m_AmbientIntensityText;
 
@@ -21,7 +23,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             set => m_AmbientIntensityText = ambientIntensityText;
         }
 
-        [Tooltip("The UI Text element used to display the estimated ambient color in the physical environment.")]
+        [Tooltip(
+            "The UI Text element used to display the estimated ambient color in the physical environment."
+        )]
         [SerializeField]
         Text m_AmbientColorText;
 
@@ -51,11 +55,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
             else
                 SetUIValue<float>(null, ambientColorText);
         }
-        
-        void SetUIValue<T>(T? displayValue, Text text) where T : struct
+
+        void SetUIValue<T>(T? displayValue, Text text)
+            where T : struct
         {
             if (text != null)
-                text.text = displayValue.HasValue ? displayValue.Value.ToString(): "Unavailable";
+                text.text = displayValue.HasValue ? displayValue.Value.ToString() : "Unavailable";
         }
 
         BasicLightEstimation m_BasicLightEstimation;

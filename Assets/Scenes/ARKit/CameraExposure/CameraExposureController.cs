@@ -102,12 +102,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-        protected override bool InteractableUpdateButton(ARKitExposureMode mode)
-            => mode == ARKitExposureMode.Custom;
+        protected override bool InteractableUpdateButton(ARKitExposureMode mode) =>
+            mode == ARKitExposureMode.Custom;
 
         void RefreshUI(ARKitExposure exposure)
         {
-            if (m_DurationSlider != null && Math.Abs(m_DurationSlider.value - exposure.duration) > float.Epsilon)
+            if (
+                m_DurationSlider != null
+                && Math.Abs(m_DurationSlider.value - exposure.duration) > float.Epsilon
+            )
             {
                 m_Duration = exposure.duration;
                 m_DurationSlider.SetValueWithoutNotify((float)exposure.duration);

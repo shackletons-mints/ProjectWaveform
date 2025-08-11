@@ -22,7 +22,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
         MeshRenderer m_MeshRenderer;
 
         [FormerlySerializedAs("m_TmpOverlayShader")]
-        [SerializeField, Tooltip("The Text Mesh Pro material for drawing overlay text to always render debug text info on top of Geometry.")]
+        [
+            SerializeField,
+            Tooltip(
+                "The Text Mesh Pro material for drawing overlay text to always render debug text info on top of Geometry."
+            )
+        ]
         Material m_TmpOverlayMaterial;
 
         [Header("Debug Options")]
@@ -39,21 +44,29 @@ namespace UnityEngine.XR.ARFoundation.Samples
         bool m_ShowTrackingState = true;
 
         [Header("Tracking state visualization settings")]
-
         [SerializeField, Tooltip("The mesh color when the tracking state is set to tracking")]
         Color m_TrackingMeshColor;
 
-        [SerializeField, Tooltip("The outline color gradient when the tracking state is set to tracking.")]
+        [
+            SerializeField,
+            Tooltip("The outline color gradient when the tracking state is set to tracking.")
+        ]
         Gradient m_TrackingOutlineGradient;
 
         [Space]
-
-        [SerializeField, Tooltip("The outline color gradient when the tracking state is set to limited.")]
+        [
+            SerializeField,
+            Tooltip("The outline color gradient when the tracking state is set to limited.")
+        ]
         Gradient m_LimitedTrackingOutlineGradient;
 
         [Space]
-
-        [SerializeField, Tooltip("The texture the bounding box will have when the tracking state is set to none.")]
+        [
+            SerializeField,
+            Tooltip(
+                "The texture the bounding box will have when the tracking state is set to none."
+            )
+        ]
         Texture m_NoneTrackingTexture;
 
         [SerializeField, Tooltip("The mesh color when the tracking state is set to none.")]
@@ -62,7 +75,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField, Tooltip("The mesh texture color when the tracking state is set to none.")]
         Color m_NoneTrackingMeshTextureColor;
 
-        [SerializeField, Tooltip("The outline color gradient when the tracking state is set to none.")]
+        [
+            SerializeField,
+            Tooltip("The outline color gradient when the tracking state is set to none.")
+        ]
         Gradient m_NoneTrackingOutlineGradient;
 
         [SerializeField, HideInInspector]
@@ -103,7 +119,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             if (m_ShowOrientation && m_OrientationVisualizerPrefab == null)
             {
-                Debug.LogWarning($"{nameof(m_ShowOrientation)} is enabled but {nameof(m_OrientationVisualizerPrefab)} is not assigned. To show the bounding box orientation visualizer assign a prefab to the {nameof(m_OrientationVisualizerPrefab)} in the inspector.", this);
+                Debug.LogWarning(
+                    $"{nameof(m_ShowOrientation)} is enabled but {nameof(m_OrientationVisualizerPrefab)} is not assigned. To show the bounding box orientation visualizer assign a prefab to the {nameof(m_OrientationVisualizerPrefab)} in the inspector.",
+                    this
+                );
             }
 
             if (m_OrientationVisualizerPrefab != null)
@@ -139,9 +158,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
             canvasPosition += m_ShowOrientation ? k_CanvasVerticalOffset : Vector3.zero;
             m_DebugInfoDisplayController.SetPosition(canvasPosition);
 
-            if (m_ARBoundingBox.trackableId == m_TrackableId &&
-                m_ARBoundingBox.classifications == m_Classifications &&
-                m_ARBoundingBox.trackingState == m_TrackingState)
+            if (
+                m_ARBoundingBox.trackableId == m_TrackableId
+                && m_ARBoundingBox.classifications == m_Classifications
+                && m_ARBoundingBox.trackingState == m_TrackingState
+            )
                 return;
 
             m_TrackableId = m_ARBoundingBox.trackableId;
@@ -150,13 +171,22 @@ namespace UnityEngine.XR.ARFoundation.Samples
             UpdateTrackingStateVisualization(m_TrackingState);
 
             if (m_ShowTrackableId)
-                m_DebugInfoDisplayController.AppendDebugEntry("TrackableId:", m_TrackableId.ToString());
+                m_DebugInfoDisplayController.AppendDebugEntry(
+                    "TrackableId:",
+                    m_TrackableId.ToString()
+                );
 
             if (m_ShowClassifications)
-                m_DebugInfoDisplayController.AppendDebugEntry("Classifications:", m_Classifications.ToString());
+                m_DebugInfoDisplayController.AppendDebugEntry(
+                    "Classifications:",
+                    m_Classifications.ToString()
+                );
 
             if (m_ShowTrackingState)
-                m_DebugInfoDisplayController.AppendDebugEntry("Tracking State:", m_TrackingState.ToString());
+                m_DebugInfoDisplayController.AppendDebugEntry(
+                    "Tracking State:",
+                    m_TrackingState.ToString()
+                );
 
             m_DebugInfoDisplayController.RefreshDisplayInfo();
         }
@@ -169,7 +199,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void UpdateVisualizersEnabledState()
         {
-            if (m_OrientationVisualizer != null && m_ShowOrientation != m_OrientationVisualizer.activeSelf)
+            if (
+                m_OrientationVisualizer != null
+                && m_ShowOrientation != m_OrientationVisualizer.activeSelf
+            )
             {
                 m_OrientationVisualizer.SetActive(m_ShowOrientation);
             }
@@ -212,7 +245,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     m_MeshRenderer.material.SetTexture("_MainTex", m_NoneTrackingTexture);
                     m_MeshRenderer.material.mainTextureScale = new(2, 2);
                     m_MeshRenderer.material.SetColor("_Color", m_NoneTrackingMeshColor);
-                    m_MeshRenderer.material.SetColor("_TexColorTint", m_NoneTrackingMeshTextureColor);
+                    m_MeshRenderer.material.SetColor(
+                        "_TexColorTint",
+                        m_NoneTrackingMeshTextureColor
+                    );
                     m_BoundingBoxEdgeVisualizer.SetGradient(m_NoneTrackingOutlineGradient);
                     break;
             }

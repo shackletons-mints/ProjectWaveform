@@ -2,7 +2,6 @@
 using System.Text;
 using Unity.Jobs;
 using UnityEngine;
-
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -17,7 +16,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [Serializable]
         public class ImageData
         {
-            [SerializeField, Tooltip("The source texture for the image. Must be marked as readable.")]
+            [
+                SerializeField,
+                Tooltip("The source texture for the image. Must be marked as readable.")
+            ]
             Texture2D m_Texture;
 
             public Texture2D texture
@@ -65,7 +67,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             AddImagesRequested,
             AddingImages,
             Done,
-            Error
+            Error,
         }
 
         State m_State;
@@ -82,7 +84,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             float margin = 100;
 
-            GUILayout.BeginArea(new Rect(margin, margin, Screen.width - margin * 2, Screen.height - margin * 2));
+            GUILayout.BeginArea(
+                new Rect(margin, margin, Screen.width - margin * 2, Screen.height - margin * 2)
+            );
 
             switch (m_State)
             {
@@ -101,7 +105,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     m_StringBuilder.AppendLine("Add image status:");
                     foreach (var image in m_Images)
                     {
-                        m_StringBuilder.AppendLine($"\t{image.name}: {(image.jobState.status.ToString())}");
+                        m_StringBuilder.AppendLine(
+                            $"\t{image.name}: {(image.jobState.status.ToString())}"
+                        );
                     }
                     GUILayout.Label(m_StringBuilder.ToString());
                     break;
@@ -153,12 +159,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
                     {
                         if (!image.texture.isReadable)
                         {
-                            SetError($"Image {image.name} must be readable to be added to the image library.");
+                            SetError(
+                                $"Image {image.name} must be readable to be added to the image library."
+                            );
                             break;
                         }
                     }
 
-                    if (manager.referenceLibrary is MutableRuntimeReferenceImageLibrary mutableLibrary)
+                    if (
+                        manager.referenceLibrary
+                        is MutableRuntimeReferenceImageLibrary mutableLibrary
+                    )
                     {
                         try
                         {
@@ -167,7 +178,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
                                 // Note: You do not need to do anything with the returned JobHandle, but it can be
                                 // useful if you want to know when the image has been added to the library since it may
                                 // take several frames.
-                                image.jobState = mutableLibrary.ScheduleAddImageWithValidationJob(image.texture, image.name, image.width);
+                                image.jobState = mutableLibrary.ScheduleAddImageWithValidationJob(
+                                    image.texture,
+                                    image.name,
+                                    image.width
+                                );
                             }
 
                             m_State = State.AddingImages;

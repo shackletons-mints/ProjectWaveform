@@ -35,9 +35,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (text != null)
             {
-                text.text = $"Session ID = {m_Session.subsystem.sessionId}\n" +
-                            $"Session state = {ARSession.state.ToString()}\n" +
-                            $"Tracking state = {m_Session.subsystem.trackingState}";
+                text.text =
+                    $"Session ID = {m_Session.subsystem.sessionId}\n"
+                    + $"Session state = {ARSession.state.ToString()}\n"
+                    + $"Tracking state = {m_Session.subsystem.trackingState}";
             }
         }
     }

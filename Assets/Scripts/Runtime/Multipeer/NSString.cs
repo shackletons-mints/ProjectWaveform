@@ -17,7 +17,10 @@ namespace Unity.iOS.Multipeer
         public NSString(NSData serializedString)
         {
             if (!serializedString.Created)
-                throw new ArgumentException("The serialized string is not valid.", nameof(serializedString));
+                throw new ArgumentException(
+                    "The serialized string is not valid.",
+                    nameof(serializedString)
+                );
 
             m_Ptr = Deserialize(serializedString);
         }
@@ -31,7 +34,13 @@ namespace Unity.iOS.Multipeer
             if (!Created)
                 return string.Empty;
 
-            using (var buffer = new NativeArray<byte>(GetLengthOfBytes(this), Allocator.TempJob, NativeArrayOptions.UninitializedMemory))
+            using (
+                var buffer = new NativeArray<byte>(
+                    GetLengthOfBytes(this),
+                    Allocator.TempJob,
+                    NativeArrayOptions.UninitializedMemory
+                )
+            )
             {
                 if (GetBytes(this, buffer.GetUnsafePtr(), buffer.Length))
                 {
@@ -47,34 +56,44 @@ namespace Unity.iOS.Multipeer
         public NSData Serialize()
         {
             if (!Created)
-                throw new InvalidOperationException($"The {typeof(NSString).Name} has not been created.");
+                throw new InvalidOperationException(
+                    $"The {typeof(NSString).Name} has not been created."
+                );
 
             return Serialize(this);
         }
 
         public void Dispose() => NativeApi.CFRelease(ref m_Ptr);
+
         public override int GetHashCode() => m_Ptr.GetHashCode();
+
         public override bool Equals(object obj) => (obj is NSString) && Equals((NSString)obj);
+
         public bool Equals(NSString other) => m_Ptr == other.m_Ptr;
-        public static bool operator==(NSString lhs, NSString rhs) => lhs.Equals(rhs);
-        public static bool operator!=(NSString lhs, NSString rhs) => !lhs.Equals(rhs);
 
-        [DllImport("__Internal", EntryPoint="UnityMC_NSString_createWithString")]
-        static extern IntPtr CreateWithString([MarshalAs(UnmanagedType.LPWStr)] string text, int length);
+        public static bool operator ==(NSString lhs, NSString rhs) => lhs.Equals(rhs);
 
-        [DllImport("__Internal", EntryPoint="UnityMC_NSString_lengthOfBytesUsingEncoding")]
+        public static bool operator !=(NSString lhs, NSString rhs) => !lhs.Equals(rhs);
+
+        [DllImport("__Internal", EntryPoint = "UnityMC_NSString_createWithString")]
+        static extern IntPtr CreateWithString(
+            [MarshalAs(UnmanagedType.LPWStr)] string text,
+            int length
+        );
+
+        [DllImport("__Internal", EntryPoint = "UnityMC_NSString_lengthOfBytesUsingEncoding")]
         static extern int GetLengthOfBytes(NSString self);
 
-        [DllImport("__Internal", EntryPoint="UnityMC_NSString_getLength")]
+        [DllImport("__Internal", EntryPoint = "UnityMC_NSString_getLength")]
         static extern int GetLength(NSString self);
 
-        [DllImport("__Internal", EntryPoint="UnityMC_NSString_getBytes")]
+        [DllImport("__Internal", EntryPoint = "UnityMC_NSString_getBytes")]
         static extern unsafe bool GetBytes(NSString self, void* buffer, int length);
 
-        [DllImport("__Internal", EntryPoint="UnityMC_NSString_serialize")]
+        [DllImport("__Internal", EntryPoint = "UnityMC_NSString_serialize")]
         static extern NSData Serialize(NSString self);
 
-        [DllImport("__Internal", EntryPoint="UnityMC_NSString_deserialize")]
+        [DllImport("__Internal", EntryPoint = "UnityMC_NSString_deserialize")]
         static extern IntPtr Deserialize(NSData data);
     }
 }

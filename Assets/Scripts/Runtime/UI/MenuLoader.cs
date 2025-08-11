@@ -25,14 +25,18 @@ namespace UnityEngine.XR.ARFoundation.Samples
         public static string GetMenuSceneName()
         {
 #if OPENXR_1_13_OR_NEWER
-            if (Application.platform == RuntimePlatform.WSAPlayerARM && OpenXRRuntime.name == "Windows Mixed Reality Runtime") 
+            if (
+                Application.platform == RuntimePlatform.WSAPlayerARM
+                && OpenXRRuntime.name == "Windows Mixed Reality Runtime"
+            )
             {
                 return k_HololensMenuScene;
             }
 #endif // OPENXR_1_13_OR_NEWER
 
             var loader = LoaderUtility.GetActiveLoader();
-            var sessionSubsystem = loader != null ? loader.GetLoadedSubsystem<XRSessionSubsystem>() : null;
+            var sessionSubsystem =
+                loader != null ? loader.GetLoadedSubsystem<XRSessionSubsystem>() : null;
 
             if (sessionSubsystem == null)
             {
@@ -62,7 +66,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         public static bool IsHmdDevice()
         {
             var sceneName = GetMenuSceneName();
-            return (sceneName == k_MetaMenuScene) || (sceneName == k_HololensMenuScene) || (sceneName == k_AndroidXRMenuScene);
+            return (sceneName == k_MetaMenuScene)
+                || (sceneName == k_HololensMenuScene)
+                || (sceneName == k_AndroidXRMenuScene);
         }
 
         public static void LoadMenuScene()

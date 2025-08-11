@@ -18,7 +18,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
     {
         List<string> m_LogMessages;
 
-        [Tooltip("The ARSession component controlling the session from which to generate ARWorldMaps.")]
+        [Tooltip(
+            "The ARSession component controlling the session from which to generate ARWorldMaps."
+        )]
         [SerializeField]
         ARSession m_ARSession;
 
@@ -38,7 +40,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField]
         Button m_SaveButton;
 
-        [Tooltip("A UI button component which will load a previously saved ARWorldMap from disk and apply it to the current session.")]
+        [Tooltip(
+            "A UI button component which will load a previously saved ARWorldMap from disk and apply it to the current session."
+        )]
         [SerializeField]
         Button m_LoadButton;
 
@@ -49,7 +53,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             get
             {
 #if UNITY_IOS
-                return m_ARSession.subsystem is ARKitSessionSubsystem && ARKitSessionSubsystem.worldMapSupported;
+                return m_ARSession.subsystem is ARKitSessionSubsystem
+                    && ARKitSessionSubsystem.worldMapSupported;
 #else
                 return false;
 #endif
@@ -143,7 +148,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
             catch (FileNotFoundException)
             {
-                Debug.LogError("No ARWorldMap was found. Make sure to save the ARWorldMap before attempting to load it.");
+                Debug.LogError(
+                    "No ARWorldMap was found. Make sure to save the ARWorldMap before attempting to load it."
+                );
                 yield break;
             }
 
@@ -235,7 +242,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             var numLogsToShow = 20;
             string msg = "";
-            for (int i = Mathf.Max(0, m_LogMessages.Count - numLogsToShow); i < m_LogMessages.Count; ++i)
+            for (
+                int i = Mathf.Max(0, m_LogMessages.Count - numLogsToShow);
+                i < m_LogMessages.Count;
+                ++i
+            )
             {
                 msg += m_LogMessages[i];
                 msg += "\n";

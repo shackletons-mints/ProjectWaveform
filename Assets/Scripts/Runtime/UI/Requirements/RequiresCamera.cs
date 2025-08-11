@@ -2,7 +2,8 @@ using UnityEngine.XR.ARSubsystems;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
-    public class RequiresCamera : RequiresARSubsystem<XRCameraSubsystem, XRCameraSubsystemDescriptor>
+    public class RequiresCamera
+        : RequiresARSubsystem<XRCameraSubsystem, XRCameraSubsystemDescriptor>
     {
         [SerializeField]
         bool m_RequiresCameraImages;
@@ -37,9 +38,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             if (m_RequiresBasicLightEstimation)
             {
-                bool supportsBasics = descriptor.supportsCameraConfigurations && descriptor.supportsCameraImage;
-                bool supportsColor = descriptor.supportsAverageColorTemperature || descriptor.supportsColorCorrection;
-                bool supportsBrightness = descriptor.supportsAverageBrightness || descriptor.supportsAverageIntensityInLumens;
+                bool supportsBasics =
+                    descriptor.supportsCameraConfigurations && descriptor.supportsCameraImage;
+                bool supportsColor =
+                    descriptor.supportsAverageColorTemperature
+                    || descriptor.supportsColorCorrection;
+                bool supportsBrightness =
+                    descriptor.supportsAverageBrightness
+                    || descriptor.supportsAverageIntensityInLumens;
 
                 if (!(supportsBasics && supportsColor && supportsBrightness))
                     return false;
@@ -47,7 +53,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             if (m_RequiresHdrLightEstimation)
             {
-                if (!(descriptor.supportsFaceTrackingHDRLightEstimation || descriptor.supportsWorldTrackingHDRLightEstimation))
+                if (
+                    !(
+                        descriptor.supportsFaceTrackingHDRLightEstimation
+                        || descriptor.supportsWorldTrackingHDRLightEstimation
+                    )
+                )
                     return false;
             }
 
@@ -57,7 +68,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (m_RequiresExifData && !descriptor.supportsExifData)
                 return false;
 
-            if (m_RequiresImageStabilization && descriptor.supportsImageStabilization == Supported.Unsupported)
+            if (
+                m_RequiresImageStabilization
+                && descriptor.supportsImageStabilization == Supported.Unsupported
+            )
                 return false;
 
             if (m_RequiresCameraTorchMode && !descriptor.supportsCameraTorchMode)

@@ -14,7 +14,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         XRNode m_ControllerDevice = XRNode.RightHand;
 
         [SerializeField]
-        [Tooltip("The GameObject to activate or deactivate when the controller device is enabled or disabled, respectively.")]
+        [Tooltip(
+            "The GameObject to activate or deactivate when the controller device is enabled or disabled, respectively."
+        )]
         GameObject m_DeviceGameObject;
 
         /// <summary>
@@ -82,7 +84,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void UpdateDeviceGameObject(XRController deviceToCheck)
         {
-            bool controllerState = deviceToCheck is {enabled: true};
+            bool controllerState = deviceToCheck is { enabled: true };
             if (m_DeviceGameObject != null && controllerState != m_DeviceGameObject.activeSelf)
             {
                 m_DeviceGameObject.SetActive(controllerState);

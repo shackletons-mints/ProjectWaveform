@@ -1,6 +1,6 @@
 using UnityEngine.UI;
-using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -30,12 +30,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// <summary>
         /// The instantiated instance of the default configuration chooser.
         /// </summary>
-        static readonly ConfigurationChooser m_DefaultConfigurationChooser = new DefaultConfigurationChooser();
+        static readonly ConfigurationChooser m_DefaultConfigurationChooser =
+            new DefaultConfigurationChooser();
 
         /// <summary>
         /// The instantiated instance of the prefer camera configuration chooser.
         /// </summary>
-        static readonly ConfigurationChooser m_PreferCameraConfigurationChooser = new PreferCameraConfigurationChooser();
+        static readonly ConfigurationChooser m_PreferCameraConfigurationChooser =
+            new PreferCameraConfigurationChooser();
 
         /// <summary>
         /// The current configuration chooser mode.

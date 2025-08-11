@@ -16,7 +16,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void Update()
         {
-            if(m_EnteredButton)
+            if (m_EnteredButton)
             {
                 m_Tooltip.transform.position = transform.position;
             }
@@ -25,7 +25,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         public void OnPointerEnter(PointerEventData eventData)
         {
             m_EnteredButton = true;
-            if(!gameObject.GetComponent<Button>().interactable)
+            if (!gameObject.GetComponent<Button>().interactable)
             {
                 m_Tooltip.SetActive(true);
             }

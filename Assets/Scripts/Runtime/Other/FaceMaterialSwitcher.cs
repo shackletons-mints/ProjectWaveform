@@ -21,7 +21,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         static int s_CurrentMaterialIndex;
-        static Dictionary<TrackableId, Material> s_FaceTracker = new Dictionary<TrackableId, Material>();
+        static Dictionary<TrackableId, Material> s_FaceTracker =
+            new Dictionary<TrackableId, Material>();
 
         void Start()
         {
