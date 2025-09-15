@@ -20,26 +20,28 @@ namespace AudioVisualization
             string pitchName = AudioConstants.PitchNames[pitchClass];
             int pointIndex = visualizer.layoutSelector.GetPositionForPitchClass(pitchClass);
             float volume = CalculateVolume(visualizer.spectrumData);
-            int emitValue = CalculateEmitValue(volume);
+            int particlesToEmit = Mathf.RoundToInt(CalculateLerpedValue(volume, 1f, 12f)); // 1 particle on low volumes, 12 on high
+            float particleStartSize = CalculateLerpedValue(volume, 0.02f, 0.07f);
 
             if (float.IsNaN(pitch) || visualizer.emitTimer < visualizer.emitInterval)
             {
                 return;
             }
 
-            SetParticleStartSpeed(visualizer, visualizer.sceneTimer);
+            // SetParticleStartSpeed(visualizer, visualizer.sceneTimer);
             SetParticleColor(visualizer, pitchClass, pitch);
             SetParticlePosition(visualizer, pointIndex);
+			SetParticleStartSize(visualizer, particleStartSize);
             Utilities.ShaderSetters.SetShaderColor(visualizer, pitchClass);
-            SetConeAngle(visualizer, pitch);
+            SetConeAngle(visualizer, pitch); // the more centered the pitch, the more straight it's trajectory
 
             visualizer.emitTimer = 0f;
             visualizer.previousPitchClass = pitchClass;
 
-            visualizer.particleSystem.Emit(emitValue);
+            visualizer.particleSystem.Emit(particlesToEmit);
 
             Debug.Log(
-                $"Emitting: {pitchName} (Freq: {pitch} Hz, MIDI: {midiNote}), particles: {emitValue}"
+                $"Emitting: {pitchName} (Freq: {pitch} Hz, MIDI: {midiNote}), particles: {particlesToEmit}"
             );
         }
 
@@ -63,7 +65,7 @@ namespace AudioVisualization
             return Mathf.Clamp(db, -80f, 0f);
         }
 
-        public static int CalculateEmitValue(float dbLevel)
+        public static float CalculateLerpedValue(float dbLevel, float low, float high)
         {
             const float minDb = -80f;
             const float maxDb = -30f;
@@ -73,7 +75,7 @@ namespace AudioVisualization
             normalized = Mathf.Max(normalized, 0.001f);
             float exponent = 1.5f;
             float adjusted = Mathf.Pow(normalized, exponent);
-            int emitValue = Mathf.RoundToInt(Mathf.Lerp(1f, 12f, adjusted));
+            float emitValue = Mathf.Lerp(low, high, adjusted);
 
             return emitValue;
         }
@@ -140,6 +142,12 @@ namespace AudioVisualization
             var psMain = visualizer.particleSystem.main;
             float startSpeed = (elapsedTime * 0.02f) + 0.5f;
             psMain.startSpeed = startSpeed;
+        }
+
+        private static void SetParticleStartSize(AudioVisualizer visualizer, float startSize)
+        {
+            var psMain = visualizer.particleSystem.main;
+            psMain.startSize = startSize;
         }
     }
 }
