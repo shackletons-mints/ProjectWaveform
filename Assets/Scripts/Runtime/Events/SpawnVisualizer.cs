@@ -20,8 +20,12 @@ public class SpawnVisualizer : MonoBehaviour
             Instance = this;
 
         Transform cam = Camera.main.transform;
-        Vector3 targetPosition = new Vector3(0.2f, 1f, 2f);
-        Quaternion targetRotation = Quaternion.LookRotation(cam.forward, cam.up);
+
+        // Calculate position IN FRONT of the camera
+        Vector3 targetPosition = cam.position + (cam.forward * distanceFromCamera);
+
+        // Make the visualizer face the same direction as the camera
+        Quaternion targetRotation = cam.rotation;
 
         if (visualizer == null)
             visualizer = Instantiate(prefab, targetPosition, targetRotation);

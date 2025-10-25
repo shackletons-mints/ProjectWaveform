@@ -1,15 +1,10 @@
 using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PositionInFrontOfCamera : MonoBehaviour
 {
-    [Header("References")]
-    [Header("Camera Settings")]
-    [Tooltip("The camera to spawn the object in front of")]
-    public Camera targetCamera;
-
     [Header("Position Settings")]
     [Tooltip("Distance from the camera to spawn the object")]
     public float spawnDistance = 0.75f;
@@ -21,25 +16,50 @@ public class PositionInFrontOfCamera : MonoBehaviour
     public float verticalOffset = -0.17f;
 
     [Tooltip("Match the camera's rotation when spawning")]
-    public bool matchCameraRotation = false;
+    public bool matchCameraRotation = true;
 
     [Tooltip("Stick to relative position to camera")]
     public bool sticky = false;
-    
+
     [Tooltip("The GameObject that will be positioned and oriented.")]
-    public GameObject objectToPosition; // Renamed to avoid conflict with inherited 'gameObject'
+    public GameObject objectToPosition;
+
+    [Header("Spawn Timing")]
+    [Tooltip("Delay before initial positioning (useful if camera isn't ready)")]
+    public float initialDelay = 0.1f;
 
     void Start()
     {
-		SpawnInFrontOfCamera();
+        if (initialDelay > 0)
+        {
+            StartCoroutine(DelayedSpawn());
+        }
+        else
+        {
+            SpawnInFrontOfCamera();
+        }
+    }
+
+    private IEnumerator DelayedSpawn()
+    {
+        yield return new WaitForSeconds(initialDelay);
+        SpawnInFrontOfCamera();
+    }
+
+    void Update()
+    {
+        if (sticky)
+        {
+            SpawnInFrontOfCamera();
+        }
     }
 
     [ContextMenu("Spawn In Front Of Camera")]
     public void SpawnInFrontOfCamera()
     {
-        if (targetCamera == null)
+        if (Camera.main == null)
         {
-            Debug.LogError("No target camera assigned!");
+            Debug.LogError("No main camera found in scene!");
             return;
         }
 
@@ -49,10 +69,15 @@ public class PositionInFrontOfCamera : MonoBehaviour
         // Move this GameObject to the calculated position
         transform.position = spawnPosition;
 
-        // Optionally match camera rotation
+        // Match camera rotation - this is usually what you want
         if (matchCameraRotation)
         {
-            transform.rotation = targetCamera.transform.rotation;
+            transform.rotation = Camera.main.transform.rotation;
+        }
+        else
+        {
+            // If not matching rotation, at least face the camera's forward direction
+            transform.forward = Camera.main.transform.forward;
         }
 
         Debug.Log($"Spawned {gameObject.name} at position: {spawnPosition}");
@@ -60,16 +85,18 @@ public class PositionInFrontOfCamera : MonoBehaviour
 
     private Vector3 CalculateSpawnPosition()
     {
+        Transform cameraTransform = Camera.main.transform;
+        
         // Get camera's position and forward direction
-        Vector3 cameraPos = targetCamera.transform.position;
-        Vector3 cameraForward = targetCamera.transform.forward;
-        Vector3 cameraRight = targetCamera.transform.right;
-        Vector3 cameraUp = targetCamera.transform.up;
+        Vector3 cameraPos = cameraTransform.position;
+        Vector3 cameraForward = cameraTransform.forward;
+        Vector3 cameraRight = cameraTransform.right;
+        Vector3 cameraUp = cameraTransform.up;
 
         // Calculate base position in front of camera
         Vector3 basePosition = cameraPos + (cameraForward * spawnDistance);
 
-        // Apply offsets
+        // Apply offsets using camera's local axes
         Vector3 finalPosition =
             basePosition + (cameraRight * horizontalOffset) + (cameraUp * verticalOffset);
 
@@ -83,4 +110,3 @@ public class PositionInFrontOfCamera : MonoBehaviour
         SpawnInFrontOfCamera();
     }
 }
-
