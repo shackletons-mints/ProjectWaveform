@@ -3,14 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// Positions a specified GameObject in front of the main camera at a defined distance.
-/// </summary>
 public class PositionInFrontOfCamera : MonoBehaviour
 {
     [Header("References")]
-    [Tooltip("The distance this object will be placed from the camera.")]
-    public float distanceFromCamera = 2f;
     [Header("Camera Settings")]
     [Tooltip("The camera to spawn the object in front of")]
     public Camera targetCamera;
