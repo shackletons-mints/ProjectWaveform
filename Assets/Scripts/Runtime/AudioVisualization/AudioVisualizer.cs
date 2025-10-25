@@ -8,6 +8,27 @@ namespace AudioVisualization
 {
     public class AudioVisualizer : MonoBehaviour
     {
+        private static AudioVisualizer _instance;
+        public static AudioVisualizer Instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
+
+        void Awake()
+        {
+            if (_instance != null && _instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                _instance = this;
+            }
+        }
+
         public AudioClip audioClip;
         public AudioPitchEstimator audioPitchEstimator;
         public AudioSource audioSource;
@@ -64,5 +85,40 @@ namespace AudioVisualization
 
             InputHandler.HandleInput(this);
         }
+
+		public void SetAudio(AudioClip _audioClip, AudioSource _audioSource)
+		{
+			audioSource.Stop();
+
+			if (_audioClip == null || _audioSource == null)
+			{
+                if (Microphone.devices.Length > 0)
+                {
+                    // Debug.Log("Switching to microphone: " + Microphone.devices[0]);
+                    audioSource.clip = Microphone.Start(
+                        Microphone.devices[0],
+                        true,
+                        10,
+                        sampleRate
+                    );
+                    audioSource.loop = true;
+
+                    while (!(Microphone.GetPosition(null) > 0)) { }
+
+                    audioSource.Play();
+                }
+                else
+                {
+                    Debug.LogWarning("No microphone devices found.");
+                }
+
+			} 
+			else 
+			{
+				audioClip = _audioClip;
+				audioSource = _audioSource;
+				audioSource.Play();
+			}
+		}
     }
 }
