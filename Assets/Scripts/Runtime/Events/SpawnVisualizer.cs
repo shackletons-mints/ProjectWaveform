@@ -1,4 +1,5 @@
 using System.Collections;
+using AudioVisualization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,7 @@ public class SpawnVisualizer : MonoBehaviour
     public GameObject prefab;
     public float distanceFromCamera = 1f;
     public GameObject visualizer;
+    public AudioVisualizer audioVisualizer;
 
     void Awake()
     {
