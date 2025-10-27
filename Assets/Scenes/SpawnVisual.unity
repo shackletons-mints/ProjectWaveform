@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 803569993395993439, guid: 9bf986c9320b345cbae4c62ee67c14c6, type: 3}
-  distanceFromCamera: 3
+  distanceFromCamera: 2
   visualizer: {fileID: 0}
 --- !u!4 &1875454287
 Transform:
