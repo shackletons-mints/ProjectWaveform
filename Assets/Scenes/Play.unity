@@ -340,6 +340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 245294978}
+  - component: {fileID: 245294979}
   m_Layer: 0
   m_Name: Audio Data
   m_TagString: Untagged
@@ -370,6 +371,18 @@ Transform:
   - {fileID: 4683137529610866167}
   m_Father: {fileID: 606159587}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &245294979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245294977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783616b41f8624441b45da7d74b15f26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &357689233
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,6 +681,18 @@ MonoBehaviour:
       - m_Target: {fileID: 697105997}
         m_TargetAssemblyTypeName: SetVisualizerAudio, Unity.XR.ARFoundation.Samples
         m_MethodName: SetAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 245294979}
+        m_TargetAssemblyTypeName: ResetSceneTimer, Unity.XR.ARFoundation.Samples
+        m_MethodName: ToZero
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1010,6 +1035,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1058962899}
         m_TargetAssemblyTypeName: SetVisualizerAudio, Unity.XR.ARFoundation.Samples
         m_MethodName: SetAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 245294979}
+        m_TargetAssemblyTypeName: ResetSceneTimer, Unity.XR.ARFoundation.Samples
+        m_MethodName: ToZero
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2245,6 +2282,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 245294979}
+        m_TargetAssemblyTypeName: ResetSceneTimer, Unity.XR.ARFoundation.Samples
+        m_MethodName: ToZero
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1558958795
 GameObject:
   m_ObjectHideFlags: 0
@@ -2643,6 +2692,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1558958797}
         m_TargetAssemblyTypeName: SetVisualizerAudio, Unity.XR.ARFoundation.Samples
         m_MethodName: SetAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 245294979}
+        m_TargetAssemblyTypeName: ResetSceneTimer, Unity.XR.ARFoundation.Samples
+        m_MethodName: ToZero
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3106,6 +3167,18 @@ MonoBehaviour:
       - m_Target: {fileID: 868739974}
         m_TargetAssemblyTypeName: SetVisualizerAudio, Unity.XR.ARFoundation.Samples
         m_MethodName: SetAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 245294979}
+        m_TargetAssemblyTypeName: ResetSceneTimer, Unity.XR.ARFoundation.Samples
+        m_MethodName: ToZero
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3626,6 +3699,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 245294979}
+        m_TargetAssemblyTypeName: ResetSceneTimer, Unity.XR.ARFoundation.Samples
+        m_MethodName: ToZero
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1815819902149241483
 GameObject:
   m_ObjectHideFlags: 0
@@ -4048,6 +4133,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3427263518847417551}
         m_TargetAssemblyTypeName: SetVisualizerAudio, Unity.XR.ARFoundation.Samples
         m_MethodName: SetAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 245294979}
+        m_TargetAssemblyTypeName: ResetSceneTimer, Unity.XR.ARFoundation.Samples
+        m_MethodName: ToZero
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5430,6 +5527,18 @@ MonoBehaviour:
       - m_Target: {fileID: 6388519161328041083}
         m_TargetAssemblyTypeName: SetVisualizerAudio, Unity.XR.ARFoundation.Samples
         m_MethodName: SetAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 245294979}
+        m_TargetAssemblyTypeName: ResetSceneTimer, Unity.XR.ARFoundation.Samples
+        m_MethodName: ToZero
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

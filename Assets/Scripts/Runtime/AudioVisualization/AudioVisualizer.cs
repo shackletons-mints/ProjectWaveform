@@ -86,12 +86,12 @@ namespace AudioVisualization
             InputHandler.HandleInput(this);
         }
 
-		public void SetAudio(AudioClip _audioClip, AudioSource _audioSource)
-		{
-			audioSource.Stop();
+        public void SetAudio(AudioClip _audioClip, AudioSource _audioSource)
+        {
+            audioSource.Stop();
 
-			if (_audioClip == null || _audioSource == null)
-			{
+            if (_audioClip == null || _audioSource == null)
+            {
                 if (Microphone.devices.Length > 0)
                 {
                     // Debug.Log("Switching to microphone: " + Microphone.devices[0]);
@@ -112,13 +112,13 @@ namespace AudioVisualization
                     Debug.LogWarning("No microphone devices found.");
                 }
 
-			} 
-			else 
-			{
-				audioClip = _audioClip;
-				audioSource = _audioSource;
-				audioSource.Play();
-			}
-		}
+            }
+            else
+            {
+                audioClip = _audioClip;
+                audioSource = _audioSource;
+                audioSource.Play();
+            }
+        }
     }
 }
