@@ -1,4 +1,5 @@
 using System.Collections;
+using AudioVisualization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,7 @@ public class SpawnVisualizer : MonoBehaviour
     public GameObject prefab;
     public float distanceFromCamera = 1f;
     public GameObject visualizer;
+    public AudioVisualizer audioVisualizer;
 
     void Awake()
     {
@@ -20,8 +22,8 @@ public class SpawnVisualizer : MonoBehaviour
             Instance = this;
 
         Transform cam = Camera.main.transform;
-        Vector3 targetPosition = new Vector3(0.2f, 1f, 2f);
-        Quaternion targetRotation = Quaternion.LookRotation(cam.forward, cam.up);
+        Vector3 targetPosition = cam.position + (cam.forward * distanceFromCamera);
+        Quaternion targetRotation = cam.rotation;
 
         if (visualizer == null)
             visualizer = Instantiate(prefab, targetPosition, targetRotation);

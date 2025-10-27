@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5d8e3a049146dd3409546e266b4825e6
+guid: 3701359a226f5514cb7563123a9e9b69
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -40,7 +40,7 @@ TextureImporter:
     wrapU: 0
     wrapV: 0
     wrapW: 0
-  nPOTScale: 0
+  nPOTScale: 1
   lightmap: 0
   compressionQuality: 50
   spriteMode: 0
@@ -96,10 +96,10 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
-    resizeAlgorithm: 1
-    textureFormat: 45
+    resizeAlgorithm: 0
+    textureFormat: 34
     textureCompression: 1
-    compressionQuality: 100
+    compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 1
