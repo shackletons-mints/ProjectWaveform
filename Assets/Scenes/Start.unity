@@ -120,6 +120,66 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &170134428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 170134430}
+  - component: {fileID: 170134429}
+  - component: {fileID: 170134431}
+  m_Layer: 0
+  m_Name: Get Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &170134429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170134428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35f626b12698c24d9de516f9bf408b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFromCamera: 2
+  maxDistance: 15
+  xrCamera: {fileID: 436211401}
+--- !u!4 &170134430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170134428}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -15.8804, y: 0, z: -0.57196045}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &170134431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170134428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67429b6a785fe6c4a8af36872154bd0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &436211392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215,6 +275,12 @@ MonoBehaviour:
   m_EnvironmentDepthMode: 1
   m_EnvironmentDepthTemporalSmoothing: 1
   m_OcclusionPreferenceMode: 0
+--- !u!20 &436211401 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 743587500887643373, guid: bedac471cf2327643ad9b1153fee923b,
+    type: 3}
+  m_PrefabInstance: {fileID: 436211392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &629216173
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +330,7 @@ MonoBehaviour:
   spawnDistance: 5
   horizontalOffset: 3
   verticalOffset: 0
-  matchCameraRotation: 1
+  matchCameraRotation: 0
   sticky: 0
   objectToPosition: {fileID: 629216173}
   initialDelay: 0.2
@@ -895,3 +961,4 @@ SceneRoots:
   - {fileID: 1894226552}
   - {fileID: 1562679729}
   - {fileID: 629216174}
+  - {fileID: 170134430}
