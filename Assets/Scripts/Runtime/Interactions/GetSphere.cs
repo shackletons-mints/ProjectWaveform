@@ -7,28 +7,19 @@ using Utilities;
 public class GetSphere : MonoBehaviour
 {
     [Header("References")]
-    public InputActionReference toggleAction;
     public float distanceFromCamera = 2;
+    public float maxDistance = 10f;
+    public Camera xrCamera;
 
-    private void OnEnable()
+    void Update()
     {
-        if (toggleAction != null)
+        Rigidbody rb = SpawnVisualizer.Instance.visualizer.GetComponentInChildren<Rigidbody>();
+        if (rb != null)
         {
-            toggleAction.action.performed += OnToggle;
+            float distance = Vector3.Distance(rb.position, xrCamera.transform.position);
+            if (distance > maxDistance)
+                PositionVisualsInFrontOfCamera();
         }
-    }
-
-    private void OnDisable()
-    {
-        if (toggleAction != null)
-        {
-            toggleAction.action.performed -= OnToggle;
-        }
-    }
-
-    private void OnToggle(InputAction.CallbackContext ctx)
-    {
-        PositionVisualsInFrontOfCamera();
     }
 
     private void PositionVisualsInFrontOfCamera()
