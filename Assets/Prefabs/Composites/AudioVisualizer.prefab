@@ -61,12 +61,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2808298410947820997, guid: ddb866218734c4ba697915b5e33b1775,
         type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808298410947820997, guid: ddb866218734c4ba697915b5e33b1775,
+        type: 3}
       propertyPath: m_Resource
       value: 
-      objectReference: {fileID: 8300000, guid: ca4653a86d4e348109abbf9ac8b7d730, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2808298410947820997, guid: ddb866218734c4ba697915b5e33b1775,
         type: 3}
       propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808298410947820997, guid: ddb866218734c4ba697915b5e33b1775,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4530875510733346886, guid: ddb866218734c4ba697915b5e33b1775,
@@ -96,10 +106,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
         type: 3}
+      propertyPath: masterMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: 33307920f1290984fb443862a4ef73e4,
+        type: 2}
+    - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
+        type: 3}
+      propertyPath: outputGroup
+      value: 
+      objectReference: {fileID: 8244566889605457627, guid: 33307920f1290984fb443862a4ef73e4,
+        type: 2}
+    - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
+        type: 3}
+      propertyPath: normalOutput
+      value: 
+      objectReference: {fileID: 24300002, guid: 33307920f1290984fb443862a4ef73e4,
+        type: 2}
+    - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
+        type: 3}
       propertyPath: rippleShader
       value: 
       objectReference: {fileID: -876546973899608171, guid: 12b4ca065d0868f48a1ba082d66c3a6f,
         type: 3}
+    - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
+        type: 3}
+      propertyPath: silentOutput
+      value: 
+      objectReference: {fileID: 8244566889605457627, guid: 33307920f1290984fb443862a4ef73e4,
+        type: 2}
     - target: {fileID: 6145265680876845177, guid: ddb866218734c4ba697915b5e33b1775,
         type: 3}
       propertyPath: geometricPulse
