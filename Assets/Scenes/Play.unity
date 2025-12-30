@@ -1112,8 +1112,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDistance: 2
   horizontalOffset: -0.25
-  verticalOffset: -1.25
-  matchCameraRotation: 1
+  verticalOffset: -1.15
+  matchCameraRotation: 0
   sticky: 0
   objectToPosition: {fileID: 606159581}
   initialDelay: 0.1
