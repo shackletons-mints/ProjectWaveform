@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Ball | Privacy Policy</title>
+    <style>
+        :root {
+            --neon-green: #00ff9d;
+            --neon-blue: #00b8ff;
+            --bg-dark: #050510;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background Canvas */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
+        }
+
+        /* Layout */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            backdrop-filter: blur(5px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, var(--neon-green), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        p.tagline {
+            font-size: 1.5rem;
+            color: #ccc;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--neon-green);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background: white;
+            box-shadow: 0 0 30px white;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 20px;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+        }
+
+        .card h3 {
+            color: var(--neon-green);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Privacy Policy Section */
+        .privacy-section {
+            padding: 80px 20px;
+            background: #000000;
+            color: #aaa;
+            border-top: 1px solid #333;
+        }
+
+        .privacy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .privacy-content h2 {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .privacy-content h3 {
+            color: var(--neon-blue);
+            margin-top: 30px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .privacy-content p {
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #050510;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #111;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container">
+        <canvas id="bgCanvas"></canvas>
+    </div>
+
+    <header>
+        <div class="logo">Music Ball</div>
+        <a href="#" style="color: white; text-decoration: none; font-weight: bold;">Get App</a>
+    </header>
+
+    <section class="hero">
+        <h1>Your Room.<br>Your Music.<br>In Space.</h1>
+        <p class="tagline">A floating sphere that dances to the sounds in your room. Transform your ceiling into a portal to the Milky Way.</p>
+        <a href="#privacy" class="btn btn-primary">Read Privacy Policy</a>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 50px; font-size: 2rem;">Why It's Cool</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🎤 Listens to You</h3>
+                    <p>The ball reacts instantly to your voice or music using your microphone. No cables, no setup. Just sound.</p>
+                </div>
+                <div class="card">
+                    <h3>🌌 Starry Ceiling</h3>
+                    <p>Open a portal in your roof. Gaze at the Milky Way while the ball showers your room in colorful fuzzballs.</p>
+                </div>
+                <div class="card">
+                    <h3>✨ Interactive Physics</h3>
+                    <p>Don't just watch. Grab it. Pinch to resize it. Throw it against the wall. It's a digital toy, not just a video.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="privacy" class="privacy-section">
+        <div class="privacy-content">
+            <h2>Privacy Policy</h2>
+            <p>This policy applies to the software application, “Music Ball” and was created to inform users about what information is collected if any, why and what is done with it.</p>
+            
+            <h3>Information Collected</h3>
+            <p>Music Ball does not collect or store any information about its users.</p>
+            
+            <h3>Information Shared</h3>
+            <p>We do not share personal information with companies, organizations or individuals unless there is a legal reason to do so. Music Ball is not gathering or storing any user data.</p>
+            
+            <h3>Information Security</h3>
+            <p>Music Ball does not require users to create an account.</p>
+            
+            <h3>Microphone Access</h3>
+            <p>The application requests access to the user’s microphone to be able to play back the user’s own live audio content.</p>
+            <p>Microphone access is only for audio visualization for purposes within the Music Ball application.</p>
+            
+            <h3>Compliance and Cooperation with Regulatory Authorities</h3>
+            <p>We review our compliance with our Privacy Policy and will work with the appropriate regulatory authorities, including local data protection authorities, to resolve any complaints regarding the transfer of personal data that we cannot resolve with our users directly.</p>
+            
+            <h3>Changes</h3>
+            <p>We will post any privacy policy changes on this page and if the changes are significant, we will provide a more prominent notice.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Music Ball</p>
+    </footer>
+
+    <script>
+        // Simple JS to create a "Music Ball" visualization effect in the background
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+        let time = 0;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        // The "Ball"
+        class Ball {
+            constructor() {
+                this.baseRadius = 100;
+                this.radius = 100;
+            }
+            
+            draw() {
+                // Simulate audio reactivity with a sine wave
+                const pulse = Math.sin(time * 0.1) * 20; 
+                this.radius = this.baseRadius + pulse + (Math.random() * 5);
+
+                // Draw Glow
+                const gradient = ctx.createRadialGradient(width/2, height/2, this.radius * 0.5, width/2, height/2, this.radius * 3);
+                gradient.addColorStop(0, 'rgba(0, 255, 157, 1)');
+                gradient.addColorStop(0.5, 'rgba(0, 184, 255, 0.3)');
+                gradient.addColorStop(1, 'rgba(0,0,0,0)');
+
+                ctx.beginPath();
+                ctx.arc(width/2, height/2, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+                
+                // Draw Wireframe-ish effect
+                ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(width/2, height/2, this.radius * 0.8, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        // Background Stars
+        class Star {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2;
+                this.speed = Math.random() * 0.5;
+            }
+
+            update() {
+                this.y -= this.speed;
+                if (this.y < 0) this.y = height;
+            }
+
+            draw() {
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const ball = new Ball();
+        for(let i=0; i<100; i++) particles.push(new Star());
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw Stars
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            // Draw Ball
+            ball.draw();
+
+            time++;
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
