@@ -1669,6 +1669,7 @@ MonoBehaviour:
   toggleAction: {fileID: 3336640699912901065, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   canvas: {fileID: 90435593}
+  positioner: {fileID: 606159582}
 --- !u!1 &868739972
 GameObject:
   m_ObjectHideFlags: 0

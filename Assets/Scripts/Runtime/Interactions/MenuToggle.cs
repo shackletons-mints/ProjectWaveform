@@ -7,6 +7,7 @@ public class MenuToggle : MonoBehaviour
     [Header("References")]
     public InputActionReference toggleAction;
     public GameObject canvas;
+    public PositionInFrontOfCamera positioner;
 
     private void OnEnable()
     {
@@ -28,5 +29,13 @@ public class MenuToggle : MonoBehaviour
     {
         bool newState = !canvas.activeSelf;
         canvas.SetActive(newState);
+
+        if (positioner != null)
+        {
+            if (newState == true)
+            {
+                positioner.SpawnInFrontOfCamera();
+            }
+        }
     }
 }
