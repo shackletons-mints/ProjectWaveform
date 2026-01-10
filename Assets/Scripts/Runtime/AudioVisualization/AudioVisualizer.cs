@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using Utilities;
 
@@ -40,8 +39,6 @@ namespace AudioVisualization
         private Vector3 previousSpherePosition;
         public SphereSurfacePoints sphereSurfacePoints;
         public Material rippleShader;
-        public AudioMixerGroup silentOutput;
-        public AudioMixerGroup normalOutput;
 
         public int previousPitchClass;
         public int spectrumSize = 1024;
@@ -108,7 +105,6 @@ namespace AudioVisualization
 
                     while (!(Microphone.GetPosition(null) > 0)) { }
 
-                    audioSource.outputAudioMixerGroup = silentOutput;
                     audioSource.Play();
                 }
                 else
@@ -119,7 +115,6 @@ namespace AudioVisualization
             }
             else
             {
-                audioSource.outputAudioMixerGroup = normalOutput;
                 audioClip = _audioClip;
                 audioSource = _audioSource;
                 audioSource.Play();
