@@ -16,7 +16,8 @@
         "Unity.VisualScripting.Flow",
         "Unity.XR.MetaOpenXR",
         "Unity.XR.OpenXR",
-        "Unity.XR.Simulation"
+        "Unity.XR.Simulation",
+        "Oculus.Platform"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
