@@ -151,8 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceFromCamera: 2
-  maxDistance: 15
-  xrCamera: {fileID: 436211401}
+  maxDistance: 10
+  xrCamera: {fileID: 0}
 --- !u!4 &170134430
 Transform:
   m_ObjectHideFlags: 0
@@ -275,12 +275,6 @@ MonoBehaviour:
   m_EnvironmentDepthMode: 1
   m_EnvironmentDepthTemporalSmoothing: 1
   m_OcclusionPreferenceMode: 0
---- !u!20 &436211401 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 743587500887643373, guid: bedac471cf2327643ad9b1153fee923b,
-    type: 3}
-  m_PrefabInstance: {fileID: 436211392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &629216173
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,8 +956,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7039075291280507667}
   - component: {fileID: 6818820157373934023}
+  - component: {fileID: 7039075291280507668}
   m_Layer: 0
-  m_Name: EntitlementCheck
+  m_Name: MetaComplianceScripts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -997,6 +992,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7039075291280507668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6202047908187226251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47995bebe2f5b624997c2780125bd5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
